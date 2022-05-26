@@ -39,7 +39,7 @@
 #define ADVANCE_PER_CH_ENDTIME 1
 
 #define SK_HYNIX_VALIDATION 0
-#define MK_ZONE_CONVENTIONAL 0
+#define MK_ZONE_CONVENTIONAL 3
 
 #define Interface_PCIeGen3x4_bwmb (3500 * MiB) //MB.s
 #define Interface_PCIeGen3x4_bw 3500

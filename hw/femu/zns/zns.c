@@ -1632,7 +1632,7 @@ static void znsssd_init_params(FemuCtrl * n, struct zns_ssdparams *spp){
     */
     spp->nchnls         = 16;           /* FIXME : = ZNS_MAX_CHANNEL channel configuration like this */
     spp->zones          = n->num_zones; 
-    spp->chnls_per_zone = 1;
+    spp->chnls_per_zone = 16;
     spp->ways           = 2;
     
     /* TO REAL STORAGE SIZE */
