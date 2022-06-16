@@ -232,7 +232,8 @@ static void zns_init_zoned_state(NvmeNamespace *ns)
 
     n->zone_size_log2 = 0;
     if (is_power_of_2(n->zone_size)) {
-        n->zone_size_log2 = 63 - clz64(n->zone_size);   // 18 = 63 - 45
+        n->zone_size_log2 = 63 - clz64(n->zone_size);   // 11= 63 - 52 
+        femu_err("zone_size_log2 : %x (64MB : 2^26, 512B = 2^9)\n",n->zone_size_log2);
     }
 }
 
@@ -465,6 +466,7 @@ static uint16_t zns_check_zone_write(FemuCtrl *n, NvmeNamespace *ns,
                 //(zidx == 0) || (zidx == 1) || (zidx == 2) || (zidx == 3)
                 //NVME_ZONE_TYPE_CONVENTIONAL;
                 zone->w_ptr = slba;
+                //zone->w_ptr = zone->d.zslba;
                 status = NVME_SUCCESS;
             }
 #endif
@@ -607,7 +609,9 @@ static uint64_t zns_advance_zone_wp(NvmeNamespace *ns, NvmeZone *zone,
     uint64_t result = zone->w_ptr;
     uint8_t zs;
 
+    //pthread_spin_lock(&ns->ctrl->pci_lock);
     zone->w_ptr += nlb;
+    //pthread_spin_unlock(&ns->ctrl->pci_lock);
 
     if (zone->w_ptr < zns_zone_wr_boundary(zone)) {
         zs = zns_get_zone_state(zone);
@@ -1496,6 +1500,8 @@ static uint16_t zns_write(FemuCtrl *n, NvmeNamespace *ns, NvmeCmd *cmd,
     NvmeZone *zone;
     NvmeZonedResult *res = (NvmeZonedResult *)&req->cqe;
     uint16_t status;
+    uint64_t zidx = zns_zone_idx(ns, slba);
+    uint64_t err_zidx = 0;
 
     assert(n->zoned);
     req->is_write = true;
@@ -1511,16 +1517,28 @@ static uint16_t zns_write(FemuCtrl *n, NvmeNamespace *ns, NvmeCmd *cmd,
 
     zone = zns_get_zone_by_slba(ns, slba);
 
+    //lock
+    pthread_spin_lock(&zone->w_ptr_lock);
     status = zns_check_zone_write(n, ns, zone, slba, nlb, false);
+    pthread_spin_unlock(&zone->w_ptr_lock);
+    //unlock
     if (status) {
+        err_zidx = zidx;
+        femu_err("in zns_check_zone_write [pid %x] Zidx : %lx z.wtp : %lx , slba : %lx , nlb : %x\n", getpid() ,zidx, zone->w_ptr, slba, nlb);
         goto err;
+    }
+    if(err_zidx > (1<<MK_ZONE_CONVENTIONAL)){
+        femu_err("in errzidx:%lx [pid %x] Zidx : %lx z.wtp : %lx , slba : %lx, nlb : %x \n", err_zidx, getpid() ,zidx, zone->w_ptr, slba, nlb);
     }
     status = zns_auto_open_zone(ns, zone);
     if (status) {
         goto err;
     }
-
+    //lock
+    pthread_spin_lock(&zone->w_ptr_lock);
     res->slba = zns_advance_zone_wp(ns, zone, nlb);
+    pthread_spin_unlock(&zone->w_ptr_lock);
+    //unlock
     data_offset = zns_l2b(ns, slba);
     status = zns_map_dptr(n, data_size, req);   //dptr:data pointer
     if (status) {
@@ -1533,7 +1551,7 @@ static uint16_t zns_write(FemuCtrl *n, NvmeNamespace *ns, NvmeCmd *cmd,
     return NVME_SUCCESS;
 
 err:
-    femu_err("*********ZONE WRITE FAILED*********, STATUS : %x\n",status);  
+    femu_err("*********ZONE WRITE FAILED*********, Zidx : %lx , STATUS : %x\n", zidx, status);  
     return status | NVME_DNR;
 }
 
@@ -1633,7 +1651,7 @@ static void znsssd_init_params(FemuCtrl * n, struct zns_ssdparams *spp){
     spp->nchnls         = 16;           /* FIXME : = ZNS_MAX_CHANNEL channel configuration like this */
     spp->zones          = n->num_zones; 
     spp->chnls_per_zone = 16;
-    spp->ways           = 2;
+    spp->ways           = 1;
     
     /* TO REAL STORAGE SIZE */
     spp->csze_pages     = (((int64_t)n->memsz) * 1024 * 1024) / MIN_DISCARD_GRANULARITY / spp->nchnls / spp->ways;
@@ -1670,6 +1688,11 @@ void znsssd_init(FemuCtrl * n){
     zns->chips  = g_malloc0(sizeof(struct zns_ssd_lun) * spp->nchips);
     zns->zone_array = n->zone_array;
     zns->num_zones = spp->zones;
+    for(uint32_t i=0 ; i < n->num_zones; i++){
+        int ret = pthread_spin_init(&(zns->zone_array[i].w_ptr_lock), PTHREAD_PROCESS_SHARED);
+        if(ret)
+            femu_err("zns.c:1687 znssd_init(): lock alloc failed, to inhoinno \n");
+    }
 
     for (int i = 0; i < spp->nchnls; i++) {
         zns_init_ch(&zns->ch[i], spp);

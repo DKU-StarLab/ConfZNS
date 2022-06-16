@@ -81,7 +81,7 @@ typedef struct zns {
 
     /*new members for znsssd*/
     struct NvmeNamespace    * namespaces;      //FEMU only support 1 namespace For now, 
-    struct NvmeZone      * zone_array;                  
+    struct NvmeZone      * zone_array;
     uint32_t            num_zones;
 
     QemuThread          zns_thread;
@@ -189,6 +189,7 @@ typedef struct QEMU_PACKED NvmeIdNsZoned {
 typedef struct NvmeZone {
     NvmeZoneDescr   d;
     uint64_t        w_ptr;
+    pthread_spinlock_t w_ptr_lock;
     QTAILQ_ENTRY(NvmeZone) entry;
 } NvmeZone;
 
