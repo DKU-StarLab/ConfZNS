@@ -1,9 +1,10 @@
 #include "./zns.h"
 #include <math.h>
 #define MIN_DISCARD_GRANULARITY     (4 * KiB)
-#define NVME_DEFAULT_ZONE_SIZE      (64 * MiB)
-#define NVME_DEFAULT_MAX_AZ_SIZE    (128 * KiB)
+#define NVME_DEFAULT_ZONE_SIZE      (72 * MiB)
+#define NVME_DEFAULT_MAX_AZ_SIZE    (192 * KiB)
 uint64_t lag = 0;
+
 
 static inline uint32_t zns_zone_idx(NvmeNamespace *ns, uint64_t slba)
 {
@@ -977,6 +978,7 @@ static uint16_t zns_zone_mgmt_send(FemuCtrl *n, NvmeRequest *req)
         status = zns_do_zone_op(ns, zone, proc_mask, zns_reset_zone, req);
         req->expire_time += zns_advance_status(n, ns, cmd, req);
         (*resets)--;
+        femu_err("zone reset    action:%c   slba:%ld     zone_idx:%d    req->expire_time - req->stime:%ld\n",action, req->slba ,zone_idx,(req->expire_time - req->stime));
         return NVME_SUCCESS;
     case NVME_ZONE_ACTION_OFFLINE:
         if (all) {
@@ -1389,17 +1391,70 @@ static uint64_t znsssd_read(ZNS *zns, NvmeRequest *req){
     return maxlat;
 }
 
+/**
+ * @brief 
+ * 
+ * @param n 
+ * @param ns 
+ * @param cmd 
+ * @param req 
+}*/
+
+static uint64_t znssd_reset_zones(ZNS *zns, NvmeRequest *req){
+    NvmeCmd *cmd = (NvmeCmd *)&req->cmd;
+    NvmeNamespace *ns = req->ns;
+    FemuCtrl *n = ns->ctrl;
+    struct zns_ssdparams * spp = &zns->sp;
+    //NvmeZone *zone;
+    uint32_t zone_idx = 0;
+    zns_ssd_lun *chip = NULL;
+    uint32_t chip_idx=0;
+    uint32_t chip_start_idx=0;
+    //zns_ssd_channel *chnl =NULL;
+
+    uint64_t slba = 0;
+    uint64_t cmd_stime = (req->stime == 0) ? qemu_clock_get_ns(QEMU_CLOCK_REALTIME) : req->stime ;
+
+    uint64_t maxlat=0;
+    uint64_t lat =0;
+    //uint16_t status;
+
+    zns_get_mgmt_zone_slba_idx(n, cmd, &slba, &zone_idx);
+#if SK_HYNIX_VALIDATION
+    chip_idx = zone_idx % (spp->nchnls * spp->ways);
+    chip = &(zns->chips[chip_idx]);
+    chip->next_avail_time = (chip->next_avail_time > cmd_stime)? chip->next_avail_time + ZONE_RESET_LATENCY : cmd_stime + ZONE_RESET_LATENCY;
+    return (chip->next_avail_time - cmd_stime);
+#endif
+    //default
+    chip_start_idx = zone_idx % (spp->nchnls / spp->chnls_per_zone);
+    chip_idx = chip_start_idx;
+    for(uint32_t ass=0; ass < spp->chnls_per_zone; ass++){
+        chip_idx += 1; 
+        for(uint32_t i =0 ; i < spp->ways ; i++){
+            chip_idx += (i*spp->nchnls);
+            chip = &(zns->chips[chip_idx]);
+            chip->next_avail_time = (chip->next_avail_time > cmd_stime)? chip->next_avail_time + ZONE_RESET_LATENCY : cmd_stime + ZONE_RESET_LATENCY;
+            lat = chip->next_avail_time - cmd_stime;
+            maxlat = (maxlat < lat) ? lat : maxlat;
+        }
+    }
+    return maxlat;
+}
 static int zns_advance_status(FemuCtrl *n, NvmeNamespace *ns, NvmeCmd *cmd, NvmeRequest *req){
     
     NvmeRwCmd *rw = (NvmeRwCmd *)&req->cmd;
     uint8_t opcode = rw->opcode;
     uint32_t dw13 = le32_to_cpu(cmd->cdw13);
+
     uint8_t action;
     action = dw13 & 0xff;
+
     // Zone Reset 
     if (action == NVME_ZONE_ACTION_RESET){
         //reset zone->wp and zone->status=Empty
-        return ZONE_RESET_LATENCY;
+        //reset zone, causing every chip lat +
+        return znssd_reset_zones(n->zns,req);
     }
     // Read, Write 
     assert(opcode == NVME_CMD_WRITE || opcode == NVME_CMD_READ || opcode == NVME_CMD_ZONE_APPEND);
@@ -1475,7 +1530,6 @@ static uint16_t zns_read(FemuCtrl *n, NvmeNamespace *ns, NvmeCmd *cmd,
     }else if (req->stime < pcie->ntime && lag != 0 ){
         req->expire_time+=lag;
     }
-    
     pcie->stime += delta_time;
     femu_err("[inho] lag : %lx\n", lag);
     
@@ -1488,6 +1542,7 @@ static uint16_t zns_read(FemuCtrl *n, NvmeNamespace *ns, NvmeCmd *cmd,
 err:
     return status | NVME_DNR;
 }
+
 
 static uint16_t zns_write(FemuCtrl *n, NvmeNamespace *ns, NvmeCmd *cmd,
                           NvmeRequest *req)
@@ -1554,7 +1609,6 @@ err:
     femu_err("*********ZONE WRITE FAILED*********, Zidx : %lx , STATUS : %x\n", zidx, status);  
     return status | NVME_DNR;
 }
-
 static uint16_t zns_io_cmd(FemuCtrl *n, NvmeNamespace *ns, NvmeCmd *cmd,
                            NvmeRequest *req)
 {
@@ -1644,14 +1698,13 @@ static void znsssd_init_params(FemuCtrl * n, struct zns_ssdparams *spp){
     //spp->blk_er_lat = NAND_ERASE_LATENCY;
     spp->ch_xfer_lat = NAND_CHNL_PAGE_TRANSFER_LATENCY;
     /**
-     * @brief Inhoinno : To show difference between 1-to-1 mapping, and 1-to-N mapping,
-     * at least one param among these four should be configured in zns ssd.
+
      * 1. SSD size  2. zone size 3. # of chnls 4. # of chnls per zone
     */
     spp->nchnls         = 16;           /* FIXME : = ZNS_MAX_CHANNEL channel configuration like this */
     spp->zones          = n->num_zones; 
     spp->chnls_per_zone = 16;
-    spp->ways           = 1;
+    spp->ways           = 2;
     
     /* TO REAL STORAGE SIZE */
     spp->csze_pages     = (((int64_t)n->memsz) * 1024 * 1024) / MIN_DISCARD_GRANULARITY / spp->nchnls / spp->ways;
@@ -1696,6 +1749,12 @@ void znsssd_init(FemuCtrl * n){
 
     for (int i = 0; i < spp->nchnls; i++) {
         zns_init_ch(&zns->ch[i], spp);
+    }
+    for (uint64_t i =0; i < 16*8; i+=8){
+        femu_err("[TEST] zns.c:1701 slba:%lu  ppa:%lu chidx%lu chnnl:%lu \n",\
+        i, zns_get_multiway_ppn_idx(n->namespaces,i), zns_get_multiway_chip_idx(n->namespaces, i), \
+        zns_advanced_chnl_idx(n->namespaces,i));
+
     }
 }
 

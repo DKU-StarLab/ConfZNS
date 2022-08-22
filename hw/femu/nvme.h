@@ -30,7 +30,6 @@
 
 #define NVME_ID_NS_LBAF_DS(ns, lba_index) (ns->id_ns.lbaf[lba_index].lbads)
 #define NVME_ID_NS_LBAF_MS(ns, lba_index) (ns->id_ns.lbaf[lba_index].ms)
-
 /**
  * @brief 
  * Advance Channel latency emulating
@@ -39,7 +38,8 @@
 #define ADVANCE_PER_CH_ENDTIME 1
 
 #define SK_HYNIX_VALIDATION 1
-#define MK_ZONE_CONVENTIONAL 0
+#define MK_ZONE_CONVENTIONAL 3
+
 
 #define Interface_PCIeGen3x4_bwmb (3500 * MiB) //MB.s
 #define Interface_PCIeGen3x4_bw 3500
