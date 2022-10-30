@@ -1,0 +1,1400 @@
+
+SPEED = quick
+
+# $1 = environment, $2 = test command, $3 = test name, $4 = dir
+.test-human-tap = $1 $(if $4,(cd $4 && $2),$2) < /dev/null | ./scripts/tap-driver.pl --test-name="$3" $(if $(V),,--show-failures-only)
+.test-human-exitcode = $1 $(PYTHON) scripts/test-driver.py $(if $4,-C$4) $(if $(V),--verbose) -- $2 < /dev/null
+.test-tap-tap = $1 $(if $4,(cd $4 && $2),$2) < /dev/null | sed "s/^[a-z][a-z]* [0-9]*/& $3/" || true
+.test-tap-exitcode = printf "%s\n" 1..1 "`$1 $(if $4,(cd $4 && $2),$2) < /dev/null > /dev/null || echo "not "`ok 1 $3"
+.test.human-print = echo $(if $(V),'$1 $2','Running test $3') &&
+.test.env = MALLOC_PERTURB_=$${MALLOC_PERTURB_:-$$(( $${RANDOM:-0} % 255 + 1))}
+
+# $1 = test name, $2 = test target (human or tap)
+.test.run = $(call .test.$2-print,$(.test.env.$1),$(.test.cmd.$1),$(.test.name.$1)) $(call .test-$2-$(.test.driver.$1),$(.test.env.$1),$(.test.cmd.$1),$(.test.name.$1),$(.test.dir.$1))
+
+.test.output-format = human
+
+.test.name.1 := check-block-qdict
+.test.driver.1 := tap
+.test.env.1 := $(.test.env) G_TEST_SRCDIR=/home/inhoinno/FEMU/tests G_TEST_BUILDDIR=/home/inhoinno/FEMU/build-femu/tests
+.test.cmd.1 := tests/check-block-qdict --tap -k
+.test.deps.1 := all
+.PHONY: run-test-1
+run-test-1: $(.test.deps.1)
+	@$(call .test.run,1,$(.test.output-format))
+.test.name.2 := check-qdict
+.test.driver.2 := tap
+.test.env.2 := $(.test.env) G_TEST_SRCDIR=/home/inhoinno/FEMU/tests G_TEST_BUILDDIR=/home/inhoinno/FEMU/build-femu/tests
+.test.cmd.2 := tests/check-qdict --tap -k
+.test.deps.2 := all
+.PHONY: run-test-2
+run-test-2: $(.test.deps.2)
+	@$(call .test.run,2,$(.test.output-format))
+.test.name.3 := check-qnum
+.test.driver.3 := tap
+.test.env.3 := $(.test.env) G_TEST_SRCDIR=/home/inhoinno/FEMU/tests G_TEST_BUILDDIR=/home/inhoinno/FEMU/build-femu/tests
+.test.cmd.3 := tests/check-qnum --tap -k
+.test.deps.3 := all
+.PHONY: run-test-3
+run-test-3: $(.test.deps.3)
+	@$(call .test.run,3,$(.test.output-format))
+.test.name.4 := check-qstring
+.test.driver.4 := tap
+.test.env.4 := $(.test.env) G_TEST_SRCDIR=/home/inhoinno/FEMU/tests G_TEST_BUILDDIR=/home/inhoinno/FEMU/build-femu/tests
+.test.cmd.4 := tests/check-qstring --tap -k
+.test.deps.4 := all
+.PHONY: run-test-4
+run-test-4: $(.test.deps.4)
+	@$(call .test.run,4,$(.test.output-format))
+.test.name.5 := check-qlist
+.test.driver.5 := tap
+.test.env.5 := $(.test.env) G_TEST_SRCDIR=/home/inhoinno/FEMU/tests G_TEST_BUILDDIR=/home/inhoinno/FEMU/build-femu/tests
+.test.cmd.5 := tests/check-qlist --tap -k
+.test.deps.5 := all
+.PHONY: run-test-5
+run-test-5: $(.test.deps.5)
+	@$(call .test.run,5,$(.test.output-format))
+.test.name.6 := check-qnull
+.test.driver.6 := tap
+.test.env.6 := $(.test.env) G_TEST_SRCDIR=/home/inhoinno/FEMU/tests G_TEST_BUILDDIR=/home/inhoinno/FEMU/build-femu/tests
+.test.cmd.6 := tests/check-qnull --tap -k
+.test.deps.6 := all
+.PHONY: run-test-6
+run-test-6: $(.test.deps.6)
+	@$(call .test.run,6,$(.test.output-format))
+.test.name.7 := check-qobject
+.test.driver.7 := tap
+.test.env.7 := $(.test.env) G_TEST_SRCDIR=/home/inhoinno/FEMU/tests G_TEST_BUILDDIR=/home/inhoinno/FEMU/build-femu/tests
+.test.cmd.7 := tests/check-qobject --tap -k
+.test.deps.7 := all
+.PHONY: run-test-7
+run-test-7: $(.test.deps.7)
+	@$(call .test.run,7,$(.test.output-format))
+.test.name.8 := check-qjson
+.test.driver.8 := tap
+.test.env.8 := $(.test.env) G_TEST_SRCDIR=/home/inhoinno/FEMU/tests G_TEST_BUILDDIR=/home/inhoinno/FEMU/build-femu/tests
+.test.cmd.8 := tests/check-qjson --tap -k
+.test.deps.8 := all
+.PHONY: run-test-8
+run-test-8: $(.test.deps.8)
+	@$(call .test.run,8,$(.test.output-format))
+.test.name.9 := check-qlit
+.test.driver.9 := tap
+.test.env.9 := $(.test.env) G_TEST_SRCDIR=/home/inhoinno/FEMU/tests G_TEST_BUILDDIR=/home/inhoinno/FEMU/build-femu/tests
+.test.cmd.9 := tests/check-qlit --tap -k
+.test.deps.9 := all
+.PHONY: run-test-9
+run-test-9: $(.test.deps.9)
+	@$(call .test.run,9,$(.test.output-format))
+.test.name.10 := test-qobject-output-visitor
+.test.driver.10 := tap
+.test.env.10 := $(.test.env) G_TEST_SRCDIR=/home/inhoinno/FEMU/tests G_TEST_BUILDDIR=/home/inhoinno/FEMU/build-femu/tests
+.test.cmd.10 := tests/test-qobject-output-visitor --tap -k
+.test.deps.10 := all
+.PHONY: run-test-10
+run-test-10: $(.test.deps.10)
+	@$(call .test.run,10,$(.test.output-format))
+.test.name.11 := test-clone-visitor
+.test.driver.11 := tap
+.test.env.11 := $(.test.env) G_TEST_SRCDIR=/home/inhoinno/FEMU/tests G_TEST_BUILDDIR=/home/inhoinno/FEMU/build-femu/tests
+.test.cmd.11 := tests/test-clone-visitor --tap -k
+.test.deps.11 := all
+.PHONY: run-test-11
+run-test-11: $(.test.deps.11)
+	@$(call .test.run,11,$(.test.output-format))
+.test.name.12 := test-qobject-input-visitor
+.test.driver.12 := tap
+.test.env.12 := $(.test.env) G_TEST_SRCDIR=/home/inhoinno/FEMU/tests G_TEST_BUILDDIR=/home/inhoinno/FEMU/build-femu/tests
+.test.cmd.12 := tests/test-qobject-input-visitor --tap -k
+.test.deps.12 := all
+.PHONY: run-test-12
+run-test-12: $(.test.deps.12)
+	@$(call .test.run,12,$(.test.output-format))
+.test.name.13 := test-string-input-visitor
+.test.driver.13 := tap
+.test.env.13 := $(.test.env) G_TEST_SRCDIR=/home/inhoinno/FEMU/tests G_TEST_BUILDDIR=/home/inhoinno/FEMU/build-femu/tests
+.test.cmd.13 := tests/test-string-input-visitor --tap -k
+.test.deps.13 := all
+.PHONY: run-test-13
+run-test-13: $(.test.deps.13)
+	@$(call .test.run,13,$(.test.output-format))
+.test.name.14 := test-string-output-visitor
+.test.driver.14 := tap
+.test.env.14 := $(.test.env) G_TEST_SRCDIR=/home/inhoinno/FEMU/tests G_TEST_BUILDDIR=/home/inhoinno/FEMU/build-femu/tests
+.test.cmd.14 := tests/test-string-output-visitor --tap -k
+.test.deps.14 := all
+.PHONY: run-test-14
+run-test-14: $(.test.deps.14)
+	@$(call .test.run,14,$(.test.output-format))
+.test.name.15 := test-qmp-event
+.test.driver.15 := tap
+.test.env.15 := $(.test.env) G_TEST_SRCDIR=/home/inhoinno/FEMU/tests G_TEST_BUILDDIR=/home/inhoinno/FEMU/build-femu/tests
+.test.cmd.15 := tests/test-qmp-event --tap -k
+.test.deps.15 := all
+.PHONY: run-test-15
+run-test-15: $(.test.deps.15)
+	@$(call .test.run,15,$(.test.output-format))
+.test.name.16 := test-opts-visitor
+.test.driver.16 := tap
+.test.env.16 := $(.test.env) G_TEST_SRCDIR=/home/inhoinno/FEMU/tests G_TEST_BUILDDIR=/home/inhoinno/FEMU/build-femu/tests
+.test.cmd.16 := tests/test-opts-visitor --tap -k
+.test.deps.16 := all
+.PHONY: run-test-16
+run-test-16: $(.test.deps.16)
+	@$(call .test.run,16,$(.test.output-format))
+.test.name.17 := test-visitor-serialization
+.test.driver.17 := tap
+.test.env.17 := $(.test.env) G_TEST_SRCDIR=/home/inhoinno/FEMU/tests G_TEST_BUILDDIR=/home/inhoinno/FEMU/build-femu/tests
+.test.cmd.17 := tests/test-visitor-serialization --tap -k
+.test.deps.17 := all
+.PHONY: run-test-17
+run-test-17: $(.test.deps.17)
+	@$(call .test.run,17,$(.test.output-format))
+.test.name.18 := test-bitmap
+.test.driver.18 := tap
+.test.env.18 := $(.test.env) G_TEST_SRCDIR=/home/inhoinno/FEMU/tests G_TEST_BUILDDIR=/home/inhoinno/FEMU/build-femu/tests
+.test.cmd.18 := tests/test-bitmap --tap -k
+.test.deps.18 := all
+.PHONY: run-test-18
+run-test-18: $(.test.deps.18)
+	@$(call .test.run,18,$(.test.output-format))
+.test.name.19 := test-x86-cpuid
+.test.driver.19 := tap
+.test.env.19 := $(.test.env) G_TEST_SRCDIR=/home/inhoinno/FEMU/tests G_TEST_BUILDDIR=/home/inhoinno/FEMU/build-femu/tests
+.test.cmd.19 := tests/test-x86-cpuid --tap -k
+.test.deps.19 := all
+.PHONY: run-test-19
+run-test-19: $(.test.deps.19)
+	@$(call .test.run,19,$(.test.output-format))
+.test.name.20 := test-cutils
+.test.driver.20 := tap
+.test.env.20 := $(.test.env) G_TEST_SRCDIR=/home/inhoinno/FEMU/tests G_TEST_BUILDDIR=/home/inhoinno/FEMU/build-femu/tests
+.test.cmd.20 := tests/test-cutils --tap -k
+.test.deps.20 := all
+.PHONY: run-test-20
+run-test-20: $(.test.deps.20)
+	@$(call .test.run,20,$(.test.output-format))
+.test.name.21 := test-shift128
+.test.driver.21 := tap
+.test.env.21 := $(.test.env) G_TEST_SRCDIR=/home/inhoinno/FEMU/tests G_TEST_BUILDDIR=/home/inhoinno/FEMU/build-femu/tests
+.test.cmd.21 := tests/test-shift128 --tap -k
+.test.deps.21 := all
+.PHONY: run-test-21
+run-test-21: $(.test.deps.21)
+	@$(call .test.run,21,$(.test.output-format))
+.test.name.22 := test-mul64
+.test.driver.22 := tap
+.test.env.22 := $(.test.env) G_TEST_SRCDIR=/home/inhoinno/FEMU/tests G_TEST_BUILDDIR=/home/inhoinno/FEMU/build-femu/tests
+.test.cmd.22 := tests/test-mul64 --tap -k
+.test.deps.22 := all
+.PHONY: run-test-22
+run-test-22: $(.test.deps.22)
+	@$(call .test.run,22,$(.test.output-format))
+.test.name.23 := test-int128
+.test.driver.23 := tap
+.test.env.23 := $(.test.env) G_TEST_SRCDIR=/home/inhoinno/FEMU/tests G_TEST_BUILDDIR=/home/inhoinno/FEMU/build-femu/tests
+.test.cmd.23 := tests/test-int128 --tap -k
+.test.deps.23 := all
+.PHONY: run-test-23
+run-test-23: $(.test.deps.23)
+	@$(call .test.run,23,$(.test.output-format))
+.test.name.24 := rcutorture
+.test.driver.24 := tap
+.test.env.24 := $(.test.env) G_TEST_SRCDIR=/home/inhoinno/FEMU/tests G_TEST_BUILDDIR=/home/inhoinno/FEMU/build-femu/tests
+.test.cmd.24 := tests/rcutorture --tap -k
+.test.deps.24 := all
+.PHONY: run-test-24
+run-test-24: $(.test.deps.24)
+	@$(call .test.run,24,$(.test.output-format))
+.test.name.25 := test-rcu-list
+.test.driver.25 := tap
+.test.env.25 := $(.test.env) G_TEST_SRCDIR=/home/inhoinno/FEMU/tests G_TEST_BUILDDIR=/home/inhoinno/FEMU/build-femu/tests
+.test.cmd.25 := tests/test-rcu-list --tap -k
+.test.deps.25 := all
+.PHONY: run-test-25
+run-test-25: $(.test.deps.25)
+	@$(call .test.run,25,$(.test.output-format))
+.test.name.26 := test-rcu-simpleq
+.test.driver.26 := tap
+.test.env.26 := $(.test.env) G_TEST_SRCDIR=/home/inhoinno/FEMU/tests G_TEST_BUILDDIR=/home/inhoinno/FEMU/build-femu/tests
+.test.cmd.26 := tests/test-rcu-simpleq --tap -k
+.test.deps.26 := all
+.PHONY: run-test-26
+run-test-26: $(.test.deps.26)
+	@$(call .test.run,26,$(.test.output-format))
+.test.name.27 := test-rcu-tailq
+.test.driver.27 := tap
+.test.env.27 := $(.test.env) G_TEST_SRCDIR=/home/inhoinno/FEMU/tests G_TEST_BUILDDIR=/home/inhoinno/FEMU/build-femu/tests
+.test.cmd.27 := tests/test-rcu-tailq --tap -k
+.test.deps.27 := all
+.PHONY: run-test-27
+run-test-27: $(.test.deps.27)
+	@$(call .test.run,27,$(.test.output-format))
+.test.name.28 := test-rcu-slist
+.test.driver.28 := tap
+.test.env.28 := $(.test.env) G_TEST_SRCDIR=/home/inhoinno/FEMU/tests G_TEST_BUILDDIR=/home/inhoinno/FEMU/build-femu/tests
+.test.cmd.28 := tests/test-rcu-slist --tap -k
+.test.deps.28 := all
+.PHONY: run-test-28
+run-test-28: $(.test.deps.28)
+	@$(call .test.run,28,$(.test.output-format))
+.test.name.29 := test-qdist
+.test.driver.29 := tap
+.test.env.29 := $(.test.env) G_TEST_SRCDIR=/home/inhoinno/FEMU/tests G_TEST_BUILDDIR=/home/inhoinno/FEMU/build-femu/tests
+.test.cmd.29 := tests/test-qdist --tap -k
+.test.deps.29 := all
+.PHONY: run-test-29
+run-test-29: $(.test.deps.29)
+	@$(call .test.run,29,$(.test.output-format))
+.test.name.30 := test-qht
+.test.driver.30 := tap
+.test.env.30 := $(.test.env) G_TEST_SRCDIR=/home/inhoinno/FEMU/tests G_TEST_BUILDDIR=/home/inhoinno/FEMU/build-femu/tests
+.test.cmd.30 := tests/test-qht --tap -k
+.test.deps.30 := all
+.PHONY: run-test-30
+run-test-30: $(.test.deps.30)
+	@$(call .test.run,30,$(.test.output-format))
+.test.name.31 := test-bitops
+.test.driver.31 := tap
+.test.env.31 := $(.test.env) G_TEST_SRCDIR=/home/inhoinno/FEMU/tests G_TEST_BUILDDIR=/home/inhoinno/FEMU/build-femu/tests
+.test.cmd.31 := tests/test-bitops --tap -k
+.test.deps.31 := all
+.PHONY: run-test-31
+run-test-31: $(.test.deps.31)
+	@$(call .test.run,31,$(.test.output-format))
+.test.name.32 := test-bitcnt
+.test.driver.32 := tap
+.test.env.32 := $(.test.env) G_TEST_SRCDIR=/home/inhoinno/FEMU/tests G_TEST_BUILDDIR=/home/inhoinno/FEMU/build-femu/tests
+.test.cmd.32 := tests/test-bitcnt --tap -k
+.test.deps.32 := all
+.PHONY: run-test-32
+run-test-32: $(.test.deps.32)
+	@$(call .test.run,32,$(.test.output-format))
+.test.name.33 := test-qgraph
+.test.driver.33 := tap
+.test.env.33 := $(.test.env) G_TEST_SRCDIR=/home/inhoinno/FEMU/tests G_TEST_BUILDDIR=/home/inhoinno/FEMU/build-femu/tests
+.test.cmd.33 := tests/test-qgraph --tap -k
+.test.deps.33 := all
+.PHONY: run-test-33
+run-test-33: $(.test.deps.33)
+	@$(call .test.run,33,$(.test.output-format))
+.test.name.34 := check-qom-interface
+.test.driver.34 := tap
+.test.env.34 := $(.test.env) G_TEST_SRCDIR=/home/inhoinno/FEMU/tests G_TEST_BUILDDIR=/home/inhoinno/FEMU/build-femu/tests
+.test.cmd.34 := tests/check-qom-interface --tap -k
+.test.deps.34 := all
+.PHONY: run-test-34
+run-test-34: $(.test.deps.34)
+	@$(call .test.run,34,$(.test.output-format))
+.test.name.35 := check-qom-proplist
+.test.driver.35 := tap
+.test.env.35 := $(.test.env) G_TEST_SRCDIR=/home/inhoinno/FEMU/tests G_TEST_BUILDDIR=/home/inhoinno/FEMU/build-femu/tests
+.test.cmd.35 := tests/check-qom-proplist --tap -k
+.test.deps.35 := all
+.PHONY: run-test-35
+run-test-35: $(.test.deps.35)
+	@$(call .test.run,35,$(.test.output-format))
+.test.name.36 := test-qemu-opts
+.test.driver.36 := tap
+.test.env.36 := $(.test.env) G_TEST_SRCDIR=/home/inhoinno/FEMU/tests G_TEST_BUILDDIR=/home/inhoinno/FEMU/build-femu/tests
+.test.cmd.36 := tests/test-qemu-opts --tap -k
+.test.deps.36 := all
+.PHONY: run-test-36
+run-test-36: $(.test.deps.36)
+	@$(call .test.run,36,$(.test.output-format))
+.test.name.37 := test-keyval
+.test.driver.37 := tap
+.test.env.37 := $(.test.env) G_TEST_SRCDIR=/home/inhoinno/FEMU/tests G_TEST_BUILDDIR=/home/inhoinno/FEMU/build-femu/tests
+.test.cmd.37 := tests/test-keyval --tap -k
+.test.deps.37 := all
+.PHONY: run-test-37
+run-test-37: $(.test.deps.37)
+	@$(call .test.run,37,$(.test.output-format))
+.test.name.38 := test-logging
+.test.driver.38 := tap
+.test.env.38 := $(.test.env) G_TEST_SRCDIR=/home/inhoinno/FEMU/tests G_TEST_BUILDDIR=/home/inhoinno/FEMU/build-femu/tests
+.test.cmd.38 := tests/test-logging --tap -k
+.test.deps.38 := all
+.PHONY: run-test-38
+run-test-38: $(.test.deps.38)
+	@$(call .test.run,38,$(.test.output-format))
+.test.name.39 := test-uuid
+.test.driver.39 := tap
+.test.env.39 := $(.test.env) G_TEST_SRCDIR=/home/inhoinno/FEMU/tests G_TEST_BUILDDIR=/home/inhoinno/FEMU/build-femu/tests
+.test.cmd.39 := tests/test-uuid --tap -k
+.test.deps.39 := all
+.PHONY: run-test-39
+run-test-39: $(.test.deps.39)
+	@$(call .test.run,39,$(.test.output-format))
+.test.name.40 := ptimer-test
+.test.driver.40 := tap
+.test.env.40 := $(.test.env) G_TEST_SRCDIR=/home/inhoinno/FEMU/tests G_TEST_BUILDDIR=/home/inhoinno/FEMU/build-femu/tests
+.test.cmd.40 := tests/ptimer-test --tap -k
+.test.deps.40 := all
+.PHONY: run-test-40
+run-test-40: $(.test.deps.40)
+	@$(call .test.run,40,$(.test.output-format))
+.test.name.41 := test-qapi-util
+.test.driver.41 := tap
+.test.env.41 := $(.test.env) G_TEST_SRCDIR=/home/inhoinno/FEMU/tests G_TEST_BUILDDIR=/home/inhoinno/FEMU/build-femu/tests
+.test.cmd.41 := tests/test-qapi-util --tap -k
+.test.deps.41 := all
+.PHONY: run-test-41
+run-test-41: $(.test.deps.41)
+	@$(call .test.run,41,$(.test.output-format))
+.test.name.42 := test-coroutine
+.test.driver.42 := tap
+.test.env.42 := $(.test.env) G_TEST_SRCDIR=/home/inhoinno/FEMU/tests G_TEST_BUILDDIR=/home/inhoinno/FEMU/build-femu/tests
+.test.cmd.42 := tests/test-coroutine --tap -k
+.test.deps.42 := all
+.PHONY: run-test-42
+run-test-42: $(.test.deps.42)
+	@$(call .test.run,42,$(.test.output-format))
+.test.name.43 := test-aio
+.test.driver.43 := tap
+.test.env.43 := $(.test.env) G_TEST_SRCDIR=/home/inhoinno/FEMU/tests G_TEST_BUILDDIR=/home/inhoinno/FEMU/build-femu/tests
+.test.cmd.43 := tests/test-aio --tap -k
+.test.deps.43 := all
+.PHONY: run-test-43
+run-test-43: $(.test.deps.43)
+	@$(call .test.run,43,$(.test.output-format))
+.test.name.44 := test-aio-multithread
+.test.driver.44 := tap
+.test.env.44 := $(.test.env) G_TEST_SRCDIR=/home/inhoinno/FEMU/tests G_TEST_BUILDDIR=/home/inhoinno/FEMU/build-femu/tests
+.test.cmd.44 := tests/test-aio-multithread --tap -k
+.test.deps.44 := all
+.PHONY: run-test-44
+run-test-44: $(.test.deps.44)
+	@$(call .test.run,44,$(.test.output-format))
+.test.name.45 := test-throttle
+.test.driver.45 := tap
+.test.env.45 := $(.test.env) G_TEST_SRCDIR=/home/inhoinno/FEMU/tests G_TEST_BUILDDIR=/home/inhoinno/FEMU/build-femu/tests
+.test.cmd.45 := tests/test-throttle --tap -k
+.test.deps.45 := all
+.PHONY: run-test-45
+run-test-45: $(.test.deps.45)
+	@$(call .test.run,45,$(.test.output-format))
+.test.name.46 := test-thread-pool
+.test.driver.46 := tap
+.test.env.46 := $(.test.env) G_TEST_SRCDIR=/home/inhoinno/FEMU/tests G_TEST_BUILDDIR=/home/inhoinno/FEMU/build-femu/tests
+.test.cmd.46 := tests/test-thread-pool --tap -k
+.test.deps.46 := all
+.PHONY: run-test-46
+run-test-46: $(.test.deps.46)
+	@$(call .test.run,46,$(.test.output-format))
+.test.name.47 := test-hbitmap
+.test.driver.47 := tap
+.test.env.47 := $(.test.env) G_TEST_SRCDIR=/home/inhoinno/FEMU/tests G_TEST_BUILDDIR=/home/inhoinno/FEMU/build-femu/tests
+.test.cmd.47 := tests/test-hbitmap --tap -k
+.test.deps.47 := all
+.PHONY: run-test-47
+run-test-47: $(.test.deps.47)
+	@$(call .test.run,47,$(.test.output-format))
+.test.name.48 := test-bdrv-drain
+.test.driver.48 := tap
+.test.env.48 := $(.test.env) G_TEST_SRCDIR=/home/inhoinno/FEMU/tests G_TEST_BUILDDIR=/home/inhoinno/FEMU/build-femu/tests
+.test.cmd.48 := tests/test-bdrv-drain --tap -k
+.test.deps.48 := all
+.PHONY: run-test-48
+run-test-48: $(.test.deps.48)
+	@$(call .test.run,48,$(.test.output-format))
+.test.name.49 := test-bdrv-graph-mod
+.test.driver.49 := tap
+.test.env.49 := $(.test.env) G_TEST_SRCDIR=/home/inhoinno/FEMU/tests G_TEST_BUILDDIR=/home/inhoinno/FEMU/build-femu/tests
+.test.cmd.49 := tests/test-bdrv-graph-mod --tap -k
+.test.deps.49 := all
+.PHONY: run-test-49
+run-test-49: $(.test.deps.49)
+	@$(call .test.run,49,$(.test.output-format))
+.test.name.50 := test-blockjob
+.test.driver.50 := tap
+.test.env.50 := $(.test.env) G_TEST_SRCDIR=/home/inhoinno/FEMU/tests G_TEST_BUILDDIR=/home/inhoinno/FEMU/build-femu/tests
+.test.cmd.50 := tests/test-blockjob --tap -k
+.test.deps.50 := all
+.PHONY: run-test-50
+run-test-50: $(.test.deps.50)
+	@$(call .test.run,50,$(.test.output-format))
+.test.name.51 := test-blockjob-txn
+.test.driver.51 := tap
+.test.env.51 := $(.test.env) G_TEST_SRCDIR=/home/inhoinno/FEMU/tests G_TEST_BUILDDIR=/home/inhoinno/FEMU/build-femu/tests
+.test.cmd.51 := tests/test-blockjob-txn --tap -k
+.test.deps.51 := all
+.PHONY: run-test-51
+run-test-51: $(.test.deps.51)
+	@$(call .test.run,51,$(.test.output-format))
+.test.name.52 := test-block-backend
+.test.driver.52 := tap
+.test.env.52 := $(.test.env) G_TEST_SRCDIR=/home/inhoinno/FEMU/tests G_TEST_BUILDDIR=/home/inhoinno/FEMU/build-femu/tests
+.test.cmd.52 := tests/test-block-backend --tap -k
+.test.deps.52 := all
+.PHONY: run-test-52
+run-test-52: $(.test.deps.52)
+	@$(call .test.run,52,$(.test.output-format))
+.test.name.53 := test-block-iothread
+.test.driver.53 := tap
+.test.env.53 := $(.test.env) G_TEST_SRCDIR=/home/inhoinno/FEMU/tests G_TEST_BUILDDIR=/home/inhoinno/FEMU/build-femu/tests
+.test.cmd.53 := tests/test-block-iothread --tap -k
+.test.deps.53 := all
+.PHONY: run-test-53
+run-test-53: $(.test.deps.53)
+	@$(call .test.run,53,$(.test.output-format))
+.test.name.54 := test-write-threshold
+.test.driver.54 := tap
+.test.env.54 := $(.test.env) G_TEST_SRCDIR=/home/inhoinno/FEMU/tests G_TEST_BUILDDIR=/home/inhoinno/FEMU/build-femu/tests
+.test.cmd.54 := tests/test-write-threshold --tap -k
+.test.deps.54 := all
+.PHONY: run-test-54
+run-test-54: $(.test.deps.54)
+	@$(call .test.run,54,$(.test.output-format))
+.test.name.55 := test-crypto-hash
+.test.driver.55 := tap
+.test.env.55 := $(.test.env) G_TEST_SRCDIR=/home/inhoinno/FEMU/tests G_TEST_BUILDDIR=/home/inhoinno/FEMU/build-femu/tests
+.test.cmd.55 := tests/test-crypto-hash --tap -k
+.test.deps.55 := all
+.PHONY: run-test-55
+run-test-55: $(.test.deps.55)
+	@$(call .test.run,55,$(.test.output-format))
+.test.name.56 := test-crypto-hmac
+.test.driver.56 := tap
+.test.env.56 := $(.test.env) G_TEST_SRCDIR=/home/inhoinno/FEMU/tests G_TEST_BUILDDIR=/home/inhoinno/FEMU/build-femu/tests
+.test.cmd.56 := tests/test-crypto-hmac --tap -k
+.test.deps.56 := all
+.PHONY: run-test-56
+run-test-56: $(.test.deps.56)
+	@$(call .test.run,56,$(.test.output-format))
+.test.name.57 := test-crypto-cipher
+.test.driver.57 := tap
+.test.env.57 := $(.test.env) G_TEST_SRCDIR=/home/inhoinno/FEMU/tests G_TEST_BUILDDIR=/home/inhoinno/FEMU/build-femu/tests
+.test.cmd.57 := tests/test-crypto-cipher --tap -k
+.test.deps.57 := all
+.PHONY: run-test-57
+run-test-57: $(.test.deps.57)
+	@$(call .test.run,57,$(.test.output-format))
+.test.name.58 := test-crypto-secret
+.test.driver.58 := tap
+.test.env.58 := $(.test.env) G_TEST_SRCDIR=/home/inhoinno/FEMU/tests G_TEST_BUILDDIR=/home/inhoinno/FEMU/build-femu/tests
+.test.cmd.58 := tests/test-crypto-secret --tap -k
+.test.deps.58 := all
+.PHONY: run-test-58
+run-test-58: $(.test.deps.58)
+	@$(call .test.run,58,$(.test.output-format))
+.test.name.59 := test-authz-simple
+.test.driver.59 := tap
+.test.env.59 := $(.test.env) G_TEST_SRCDIR=/home/inhoinno/FEMU/tests G_TEST_BUILDDIR=/home/inhoinno/FEMU/build-femu/tests
+.test.cmd.59 := tests/test-authz-simple --tap -k
+.test.deps.59 := all
+.PHONY: run-test-59
+run-test-59: $(.test.deps.59)
+	@$(call .test.run,59,$(.test.output-format))
+.test.name.60 := test-authz-list
+.test.driver.60 := tap
+.test.env.60 := $(.test.env) G_TEST_SRCDIR=/home/inhoinno/FEMU/tests G_TEST_BUILDDIR=/home/inhoinno/FEMU/build-femu/tests
+.test.cmd.60 := tests/test-authz-list --tap -k
+.test.deps.60 := all
+.PHONY: run-test-60
+run-test-60: $(.test.deps.60)
+	@$(call .test.run,60,$(.test.output-format))
+.test.name.61 := test-authz-listfile
+.test.driver.61 := tap
+.test.env.61 := $(.test.env) G_TEST_SRCDIR=/home/inhoinno/FEMU/tests G_TEST_BUILDDIR=/home/inhoinno/FEMU/build-femu/tests
+.test.cmd.61 := tests/test-authz-listfile --tap -k
+.test.deps.61 := all
+.PHONY: run-test-61
+run-test-61: $(.test.deps.61)
+	@$(call .test.run,61,$(.test.output-format))
+.test.name.62 := test-io-task
+.test.driver.62 := tap
+.test.env.62 := $(.test.env) G_TEST_SRCDIR=/home/inhoinno/FEMU/tests G_TEST_BUILDDIR=/home/inhoinno/FEMU/build-femu/tests
+.test.cmd.62 := tests/test-io-task --tap -k
+.test.deps.62 := all
+.PHONY: run-test-62
+run-test-62: $(.test.deps.62)
+	@$(call .test.run,62,$(.test.output-format))
+.test.name.63 := test-io-channel-socket
+.test.driver.63 := tap
+.test.env.63 := $(.test.env) G_TEST_SRCDIR=/home/inhoinno/FEMU/tests G_TEST_BUILDDIR=/home/inhoinno/FEMU/build-femu/tests
+.test.cmd.63 := tests/test-io-channel-socket --tap -k
+.test.deps.63 := all
+.PHONY: run-test-63
+run-test-63: $(.test.deps.63)
+	@$(call .test.run,63,$(.test.output-format))
+.test.name.64 := test-io-channel-file
+.test.driver.64 := tap
+.test.env.64 := $(.test.env) G_TEST_SRCDIR=/home/inhoinno/FEMU/tests G_TEST_BUILDDIR=/home/inhoinno/FEMU/build-femu/tests
+.test.cmd.64 := tests/test-io-channel-file --tap -k
+.test.deps.64 := all
+.PHONY: run-test-64
+run-test-64: $(.test.deps.64)
+	@$(call .test.run,64,$(.test.output-format))
+.test.name.65 := test-io-channel-command
+.test.driver.65 := tap
+.test.env.65 := $(.test.env) G_TEST_SRCDIR=/home/inhoinno/FEMU/tests G_TEST_BUILDDIR=/home/inhoinno/FEMU/build-femu/tests
+.test.cmd.65 := tests/test-io-channel-command --tap -k
+.test.deps.65 := all
+.PHONY: run-test-65
+run-test-65: $(.test.deps.65)
+	@$(call .test.run,65,$(.test.output-format))
+.test.name.66 := test-io-channel-buffer
+.test.driver.66 := tap
+.test.env.66 := $(.test.env) G_TEST_SRCDIR=/home/inhoinno/FEMU/tests G_TEST_BUILDDIR=/home/inhoinno/FEMU/build-femu/tests
+.test.cmd.66 := tests/test-io-channel-buffer --tap -k
+.test.deps.66 := all
+.PHONY: run-test-66
+run-test-66: $(.test.deps.66)
+	@$(call .test.run,66,$(.test.output-format))
+.test.name.67 := test-crypto-ivgen
+.test.driver.67 := tap
+.test.env.67 := $(.test.env) G_TEST_SRCDIR=/home/inhoinno/FEMU/tests G_TEST_BUILDDIR=/home/inhoinno/FEMU/build-femu/tests
+.test.cmd.67 := tests/test-crypto-ivgen --tap -k
+.test.deps.67 := all
+.PHONY: run-test-67
+run-test-67: $(.test.deps.67)
+	@$(call .test.run,67,$(.test.output-format))
+.test.name.68 := test-crypto-afsplit
+.test.driver.68 := tap
+.test.env.68 := $(.test.env) G_TEST_SRCDIR=/home/inhoinno/FEMU/tests G_TEST_BUILDDIR=/home/inhoinno/FEMU/build-femu/tests
+.test.cmd.68 := tests/test-crypto-afsplit --tap -k
+.test.deps.68 := all
+.PHONY: run-test-68
+run-test-68: $(.test.deps.68)
+	@$(call .test.run,68,$(.test.output-format))
+.test.name.69 := test-crypto-block
+.test.driver.69 := tap
+.test.env.69 := $(.test.env) G_TEST_SRCDIR=/home/inhoinno/FEMU/tests G_TEST_BUILDDIR=/home/inhoinno/FEMU/build-femu/tests
+.test.cmd.69 := tests/test-crypto-block --tap -k
+.test.deps.69 := all
+.PHONY: run-test-69
+run-test-69: $(.test.deps.69)
+	@$(call .test.run,69,$(.test.output-format))
+.test.name.70 := test-crypto-xts
+.test.driver.70 := tap
+.test.env.70 := $(.test.env) G_TEST_SRCDIR=/home/inhoinno/FEMU/tests G_TEST_BUILDDIR=/home/inhoinno/FEMU/build-femu/tests
+.test.cmd.70 := tests/test-crypto-xts --tap -k
+.test.deps.70 := all
+.PHONY: run-test-70
+run-test-70: $(.test.deps.70)
+	@$(call .test.run,70,$(.test.output-format))
+.test.name.71 := test-image-locking
+.test.driver.71 := tap
+.test.env.71 := $(.test.env) G_TEST_SRCDIR=/home/inhoinno/FEMU/tests G_TEST_BUILDDIR=/home/inhoinno/FEMU/build-femu/tests
+.test.cmd.71 := tests/test-image-locking --tap -k
+.test.deps.71 := all
+.PHONY: run-test-71
+run-test-71: $(.test.deps.71)
+	@$(call .test.run,71,$(.test.output-format))
+.test.name.72 := test-replication
+.test.driver.72 := tap
+.test.env.72 := $(.test.env) G_TEST_SRCDIR=/home/inhoinno/FEMU/tests G_TEST_BUILDDIR=/home/inhoinno/FEMU/build-femu/tests
+.test.cmd.72 := tests/test-replication --tap -k
+.test.deps.72 := all
+.PHONY: run-test-72
+run-test-72: $(.test.deps.72)
+	@$(call .test.run,72,$(.test.output-format))
+.test.name.73 := test-fdmon-epoll
+.test.driver.73 := tap
+.test.env.73 := $(.test.env) G_TEST_SRCDIR=/home/inhoinno/FEMU/tests G_TEST_BUILDDIR=/home/inhoinno/FEMU/build-femu/tests
+.test.cmd.73 := tests/test-fdmon-epoll --tap -k
+.test.deps.73 := all
+.PHONY: run-test-73
+run-test-73: $(.test.deps.73)
+	@$(call .test.run,73,$(.test.output-format))
+.test.name.74 := test-iov
+.test.driver.74 := tap
+.test.env.74 := $(.test.env) G_TEST_SRCDIR=/home/inhoinno/FEMU/tests G_TEST_BUILDDIR=/home/inhoinno/FEMU/build-femu/tests
+.test.cmd.74 := tests/test-iov --tap -k
+.test.deps.74 := all
+.PHONY: run-test-74
+run-test-74: $(.test.deps.74)
+	@$(call .test.run,74,$(.test.output-format))
+.test.name.75 := test-qmp-cmds
+.test.driver.75 := tap
+.test.env.75 := $(.test.env) G_TEST_SRCDIR=/home/inhoinno/FEMU/tests G_TEST_BUILDDIR=/home/inhoinno/FEMU/build-femu/tests
+.test.cmd.75 := tests/test-qmp-cmds --tap -k
+.test.deps.75 := all
+.PHONY: run-test-75
+run-test-75: $(.test.deps.75)
+	@$(call .test.run,75,$(.test.output-format))
+.test.name.76 := test-xbzrle
+.test.driver.76 := tap
+.test.env.76 := $(.test.env) G_TEST_SRCDIR=/home/inhoinno/FEMU/tests G_TEST_BUILDDIR=/home/inhoinno/FEMU/build-femu/tests
+.test.cmd.76 := tests/test-xbzrle --tap -k
+.test.deps.76 := all
+.PHONY: run-test-76
+run-test-76: $(.test.deps.76)
+	@$(call .test.run,76,$(.test.output-format))
+.test.name.77 := test-timed-average
+.test.driver.77 := tap
+.test.env.77 := $(.test.env) G_TEST_SRCDIR=/home/inhoinno/FEMU/tests G_TEST_BUILDDIR=/home/inhoinno/FEMU/build-femu/tests
+.test.cmd.77 := tests/test-timed-average --tap -k
+.test.deps.77 := all
+.PHONY: run-test-77
+run-test-77: $(.test.deps.77)
+	@$(call .test.run,77,$(.test.output-format))
+.test.name.78 := test-util-sockets
+.test.driver.78 := tap
+.test.env.78 := $(.test.env) G_TEST_SRCDIR=/home/inhoinno/FEMU/tests G_TEST_BUILDDIR=/home/inhoinno/FEMU/build-femu/tests
+.test.cmd.78 := tests/test-util-sockets --tap -k
+.test.deps.78 := all
+.PHONY: run-test-78
+run-test-78: $(.test.deps.78)
+	@$(call .test.run,78,$(.test.output-format))
+.test.name.79 := test-base64
+.test.driver.79 := tap
+.test.env.79 := $(.test.env) G_TEST_SRCDIR=/home/inhoinno/FEMU/tests G_TEST_BUILDDIR=/home/inhoinno/FEMU/build-femu/tests
+.test.cmd.79 := tests/test-base64 --tap -k
+.test.deps.79 := all
+.PHONY: run-test-79
+run-test-79: $(.test.deps.79)
+	@$(call .test.run,79,$(.test.output-format))
+.test.name.80 := test-bufferiszero
+.test.driver.80 := tap
+.test.env.80 := $(.test.env) G_TEST_SRCDIR=/home/inhoinno/FEMU/tests G_TEST_BUILDDIR=/home/inhoinno/FEMU/build-femu/tests
+.test.cmd.80 := tests/test-bufferiszero --tap -k
+.test.deps.80 := all
+.PHONY: run-test-80
+run-test-80: $(.test.deps.80)
+	@$(call .test.run,80,$(.test.output-format))
+.test.name.81 := test-vmstate
+.test.driver.81 := tap
+.test.env.81 := $(.test.env) G_TEST_SRCDIR=/home/inhoinno/FEMU/tests G_TEST_BUILDDIR=/home/inhoinno/FEMU/build-femu/tests
+.test.cmd.81 := tests/test-vmstate --tap -k
+.test.deps.81 := all
+.PHONY: run-test-81
+run-test-81: $(.test.deps.81)
+	@$(call .test.run,81,$(.test.output-format))
+.test.name.82 := test-util-filemonitor
+.test.driver.82 := tap
+.test.env.82 := $(.test.env) G_TEST_SRCDIR=/home/inhoinno/FEMU/tests G_TEST_BUILDDIR=/home/inhoinno/FEMU/build-femu/tests
+.test.cmd.82 := tests/test-util-filemonitor --tap -k
+.test.deps.82 := all
+.PHONY: run-test-82
+run-test-82: $(.test.deps.82)
+	@$(call .test.run,82,$(.test.output-format))
+.test.name.83 := test-char
+.test.driver.83 := tap
+.test.env.83 := $(.test.env) G_TEST_SRCDIR=/home/inhoinno/FEMU/tests G_TEST_BUILDDIR=/home/inhoinno/FEMU/build-femu/tests
+.test.cmd.83 := tests/test-char --tap -k
+.test.deps.83 := all
+.PHONY: run-test-83
+run-test-83: $(.test.deps.83)
+	@$(call .test.run,83,$(.test.output-format))
+.test.name.84 := test-qdev-global-props
+.test.driver.84 := tap
+.test.env.84 := $(.test.env) G_TEST_SRCDIR=/home/inhoinno/FEMU/tests G_TEST_BUILDDIR=/home/inhoinno/FEMU/build-femu/tests
+.test.cmd.84 := tests/test-qdev-global-props --tap -k
+.test.deps.84 := all
+.PHONY: run-test-84
+run-test-84: $(.test.deps.84)
+	@$(call .test.run,84,$(.test.output-format))
+.test.name.85 := test-qga
+.test.driver.85 := tap
+.test.env.85 := $(.test.env) G_TEST_SRCDIR=/home/inhoinno/FEMU/tests G_TEST_BUILDDIR=/home/inhoinno/FEMU/build-femu/tests
+.test.cmd.85 := tests/test-qga --tap -k
+.test.deps.85 := all
+.PHONY: run-test-85
+run-test-85: $(.test.deps.85)
+	@$(call .test.run,85,$(.test.output-format))
+.test.dir.86 := /home/inhoinno/FEMU/tests/decode
+.test.name.86 := decodetree
+.test.driver.86 := exitcode
+.test.env.86 := $(.test.env) 
+.test.cmd.86 := ../../../../../bin/sh /home/inhoinno/FEMU/build-femu/../tests/decode/check.sh '/home/inhoinno/anaconda3/bin/python3 -B' /home/inhoinno/FEMU/build-femu/../tests/../scripts/decodetree.py
+.test.deps.86 := all
+.PHONY: run-test-86
+run-test-86: $(.test.deps.86)
+	@$(call .test.run,86,$(.test.output-format))
+.test.name.87 := fp-test-float-to-float
+.test.driver.87 := exitcode
+.test.env.87 := $(.test.env) 
+.test.cmd.87 := tests/fp/fp-test -s -l 1 -r all f16_to_f32 f16_to_f64 f16_to_extF80 f16_to_f128 f32_to_f16 f32_to_f64 f32_to_extF80 f64_to_f16 f64_to_f32 extF80_to_f16 extF80_to_f32 extF80_to_f64 extF80_to_f128 f128_to_f16
+.test.deps.87 := all
+.PHONY: run-test-87
+run-test-87: $(.test.deps.87)
+	@$(call .test.run,87,$(.test.output-format))
+.test.name.88 := fp-test-int-to-float
+.test.driver.88 := exitcode
+.test.env.88 := $(.test.env) 
+.test.cmd.88 := tests/fp/fp-test -s -l 1 -r all i32_to_f16 i64_to_f16 i32_to_f32 i64_to_f32 i32_to_f64 i64_to_f64 i32_to_f128 i64_to_f128
+.test.deps.88 := all
+.PHONY: run-test-88
+run-test-88: $(.test.deps.88)
+	@$(call .test.run,88,$(.test.output-format))
+.test.name.89 := fp-test-uint-to-float
+.test.driver.89 := exitcode
+.test.env.89 := $(.test.env) 
+.test.cmd.89 := tests/fp/fp-test -s -l 1 -r all ui32_to_f16 ui64_to_f16 ui32_to_f32 ui64_to_f32 ui32_to_f64 ui64_to_f64 ui64_to_f128 ui32_to_extF80 ui64_to_extF80
+.test.deps.89 := all
+.PHONY: run-test-89
+run-test-89: $(.test.deps.89)
+	@$(call .test.run,89,$(.test.output-format))
+.test.name.90 := fp-test-float-to-int
+.test.driver.90 := exitcode
+.test.env.90 := $(.test.env) 
+.test.cmd.90 := tests/fp/fp-test -s -l 1 -r all f16_to_i32 f16_to_i32_r_minMag f32_to_i32 f32_to_i32_r_minMag f64_to_i32 f64_to_i32_r_minMag extF80_to_i32 extF80_to_i32_r_minMag f128_to_i32 f128_to_i32_r_minMag f16_to_i64 f16_to_i64_r_minMag f32_to_i64 f32_to_i64_r_minMag f64_to_i64 f64_to_i64_r_minMag extF80_to_i64 extF80_to_i64_r_minMag f128_to_i64 f128_to_i64_r_minMag
+.test.deps.90 := all
+.PHONY: run-test-90
+run-test-90: $(.test.deps.90)
+	@$(call .test.run,90,$(.test.output-format))
+.test.name.91 := fp-test-float-to-uint
+.test.driver.91 := exitcode
+.test.env.91 := $(.test.env) 
+.test.cmd.91 := tests/fp/fp-test -s -l 1 -r all f16_to_ui32 f16_to_ui32_r_minMag f32_to_ui32 f32_to_ui32_r_minMag f64_to_ui32 f64_to_ui32_r_minMag extF80_to_ui32 extF80_to_ui32_r_minMag f128_to_ui32 f128_to_ui32_r_minMag f16_to_ui64 f16_to_ui64_r_minMag f32_to_ui64 f32_to_ui64_r_minMag f64_to_ui64 f64_to_ui64_r_minMag extF80_to_ui64 extF80_to_ui64_r_minMag f128_to_ui64 f128_to_ui64_r_minMag
+.test.deps.91 := all
+.PHONY: run-test-91
+run-test-91: $(.test.deps.91)
+	@$(call .test.run,91,$(.test.output-format))
+.test.name.92 := fp-test-round-to-integer
+.test.driver.92 := exitcode
+.test.env.92 := $(.test.env) 
+.test.cmd.92 := tests/fp/fp-test -s -l 1 -r all f16_roundToInt f32_roundToInt f64_roundToInt f128_roundToInt
+.test.deps.92 := all
+.PHONY: run-test-92
+run-test-92: $(.test.deps.92)
+	@$(call .test.run,92,$(.test.output-format))
+.test.name.93 := fp-test-eq_signaling
+.test.driver.93 := exitcode
+.test.env.93 := $(.test.env) 
+.test.cmd.93 := tests/fp/fp-test -s -l 1 -r all f16_eq_signaling f32_eq_signaling f64_eq_signaling f128_eq_signaling extF80_eq_signaling
+.test.deps.93 := all
+.PHONY: run-test-93
+run-test-93: $(.test.deps.93)
+	@$(call .test.run,93,$(.test.output-format))
+.test.name.94 := fp-test-le
+.test.driver.94 := exitcode
+.test.env.94 := $(.test.env) 
+.test.cmd.94 := tests/fp/fp-test -s -l 1 -r all f16_le f32_le f64_le f128_le extF80_le
+.test.deps.94 := all
+.PHONY: run-test-94
+run-test-94: $(.test.deps.94)
+	@$(call .test.run,94,$(.test.output-format))
+.test.name.95 := fp-test-le_quiet
+.test.driver.95 := exitcode
+.test.env.95 := $(.test.env) 
+.test.cmd.95 := tests/fp/fp-test -s -l 1 -r all f16_le_quiet f32_le_quiet f64_le_quiet f128_le_quiet extF80_le_quiet
+.test.deps.95 := all
+.PHONY: run-test-95
+run-test-95: $(.test.deps.95)
+	@$(call .test.run,95,$(.test.output-format))
+.test.name.96 := fp-test-lt_quiet
+.test.driver.96 := exitcode
+.test.env.96 := $(.test.env) 
+.test.cmd.96 := tests/fp/fp-test -s -l 1 -r all f16_lt_quiet f32_lt_quiet f64_lt_quiet f128_lt_quiet
+.test.deps.96 := all
+.PHONY: run-test-96
+run-test-96: $(.test.deps.96)
+	@$(call .test.run,96,$(.test.output-format))
+.test.name.97 := fp-test-add
+.test.driver.97 := exitcode
+.test.env.97 := $(.test.env) 
+.test.cmd.97 := tests/fp/fp-test -s -l 1 -r all f16_add f32_add f64_add f128_add extF80_add
+.test.deps.97 := all
+.PHONY: run-test-97
+run-test-97: $(.test.deps.97)
+	@$(call .test.run,97,$(.test.output-format))
+.test.name.98 := fp-test-sub
+.test.driver.98 := exitcode
+.test.env.98 := $(.test.env) 
+.test.cmd.98 := tests/fp/fp-test -s -l 1 -r all f16_sub f32_sub f64_sub f128_sub extF80_sub
+.test.deps.98 := all
+.PHONY: run-test-98
+run-test-98: $(.test.deps.98)
+	@$(call .test.run,98,$(.test.output-format))
+.test.name.99 := fp-test-mul
+.test.driver.99 := exitcode
+.test.env.99 := $(.test.env) 
+.test.cmd.99 := tests/fp/fp-test -s -l 1 -r all f16_mul f32_mul f64_mul f128_mul extF80_mul
+.test.deps.99 := all
+.PHONY: run-test-99
+run-test-99: $(.test.deps.99)
+	@$(call .test.run,99,$(.test.output-format))
+.test.name.100 := fp-test-div
+.test.driver.100 := exitcode
+.test.env.100 := $(.test.env) 
+.test.cmd.100 := tests/fp/fp-test -s -l 1 -r all f16_div f32_div f64_div f128_div extF80_div
+.test.deps.100 := all
+.PHONY: run-test-100
+run-test-100: $(.test.deps.100)
+	@$(call .test.run,100,$(.test.output-format))
+.test.name.101 := fp-test-rem
+.test.driver.101 := exitcode
+.test.env.101 := $(.test.env) 
+.test.cmd.101 := tests/fp/fp-test -s -l 1 -r all f16_rem f32_rem f64_rem f128_rem
+.test.deps.101 := all
+.PHONY: run-test-101
+run-test-101: $(.test.deps.101)
+	@$(call .test.run,101,$(.test.output-format))
+.test.name.102 := fp-test-sqrt
+.test.driver.102 := exitcode
+.test.env.102 := $(.test.env) 
+.test.cmd.102 := tests/fp/fp-test -s -l 1 -r all f16_sqrt f32_sqrt f64_sqrt f128_sqrt extF80_sqrt
+.test.deps.102 := all
+.PHONY: run-test-102
+run-test-102: $(.test.deps.102)
+	@$(call .test.run,102,$(.test.output-format))
+.test.name.103 := fp-test-mulAdd
+.test.driver.103 := exitcode
+.test.env.103 := $(.test.env) 
+.test.cmd.103 := tests/fp/fp-test -s -l 1 f16_mulAdd f32_mulAdd f64_mulAdd f128_mulAdd
+.test.deps.103 := all
+.PHONY: run-test-103
+run-test-103: $(.test.deps.103)
+	@$(call .test.run,103,$(.test.output-format))
+.test.name.104 := QAPI schema regression tests
+.test.driver.104 := exitcode
+.test.env.104 := $(.test.env) PYTHONPATH=/home/inhoinno/FEMU/scripts PYTHONIOENCODING=utf-8
+.test.cmd.104 := ../../anaconda3/bin/python3 /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/test-qapi.py /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/alternate-any.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/alternate-array.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/alternate-base.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/alternate-branch-if-invalid.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/alternate-clash.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/alternate-conflict-dict.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/alternate-conflict-enum-bool.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/alternate-conflict-enum-int.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/alternate-conflict-string.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/alternate-conflict-bool-string.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/alternate-conflict-num-string.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/alternate-empty.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/alternate-invalid-dict.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/alternate-nested.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/alternate-unknown.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/args-alternate.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/args-any.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/args-array-empty.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/args-array-unknown.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/args-bad-boxed.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/args-boxed-anon.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/args-boxed-string.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/args-int.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/args-invalid.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/args-member-array-bad.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/args-member-case.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/args-member-unknown.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/args-name-clash.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/args-union.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/args-unknown.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/bad-base.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/bad-data.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/bad-ident.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/bad-if.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/bad-if-empty.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/bad-if-empty-list.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/bad-if-list.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/bad-type-bool.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/bad-type-dict.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/bad-type-int.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/base-cycle-direct.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/base-cycle-indirect.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/command-int.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/comments.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/doc-bad-alternate-member.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/doc-bad-boxed-command-arg.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/doc-bad-command-arg.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/doc-bad-enum-member.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/doc-bad-event-arg.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/doc-bad-feature.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/doc-bad-indent.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/doc-bad-section.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/doc-bad-symbol.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/doc-bad-union-member.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/doc-before-include.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/doc-before-pragma.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/doc-duplicated-arg.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/doc-duplicated-return.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/doc-duplicated-since.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/doc-empty-arg.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/doc-empty-section.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/doc-empty-symbol.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/doc-good.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/doc-interleaved-section.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/doc-invalid-end.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/doc-invalid-end2.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/doc-invalid-return.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/doc-invalid-section.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/doc-invalid-start.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/doc-missing-colon.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/doc-missing-expr.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/doc-missing-space.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/doc-missing.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/doc-no-symbol.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/doc-undoc-feature.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/double-type.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/duplicate-key.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/empty.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/enum-bad-member.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/enum-bad-name.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/enum-bad-prefix.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/enum-clash-member.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/enum-dict-member-unknown.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/enum-if-invalid.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/enum-int-member.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/enum-member-case.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/enum-missing-data.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/enum-wrong-data.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/event-boxed-empty.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/event-case.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/event-member-invalid-dict.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/event-nest-struct.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/features-bad-type.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/features-deprecated-type.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/features-duplicate-name.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/features-if-invalid.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/features-missing-name.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/features-name-bad-type.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/features-no-list.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/features-unknown-key.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/flat-union-array-branch.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/flat-union-bad-base.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/flat-union-bad-discriminator.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/flat-union-base-any.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/flat-union-base-union.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/flat-union-clash-member.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/flat-union-discriminator-bad-name.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/flat-union-empty.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/flat-union-inline.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/flat-union-inline-invalid-dict.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/flat-union-int-branch.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/flat-union-invalid-branch-key.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/flat-union-invalid-discriminator.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/flat-union-invalid-if-discriminator.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/flat-union-no-base.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/flat-union-optional-discriminator.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/flat-union-string-discriminator.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/funny-char.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/funny-word.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/ident-with-escape.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/include-before-err.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/include-cycle.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/include-extra-junk.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/include-nested-err.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/include-no-file.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/include-non-file.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/include-repetition.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/include-self-cycle.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/include-simple.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/indented-expr.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/leading-comma-list.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/leading-comma-object.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/missing-colon.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/missing-comma-list.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/missing-comma-object.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/missing-type.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/nested-struct-data.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/nested-struct-data-invalid-dict.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/non-objects.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/oob-coroutine.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/oob-test.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/allow-preconfig-test.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/pragma-doc-required-crap.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/pragma-extra-junk.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/pragma-name-case-whitelist-crap.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/pragma-non-dict.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/pragma-unknown.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/pragma-returns-whitelist-crap.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/qapi-schema-test.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/quoted-structural-chars.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/redefined-builtin.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/redefined-command.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/redefined-event.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/redefined-type.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/reserved-command-q.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/reserved-enum-q.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/reserved-member-has.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/reserved-member-q.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/reserved-member-u.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/reserved-member-underscore.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/reserved-type-kind.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/reserved-type-list.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/returns-alternate.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/returns-array-bad.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/returns-dict.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/returns-unknown.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/returns-whitelist.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/string-code-point-31.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/string-code-point-127.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/struct-base-clash-deep.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/struct-base-clash.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/struct-data-invalid.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/struct-member-if-invalid.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/struct-member-invalid-dict.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/struct-member-invalid.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/trailing-comma-list.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/trailing-comma-object.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/type-bypass-bad-gen.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/unclosed-list.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/unclosed-object.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/unclosed-string.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/union-base-empty.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/union-base-no-discriminator.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/union-branch-case.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/union-branch-if-invalid.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/union-branch-invalid-dict.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/union-clash-branches.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/union-empty.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/union-invalid-base.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/union-optional-branch.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/union-unknown.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/unknown-escape.json /home/inhoinno/FEMU/build-femu/../tests/qapi-schema/unknown-expr-key.json
+.test.deps.104 := all
+.PHONY: run-test-104
+run-test-104: $(.test.deps.104)
+	@$(call .test.run,104,$(.test.output-format))
+.test.name.105 := QAPI rST doc
+.test.driver.105 := exitcode
+.test.env.105 := $(.test.env) 
+.test.cmd.105 := ../../../../usr/bin/diff -u /home/inhoinno/FEMU/build-femu/tests/qapi-schema/doc-good.ref.nocr /home/inhoinno/FEMU/build-femu/tests/qapi-schema/doc-good.txt.nocr
+.test.deps.105 := all
+.PHONY: run-test-105
+run-test-105: $(.test.deps.105)
+	@$(call .test.run,105,$(.test.output-format))
+.test.name.106 := qtest-x86_64/pxe-test
+.test.driver.106 := tap
+.test.env.106 := $(.test.env) QTEST_QEMU_IMG=./qemu-img G_TEST_DBUS_DAEMON=/home/inhoinno/FEMU/tests/dbus-vmstate-daemon.sh QTEST_QEMU_BINARY=./qemu-system-x86_64
+.test.cmd.106 := tests/qtest/pxe-test --tap -k
+.test.deps.106 := all
+.PHONY: run-test-106
+run-test-106: $(.test.deps.106)
+	@$(call .test.run,106,$(.test.output-format))
+.test.name.107 := qtest-x86_64/test-netfilter
+.test.driver.107 := tap
+.test.env.107 := $(.test.env) QTEST_QEMU_IMG=./qemu-img G_TEST_DBUS_DAEMON=/home/inhoinno/FEMU/tests/dbus-vmstate-daemon.sh QTEST_QEMU_BINARY=./qemu-system-x86_64
+.test.cmd.107 := tests/qtest/test-netfilter --tap -k
+.test.deps.107 := all
+.PHONY: run-test-107
+run-test-107: $(.test.deps.107)
+	@$(call .test.run,107,$(.test.output-format))
+.test.name.108 := qtest-x86_64/test-filter-mirror
+.test.driver.108 := tap
+.test.env.108 := $(.test.env) QTEST_QEMU_IMG=./qemu-img G_TEST_DBUS_DAEMON=/home/inhoinno/FEMU/tests/dbus-vmstate-daemon.sh QTEST_QEMU_BINARY=./qemu-system-x86_64
+.test.cmd.108 := tests/qtest/test-filter-mirror --tap -k
+.test.deps.108 := all
+.PHONY: run-test-108
+run-test-108: $(.test.deps.108)
+	@$(call .test.run,108,$(.test.output-format))
+.test.name.109 := qtest-x86_64/ahci-test
+.test.driver.109 := tap
+.test.env.109 := $(.test.env) QTEST_QEMU_IMG=./qemu-img G_TEST_DBUS_DAEMON=/home/inhoinno/FEMU/tests/dbus-vmstate-daemon.sh QTEST_QEMU_BINARY=./qemu-system-x86_64
+.test.cmd.109 := tests/qtest/ahci-test --tap -k
+.test.deps.109 := all
+.PHONY: run-test-109
+run-test-109: $(.test.deps.109)
+	@$(call .test.run,109,$(.test.output-format))
+.test.name.110 := qtest-x86_64/endianness-test
+.test.driver.110 := tap
+.test.env.110 := $(.test.env) QTEST_QEMU_IMG=./qemu-img G_TEST_DBUS_DAEMON=/home/inhoinno/FEMU/tests/dbus-vmstate-daemon.sh QTEST_QEMU_BINARY=./qemu-system-x86_64
+.test.cmd.110 := tests/qtest/endianness-test --tap -k
+.test.deps.110 := all
+.PHONY: run-test-110
+run-test-110: $(.test.deps.110)
+	@$(call .test.run,110,$(.test.output-format))
+.test.name.111 := qtest-x86_64/boot-serial-test
+.test.driver.111 := tap
+.test.env.111 := $(.test.env) QTEST_QEMU_IMG=./qemu-img G_TEST_DBUS_DAEMON=/home/inhoinno/FEMU/tests/dbus-vmstate-daemon.sh QTEST_QEMU_BINARY=./qemu-system-x86_64
+.test.cmd.111 := tests/qtest/boot-serial-test --tap -k
+.test.deps.111 := all
+.PHONY: run-test-111
+run-test-111: $(.test.deps.111)
+	@$(call .test.run,111,$(.test.output-format))
+.test.name.112 := qtest-x86_64/test-filter-redirector
+.test.driver.112 := tap
+.test.env.112 := $(.test.env) QTEST_QEMU_IMG=./qemu-img G_TEST_DBUS_DAEMON=/home/inhoinno/FEMU/tests/dbus-vmstate-daemon.sh QTEST_QEMU_BINARY=./qemu-system-x86_64
+.test.cmd.112 := tests/qtest/test-filter-redirector --tap -k
+.test.deps.112 := all
+.PHONY: run-test-112
+run-test-112: $(.test.deps.112)
+	@$(call .test.run,112,$(.test.output-format))
+.test.name.113 := qtest-x86_64/ipmi-kcs-test
+.test.driver.113 := tap
+.test.env.113 := $(.test.env) QTEST_QEMU_IMG=./qemu-img G_TEST_DBUS_DAEMON=/home/inhoinno/FEMU/tests/dbus-vmstate-daemon.sh QTEST_QEMU_BINARY=./qemu-system-x86_64
+.test.cmd.113 := tests/qtest/ipmi-kcs-test --tap -k
+.test.deps.113 := all
+.PHONY: run-test-113
+run-test-113: $(.test.deps.113)
+	@$(call .test.run,113,$(.test.output-format))
+.test.name.114 := qtest-x86_64/ipmi-bt-test
+.test.driver.114 := tap
+.test.env.114 := $(.test.env) QTEST_QEMU_IMG=./qemu-img G_TEST_DBUS_DAEMON=/home/inhoinno/FEMU/tests/dbus-vmstate-daemon.sh QTEST_QEMU_BINARY=./qemu-system-x86_64
+.test.cmd.114 := tests/qtest/ipmi-bt-test --tap -k
+.test.deps.114 := all
+.PHONY: run-test-114
+run-test-114: $(.test.deps.114)
+	@$(call .test.run,114,$(.test.output-format))
+.test.name.115 := qtest-x86_64/wdt_ib700-test
+.test.driver.115 := tap
+.test.env.115 := $(.test.env) QTEST_QEMU_IMG=./qemu-img G_TEST_DBUS_DAEMON=/home/inhoinno/FEMU/tests/dbus-vmstate-daemon.sh QTEST_QEMU_BINARY=./qemu-system-x86_64
+.test.cmd.115 := tests/qtest/wdt_ib700-test --tap -k
+.test.deps.115 := all
+.PHONY: run-test-115
+run-test-115: $(.test.deps.115)
+	@$(call .test.run,115,$(.test.output-format))
+.test.name.116 := qtest-x86_64/pvpanic-test
+.test.driver.116 := tap
+.test.env.116 := $(.test.env) QTEST_QEMU_IMG=./qemu-img G_TEST_DBUS_DAEMON=/home/inhoinno/FEMU/tests/dbus-vmstate-daemon.sh QTEST_QEMU_BINARY=./qemu-system-x86_64
+.test.cmd.116 := tests/qtest/pvpanic-test --tap -k
+.test.deps.116 := all
+.PHONY: run-test-116
+run-test-116: $(.test.deps.116)
+	@$(call .test.run,116,$(.test.output-format))
+.test.name.117 := qtest-x86_64/intel-hda-test
+.test.driver.117 := tap
+.test.env.117 := $(.test.env) QTEST_QEMU_IMG=./qemu-img G_TEST_DBUS_DAEMON=/home/inhoinno/FEMU/tests/dbus-vmstate-daemon.sh QTEST_QEMU_BINARY=./qemu-system-x86_64
+.test.cmd.117 := tests/qtest/intel-hda-test --tap -k
+.test.deps.117 := all
+.PHONY: run-test-117
+run-test-117: $(.test.deps.117)
+	@$(call .test.run,117,$(.test.output-format))
+.test.name.118 := qtest-x86_64/i82801b11-test
+.test.driver.118 := tap
+.test.env.118 := $(.test.env) QTEST_QEMU_IMG=./qemu-img G_TEST_DBUS_DAEMON=/home/inhoinno/FEMU/tests/dbus-vmstate-daemon.sh QTEST_QEMU_BINARY=./qemu-system-x86_64
+.test.cmd.118 := tests/qtest/i82801b11-test --tap -k
+.test.deps.118 := all
+.PHONY: run-test-118
+run-test-118: $(.test.deps.118)
+	@$(call .test.run,118,$(.test.output-format))
+.test.name.119 := qtest-x86_64/ioh3420-test
+.test.driver.119 := tap
+.test.env.119 := $(.test.env) QTEST_QEMU_IMG=./qemu-img G_TEST_DBUS_DAEMON=/home/inhoinno/FEMU/tests/dbus-vmstate-daemon.sh QTEST_QEMU_BINARY=./qemu-system-x86_64
+.test.cmd.119 := tests/qtest/ioh3420-test --tap -k
+.test.deps.119 := all
+.PHONY: run-test-119
+run-test-119: $(.test.deps.119)
+	@$(call .test.run,119,$(.test.output-format))
+.test.name.120 := qtest-x86_64/usb-hcd-uhci-test
+.test.driver.120 := tap
+.test.env.120 := $(.test.env) QTEST_QEMU_IMG=./qemu-img G_TEST_DBUS_DAEMON=/home/inhoinno/FEMU/tests/dbus-vmstate-daemon.sh QTEST_QEMU_BINARY=./qemu-system-x86_64
+.test.cmd.120 := tests/qtest/usb-hcd-uhci-test --tap -k
+.test.deps.120 := all
+.PHONY: run-test-120
+run-test-120: $(.test.deps.120)
+	@$(call .test.run,120,$(.test.output-format))
+.test.name.121 := qtest-x86_64/usb-hcd-ehci-test
+.test.driver.121 := tap
+.test.env.121 := $(.test.env) QTEST_QEMU_IMG=./qemu-img G_TEST_DBUS_DAEMON=/home/inhoinno/FEMU/tests/dbus-vmstate-daemon.sh QTEST_QEMU_BINARY=./qemu-system-x86_64
+.test.cmd.121 := tests/qtest/usb-hcd-ehci-test --tap -k
+.test.deps.121 := all
+.PHONY: run-test-121
+run-test-121: $(.test.deps.121)
+	@$(call .test.run,121,$(.test.output-format))
+.test.name.122 := qtest-x86_64/usb-hcd-xhci-test
+.test.driver.122 := tap
+.test.env.122 := $(.test.env) QTEST_QEMU_IMG=./qemu-img G_TEST_DBUS_DAEMON=/home/inhoinno/FEMU/tests/dbus-vmstate-daemon.sh QTEST_QEMU_BINARY=./qemu-system-x86_64
+.test.cmd.122 := tests/qtest/usb-hcd-xhci-test --tap -k
+.test.deps.122 := all
+.PHONY: run-test-122
+run-test-122: $(.test.deps.122)
+	@$(call .test.run,122,$(.test.output-format))
+.test.name.123 := qtest-x86_64/tpm-crb-test
+.test.driver.123 := tap
+.test.env.123 := $(.test.env) QTEST_QEMU_IMG=./qemu-img G_TEST_DBUS_DAEMON=/home/inhoinno/FEMU/tests/dbus-vmstate-daemon.sh QTEST_QEMU_BINARY=./qemu-system-x86_64
+.test.cmd.123 := tests/qtest/tpm-crb-test --tap -k
+.test.deps.123 := all
+.PHONY: run-test-123
+run-test-123: $(.test.deps.123)
+	@$(call .test.run,123,$(.test.output-format))
+.test.name.124 := qtest-x86_64/tpm-crb-swtpm-test
+.test.driver.124 := tap
+.test.env.124 := $(.test.env) QTEST_QEMU_IMG=./qemu-img G_TEST_DBUS_DAEMON=/home/inhoinno/FEMU/tests/dbus-vmstate-daemon.sh QTEST_QEMU_BINARY=./qemu-system-x86_64
+.test.cmd.124 := tests/qtest/tpm-crb-swtpm-test --tap -k
+.test.deps.124 := all
+.PHONY: run-test-124
+run-test-124: $(.test.deps.124)
+	@$(call .test.run,124,$(.test.output-format))
+.test.name.125 := qtest-x86_64/tpm-tis-test
+.test.driver.125 := tap
+.test.env.125 := $(.test.env) QTEST_QEMU_IMG=./qemu-img G_TEST_DBUS_DAEMON=/home/inhoinno/FEMU/tests/dbus-vmstate-daemon.sh QTEST_QEMU_BINARY=./qemu-system-x86_64
+.test.cmd.125 := tests/qtest/tpm-tis-test --tap -k
+.test.deps.125 := all
+.PHONY: run-test-125
+run-test-125: $(.test.deps.125)
+	@$(call .test.run,125,$(.test.output-format))
+.test.name.126 := qtest-x86_64/tpm-tis-swtpm-test
+.test.driver.126 := tap
+.test.env.126 := $(.test.env) QTEST_QEMU_IMG=./qemu-img G_TEST_DBUS_DAEMON=/home/inhoinno/FEMU/tests/dbus-vmstate-daemon.sh QTEST_QEMU_BINARY=./qemu-system-x86_64
+.test.cmd.126 := tests/qtest/tpm-tis-swtpm-test --tap -k
+.test.deps.126 := all
+.PHONY: run-test-126
+run-test-126: $(.test.deps.126)
+	@$(call .test.run,126,$(.test.output-format))
+.test.name.127 := qtest-x86_64/rtl8139-test
+.test.driver.127 := tap
+.test.env.127 := $(.test.env) QTEST_QEMU_IMG=./qemu-img G_TEST_DBUS_DAEMON=/home/inhoinno/FEMU/tests/dbus-vmstate-daemon.sh QTEST_QEMU_BINARY=./qemu-system-x86_64
+.test.cmd.127 := tests/qtest/rtl8139-test --tap -k
+.test.deps.127 := all
+.PHONY: run-test-127
+run-test-127: $(.test.deps.127)
+	@$(call .test.run,127,$(.test.output-format))
+.test.name.128 := qtest-x86_64/display-vga-test
+.test.driver.128 := tap
+.test.env.128 := $(.test.env) QTEST_QEMU_IMG=./qemu-img G_TEST_DBUS_DAEMON=/home/inhoinno/FEMU/tests/dbus-vmstate-daemon.sh QTEST_QEMU_BINARY=./qemu-system-x86_64
+.test.cmd.128 := tests/qtest/display-vga-test --tap -k
+.test.deps.128 := all
+.PHONY: run-test-128
+run-test-128: $(.test.deps.128)
+	@$(call .test.run,128,$(.test.output-format))
+.test.name.129 := qtest-x86_64/ivshmem-test
+.test.driver.129 := tap
+.test.env.129 := $(.test.env) QTEST_QEMU_IMG=./qemu-img G_TEST_DBUS_DAEMON=/home/inhoinno/FEMU/tests/dbus-vmstate-daemon.sh QTEST_QEMU_BINARY=./qemu-system-x86_64
+.test.cmd.129 := tests/qtest/ivshmem-test --tap -k
+.test.deps.129 := all
+.PHONY: run-test-129
+run-test-129: $(.test.deps.129)
+	@$(call .test.run,129,$(.test.output-format))
+.test.name.130 := qtest-x86_64/fdc-test
+.test.driver.130 := tap
+.test.env.130 := $(.test.env) QTEST_QEMU_IMG=./qemu-img G_TEST_DBUS_DAEMON=/home/inhoinno/FEMU/tests/dbus-vmstate-daemon.sh QTEST_QEMU_BINARY=./qemu-system-x86_64
+.test.cmd.130 := tests/qtest/fdc-test --tap -k
+.test.deps.130 := all
+.PHONY: run-test-130
+run-test-130: $(.test.deps.130)
+	@$(call .test.run,130,$(.test.output-format))
+.test.name.131 := qtest-x86_64/ide-test
+.test.driver.131 := tap
+.test.env.131 := $(.test.env) QTEST_QEMU_IMG=./qemu-img G_TEST_DBUS_DAEMON=/home/inhoinno/FEMU/tests/dbus-vmstate-daemon.sh QTEST_QEMU_BINARY=./qemu-system-x86_64
+.test.cmd.131 := tests/qtest/ide-test --tap -k
+.test.deps.131 := all
+.PHONY: run-test-131
+run-test-131: $(.test.deps.131)
+	@$(call .test.run,131,$(.test.output-format))
+.test.name.132 := qtest-x86_64/hd-geo-test
+.test.driver.132 := tap
+.test.env.132 := $(.test.env) QTEST_QEMU_IMG=./qemu-img G_TEST_DBUS_DAEMON=/home/inhoinno/FEMU/tests/dbus-vmstate-daemon.sh QTEST_QEMU_BINARY=./qemu-system-x86_64
+.test.cmd.132 := tests/qtest/hd-geo-test --tap -k
+.test.deps.132 := all
+.PHONY: run-test-132
+run-test-132: $(.test.deps.132)
+	@$(call .test.run,132,$(.test.output-format))
+.test.name.133 := qtest-x86_64/boot-order-test
+.test.driver.133 := tap
+.test.env.133 := $(.test.env) QTEST_QEMU_IMG=./qemu-img G_TEST_DBUS_DAEMON=/home/inhoinno/FEMU/tests/dbus-vmstate-daemon.sh QTEST_QEMU_BINARY=./qemu-system-x86_64
+.test.cmd.133 := tests/qtest/boot-order-test --tap -k
+.test.deps.133 := all
+.PHONY: run-test-133
+run-test-133: $(.test.deps.133)
+	@$(call .test.run,133,$(.test.output-format))
+.test.name.134 := qtest-x86_64/bios-tables-test
+.test.driver.134 := tap
+.test.env.134 := $(.test.env) QTEST_QEMU_IMG=./qemu-img G_TEST_DBUS_DAEMON=/home/inhoinno/FEMU/tests/dbus-vmstate-daemon.sh QTEST_QEMU_BINARY=./qemu-system-x86_64
+.test.cmd.134 := tests/qtest/bios-tables-test --tap -k
+.test.deps.134 := all
+.PHONY: run-test-134
+run-test-134: $(.test.deps.134)
+	@$(call .test.run,134,$(.test.output-format))
+.test.name.135 := qtest-x86_64/rtc-test
+.test.driver.135 := tap
+.test.env.135 := $(.test.env) QTEST_QEMU_IMG=./qemu-img G_TEST_DBUS_DAEMON=/home/inhoinno/FEMU/tests/dbus-vmstate-daemon.sh QTEST_QEMU_BINARY=./qemu-system-x86_64
+.test.cmd.135 := tests/qtest/rtc-test --tap -k
+.test.deps.135 := all
+.PHONY: run-test-135
+run-test-135: $(.test.deps.135)
+	@$(call .test.run,135,$(.test.output-format))
+.test.name.136 := qtest-x86_64/i440fx-test
+.test.driver.136 := tap
+.test.env.136 := $(.test.env) QTEST_QEMU_IMG=./qemu-img G_TEST_DBUS_DAEMON=/home/inhoinno/FEMU/tests/dbus-vmstate-daemon.sh QTEST_QEMU_BINARY=./qemu-system-x86_64
+.test.cmd.136 := tests/qtest/i440fx-test --tap -k
+.test.deps.136 := all
+.PHONY: run-test-136
+run-test-136: $(.test.deps.136)
+	@$(call .test.run,136,$(.test.output-format))
+.test.name.137 := qtest-x86_64/fuzz-test
+.test.driver.137 := tap
+.test.env.137 := $(.test.env) QTEST_QEMU_IMG=./qemu-img G_TEST_DBUS_DAEMON=/home/inhoinno/FEMU/tests/dbus-vmstate-daemon.sh QTEST_QEMU_BINARY=./qemu-system-x86_64
+.test.cmd.137 := tests/qtest/fuzz-test --tap -k
+.test.deps.137 := all
+.PHONY: run-test-137
+run-test-137: $(.test.deps.137)
+	@$(call .test.run,137,$(.test.output-format))
+.test.name.138 := qtest-x86_64/fw_cfg-test
+.test.driver.138 := tap
+.test.env.138 := $(.test.env) QTEST_QEMU_IMG=./qemu-img G_TEST_DBUS_DAEMON=/home/inhoinno/FEMU/tests/dbus-vmstate-daemon.sh QTEST_QEMU_BINARY=./qemu-system-x86_64
+.test.cmd.138 := tests/qtest/fw_cfg-test --tap -k
+.test.deps.138 := all
+.PHONY: run-test-138
+run-test-138: $(.test.deps.138)
+	@$(call .test.run,138,$(.test.output-format))
+.test.name.139 := qtest-x86_64/device-plug-test
+.test.driver.139 := tap
+.test.env.139 := $(.test.env) QTEST_QEMU_IMG=./qemu-img G_TEST_DBUS_DAEMON=/home/inhoinno/FEMU/tests/dbus-vmstate-daemon.sh QTEST_QEMU_BINARY=./qemu-system-x86_64
+.test.cmd.139 := tests/qtest/device-plug-test --tap -k
+.test.deps.139 := all
+.PHONY: run-test-139
+run-test-139: $(.test.deps.139)
+	@$(call .test.run,139,$(.test.output-format))
+.test.name.140 := qtest-x86_64/drive_del-test
+.test.driver.140 := tap
+.test.env.140 := $(.test.env) QTEST_QEMU_IMG=./qemu-img G_TEST_DBUS_DAEMON=/home/inhoinno/FEMU/tests/dbus-vmstate-daemon.sh QTEST_QEMU_BINARY=./qemu-system-x86_64
+.test.cmd.140 := tests/qtest/drive_del-test --tap -k
+.test.deps.140 := all
+.PHONY: run-test-140
+run-test-140: $(.test.deps.140)
+	@$(call .test.run,140,$(.test.output-format))
+.test.name.141 := qtest-x86_64/tco-test
+.test.driver.141 := tap
+.test.env.141 := $(.test.env) QTEST_QEMU_IMG=./qemu-img G_TEST_DBUS_DAEMON=/home/inhoinno/FEMU/tests/dbus-vmstate-daemon.sh QTEST_QEMU_BINARY=./qemu-system-x86_64
+.test.cmd.141 := tests/qtest/tco-test --tap -k
+.test.deps.141 := all
+.PHONY: run-test-141
+run-test-141: $(.test.deps.141)
+	@$(call .test.run,141,$(.test.output-format))
+.test.name.142 := qtest-x86_64/cpu-plug-test
+.test.driver.142 := tap
+.test.env.142 := $(.test.env) QTEST_QEMU_IMG=./qemu-img G_TEST_DBUS_DAEMON=/home/inhoinno/FEMU/tests/dbus-vmstate-daemon.sh QTEST_QEMU_BINARY=./qemu-system-x86_64
+.test.cmd.142 := tests/qtest/cpu-plug-test --tap -k
+.test.deps.142 := all
+.PHONY: run-test-142
+run-test-142: $(.test.deps.142)
+	@$(call .test.run,142,$(.test.output-format))
+.test.name.143 := qtest-x86_64/q35-test
+.test.driver.143 := tap
+.test.env.143 := $(.test.env) QTEST_QEMU_IMG=./qemu-img G_TEST_DBUS_DAEMON=/home/inhoinno/FEMU/tests/dbus-vmstate-daemon.sh QTEST_QEMU_BINARY=./qemu-system-x86_64
+.test.cmd.143 := tests/qtest/q35-test --tap -k
+.test.deps.143 := all
+.PHONY: run-test-143
+run-test-143: $(.test.deps.143)
+	@$(call .test.run,143,$(.test.output-format))
+.test.name.144 := qtest-x86_64/vmgenid-test
+.test.driver.144 := tap
+.test.env.144 := $(.test.env) QTEST_QEMU_IMG=./qemu-img G_TEST_DBUS_DAEMON=/home/inhoinno/FEMU/tests/dbus-vmstate-daemon.sh QTEST_QEMU_BINARY=./qemu-system-x86_64
+.test.cmd.144 := tests/qtest/vmgenid-test --tap -k
+.test.deps.144 := all
+.PHONY: run-test-144
+run-test-144: $(.test.deps.144)
+	@$(call .test.run,144,$(.test.output-format))
+.test.name.145 := qtest-x86_64/migration-test
+.test.driver.145 := tap
+.test.env.145 := $(.test.env) QTEST_QEMU_IMG=./qemu-img G_TEST_DBUS_DAEMON=/home/inhoinno/FEMU/tests/dbus-vmstate-daemon.sh QTEST_QEMU_BINARY=./qemu-system-x86_64
+.test.cmd.145 := tests/qtest/migration-test --tap -k
+.test.deps.145 := all
+.PHONY: run-test-145
+run-test-145: $(.test.deps.145)
+	@$(call .test.run,145,$(.test.output-format))
+.test.name.146 := qtest-x86_64/test-x86-cpuid-compat
+.test.driver.146 := tap
+.test.env.146 := $(.test.env) QTEST_QEMU_IMG=./qemu-img G_TEST_DBUS_DAEMON=/home/inhoinno/FEMU/tests/dbus-vmstate-daemon.sh QTEST_QEMU_BINARY=./qemu-system-x86_64
+.test.cmd.146 := tests/qtest/test-x86-cpuid-compat --tap -k
+.test.deps.146 := all
+.PHONY: run-test-146
+run-test-146: $(.test.deps.146)
+	@$(call .test.run,146,$(.test.output-format))
+.test.name.147 := qtest-x86_64/numa-test
+.test.driver.147 := tap
+.test.env.147 := $(.test.env) QTEST_QEMU_IMG=./qemu-img G_TEST_DBUS_DAEMON=/home/inhoinno/FEMU/tests/dbus-vmstate-daemon.sh QTEST_QEMU_BINARY=./qemu-system-x86_64
+.test.cmd.147 := tests/qtest/numa-test --tap -k
+.test.deps.147 := all
+.PHONY: run-test-147
+run-test-147: $(.test.deps.147)
+	@$(call .test.run,147,$(.test.output-format))
+.test.name.148 := qtest-x86_64/cdrom-test
+.test.driver.148 := tap
+.test.env.148 := $(.test.env) QTEST_QEMU_IMG=./qemu-img G_TEST_DBUS_DAEMON=/home/inhoinno/FEMU/tests/dbus-vmstate-daemon.sh QTEST_QEMU_BINARY=./qemu-system-x86_64
+.test.cmd.148 := tests/qtest/cdrom-test --tap -k
+.test.deps.148 := all
+.PHONY: run-test-148
+run-test-148: $(.test.deps.148)
+	@$(call .test.run,148,$(.test.output-format))
+.test.name.149 := qtest-x86_64/device-introspect-test
+.test.driver.149 := tap
+.test.env.149 := $(.test.env) QTEST_QEMU_IMG=./qemu-img G_TEST_DBUS_DAEMON=/home/inhoinno/FEMU/tests/dbus-vmstate-daemon.sh QTEST_QEMU_BINARY=./qemu-system-x86_64
+.test.cmd.149 := tests/qtest/device-introspect-test --tap -k
+.test.deps.149 := all
+.PHONY: run-test-149
+run-test-149: $(.test.deps.149)
+	@$(call .test.run,149,$(.test.output-format))
+.test.name.150 := qtest-x86_64/machine-none-test
+.test.driver.150 := tap
+.test.env.150 := $(.test.env) QTEST_QEMU_IMG=./qemu-img G_TEST_DBUS_DAEMON=/home/inhoinno/FEMU/tests/dbus-vmstate-daemon.sh QTEST_QEMU_BINARY=./qemu-system-x86_64
+.test.cmd.150 := tests/qtest/machine-none-test --tap -k
+.test.deps.150 := all
+.PHONY: run-test-150
+run-test-150: $(.test.deps.150)
+	@$(call .test.run,150,$(.test.output-format))
+.test.name.151 := qtest-x86_64/qmp-test
+.test.driver.151 := tap
+.test.env.151 := $(.test.env) QTEST_QEMU_IMG=./qemu-img G_TEST_DBUS_DAEMON=/home/inhoinno/FEMU/tests/dbus-vmstate-daemon.sh QTEST_QEMU_BINARY=./qemu-system-x86_64
+.test.cmd.151 := tests/qtest/qmp-test --tap -k
+.test.deps.151 := all
+.PHONY: run-test-151
+run-test-151: $(.test.deps.151)
+	@$(call .test.run,151,$(.test.output-format))
+.test.name.152 := qtest-x86_64/qmp-cmd-test
+.test.driver.152 := tap
+.test.env.152 := $(.test.env) QTEST_QEMU_IMG=./qemu-img G_TEST_DBUS_DAEMON=/home/inhoinno/FEMU/tests/dbus-vmstate-daemon.sh QTEST_QEMU_BINARY=./qemu-system-x86_64
+.test.cmd.152 := tests/qtest/qmp-cmd-test --tap -k
+.test.deps.152 := all
+.PHONY: run-test-152
+run-test-152: $(.test.deps.152)
+	@$(call .test.run,152,$(.test.output-format))
+.test.name.153 := qtest-x86_64/qom-test
+.test.driver.153 := tap
+.test.env.153 := $(.test.env) QTEST_QEMU_IMG=./qemu-img G_TEST_DBUS_DAEMON=/home/inhoinno/FEMU/tests/dbus-vmstate-daemon.sh QTEST_QEMU_BINARY=./qemu-system-x86_64
+.test.cmd.153 := tests/qtest/qom-test --tap -k
+.test.deps.153 := all
+.PHONY: run-test-153
+run-test-153: $(.test.deps.153)
+	@$(call .test.run,153,$(.test.output-format))
+.test.name.154 := qtest-x86_64/test-hmp
+.test.driver.154 := tap
+.test.env.154 := $(.test.env) QTEST_QEMU_IMG=./qemu-img G_TEST_DBUS_DAEMON=/home/inhoinno/FEMU/tests/dbus-vmstate-daemon.sh QTEST_QEMU_BINARY=./qemu-system-x86_64
+.test.cmd.154 := tests/qtest/test-hmp --tap -k
+.test.deps.154 := all
+.PHONY: run-test-154
+run-test-154: $(.test.deps.154)
+	@$(call .test.run,154,$(.test.output-format))
+.test.name.155 := qtest-x86_64/qos-test
+.test.driver.155 := tap
+.test.env.155 := $(.test.env) QTEST_QEMU_IMG=./qemu-img G_TEST_DBUS_DAEMON=/home/inhoinno/FEMU/tests/dbus-vmstate-daemon.sh QTEST_QEMU_BINARY=./qemu-system-x86_64
+.test.cmd.155 := tests/qtest/qos-test --tap -k
+.test.deps.155 := all
+.PHONY: run-test-155
+run-test-155: $(.test.deps.155)
+	@$(call .test.run,155,$(.test.output-format))
+.PHONY: check check-report.tap check-report-unit.tap check-report-decodetree.tap check-report-softfloat.tap check-report-softfloat-conv.tap check-report-softfloat-compare.tap check-report-softfloat-ops.tap check-report-qapi-schema.tap check-report-qapi-frontend.tap check-report-qapi-doc.tap check-report-qtest.tap check-report-qtest-x86_64.tap
+check: run-tests
+check-report.tap check-report-unit.tap check-report-decodetree.tap check-report-softfloat.tap check-report-softfloat-conv.tap check-report-softfloat-compare.tap check-report-softfloat-ops.tap check-report-qapi-schema.tap check-report-qapi-frontend.tap check-report-qapi-doc.tap check-report-qtest.tap check-report-qtest-x86_64.tap: check-report%.tap: all
+	$(MAKE) .test.output-format=tap --quiet -Otarget V=1 check$* | ./scripts/tap-merge.pl | tee "$@" \
+              | ./scripts/tap-driver.pl $(if $(V),, --show-failures-only)
+.test.quick.check-unit := 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85
+.test.slow.check-unit := $(.test.quick.check-unit) 
+check-build: tests/rcutorture tests/test-logging tests/test-visitor-serialization tests/check-qlit tests/check-qnum tests/test-io-channel-command tests/test-crypto-hash tests/test-rcu-simpleq tests/test-char tests/test-image-locking tests/ptimer-test tests/test-aio-multithread tests/test-io-channel-file tests/test-rcu-slist tests/check-qjson tests/test-rcu-list tests/test-qmp-cmds tests/test-crypto-secret tests/check-qlist tests/test-base64 tests/test-aio tests/test-authz-list tests/test-write-threshold tests/test-block-iothread tests/test-cutils tests/test-bufferiszero tests/test-fdmon-epoll tests/test-crypto-cipher tests/test-clone-visitor tests/check-qdict tests/test-crypto-hmac tests/test-io-channel-buffer tests/test-qdist tests/test-bitcnt tests/test-string-output-visitor tests/test-io-channel-socket tests/test-replication tests/test-hbitmap tests/test-authz-listfile tests/test-crypto-xts tests/test-iov tests/test-authz-simple tests/test-io-task tests/test-qht tests/check-qom-proplist tests/test-bitmap tests/test-bitops tests/test-util-sockets tests/test-string-input-visitor tests/test-thread-pool tests/check-qnull tests/test-vmstate tests/test-qga tests/test-crypto-block tests/test-qdev-global-props tests/test-xbzrle tests/test-opts-visitor tests/test-block-backend tests/test-keyval tests/test-crypto-afsplit tests/test-timed-average tests/test-util-filemonitor tests/test-throttle tests/test-qmp-event tests/test-blockjob tests/test-blockjob-txn tests/test-qemu-opts tests/test-qobject-output-visitor tests/test-x86-cpuid tests/test-qapi-util tests/test-crypto-ivgen tests/test-bdrv-graph-mod tests/test-bdrv-drain tests/check-qstring tests/test-coroutine tests/test-mul64 tests/test-qgraph tests/test-shift128 tests/check-qobject tests/test-uuid tests/check-qom-interface tests/test-qobject-input-visitor tests/test-rcu-tailq tests/check-block-qdict tests/test-int128
+.PHONY: check-unit
+.PHONY: check-report-unit.tap
+check-unit: run-tests
+ifneq ($(filter check-unit check, $(MAKECMDGOALS)),)
+.tests += $(.test.$(SPEED).check-unit)
+endif
+.test.quick.check-decodetree := 86
+.test.slow.check-decodetree := $(.test.quick.check-decodetree) 
+check-build: ../../../../bin/sh
+.PHONY: check-decodetree
+.PHONY: check-report-decodetree.tap
+check-decodetree: run-tests
+ifneq ($(filter check-decodetree check, $(MAKECMDGOALS)),)
+.tests += $(.test.$(SPEED).check-decodetree)
+endif
+.test.quick.check-softfloat := 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102
+.test.slow.check-softfloat := $(.test.quick.check-softfloat) 103
+check-build: tests/fp/fp-test
+.PHONY: check-softfloat
+.PHONY: check-report-softfloat.tap
+check-softfloat: run-tests
+ifneq ($(filter check-softfloat check, $(MAKECMDGOALS)),)
+.tests += $(.test.$(SPEED).check-softfloat)
+endif
+.test.quick.check-softfloat-conv := 87 88 89 90 91 92
+.test.slow.check-softfloat-conv := $(.test.quick.check-softfloat-conv) 
+check-build: tests/fp/fp-test
+.PHONY: check-softfloat-conv
+.PHONY: check-report-softfloat-conv.tap
+check-softfloat-conv: run-tests
+ifneq ($(filter check-softfloat-conv check, $(MAKECMDGOALS)),)
+.tests += $(.test.$(SPEED).check-softfloat-conv)
+endif
+.test.quick.check-softfloat-compare := 93 94 95 96
+.test.slow.check-softfloat-compare := $(.test.quick.check-softfloat-compare) 
+check-build: tests/fp/fp-test
+.PHONY: check-softfloat-compare
+.PHONY: check-report-softfloat-compare.tap
+check-softfloat-compare: run-tests
+ifneq ($(filter check-softfloat-compare check, $(MAKECMDGOALS)),)
+.tests += $(.test.$(SPEED).check-softfloat-compare)
+endif
+.test.quick.check-softfloat-ops := 97 98 99 100 101 102
+.test.slow.check-softfloat-ops := $(.test.quick.check-softfloat-ops) 103
+check-build: tests/fp/fp-test
+.PHONY: check-softfloat-ops
+.PHONY: check-report-softfloat-ops.tap
+check-softfloat-ops: run-tests
+ifneq ($(filter check-softfloat-ops check, $(MAKECMDGOALS)),)
+.tests += $(.test.$(SPEED).check-softfloat-ops)
+endif
+.test.quick.check-qapi-schema := 104 105
+.test.slow.check-qapi-schema := $(.test.quick.check-qapi-schema) 
+check-build: ../../../../usr/bin/diff ../../anaconda3/bin/python3
+.PHONY: check-qapi-schema
+.PHONY: check-report-qapi-schema.tap
+check-qapi-schema: run-tests
+ifneq ($(filter check-qapi-schema check, $(MAKECMDGOALS)),)
+.tests += $(.test.$(SPEED).check-qapi-schema)
+endif
+.test.quick.check-qapi-frontend := 104
+.test.slow.check-qapi-frontend := $(.test.quick.check-qapi-frontend) 
+check-build: ../../anaconda3/bin/python3
+.PHONY: check-qapi-frontend
+.PHONY: check-report-qapi-frontend.tap
+check-qapi-frontend: run-tests
+ifneq ($(filter check-qapi-frontend check, $(MAKECMDGOALS)),)
+.tests += $(.test.$(SPEED).check-qapi-frontend)
+endif
+.test.quick.check-qapi-doc := 105
+.test.slow.check-qapi-doc := $(.test.quick.check-qapi-doc) 
+check-build: ../../../../usr/bin/diff
+.PHONY: check-qapi-doc
+.PHONY: check-report-qapi-doc.tap
+check-qapi-doc: run-tests
+ifneq ($(filter check-qapi-doc check, $(MAKECMDGOALS)),)
+.tests += $(.test.$(SPEED).check-qapi-doc)
+endif
+.test.quick.check-qtest := 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153 154 155
+.test.slow.check-qtest := $(.test.quick.check-qtest) 
+check-build: tests/qtest/qmp-test tests/qtest/rtc-test tests/qtest/bios-tables-test tests/qtest/tco-test tests/qtest/hd-geo-test tests/qtest/endianness-test tests/qtest/cpu-plug-test tests/qtest/vmgenid-test tests/qtest/qos-test tests/qtest/test-filter-mirror tests/qtest/usb-hcd-xhci-test tests/qtest/boot-serial-test tests/qtest/display-vga-test tests/qtest/ivshmem-test tests/qtest/qom-test tests/qtest/fuzz-test tests/qtest/i82801b11-test tests/qtest/pxe-test tests/qtest/fdc-test tests/qtest/test-x86-cpuid-compat tests/qtest/numa-test tests/qtest/cdrom-test tests/qtest/ipmi-kcs-test tests/qtest/tpm-crb-test tests/qtest/test-hmp tests/qtest/device-introspect-test tests/qtest/fw_cfg-test tests/qtest/usb-hcd-uhci-test tests/qtest/test-netfilter tests/qtest/drive_del-test tests/qtest/ioh3420-test tests/qtest/tpm-tis-test tests/qtest/qmp-cmd-test tests/qtest/intel-hda-test tests/qtest/q35-test tests/qtest/ipmi-bt-test tests/qtest/test-filter-redirector tests/qtest/ide-test tests/qtest/i440fx-test tests/qtest/tpm-tis-swtpm-test tests/qtest/ahci-test tests/qtest/migration-test tests/qtest/boot-order-test tests/qtest/pvpanic-test tests/qtest/device-plug-test tests/qtest/machine-none-test tests/qtest/usb-hcd-ehci-test tests/qtest/wdt_ib700-test tests/qtest/tpm-crb-swtpm-test tests/qtest/rtl8139-test
+.PHONY: check-qtest
+.PHONY: check-report-qtest.tap
+check-qtest: run-tests
+ifneq ($(filter check-qtest check, $(MAKECMDGOALS)),)
+.tests += $(.test.$(SPEED).check-qtest)
+endif
+.test.quick.check-qtest-x86_64 := 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153 154 155
+.test.slow.check-qtest-x86_64 := $(.test.quick.check-qtest-x86_64) 
+check-build: tests/qtest/qmp-test tests/qtest/rtc-test tests/qtest/bios-tables-test tests/qtest/tco-test tests/qtest/hd-geo-test tests/qtest/endianness-test tests/qtest/cpu-plug-test tests/qtest/vmgenid-test tests/qtest/qos-test tests/qtest/test-filter-mirror tests/qtest/usb-hcd-xhci-test tests/qtest/boot-serial-test tests/qtest/display-vga-test tests/qtest/ivshmem-test tests/qtest/qom-test tests/qtest/fuzz-test tests/qtest/i82801b11-test tests/qtest/pxe-test tests/qtest/fdc-test tests/qtest/test-x86-cpuid-compat tests/qtest/numa-test tests/qtest/cdrom-test tests/qtest/ipmi-kcs-test tests/qtest/tpm-crb-test tests/qtest/test-hmp tests/qtest/device-introspect-test tests/qtest/fw_cfg-test tests/qtest/usb-hcd-uhci-test tests/qtest/test-netfilter tests/qtest/drive_del-test tests/qtest/ioh3420-test tests/qtest/tpm-tis-test tests/qtest/qmp-cmd-test tests/qtest/intel-hda-test tests/qtest/q35-test tests/qtest/ipmi-bt-test tests/qtest/test-filter-redirector tests/qtest/ide-test tests/qtest/i440fx-test tests/qtest/tpm-tis-swtpm-test tests/qtest/ahci-test tests/qtest/migration-test tests/qtest/boot-order-test tests/qtest/pvpanic-test tests/qtest/device-plug-test tests/qtest/machine-none-test tests/qtest/usb-hcd-ehci-test tests/qtest/wdt_ib700-test tests/qtest/tpm-crb-swtpm-test tests/qtest/rtl8139-test
+.PHONY: check-qtest-x86_64
+.PHONY: check-report-qtest-x86_64.tap
+check-qtest-x86_64: run-tests
+ifneq ($(filter check-qtest-x86_64 check, $(MAKECMDGOALS)),)
+.tests += $(.test.$(SPEED).check-qtest-x86_64)
+endif
+.test.name.156 := benchmark-crypto-hash
+.test.driver.156 := tap
+.test.env.156 := $(.test.env) 
+.test.cmd.156 := tests/benchmark-crypto-hash --tap -k
+.test.deps.156 := all
+.PHONY: run-test-156
+run-test-156: $(.test.deps.156)
+	@$(call .test.run,156,$(.test.output-format))
+.test.name.157 := benchmark-crypto-hmac
+.test.driver.157 := tap
+.test.env.157 := $(.test.env) 
+.test.cmd.157 := tests/benchmark-crypto-hmac --tap -k
+.test.deps.157 := all
+.PHONY: run-test-157
+run-test-157: $(.test.deps.157)
+	@$(call .test.run,157,$(.test.output-format))
+.test.name.158 := benchmark-crypto-cipher
+.test.driver.158 := tap
+.test.env.158 := $(.test.env) 
+.test.cmd.158 := tests/benchmark-crypto-cipher --tap -k
+.test.deps.158 := all
+.PHONY: run-test-158
+run-test-158: $(.test.deps.158)
+	@$(call .test.run,158,$(.test.output-format))
+.PHONY: bench bench-report.tap bench-report-speed.tap
+bench: run-tests
+bench-report.tap bench-report-speed.tap: bench-report%.tap: all
+	$(MAKE) .test.output-format=tap --quiet -Otarget V=1 bench$* | ./scripts/tap-merge.pl | tee "$@" \
+              | ./scripts/tap-driver.pl $(if $(V),, --show-failures-only)
+.test.quick.bench-speed := 156 157 158
+.test.slow.bench-speed := $(.test.quick.bench-speed) 
+bench-build: tests/benchmark-crypto-hmac tests/benchmark-crypto-hash tests/benchmark-crypto-cipher
+.PHONY: bench-speed
+.PHONY: bench-report-speed.tap
+bench-speed: run-tests
+ifneq ($(filter bench-speed bench, $(MAKECMDGOALS)),)
+.tests += $(.test.$(SPEED).bench-speed)
+endif
+run-tests: $(patsubst %, run-test-%, $(.tests))

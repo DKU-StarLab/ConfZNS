@@ -1,0 +1,10 @@
+# AUTOMATICALLY GENERATED, DO NOT MODIFY
+
+qmp_enter_query_rocker(const char *json) "%s"
+qmp_exit_query_rocker(const char *result, bool succeeded) "%s %d"
+qmp_enter_query_rocker_ports(const char *json) "%s"
+qmp_exit_query_rocker_ports(const char *result, bool succeeded) "%s %d"
+qmp_enter_query_rocker_of_dpa_flows(const char *json) "%s"
+qmp_exit_query_rocker_of_dpa_flows(const char *result, bool succeeded) "%s %d"
+qmp_enter_query_rocker_of_dpa_groups(const char *json) "%s"
+qmp_exit_query_rocker_of_dpa_groups(const char *result, bool succeeded) "%s %d"

@@ -65,6 +65,7 @@ static void nvme_process_sq_io(void *opaque, int index_poller)
         req->expire_time = req->stime = qemu_clock_get_ns(QEMU_CLOCK_REALTIME);
         req->cqe.cid = cmd.cid;
         req->cmd_opcode = cmd.opcode;
+        //void *memcpy(void *dest, const void * src, size_t n)
         memcpy(&req->cmd, &cmd, sizeof(NvmeCmd));
 
         if (n->print_log) {
@@ -82,7 +83,7 @@ static void nvme_process_sq_io(void *opaque, int index_poller)
             /* Normal I/Os that don't need delay emulation */
             req->status = status;
         } else {
-            femu_err("Error IO processed!\n");
+            femu_err("Error IO processed! status : %x \n",status);
         }
 
         processed++;
@@ -523,7 +524,22 @@ static uint16_t nvme_io_cmd(FemuCtrl *n, NvmeCmd *cmd, NvmeRequest *req)
         }
         return NVME_INVALID_OPCODE | NVME_DNR;
     default:
-
+        /**
+         * inhoinno
+         * 
+         * 1. Schedule based on priority (req=n->scheduler.schedule)
+         * 2. n->ext_ops.io_cmd(n, ns, cmd, req)
+         * 
+         * 4 Streams : Urgent High Med Low 
+         * UrgentQueue
+         * HighQueue
+         * MedQueue
+         * LowQueue    
+         * 
+         * 
+         * req = n->scheduler.schedule()     
+         * cmd = &req->cmd 
+        */
         if (n->ext_ops.io_cmd) {
             return n->ext_ops.io_cmd(n, ns, cmd, req);
         }

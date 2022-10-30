@@ -126,6 +126,7 @@ static uint16_t nvme_create_sq(FemuCtrl *n, NvmeCmd *cmd)
     }
 
     sq = g_malloc0(sizeof(*sq));
+    femu_err("NVMe sq priority %u qflags %u nvme-admin.c:129\n",NVME_SQ_FLAGS_QPRIO(qflags),qflags);
     if (nvme_init_sq(sq, n, prp1, sqid, cqid, qsize + 1,
                 NVME_SQ_FLAGS_QPRIO(qflags),
                 NVME_SQ_FLAGS_PC(qflags))) {
@@ -950,6 +951,8 @@ static uint16_t nvme_format(FemuCtrl *n, NvmeCmd *cmd)
 
 static uint16_t nvme_admin_cmd(FemuCtrl *n, NvmeCmd *cmd, NvmeCqe *cqe)
 {
+    //inho debug
+    femu_err("Seq 3 nvme_admin_cmd nvme-admin.c:955\n");
     switch (cmd->opcode) {
     case NVME_ADM_CMD_FEMU_DEBUG:
         n->upg_rd_lat_ns = le64_to_cpu(cmd->cdw10);
@@ -1023,7 +1026,8 @@ void nvme_process_sq_admin(void *opaque)
     hwaddr addr;
     NvmeCmd cmd;
     NvmeCqe cqe;
-
+    //inho debug
+    femu_err("Seq 2 nvme_process_sq_admin nvme-admin.c:1030\n");
     while (!(nvme_sq_empty(sq))) {
         if (sq->phys_contig) {
             addr = sq->dma_addr + sq->head * n->sqe_size;

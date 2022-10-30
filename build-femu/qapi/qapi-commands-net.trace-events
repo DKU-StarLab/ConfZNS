@@ -1,0 +1,12 @@
+# AUTOMATICALLY GENERATED, DO NOT MODIFY
+
+qmp_enter_set_link(const char *json) "%s"
+qmp_exit_set_link(const char *result, bool succeeded) "%s %d"
+qmp_enter_netdev_add(const char *json) "%s"
+qmp_exit_netdev_add(const char *result, bool succeeded) "%s %d"
+qmp_enter_netdev_del(const char *json) "%s"
+qmp_exit_netdev_del(const char *result, bool succeeded) "%s %d"
+qmp_enter_query_rx_filter(const char *json) "%s"
+qmp_exit_query_rx_filter(const char *result, bool succeeded) "%s %d"
+qmp_enter_announce_self(const char *json) "%s"
+qmp_exit_announce_self(const char *result, bool succeeded) "%s %d"

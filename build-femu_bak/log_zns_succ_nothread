@@ -1,0 +1,3149 @@
+[FEMU] Err: femu.c : femu_class_init(), to inhoinno 
+[FEMU] Err: femu.c : femu_realize(), to inhoinno 
+[FEMU] Err: femu.c : nvme_init_pci(), to inhoinno 
+[FEMU] Err: femu.c : nvme_init_ctrl(), to inhoinno 
+[FEMU] Err: femu.c : nvme_init_namespaces(), to inhoinno 
+[FEMU] Err: femu.c : nvme_register_extensions(), to inhoinno 
+[FEMU] Err: zns.c : nvme_register_znsssd(), to inhoinno 
+[FEMU] Err: zns.c : zns_init(), to inhoinno 
+[FEMU] Err: zns.c : zns_init_zone_geometry(), to inhoinno 
+[FEMU] Err: zns.c : zns_init_zone_identify(), to inhoinno 
+[FEMU] Err: zns.c : zns_init_zoned_state(), to inhoinno 
+[FEMU] Err: zns.c : znsssd_init(), to inhoinno 
+[FEMU] Err: zns.c : znsssd_init(), channel allocated, to inhoinno 
+[FEMU] Err: zns.c : znsssd_init(), before thread creat, to inhoinno 
+c[?7l[2J[0mSeaBIOS (version rel-1.14.0-0-g155821a1990b-prebuilt.qemu.org[FEMU] Err: zns.c : zns_start_ctrl(), to inhoinno 
+)
+
+
+iPXE (http://ipxe.org) 00:03.0 CA00 PCI2.10 PnP PMM+BFF8F0F0+BFEEF0F0 CA00
+Press Ctrl-B to configure iPXE (PCI 00:03.0)...
+                                                                               
+
+
+Booting from Hard Disk...
+[H[J[1;1H[    0.000000] Linux version 5.10.0-051000-generic (kernel@kathleen) (gcc (Ubuntu 10.2.0-13ubuntu1) 10.2.0, GNU ld (GNU Binutils for Ubuntu) 2.35.1) #202012132330 SMP Sun Dec 13 23:33:36 UTC 2020
+[    0.000000] Command line: BOOT_IMAGE=/vmlinuz-5.10.0-051000-generic root=/dev/mapper/ubuntu--vg-ubuntu--lv ro ip=dhcp console=ttyS0, 38400 console=tty console=ttyS0 maybe-ubiquity
+[    0.000000] KERNEL supported cpus:
+[    0.000000]   Intel GenuineIntel
+[    0.000000]   AMD AuthenticAMD
+[    0.000000]   Hygon HygonGenuine
+[    0.000000]   Centaur CentaurHauls
+[    0.000000]   zhaoxin   Shanghai  
+[    0.000000] x86/fpu: Supporting XSAVE feature 0x001: 'x87 floating point registers'
+[    0.000000] x86/fpu: Supporting XSAVE feature 0x002: 'SSE registers'
+[    0.000000] x86/fpu: Supporting XSAVE feature 0x004: 'AVX registers'
+[    0.000000] x86/fpu: Supporting XSAVE feature 0x008: 'MPX bounds registers'
+[    0.000000] x86/fpu: Supporting XSAVE feature 0x010: 'MPX CSR'
+[    0.000000] x86/fpu: Supporting XSAVE feature 0x200: 'Protection Keys User registers'
+[    0.000000] x86/fpu: xstate_offset[2]:  576, xstate_sizes[2]:  256
+[    0.000000] x86/fpu: xstate_offset[3]:  832, xstate_sizes[3]:   64
+[    0.000000] x86/fpu: xstate_offset[4]:  896, xstate_sizes[4]:   64
+[    0.000000] x86/fpu: xstate_offset[9]:  960, xstate_sizes[9]:    8
+[    0.000000] x86/fpu: Enabled xstate features 0x21f, context size is 968 bytes, using 'compacted' format.
+[    0.000000] BIOS-provided physical RAM map:
+[    0.000000] BIOS-e820: [mem 0x0000000000000000-0x000000000009fbff] usable
+[    0.000000] BIOS-e820: [mem 0x000000000009fc00-0x000000000009ffff] reserved
+[    0.000000] BIOS-e820: [mem 0x00000000000f0000-0x00000000000fffff] reserved
+[    0.000000] BIOS-e820: [mem 0x0000000000100000-0x00000000bffd4fff] usable
+[    0.000000] BIOS-e820: [mem 0x00000000bffd5000-0x00000000bfffffff] reserved
+[    0.000000] BIOS-e820: [mem 0x00000000feffc000-0x00000000feffffff] reserved
+[    0.000000] BIOS-e820: [mem 0x00000000fffc0000-0x00000000ffffffff] reserved
+[    0.000000] BIOS-e820: [mem 0x0000000100000000-0x000000013fffffff] usable
+[    0.000000] NX (Execute Disable) protection: active
+[    0.000000] SMBIOS 2.8 present.
+[    0.000000] DMI: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.14.0-0-g155821a1990b-prebuilt.qemu.org 04/01/2014
+[    0.000000] Hypervisor detected: KVM
+[    0.000000] kvm-clock: Using msrs 4b564d01 and 4b564d00
+[    0.000000] kvm-clock: cpu 0, msr a7201001, primary cpu clock
+[    0.000000] kvm-clock: using sched offset of 4516609866 cycles
+[    0.000003] clocksource: kvm-clock: mask: 0xffffffffffffffff max_cycles: 0x1cd42e4dffb, max_idle_ns: 881590591483 ns
+[    0.000007] tsc: Detected 3792.034 MHz processor
+[    0.000591] last_pfn = 0x140000 max_arch_pfn = 0x400000000
+[    0.000624] x86/PAT: Configuration [0-7]: WB  WC  UC- UC  WB  WP  UC- WT  
+[    0.000632] last_pfn = 0xbffd5 max_arch_pfn = 0x400000000
+[    0.006012] found SMP MP-table at [mem 0x000f5a60-0x000f5a6f]
+[    0.006093] check: Scanning 1 areas for low memory corruption
+[    0.006116] Using GB pages for direct mapping
+[    0.006345] RAMDISK: [mem 0x2d769000-0x32babfff]
+[    0.006363] ACPI: Early table checksum verification disabled
+[    0.006374] ACPI: RSDP 0x00000000000F5A20 000014 (v00 BOCHS )
+[    0.006377] ACPI: RSDT 0x00000000BFFE13A7 000034 (v01 BOCHS  BXPCRSDT 00000001 BXPC 00000001)
+[    0.006381] ACPI: FACP 0x00000000BFFE1243 000074 (v01 BOCHS  BXPCFACP 00000001 BXPC 00000001)
+[    0.006385] ACPI: DSDT 0x00000000BFFDFD80 0014C3 (v01 BOCHS  BXPCDSDT 00000001 BXPC 00000001)
+[    0.006388] ACPI: FACS 0x00000000BFFDFD40 000040
+[    0.006390] ACPI: APIC 0x00000000BFFE12B7 000090 (v01 BOCHS  BXPCAPIC 00000001 BXPC 00000001)
+[    0.006393] ACPI: HPET 0x00000000BFFE1347 000038 (v01 BOCHS  BXPCHPET 00000001 BXPC 00000001)
+[    0.006395] ACPI: WAET 0x00000000BFFE137F 000028 (v01 BOCHS  BXPCWAET 00000001 BXPC 00000001)
+[    0.006530] No NUMA configuration found
+[    0.006531] Faking a node at [mem 0x0000000000000000-0x000000013fffffff]
+[    0.006540] NODE_DATA(0) allocated [mem 0x13ffd4000-0x13fffdfff]
+[    0.006728] Zone ranges:
+[    0.006729]   DMA      [mem 0x0000000000001000-0x0000000000ffffff]
+[    0.006730]   DMA32    [mem 0x0000000001000000-0x00000000ffffffff]
+[    0.006731]   Normal   [mem 0x0000000100000000-0x000000013fffffff]
+[    0.006732]   Device   empty
+[    0.006733] Movable zone start for each node
+[    0.006734] Early memory node ranges
+[    0.006735]   node   0: [mem 0x0000000000001000-0x000000000009efff]
+[    0.006736]   node   0: [mem 0x0000000000100000-0x00000000bffd4fff]
+[    0.006736]   node   0: [mem 0x0000000100000000-0x000000013fffffff]
+[    0.007002] Zeroed struct page in unavailable ranges: 141 pages
+[    0.007003] Initmem setup node 0 [mem 0x0000000000001000-0x000000013fffffff]
+[    0.013755] ACPI: PM-Timer IO Port: 0x608
+[    0.013773] ACPI: LAPIC_NMI (acpi_id[0xff] dfl dfl lint[0x1])
+[    0.013796] IOAPIC[0]: apic_id 0, version 17, address 0xfec00000, GSI 0-23
+[    0.013798] ACPI: INT_SRC_OVR (bus 0 bus_irq 0 global_irq 2 dfl dfl)
+[    0.013799] ACPI: INT_SRC_OVR (bus 0 bus_irq 5 global_irq 5 high level)
+[    0.013800] ACPI: INT_SRC_OVR (bus 0 bus_irq 9 global_irq 9 high level)
+[    0.013805] ACPI: INT_SRC_OVR (bus 0 bus_irq 10 global_irq 10 high level)
+[    0.013805] ACPI: INT_SRC_OVR (bus 0 bus_irq 11 global_irq 11 high level)
+[    0.013809] Using ACPI (MADT) for SMP configuration information
+[    0.013811] ACPI: HPET id: 0x8086a201 base: 0xfed00000
+[    0.013814] TSC deadline timer available
+[    0.013815] smpboot: Allowing 4 CPUs, 0 hotplug CPUs
+[    0.013823] kvm-guest: KVM setup pv remote TLB flush
+[    0.013828] kvm-guest: setup PV sched yield
+[    0.013837] PM: hibernation: Registered nosave memory: [mem 0x00000000-0x00000fff]
+[    0.013838] PM: hibernation: Registered nosave memory: [mem 0x0009f000-0x0009ffff]
+[    0.013839] PM: hibernation: Registered nosave memory: [mem 0x000a0000-0x000effff]
+[    0.013839] PM: hibernation: Registered nosave memory: [mem 0x000f0000-0x000fffff]
+[    0.013840] PM: hibernation: Registered nosave memory: [mem 0xbffd5000-0xbfffffff]
+[    0.013841] PM: hibernation: Registered nosave memory: [mem 0xc0000000-0xfeffbfff]
+[    0.013841] PM: hibernation: Registered nosave memory: [mem 0xfeffc000-0xfeffffff]
+[    0.013842] PM: hibernation: Registered nosave memory: [mem 0xff000000-0xfffbffff]
+[    0.013842] PM: hibernation: Registered nosave memory: [mem 0xfffc0000-0xffffffff]
+[    0.013843] [mem 0xc0000000-0xfeffbfff] available for PCI devices
+[    0.013844] Booting paravirtualized kernel on KVM
+[    0.013846] clocksource: refined-jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 7645519600211568 ns
+[    0.013852] setup_percpu: NR_CPUS:8192 nr_cpumask_bits:4 nr_cpu_ids:4 nr_node_ids:1
+[    0.014082] percpu: Embedded 56 pages/cpu s192512 r8192 d28672 u524288
+[    0.014106] kvm-guest: KVM setup async PF for cpu 0
+[    0.014110] kvm-guest: stealtime: cpu 0, msr 13bc2e080
+[    0.014113] kvm-guest: PV spinlocks enabled
+[    0.014115] PV qspinlock hash table entries: 256 (order: 0, 4096 bytes, linear)
+[    0.014120] Built 1 zonelists, mobility grouping on.  Total pages: 1032030
+[    0.014121] Policy zone: Normal
+[    0.014122] Kernel command line: BOOT_IMAGE=/vmlinuz-5.10.0-051000-generic root=/dev/mapper/ubuntu--vg-ubuntu--lv ro ip=dhcp console=ttyS0, 38400 console=tty console=ttyS0 maybe-ubiquity
+[    0.014511] Dentry cache hash table entries: 524288 (order: 10, 4194304 bytes, linear)
+[    0.014711] Inode-cache hash table entries: 262144 (order: 9, 2097152 bytes, linear)
+[    0.014756] mem auto-init: stack:off, heap alloc:on, heap free:off
+[    0.024505] Memory: 3927372K/4193740K available (16393K kernel code, 3480K rwdata, 8984K rodata, 2664K init, 5996K bss, 266108K reserved, 0K cma-reserved)
+[    0.024517] random: get_random_u64 called from kmem_cache_open+0x29/0x220 with crng_init=0
+[    0.024573] SLUB: HWalign=64, Order=0-3, MinObjects=0, CPUs=4, Nodes=1
+[    0.024588] ftrace: allocating 50596 entries in 198 pages
+[    0.036702] ftrace: allocated 198 pages with 4 groups
+[    0.036892] rcu: Hierarchical RCU implementation.
+[    0.036893] rcu: 	RCU restricting CPUs from NR_CPUS=8192 to nr_cpu_ids=4.
+[    0.036894] 	Rude variant of Tasks RCU enabled.
+[    0.036895] 	Tracing variant of Tasks RCU enabled.
+[    0.036896] rcu: RCU calculated value of scheduler-enlistment delay is 25 jiffies.
+[    0.036896] rcu: Adjusting geometry for rcu_fanout_leaf=16, nr_cpu_ids=4
+[    0.038970] NR_IRQS: 524544, nr_irqs: 456, preallocated irqs: 16
+[    0.039154] random: crng done (trusting CPU's manufacturer)
+[    0.045567] Console: colour VGA+ 80x25
+[    0.062099] printk: console [tty0] enabled
+[    0.117889] printk: console [ttyS0] enabled
+[    0.118284] ACPI: Core revision 20200925
+[    0.118718] clocksource: hpet: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 19112604467 ns
+[    0.119660] APIC: Switch to symmetric I/O mode setup
+[    0.120283] x2apic enabled
+[    0.120713] Switched APIC routing to physical x2apic.
+[    0.121221] kvm-guest: setup PV IPIs
+[    0.122201] ..TIMER: vector=0x30 apic1=0 pin1=2 apic2=-1 pin2=-1
+[    0.122874] clocksource: tsc-early: mask: 0xffffffffffffffff max_cycles: 0x6d51e514936, max_idle_ns: 881590614020 ns
+[    0.124032] Calibrating delay loop (skipped) preset value.. 7584.06 BogoMIPS (lpj=15168136)
+[    0.124917] pid_max: default: 32768 minimum: 301
+[    0.125448] LSM: Security Framework initializing
+[    0.125967] Yama: becoming mindful.
+[    0.126525] AppArmor: AppArmor initialized
+[    0.126982] Mount-cache hash table entries: 8192 (order: 4, 65536 bytes, linear)
+[    0.128035] Mountpoint-cache hash table entries: 8192 (order: 4, 65536 bytes, linear)
+[    0.128989] x86/cpu: User Mode Instruction Prevention (UMIP) activated
+[    0.129690] Last level iTLB entries: 4KB 0, 2MB 0, 4MB 0
+[    0.130226] Last level dTLB entries: 4KB 0, 2MB 0, 4MB 0, 1GB 0
+[    0.130836] Spectre V1 : Mitigation: usercopy/swapgs barriers and __user pointer sanitization
+[    0.131687] Spectre V2 : Mitigation: Enhanced IBRS
+[    0.132032] Spectre V2 : Spectre v2 / SpectreRSB mitigation: Filling RSB on context switch
+[    0.132817] Spectre V2 : mitigation: Enabling conditional Indirect Branch Prediction Barrier
+[    0.133570] Speculative Store Bypass: Mitigation: Speculative Store Bypass disabled via prctl and seccomp
+[    0.134647] Freeing SMP alternatives memory: 40K
+[    0.136571] smpboot: CPU0: Intel(R) Core(TM) i7-10700K CPU @ 3.80GHz (family: 0x6, model: 0xa5, stepping: 0x5)
+[    0.137590] Performance Events: Skylake events, full-width counters, Intel PMU driver.
+[    0.138436] ... version:                2
+[    0.138872] ... bit width:              48
+[    0.139325] ... generic registers:      4
+[    0.139750] ... value mask:             0000ffffffffffff
+[    0.140029] ... max period:             00007fffffffffff
+[    0.140032] ... fixed-purpose events:   3
+[    0.140412] ... event mask:             000000070000000f
+[    0.140930] rcu: Hierarchical SRCU implementation.
+[    0.141699] smp: Bringing up secondary CPUs ...
+[    0.142184] x86: Booting SMP configuration:
+[    0.142562] .... node  #0, CPUs:      #1
+[    0.080902] kvm-clock: cpu 1, msr a7201041, secondary cpu clock
+[    0.080902] smpboot: CPU 1 Converting physical 0 to logical die 1
+[    0.144050] kvm-guest: KVM setup async PF for cpu 1
+[    0.148029] kvm-guest: stealtime: cpu 1, msr 13bcae080
+[    0.148117]  #2
+[    0.080902] kvm-clock: cpu 2, msr a7201081, secondary cpu clock
+[    0.080902] smpboot: CPU 2 Converting physical 0 to logical die 2
+[    0.152050] kvm-guest: KVM setup async PF for cpu 2
+[    0.152557] kvm-guest: stealtime: cpu 2, msr 13bd2e080
+[    0.153059]  #3
+[    0.080902] kvm-clock: cpu 3, msr a72010c1, secondary cpu clock
+[    0.080902] smpboot: CPU 3 Converting physical 0 to logical die 3
+[    0.156050] kvm-guest: KVM setup async PF for cpu 3
+[    0.156541] kvm-guest: stealtime: cpu 3, msr 13bdae080
+[    0.157090] smp: Brought up 1 node, 4 CPUs
+[    0.157090] smpboot: Max logical packages: 4
+[    0.157090] smpboot: Total of 4 processors activated (30336.27 BogoMIPS)
+[    0.157690] devtmpfs: initialized
+[    0.157690] x86/mm: Memory block size: 128MB
+[    0.160045] clocksource: jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 7645041785100000 ns
+[    0.160894] futex hash table entries: 1024 (order: 4, 65536 bytes, linear)
+[    0.161587] pinctrl core: initialized pinctrl subsystem
+[    0.162145] PM: RTC time: 07:16:06, date: 2022-03-05
+[    0.162704] NET: Registered protocol family 16
+[    0.163189] DMA: preallocated 512 KiB GFP_KERNEL pool for atomic allocations
+[    0.163927] DMA: preallocated 512 KiB GFP_KERNEL|GFP_DMA pool for atomic allocations
+[    0.164201] DMA: preallocated 512 KiB GFP_KERNEL|GFP_DMA32 pool for atomic allocations
+[    0.164925] audit: initializing netlink subsys (disabled)
+[    0.165438] audit: type=2000 audit(1646464567.125:1): state=initialized audit_enabled=0 res=1
+[    0.165438] thermal_sys: Registered thermal governor 'fair_share'
+[    0.165438] thermal_sys: Registered thermal governor 'bang_bang'
+[    0.165438] thermal_sys: Registered thermal governor 'step_wise'
+[    0.165852] thermal_sys: Registered thermal governor 'user_space'
+[    0.166342] thermal_sys: Registered thermal governor 'power_allocator'
+[    0.168041] EISA bus registered
+[    0.168906] cpuidle: using governor ladder
+[    0.169332] cpuidle: using governor menu
+[    0.169814] ACPI: bus type PCI registered
+[    0.170229] acpiphp: ACPI Hot Plug PCI Controller Driver version: 0.5
+[    0.170939] PCI: Using configuration type 1 for base access
+[    0.172333] HugeTLB registered 1.00 GiB page size, pre-allocated 0 pages
+[    0.172681] HugeTLB registered 2.00 MiB page size, pre-allocated 0 pages
+[    0.173338] ACPI: Added _OSI(Module Device)
+[    0.173338] ACPI: Added _OSI(Processor Device)
+[    0.173338] ACPI: Added _OSI(3.0 _SCP Extensions)
+[    0.176033] ACPI: Added _OSI(Processor Aggregator Device)
+[    0.176557] ACPI: Added _OSI(Linux-Dell-Video)
+[    0.176965] ACPI: Added _OSI(Linux-Lenovo-NV-HDMI-Audio)
+[    0.177389] ACPI: Added _OSI(Linux-HPI-Hybrid-Graphics)
+[    0.178364] ACPI: 1 ACPI AML tables successfully acquired and loaded
+[    0.179638] ACPI: Interpreter enabled
+[    0.180047] ACPI: (supports S0 S3 S4 S5)
+[    0.180457] ACPI: Using IOAPIC for interrupt routing
+[    0.180970] PCI: Using host bridge windows from ACPI; if necessary, use "pci=nocrs" and report a bug
+[    0.181923] ACPI: Enabled 2 GPEs in block 00 to 0F
+[    0.184001] ACPI: PCI Root Bridge [PCI0] (domain 0000 [bus 00-ff])
+[    0.184036] acpi PNP0A03:00: _OSC: OS supports [ASPM ClockPM Segments MSI HPX-Type3]
+[    0.184800] acpi PNP0A03:00: fail to add MMCONFIG information, can't access extended PCI configuration space under this bridge.
+[    0.186033] acpiphp: Slot [3] registered
+[    0.186449] acpiphp: Slot [4] registered
+[    0.186860] acpiphp: Slot [5] registered
+[    0.187275] acpiphp: Slot [6] registered
+[    0.187697] acpiphp: Slot [7] registered
+[    0.188044] acpiphp: Slot [8] registered
+[    0.188456] acpiphp: Slot [9] registered
+[    0.188871] acpiphp: Slot [10] registered
+[    0.189319] acpiphp: Slot [11] registered
+[    0.189768] acpiphp: Slot [12] registered
+[    0.190219] acpiphp: Slot [13] registered
+[    0.190592] acpiphp: Slot [14] registered
+[    0.190952] acpiphp: Slot [15] registered
+[    0.191315] acpiphp: Slot [16] registered
+[    0.191681] acpiphp: Slot [17] registered
+[    0.192043] acpiphp: Slot [18] registered
+[    0.192403] acpiphp: Slot [19] registered
+[    0.192821] acpiphp: Slot [20] registered
+[    0.193249] acpiphp: Slot [21] registered
+[    0.193674] acpiphp: Slot [22] registered
+[    0.194105] acpiphp: Slot [23] registered
+[    0.194531] acpiphp: Slot [24] registered
+[    0.194910] acpiphp: Slot [25] registered
+[    0.195275] acpiphp: Slot [26] registered
+[    0.195638] acpiphp: Slot [27] registered
+[    0.196002] acpiphp: Slot [28] registered
+[    0.196044] acpiphp: Slot [29] registered
+[    0.196435] acpiphp: Slot [30] registered
+[    0.196805] acpiphp: Slot [31] registered
+[    0.197167] PCI host bridge to bus 0000:00
+[    0.197527] pci_bus 0000:00: root bus resource [io  0x0000-0x0cf7 window]
+[    0.198084] pci_bus 0000:00: root bus resource [io  0x0d00-0xffff window]
+[    0.198631] pci_bus 0000:00: root bus resource [mem 0x000a0000-0x000bffff window]
+[    0.199255] pci_bus 0000:00: root bus resource [mem 0xc0000000-0xfebfffff window]
+[    0.199823] pci_bus 0000:00: root bus resource [mem 0x140000000-0x1bfffffff window]
+[    0.200033] pci_bus 0000:00: root bus resource [bus 00-ff]
+[    0.200526] pci 0000:00:00.0: [8086:1237] type 00 class 0x060000
+[    0.201400] pci 0000:00:01.0: [8086:7000] type 00 class 0x060100
+[    0.202171] pci 0000:00:01.1: [8086:7010] type 00 class 0x010180
+[    0.204033] pci 0000:00:01.1: reg 0x20: [io  0xc060-0xc06f]
+[    0.205190] pci 0000:00:01.1: legacy IDE quirk: reg 0x10: [io  0x01f0-0x01f7]
+[    0.205868] pci 0000:00:01.1: legacy IDE quirk: reg 0x14: [io  0x03f6]
+[    0.206484] pci 0000:00:01.1: legacy IDE quirk: reg 0x18: [io  0x0170-0x0177]
+[    0.207151] pci 0000:00:01.1: legacy IDE quirk: reg 0x1c: [io  0x0376]
+[    0.207891] pci 0000:00:01.3: [8086:7113] type 00 class 0x068000
+[    0.208221] pci 0000:00:01.3: quirk: [io  0x0600-0x063f] claimed by PIIX4 ACPI
+[    0.208933] pci 0000:00:01.3: quirk: [io  0x0700-0x070f] claimed by PIIX4 SMB
+[    0.209861] pci 0000:00:02.0: [1234:1111] type 00 class 0x030000
+[    0.212286] pci 0000:00:02.0: reg 0x10: [mem 0xfd000000-0xfdffffff pref]
+[    0.213996] pci 0000:00:02.0: reg 0x18: [mem 0xfebd2000-0xfebd2fff]
+[    0.217318] pci 0000:00:02.0: reg 0x30: [mem 0xfebc0000-0xfebcffff pref]
+[    0.218407] pci 0000:00:03.0: [1af4:1000] type 00 class 0x020000
+[    0.219542] pci 0000:00:03.0: reg 0x10: [io  0xc040-0xc05f]
+[    0.220577] pci 0000:00:03.0: reg 0x14: [mem 0xfebd3000-0xfebd3fff]
+[    0.223249] pci 0000:00:03.0: reg 0x20: [mem 0xfe000000-0xfe003fff 64bit pref]
+[    0.224437] pci 0000:00:03.0: reg 0x30: [mem 0xfeb80000-0xfebbffff pref]
+[    0.225564] pci 0000:00:04.0: [1af4:1004] type 00 class 0x010000
+[    0.227079] pci 0000:00:04.0: reg 0x10: [io  0xc000-0xc03f]
+[    0.228666] pci 0000:00:04.0: reg 0x14: [mem 0xfebd4000-0xfebd4fff]
+[    0.231226] pci 0000:00:04.0: reg 0x20: [mem 0xfe004000-0xfe007fff 64bit pref]
+[    0.232817] pci 0000:00:05.0: [8086:5845] type 00 class 0x010802
+[    0.233724] pci 0000:00:05.0: reg 0x10: [mem 0xfebd0000-0xfebd1fff 64bit]
+[    0.235479] pci 0000:00:05.0: reg 0x20: [mem 0xfebd5000-0xfebd5fff]
+[    0.241872] ACPI: PCI Interrupt Link [LNKA] (IRQs 5 *10 11)
+[    0.242430] ACPI: PCI Interrupt Link [LNKB] (IRQs 5 *10 11)
+[    0.242963] ACPI: PCI Interrupt Link [LNKC] (IRQs 5 10 *11)
+[    0.243481] ACPI: PCI Interrupt Link [LNKD] (IRQs 5 10 *11)
+[    0.243994] ACPI: PCI Interrupt Link [LNKS] (IRQs *9)
+[    0.244403] iommu: Default domain type: Translated 
+[    0.244491] pci 0000:00:02.0: vgaarb: setting as boot VGA device
+[    0.244540] pci 0000:00:02.0: vgaarb: VGA device added: decodes=io+mem,owns=io+mem,locks=none
+[    0.245375] pci 0000:00:02.0: vgaarb: bridge control possible
+[    0.245933] vgaarb: loaded
+[    0.246380] SCSI subsystem initialized
+[    0.246825] ACPI: bus type USB registered
+[    0.248066] usbcore: registered new interface driver usbfs
+[    0.248626] usbcore: registered new interface driver hub
+[    0.249155] usbcore: registered new device driver usb
+[    0.249687] pps_core: LinuxPPS API ver. 1 registered
+[    0.250185] pps_core: Software ver. 5.3.6 - Copyright 2005-2007 Rodolfo Giometti <giometti@linux.it>
+[    0.251061] PTP clock support registered
+[    0.251491] EDAC MC: Ver: 3.0.0
+[    0.252155] NetLabel: Initializing
+[    0.252449] NetLabel:  domain hash size = 128
+[    0.252832] NetLabel:  protocols = UNLABELED CIPSOv4 CALIPSO
+[    0.253407] NetLabel:  unlabeled traffic allowed by default
+[    0.253973] PCI: Using ACPI for IRQ routing
+[    0.253973] hpet0: at MMIO 0xfed00000, IRQs 2, 8, 0
+[    0.253973] hpet0: 3 comparators, 64-bit 100.000000 MHz counter
+[    0.259114] clocksource: Switched to clocksource kvm-clock
+[    0.265131] VFS: Disk quotas dquot_6.6.0
+[    0.265561] VFS: Dquot-cache hash table entries: 512 (order 0, 4096 bytes)
+[    0.266438] AppArmor: AppArmor Filesystem Enabled
+[    0.266951] pnp: PnP ACPI init
+[    0.267541] pnp: PnP ACPI: found 6 devices
+[    0.273481] clocksource: acpi_pm: mask: 0xffffff max_cycles: 0xffffff, max_idle_ns: 2085701024 ns
+[    0.274393] NET: Registered protocol family 2
+[    0.275007] tcp_listen_portaddr_hash hash table entries: 2048 (order: 3, 32768 bytes, linear)
+[    0.275842] TCP established hash table entries: 32768 (order: 6, 262144 bytes, linear)
+[    0.276653] TCP bind hash table entries: 32768 (order: 7, 524288 bytes, linear)
+[    0.277397] TCP: Hash tables configured (established 32768 bind 32768)
+[    0.278066] MPTCP token hash table entries: 4096 (order: 4, 98304 bytes, linear)
+[    0.278814] UDP hash table entries: 2048 (order: 4, 65536 bytes, linear)
+[    0.279441] UDP-Lite hash table entries: 2048 (order: 4, 65536 bytes, linear)
+[    0.280147] NET: Registered protocol family 1
+[    0.280605] NET: Registered protocol family 44
+[    0.281070] pci_bus 0000:00: resource 4 [io  0x0000-0x0cf7 window]
+[    0.281659] pci_bus 0000:00: resource 5 [io  0x0d00-0xffff window]
+[    0.282235] pci_bus 0000:00: resource 6 [mem 0x000a0000-0x000bffff window]
+[    0.282894] pci_bus 0000:00: resource 7 [mem 0xc0000000-0xfebfffff window]
+[    0.283557] pci_bus 0000:00: resource 8 [mem 0x140000000-0x1bfffffff window]
+[    0.288861] pci 0000:00:01.0: PIIX3: Enabling Passive Release
+[    0.289436] pci 0000:00:00.0: Limiting direct PCI/PCI transfers
+[    0.290012] pci 0000:00:01.0: Activating ISA DMA hang workarounds
+[    0.290622] pci 0000:00:02.0: Video device with shadowed ROM at [mem 0x000c0000-0x000dffff]
+[    0.291455] PCI: CLS 0 bytes, default 64
+[    0.291900] Trying to unpack rootfs image as initramfs...
+[    0.413395] Freeing initrd memory: 86284K
+[    0.413897] PCI-DMA: Using software bounce buffering for IO (SWIOTLB)
+[    0.414525] software IO TLB: mapped [mem 0x00000000bbfd5000-0x00000000bffd5000] (64MB)
+[    0.415356] clocksource: tsc: mask: 0xffffffffffffffff max_cycles: 0x6d51e514936, max_idle_ns: 881590614020 ns
+[    0.416346] check: Scanning for low memory corruption every 60 seconds
+[    0.417206] Initialise system trusted keyrings
+[    0.417681] Key type blacklist registered
+[    0.418109] workingset: timestamp_bits=36 max_order=20 bucket_order=0
+[    0.419273] zbud: loaded
+[    0.419713] squashfs: version 4.0 (2009/01/31) Phillip Lougher
+[    0.420413] fuse: init (API version 7.32)
+[    0.420959] integrity: Platform Keyring initialized
+[    0.426250] Key type asymmetric registered
+[    0.426678] Asymmetric key parser 'x509' registered
+[    0.427176] Block layer SCSI generic (bsg) driver version 0.4 loaded (major 243)
+[    0.427948] io scheduler mq-deadline registered
+[    0.428542] shpchp: Standard Hot Plug PCI Controller Driver version: 0.4
+[    0.429285] input: Power Button as /devices/LNXSYSTM:00/LNXPWRBN:00/input/input0
+[    0.430040] ACPI: Power Button [PWRF]
+[    0.448071] PCI Interrupt Link [LNKC] enabled at IRQ 11
+[    0.466470] PCI Interrupt Link [LNKD] enabled at IRQ 10
+[    0.467532] Serial: 8250/16550 driver, 32 ports, IRQ sharing enabled
+[    0.490063] 00:04: ttyS0 at I/O 0x3f8 (irq = 4, base_baud = 115200) is a 16550A
+[    0.491845] Linux agpgart interface v0.103
+[    0.493426] loop: module loaded
+[    0.494311] scsi host0: ata_piix
+[    0.494765] scsi host1: ata_piix
+[    0.495123] ata1: PATA max MWDMA2 cmd 0x1f0 ctl 0x3f6 bmdma 0xc060 irq 14
+[    0.495765] ata2: PATA max MWDMA2 cmd 0x170 ctl 0x376 bmdma 0xc068 irq 15
+[    0.496516] libphy: Fixed MDIO Bus: probed
+[    0.497012] tun: Universal TUN/TAP device driver, 1.6
+[    0.497565] PPP generic driver version 2.4.2
+[    0.498061] VFIO - User Level meta-driver version: 0.3
+[    0.498642] ehci_hcd: USB 2.0 'Enhanced' Host Controller (EHCI) Driver
+[    0.499291] ehci-pci: EHCI PCI platform driver
+[    0.499769] ehci-platform: EHCI generic platform driver
+[    0.500259] ohci_hcd: USB 1.1 'Open' Host Controller (OHCI) Driver
+[    0.500783] ohci-pci: OHCI PCI platform driver
+[    0.501237] ohci-platform: OHCI generic platform driver
+[    0.501726] uhci_hcd: USB Universal Host Controller Interface driver
+[    0.502292] i8042: PNP: PS/2 Controller [PNP0303:KBD,PNP0f13:MOU] at 0x60,0x64 irq 1,12
+[    0.503398] serio: i8042 KBD port at 0x60,0x64 irq 1
+[    0.503824] serio: i8042 AUX port at 0x60,0x64 irq 12
+[    0.504339] mousedev: PS/2 mouse device common for all mice
+[    0.504929] rtc_cmos 00:05: RTC can wake from S4
+[    0.505443] input: AT Translated Set 2 keyboard as /devices/platform/i8042/serio0/input/input1
+[    0.506439] rtc_cmos 00:05: registered as rtc0
+[    0.506944] rtc_cmos 00:05: setting system clock to 2022-03-05T07:16:06 UTC (1646464566)
+[    0.507778] rtc_cmos 00:05: alarms up to one day, y3k, 242 bytes nvram, hpet irqs
+[    0.508541] i2c /dev entries driver
+[    0.508952] device-mapper: uevent: version 1.0.3
+[    0.509478] device-mapper: ioctl: 4.43.0-ioctl (2020-10-01) initialised: dm-devel@redhat.com
+[    0.510339] platform eisa.0: Probing EISA bus 0
+[    0.510811] platform eisa.0: EISA: Cannot allocate resource for mainboard
+[    0.511474] platform eisa.0: Cannot allocate resource for EISA slot 1
+[    0.512114] platform eisa.0: Cannot allocate resource for EISA slot 2
+[    0.512748] platform eisa.0: Cannot allocate resource for EISA slot 3
+[    0.513337] platform eisa.0: Cannot allocate resource for EISA slot 4
+[    0.513913] platform eisa.0: Cannot allocate resource for EISA slot 5
+[    0.514463] platform eisa.0: Cannot allocate resource for EISA slot 6
+[    0.515001] platform eisa.0: Cannot allocate resource for EISA slot 7
+[    0.515589] platform eisa.0: Cannot allocate resource for EISA slot 8
+[    0.516230] platform eisa.0: EISA: Detected 0 cards
+[    0.516693] intel_pstate: CPU model not supported
+[    0.517170] ledtrig-cpu: registered to indicate activity on CPUs
+[    0.517760] intel_pmc_core intel_pmc_core.0:  initialized
+[    0.518276] drop_monitor: Initializing network drop monitor service
+[    0.518909] NET: Registered protocol family 10
+[    0.522939] Segment Routing with IPv6
+[    0.523301] NET: Registered protocol family 17
+[    0.523733] Key type dns_resolver registered
+[    0.524346] IPI shorthand broadcast: enabled
+[    0.524738] sched_clock: Marking stable (447404987, 76902760)->(591476266, -67168519)
+[    0.525480] registered taskstats version 1
+[    0.525853] Loading compiled-in X.509 certificates
+[    0.526719] Loaded X.509 cert 'Build time autogenerated kernel key: 5296574db5a9a84d509e62c03d1666703cc22ca1'
+[    0.527604] zswap: loaded using pool lzo/zbud
+[    0.528123] Key type ._fscrypt registered
+[    0.528453] Key type .fscrypt registered
+[    0.528771] Key type fscrypt-provisioning registered
+[    0.530697] Key type encrypted registered
+[    0.531047] AppArmor: AppArmor sha1 policy hashing enabled
+[    0.531532] ima: No TPM chip found, activating TPM-bypass!
+[    0.532051] ima: Allocated hash algorithm: sha1
+[    0.532472] ima: No architecture policies found
+[    0.532903] evm: Initialising EVM extended attributes:
+[    0.533331] evm: security.selinux
+[    0.533661] evm: security.SMACK64
+[    0.533992] evm: security.SMACK64EXEC
+[    0.534319] evm: security.SMACK64TRANSMUTE
+[    0.534697] evm: security.SMACK64MMAP
+[    0.535043] evm: security.apparmor
+[    0.535399] evm: security.ima
+[    0.535726] evm: security.capability
+[    0.536133] evm: HMAC attrs: 0x1
+[    0.536650] PM:   Magic number: 14:814:267
+[    0.537013] platform eisa.0: hash matches
+[    0.537526] RAS: Correctable Errors collector initialized.
+[    0.660486] Freeing unused decrypted memory: 2036K
+[    0.666687] Freeing unused kernel image (initmem) memory: 2664K
+[    0.667350] Write protecting the kernel read-only data: 28672k
+[    0.668622] Freeing unused kernel image (text/rodata gap) memory: 2036K
+[    0.669325] Freeing unused kernel image (rodata/data gap) memory: 1256K
+[    0.677418] x86/mm: Checked W+X mappings: passed, no W+X pages found.
+[    0.678071] Run /init as init process
+Loading, please wait...
+Starting version 245.4-4ubuntu3.15
+[    0.709734] Floppy drive(s): fd0 is 2.88M AMI BIOS
+[    0.711455] piix4_smbus 0000:00:01.3: SMBus Host Controller at 0x700, revision 0
+[    0.719127] cryptd: max_cpu_qlen set to 1000
+[    0.720932] scsi host2: Virtio SCSI HBA
+[    0.721792] scsi 2:0:0:0: Direct-Access     QEMU     QEMU HARDDISK    2.5+ PQ: 0 ANSI: 5
+[    0.728464] FDC 0 is a S82078B
+[    0.731235] AVX2 version of gcm_enc/dec engaged.
+[    0.731760] AES CTR mode by8 optimization enabled
+[    0.736159] sd 2:0:0:0: Attached scsi generic sg0 type 0
+[    0.736176] sd 2:0:0:0: Power-on or device reset occurred
+[    0.737468] sd 2:0:0:0: [sda] 167772160 512-byte logical blocks: (85.9 GB/80.0 GiB)
+[    0.738374] sd 2:0:0:0: [sda] Write Protect is off
+[    0.738970] sd 2:0:0:0: [sda] Write cache: enabled, read cache: enabled, doesn't support DPO or FUA
+[    0.743753]  sda: sda1 sda2 sda3
+[    0.744518] sd 2:0:0:0: [sda] Attached SCSI disk
+[    0.744993] virtio_net virtio0 ens3: renamed from eth0
+[    0.748199] input: VirtualPS/2 VMware VMMouse as /devices/platform/i8042/serio1/input/input4
+[    0.749230] input: VirtualPS/2 VMware VMMouse as /devices/platform/i8042/serio1/input/input3
+[    0.750214] nvme nvme0: pci function 0000:00:05.0
+[    0.766892] bochs-drm 0000:00:02.0: vgaarb: deactivate vga console
+[FEMU] Err: zns.c : zns_start_ctrl(), to inhoinno 
+[    0.769617] PCI Interrupt Link [LNKA] enabled at IRQ 10
+[    0.775954] Console: switching to colour dummy device 80x25
+[    0.777523] [drm] Found bochs VGA, ID 0xb0c0.
+[    0.778051] [drm] Framebuffer size 16384 kB @ 0xfd000000, mmio @ 0xfebd2000.
+[    0.778977] [TTM] Zone  kernel: Available graphics memory: 2010974 KiB
+[    0.779673] [TTM] Initializing pool allocator
+[    0.779757] nvme nvme0: 4/0/0 default/read/poll queues
+[    0.780010] [TTM] Initializing DMA pool allocator
+[FEMU] Err: nvme-io.c : nvme_create_poller(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[    0.781832] [drm] Found EDID data blob.
+[    0.782264] [drm] Initialized bochs-drm 1.0.0 20130925 for 0000:00:02.0 on minor 0
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[    0.783335] fbcon: bochs-drmdrmfb (fb0) is primary device
+[    0.786466] Console: switching to colour frame buffer device 128x48
+[    0.788591] bochs-drm 0000:00:02.0: [drm] fb0: bochs-drmdrmfb frame buffer device
+Begin: Loading essential drivers ... [    0.960074] raid6: avx2x4   gen() 52316 MB/s
+[    1.028086] raid6: avx2x4   xor() 19306 MB/s
+[    1.096076] raid6: avx2x2   gen() 47072 MB/s
+[    1.164082] raid6: avx2x2   xor() 31346 MB/s
+[    1.232082] raid6: avx2x1   gen() 44179 MB/s
+[    1.300070] raid6: avx2x1   xor() 26871 MB/s
+[    1.368087] raid6: sse2x4   gen() 21516 MB/s
+[    1.436083] raid6: sse2x4   xor() 12453 MB/s
+[    1.504080] raid6: sse2x2   gen() 21836 MB/s
+[    1.572069] raid6: sse2x2   xor() 13253 MB/s
+[    1.640070] raid6: sse2x1   gen() 18449 MB/s
+[    1.708083] raid6: sse2x1   xor()  9070 MB/s
+[    1.708462] raid6: using algorithm avx2x4 gen() 52316 MB/s
+[    1.708896] raid6: .... xor() 19306 MB/s, rmw enabled
+[    1.709313] raid6: using avx2x2 recovery algorithm
+[    1.710635] xor: automatically using best checksumming function   avx       
+[    1.712212] async_tx: api initialized (async)
+done.
+Begin: Running /scripts/init-premount ... done.
+Begin: Mounting root file system ... Begin: Running /scripts/local-top ... [FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+done.
+Begin: Running /scripts/local-premount ... [    1.794442] Btrfs loaded, crc32c=crc32c-intel
+Scanning for Btrfs filesystems
+[    1.872082] blk_update_request: I/O error, dev fd0, sector 0 op 0x0:(READ) flags 0x0 phys_seg 1 prio class 0
+[    1.872820] floppy: error 10 while reading block 0
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+done.
+Begin: Will now check root file system ... fsck from util-linux 2.34
+[/usr/sbin/fsck.ext4 (1) -- /dev/mapper/ubuntu--vg-ubuntu--lv] fsck.ext4 -a -C0 /dev/mapper/ubuntu--vg-ubuntu--lv 
+/dev/mapper/ubuntu--vg-ubuntu--lv: recovering journal
+/dev/mapper/ubuntu--vg-ubuntu--lv: Clearing orphaned inode 131078 (uid=0, gid=0, mode=0100000, size=0)
+/dev/mapper/ubuntu--vg-ubuntu--lv: clean, 219678/2588672 files, 3671845/10354688 blocks
+done.
+[    2.086200] EXT4-fs (dm-0): mounted filesystem with ordered data mode. Opts: (null)
+done.
+Begin: Running /scripts/local-bottom ... done.
+Begin: Running /scripts/init-bottom ... Internet Systems Consortium DHCP Client 4.4.1
+Copyright 2004-2018 Internet Systems Consortium.
+All rights reserved.
+For info, please visit https://www.isc.org/software/dhcp/
+
+Listening on LPF/ens3/52:54:00:12:34:56
+Sending on   LPF/ens3/52:54:00:12:34:56
+Sending on   Socket/fallback
+DHCPDISCOVER on ens3 to 255.255.255.255 port 67 interval 3 (xid=0x87cc2f2e)
+DHCPOFFER of 10.0.2.15 from 10.0.2.2
+DHCPREQUEST for 10.0.2.15 on ens3 to 255.255.255.255 port 67 (xid=0x2e2fcc87)
+DHCPACK of 10.0.2.15 from 10.0.2.2 (xid=0x87cc2f2e)
+bound to 10.0.2.15 -- renewal in 33836 seconds.
+done.
+[    2.261144] systemd[1]: Inserted module 'autofs4'
+[    2.270784] systemd[1]: systemd 245.4-4ubuntu3.15 running in system mode. (+PAM +AUDIT +SELINUX +IMA +APPARMOR +SMACK +SYSVINIT +UTMP +LIBCRYPTSETUP +GCRYPT +GNUTLS +ACL +XZ +LZ4 +SECCOMP +BLKID +ELFUTILS +KMOD +IDN2 -IDN +PCRE2 default-hierarchy=hybrid)
+[    2.273564] systemd[1]: Detected virtualization kvm.
+[    2.274237] systemd[1]: Detected architecture x86-64.
+
+Welcome to [1mUbuntu 20.04.3 LTS[0m!
+
+[    2.290279] systemd[1]: Set hostname to <inhoinnofemu>.
+[    2.368082] blk_update_request: I/O error, dev fd0, sector 0 op 0x0:(READ) flags 0x0 phys_seg 1 prio class 0
+[    2.369276] floppy: error 10 while reading block 0
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[    2.441489] systemd[1]: Created slice system-modprobe.slice.
+[[0;32m  OK  [0m] Created slice [0;1;39msystem-modprobe.slice[0m.
+[    2.443242] systemd[1]: Created slice system-serial\x2dgetty.slice.
+[[0;32m  OK  [0m] Created slice [0;1;39msystem-serial\x2dgetty.slice[0m.
+[    2.444906] systemd[1]: Created slice system-systemd\x2dfsck.slice.
+[[0;32m  OK  [0m] Created slice [0;1;39msystem-systemd\x2dfsck.slice[0m.
+[    2.446603] systemd[1]: Created slice User and Session Slice.
+[[0;32m  OK  [0m] Created slice [0;1;39mUser and Session Slice[0m.
+[    2.448127] systemd[1]: Started Forward Password Requests to Wall Directory Watch.
+[[0;32m  OK  [0m] Started [0;1;39mForward Password R…uests to Wall Directory Watch[0m.
+[    2.449933] systemd[1]: Set up automount Arbitrary Executable File Formats File System Automount Point.
+[[0;32m  OK  [0m] Set up automount [0;1;39mArbitrary…s File System Automount Point[0m.
+[    2.451684] systemd[1]: Reached target User and Group Name Lookups.
+[[0;32m  OK  [0m] Reached target [0;1;39mUser and Group Name Lookups[0m.
+[    2.453151] systemd[1]: Reached target Slices.
+[[0;32m  OK  [0m] Reached target [0;1;39mSlices[0m.
+[    2.454367] systemd[1]: Listening on Device-mapper event daemon FIFOs.
+[[0;32m  OK  [0m] Listening on [0;1;39mDevice-mapper event daemon FIFOs[0m.
+[    2.455801] systemd[1]: Listening on LVM2 poll daemon socket.
+[[0;32m  OK  [0m] Listening on [0;1;39mLVM2 poll daemon socket[0m.
+[    2.457121] systemd[1]: Listening on multipathd control socket.
+[[0;32m  OK  [0m] Listening on [0;1;39mmultipathd control socket[0m.
+[    2.458789] systemd[1]: Listening on Syslog Socket.
+[[0;32m  OK  [0m] Listening on [0;1;39mSyslog Socket[0m.
+[    2.460146] systemd[1]: Listening on fsck to fsckd communication Socket.
+[[0;32m  OK  [0m] Listening on [0;1;39mfsck to fsckd communication Socket[0m.
+[    2.461586] systemd[1]: Listening on initctl Compatibility Named Pipe.
+[[0;32m  OK  [0m] Listening on [0;1;39minitctl Compatibility Named Pipe[0m.
+[    2.463275] systemd[1]: Listening on Journal Audit Socket.
+[[0;32m  OK  [0m] Listening on [0;1;39mJournal Audit Socket[0m.
+[    2.464686] systemd[1]: Listening on Journal Socket (/dev/log).
+[[0;32m  OK  [0m] Listening on [0;1;39mJournal Socket (/dev/log)[0m.
+[    2.466534] systemd[1]: Listening on Journal Socket.
+[[0;32m  OK  [0m] Listening on [0;1;39mJournal Socket[0m.
+[    2.468343] systemd[1]: Listening on Network Service Netlink Socket.
+[[0;32m  OK  [0m] Listening on [0;1;39mNetwork Service Netlink Socket[0m.
+[    2.470287] systemd[1]: Listening on udev Control Socket.
+[[0;32m  OK  [0m] Listening on [0;1;39mudev Control Socket[0m.
+[    2.472084] systemd[1]: Listening on udev Kernel Socket.
+[[0;32m  OK  [0m] Listening on [0;1;39mudev Kernel Socket[0m.
+[    2.474320] systemd[1]: Mounting Huge Pages File System...
+         Mounting [0;1;39mHuge Pages File System[0m...
+[    2.476758] systemd[1]: Mounting POSIX Message Queue File System...
+         Mounting [0;1;39mPOSIX Message Queue File System[0m...
+[    2.478892] systemd[1]: Mounting Kernel Debug File System...
+         Mounting [0;1;39mKernel Debug File System[0m...
+[    2.480836] systemd[1]: Mounting Kernel Trace File System...
+         Mounting [0;1;39mKernel Trace File System[0m...
+[    2.483149] systemd[1]: Starting Journal Service...
+         Starting [0;1;39mJournal Service[0m...
+[    2.485235] systemd[1]: Starting Set the console keyboard layout...
+         Starting [0;1;39mSet the console keyboard layout[0m...
+[    2.487784] systemd[1]: Starting Create list of static device nodes for the current kernel...
+         Starting [0;1;39mCreate list of st…odes for the current kernel[0m...
+[    2.490686] systemd[1]: Starting Monitoring of LVM2 mirrors, snapshots etc. using dmeventd or progress polling...
+         Starting [0;1;39mMonitoring of LVM…meventd or progress polling[0m...
+[    2.492974] systemd[1]: Condition check resulted in Load Kernel Module drm being skipped.
+[    2.494730] systemd[1]: Condition check resulted in OpenVSwitch configuration for cleanup being skipped.
+[    2.497007] systemd[1]: Condition check resulted in Set Up Additional Binary Formats being skipped.
+[    2.498558] systemd[1]: Condition check resulted in File System Check on Root Device being skipped.
+[    2.501000] systemd[1]: Starting Load Kernel Modules...
+         Starting [0;1;39mLoad Kernel Modules[0m...
+[    2.503094] systemd[1]: Starting Remount Root and Kernel File Systems...
+         Starting [0;1;39mRemount Root and Kernel File Systems[0m...
+[    2.505530] systemd[1]: Starting udev Coldplug all Devices...
+         Starting [0;1;39mudev Coldplug all Devices[0m...
+[    2.507683] systemd[1]: Starting Uncomplicated firewall...
+[    2.509572] EXT4-fs (dm-0): re-mounted. Opts: (null)
+         Starting [0;1;39mUncomplicated firewall[0m...
+[    2.513596] systemd[1]: Mounted Huge Pages File System.
+[[0;32m  OK  [0m] Mounted [0;1;39mHuge Pages File System[0m.
+[    2.514871] systemd[1]: Mounted POSIX Message Queue File System.
+[[0;32m  OK  [0m] Mounted [0;1;39mPOSIX Message Queue File System[0m.
+[    2.517074] systemd[1]: Mounted Kernel Debug File System.
+[[0;32m  OK  [0m] Mounted [0;1;39mKernel Debug File System[0m.
+[    2.518344] systemd[1]: Mounted Kernel Trace File System.
+[[0;32m  OK  [0m] Mounted [0;1;39mKernel Trace File System[0m.
+[    2.519793] systemd[1]: Finished Create list of static device nodes for the current kernel.
+[[0;32m  OK  [0m] Finished [0;1;39mCreate list of st… nodes for the current kernel[0m.
+[    2.521417] bridge: filtering via arp/ip/ip6tables is no longer available by default. Update your scripts to load br_netfilter if you need this.
+[    2.521809] systemd[1]: Finished Remount Root and Kernel File Systems.
+[[0;32m  OK  [0m] Finished [0;1;39mRemount Root and Kernel File Systems[0m.
+[    2.525352] Bridge firewalling registered
+[    2.526719] systemd[1]: Finished Uncomplicated firewall.
+[[0;32m  OK  [0m] Finished [0;1;39mUncomplicated firewall[0m.
+[    2.529342] systemd[1]: Activating swap /swap.img...
+         Activating swap [0;1;39m/swap.img[0m...
+[    2.531633] systemd[1]: Condition check resulted in Rebuild Hardware Database being skipped.
+[    2.533358] systemd[1]: Condition check resulted in Platform Persistent Storage Archival being skipped.
+[    2.535790] systemd[1]: Starting Load/Save Random Seed...
+         Starting [0;1;39mLoad/Save Random Seed[0m...
+[    2.538624] systemd[1]: Starting Create System Users...
+         Starting [0;1;39mCreate System Users[0m...
+[    2.540561] systemd[1]: Started Journal Service.
+[[0;32m  OK  [0m] Started [0;1;39mJournal Service[0m.
+[[0;32m  OK  [0m] Finished [0;1;39mSet the console keyboard layout[0m.
+[[0;32m  OK  [0m] Finished [0;1;39mMonitoring of LVM… dmeventd or progress polling[0m.
+         Starting [0;1;39mFlush Journal to Persistent Storage[0m...
+[[0;32m  OK  [0m] Finished [0;1;39mLoad/Save Random Seed[0m.
+[[0;32m  OK  [0m] Finished [0;1;39mudev Coldplug all Devices[0m.
+[    2.549801] systemd-journald[418]: Received client request to flush runtime journal.
+         Starting [0;1;39mudev Wait for Complete Device Initialization[0m...
+[    2.552094] Adding 4194300k swap on /swap.img.  Priority:-2 extents:6 across:4726780k FS
+[[0;32m  OK  [0m] Activated swap [0;1;39m/swap.img[0m.
+[[0;32m  OK  [0m] Reached target [0;1;39mSwap[0m.
+[[0;32m  OK  [0m] Finished [0;1;39mCreate System Users[0m.
+         Starting [0;1;39mCreate Static Device Nodes in /dev[0m...
+[    2.560749] systemd-journald[418]: File /var/log/journal/ae22bc31d4cc49a5b05e4203c7927874/system.journal corrupted or uncleanly shut down, renaming and replacing.
+[[0;32m  OK  [0m] Finished [0;1;39mCreate Static Device Nodes in /dev[0m.
+         Starting [0;1;39mudev Kernel Device Manager[0m...
+[    2.622291] IPVS: Registered protocols (TCP, UDP, SCTP, AH, ESP)
+[    2.623543] IPVS: Connection hash table configured (size=4096, memory=64Kbytes)
+[    2.624827] IPVS: ipvs loaded.
+[    2.626208] IPVS: [rr] scheduler registered.
+[    2.635685] IPVS: [sh] scheduler registered.
+[    2.640998] IPVS: [wrr] scheduler registered.
+[[0;32m  OK  [0m] Finished [0;1;39mLoad Kernel Modules[0m.
+         Mounting [0;1;39mFUSE Control File System[0m...
+         Mounting [0;1;39mKernel Configuration File System[0m...
+         Starting [0;1;39mApply Kernel Variables[0m...
+[[0;32m  OK  [0m] Mounted [0;1;39mFUSE Control File System[0m.
+[[0;32m  OK  [0m] Mounted [0;1;39mKernel Configuration File System[0m.
+[[0;32m  OK  [0m] Finished [0;1;39mApply Kernel Variables[0m.
+[[0;32m  OK  [0m] Started [0;1;39mudev Kernel Device Manager[0m.
+[[0;32m  OK  [0m] Started [0;1;39mDispatch Password …ts to Console Directory Watch[0m.
+[[0;32m  OK  [0m] Reached target [0;1;39mLocal Encrypted Volumes[0m.
+[[0;32m  OK  [0m] Finished [0;1;39mFlush Journal to Persistent Storage[0m.
+[[0;32m  OK  [0m] Found device [0;1;39m/dev/ttyS0[0m.
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[[0;32m  OK  [0m] Listening on [0;1;39mLoad/Save RF …itch Status /dev/rfkill Watch[0m.
+[[0;32m  OK  [0m] Created slice [0;1;39msystem-lvm2\x2dpvscan.slice[0m.
+         Starting [0;1;39mLVM event activation on device 8:3[0m...
+[[0;32m  OK  [0m] Found device [0;1;39mQEMU_HARDDISK 2[0m.
+[[0;32m  OK  [0m] Finished [0;1;39mudev Wait for Complete Device Initialization[0m.
+[[0;32m  OK  [0m] Finished [0;1;39mLVM event activation on device 8:3[0m.
+         Starting [0;1;39mDevice-Mapper Multipath Device Controller[0m...
+[[0;32m  OK  [0m] Started [0;1;39mDevice-Mapper Multipath Device Controller[0m.
+[[0;32m  OK  [0m] Reached target [0;1;39mLocal File Systems (Pre)[0m.
+         Mounting [0;1;39mMount unit for core18, revision 2128[0m...
+         Mounting [0;1;39mMount unit for core18, revision 2284[0m...
+         Mounting [0;1;39mMount unit for core20, revision 1328[0m...
+         Mounting [0;1;39mMount unit for core20, revision 1361[0m...
+         Mounting [0;1;39mMount unit for docker, revision 1125[0m...
+         Mounting [0;1;39mMount unit for docker, revision 1458[0m...
+         Mounting [0;1;39mMount unit for lxd, revision 21835[0m...
+         Mounting [0;1;39mMount unit for lxd, revision 22526[0m...
+         Mounting [0;1;39mMount unit for microk8s, revision 2848[0m...
+         Mounting [0;1;39mMount unit for microk8s, revision 2948[0m...
+         Mounting [0;1;39mMount unit for snapd, revision 14978[0m...
+         Starting [0;1;39mFile System Check…e72d-4f51-ba47-71a8059660b3[0m...
+[[0;32m  OK  [0m] Started [0;1;39mFile System Check Daemon to report status[0m.
+[[0;32m  OK  [0m] Finished [0;1;39mFile System Check…e-e72d-4f51-ba47-71a8059660b3[0m.
+         Mounting [0;1;39m/boot[0m...
+[[0;32m  OK  [0m] Mounted [0;1;39m/boot[0m.
+[[0;32m  OK  [0m] Mounted [0;1;39mMount unit for core20, revision 1328[0m.
+[[0;32m  OK  [0m] Mounted [0;1;39mMount unit for core18, revision 2128[0m.
+[[0;32m  OK  [0m] Mounted [0;1;39mMount unit for core18, revision 2284[0m.
+[[0;32m  OK  [0m] Mounted [0;1;39mMount unit for core20, revision 1361[0m.
+[[0;32m  OK  [0m] Mounted [0;1;39mMount unit for snapd, revision 14978[0m.
+[[0;32m  OK  [0m] Mounted [0;1;39mMount unit for docker, revision 1125[0m.
+[[0;32m  OK  [0m] Mounted [0;1;39mMount unit for microk8s, revision 2948[0m.
+[[0;32m  OK  [0m] Mounted [0;1;39mMount unit for lxd, revision 21835[0m.
+[[0;32m  OK  [0m] Mounted [0;1;39mMount unit for lxd, revision 22526[0m.
+[[0;32m  OK  [0m] Mounted [0;1;39mMount unit for docker, revision 1458[0m.
+[[0;32m  OK  [0m] Mounted [0;1;39mMount unit for microk8s, revision 2848[0m.
+[[0;32m  OK  [0m] Reached target [0;1;39mLocal File Systems[0m.
+         Starting [0;1;39mLoad AppArmor profiles[0m...
+         Starting [0;1;39mSet console font and keymap[0m...
+         Starting [0;1;39mCreate final runt…dir for shutdown pivot root[0m...
+         Starting [0;1;39mTell Plymouth To Write Out Runtime Data[0m...
+         Starting [0;1;39mCreate Volatile Files and Directories[0m...
+[[0;32m  OK  [0m] Finished [0;1;39mSet console font and keymap[0m.
+[[0;32m  OK  [0m] Finished [0;1;39mCreate final runt…e dir for shutdown pivot root[0m.
+[[0;32m  OK  [0m] Finished [0;1;39mTell Plymouth To Write Out Runtime Data[0m.
+[[0;32m  OK  [0m] Finished [0;1;39mCreate Volatile Files and Directories[0m.
+[[0;32m  OK  [0m] Finished [0;1;39mLoad AppArmor profiles[0m.
+         Starting [0;1;39mLoad AppArmor pro…managed internally by snapd[0m...
+         Starting [0;1;39mNetwork Time Synchronization[0m...
+         Starting [0;1;39mUpdate UTMP about System Boot/Shutdown[0m...
+         Starting [0;1;39mInitial cloud-init job (pre-networking)[0m...
+[[0;32m  OK  [0m] Finished [0;1;39mUpdate UTMP about System Boot/Shutdown[0m.
+[[0;32m  OK  [0m] Started [0;1;39mNetwork Time Synchronization[0m.
+[[0;32m  OK  [0m] Reached target [0;1;39mSystem Time Set[0m.
+[[0;32m  OK  [0m] Reached target [0;1;39mSystem Time Synchronized[0m.
+[[0;32m  OK  [0m] Finished [0;1;39mLoad AppArmor pro…s managed internally by snapd[0m.
+[    3.778092] cloud-init[793]: Cloud-init v. 21.4-0ubuntu1~20.04.1 running 'init-local' at Sat, 05 Mar 2022 07:16:09 +0000. Up 3.59 seconds.
+[[0;32m  OK  [0m] Finished [0;1;39mInitial cloud-init job (pre-networking)[0m.
+[[0;32m  OK  [0m] Reached target [0;1;39mNetwork (Pre)[0m.
+         Starting [0;1;39mNetwork Service[0m...
+[[0;32m  OK  [0m] Started [0;1;39mNetwork Service[0m.
+         Starting [0;1;39mWait for Network to be Configured[0m...
+         Starting [0;1;39mNetwork Name Resolution[0m...
+[[0;32m  OK  [0m] Finished [0;1;39mWait for Network to be Configured[0m.
+         Starting [0;1;39mInitial cloud-ini… (metadata service crawler)[0m...
+[[0;32m  OK  [0m] Started [0;1;39mNetwork Name Resolution[0m.
+[[0;32m  OK  [0m] Reached target [0;1;39mHost and Network Name Lookups[0m.
+[    4.199591] cloud-init[819]: Cloud-init v. 21.4-0ubuntu1~20.04.1 running 'init' at Sat, 05 Mar 2022 07:16:10 +0000. Up 4.07 seconds.
+[    4.200434] cloud-init[819]: ci-info: ++++++++++++++++++++++++++++++++++++++Net device info++++++++++++++++++++++++++++++++++++++
+[    4.201164] cloud-init[819]: ci-info: +--------+------+----------------------------+---------------+--------+-------------------+
+[    4.201943] cloud-init[819]: ci-info: | Device |  Up  |          Address           |      Mask     | Scope  |     Hw-Address    |
+[    4.202752] cloud-init[819]: ci-info: +--------+------+----------------------------+---------------+--------+-------------------+
+[    4.203556] cloud-init[819]: ci-info: |  ens3  | True |         10.0.2.15          | 255.255.255.0 | global | 52:54:00:12:34:56 |
+[    4.204350] cloud-init[819]: ci-info: |  ens3  | True | fec0::5054:ff:fe12:3456/64 |       .       |  site  | 52:54:00:12:34:56 |
+[    4.205129] cloud-init[819]: ci-info: |  ens3  | True | fe80::5054:ff:fe12:3456/64 |       .       |  link  | 52:54:00:12:34:56 |
+[    4.205927] cloud-init[819]: ci-info: |   lo   | True |         127.0.0.1          |   255.0.0.0   |  host  |         .         |
+[    4.206724] cloud-init[819]: ci-info: |   lo   | True |          ::1/128           |       .       |  host  |         .         |
+[    4.207555] cloud-init[819]: ci-info: +--------+------+----------------------------+---------------+--------+-------------------+
+[    4.208358] cloud-init[819]: ci-info: ++++++++++++++++++++++++++++Route IPv4 info+++++++++++++++++++++++++++++
+[    4.209063] cloud-init[819]: ci-info: +-------+-------------+----------+-----------------+-----------+-------+
+[    4.209806] cloud-init[819]: ci-info: | Route | Destination | Gateway  |     Genmask     | Interface | Flags |
+[    4.210510] cloud-init[819]: ci-info: +-------+-------------+----------+-----------------+-----------+-------+
+[    4.211219] cloud-init[819]: ci-info: |   0   |   0.0.0.0   | 10.0.2.2 |     0.0.0.0     |    ens3   |   UG  |
+[    4.211909] cloud-init[819]: ci-info: |   1   |   0.0.0.0   | 10.0.2.2 |     0.0.0.0     |    ens3   |   UG  |
+[    4.212506] cloud-init[819]: ci-info: |   2   |   10.0.2.0  | 0.0.0.0  |  255.255.255.0  |    ens3   |   U   |
+[    4.213164] cloud-init[819]: ci-info: |   3   |   10.0.2.2  | 0.0.0.0  | 255.255.255.255 |    ens3   |   UH  |
+[    4.213821] cloud-init[819]: ci-info: +-------+-------------+----------+-----------------+-----------+-------+
+[    4.214479] cloud-init[819]: ci-info: +++++++++++++++++++Route IPv6 info+++++++++++++++++++
+[    4.214962] cloud-init[819]: ci-info: +-------+-------------+---------+-----------+-------+
+[    4.215445] cloud-init[819]: ci-info: | Route | Destination | Gateway | Interface | Flags |
+[    4.215951] cloud-init[819]: ci-info: +-------+-------------+---------+-----------+-------+
+[    4.216421] cloud-init[819]: ci-info: |   1   |  fe80::/64  |    ::   |    ens3   |   U   |
+[    4.216979] cloud-init[819]: ci-info: |   2   |  fec0::/64  |    ::   |    ens3   |   Ue  |
+[    4.217532] cloud-init[819]: ci-info: |   3   |     ::/0    | fe80::2 |    ens3   |  UGe  |
+[    4.218033] cloud-init[819]: ci-info: |   5   |    local    |    ::   |    ens3   |   U   |
+[    4.218479] cloud-init[819]: ci-info: |   6   |   ff00::/8  |    ::   |    ens3   |   U   |
+[    4.218977] cloud-init[819]: ci-info: +-------+-------------+---------+-----------+-------+
+[[0;32m  OK  [0m] Finished [0;1;39mInitial cloud-ini…ob (metadata service crawler)[0m.
+[[0;32m  OK  [0m] Reached target [0;1;39mCloud-config availability[0m.
+[[0;32m  OK  [0m] Reached target [0;1;39mSystem Initialization[0m.
+[[0;32m  OK  [0m] Started [0;1;39mTrigger to poll fo…y enabled on GCP LTS non-pro)[0m.
+[[0;32m  OK  [0m] Started [0;1;39mDaily apt download activities[0m.
+[[0;32m  OK  [0m] Started [0;1;39mDaily apt upgrade and clean activities[0m.
+[[0;32m  OK  [0m] Started [0;1;39mPeriodic ext4 Onli…ata Check for All Filesystems[0m.
+[[0;32m  OK  [0m] Started [0;1;39mDiscard unused blocks once a week[0m.
+[[0;32m  OK  [0m] Started [0;1;39mRefresh fwupd metadata regularly[0m.
+[[0;32m  OK  [0m] Started [0;1;39mDaily rotation of log files[0m.
+[[0;32m  OK  [0m] Started [0;1;39mDaily man-db regeneration[0m.
+[[0;32m  OK  [0m] Started [0;1;39mMessage of the Day[0m.
+[[0;32m  OK  [0m] Started [0;1;39mDaily Cleanup of Temporary Directories[0m.
+[[0;32m  OK  [0m] Started [0;1;39mUbuntu Advantage Timer for running repeated jobs[0m.
+[[0;32m  OK  [0m] Reached target [0;1;39mPaths[0m.
+[[0;32m  OK  [0m] Reached target [0;1;39mTimers[0m.
+[[0;32m  OK  [0m] Listening on [0;1;39mAvahi mDNS/DNS-SD Stack Activation Socket[0m.
+[[0;32m  OK  [0m] Listening on [0;1;39mcloud-init hotplug hook socket[0m.
+[[0;32m  OK  [0m] Listening on [0;1;39mD-Bus System Message Bus Socket[0m.
+[[0;32m  OK  [0m] Listening on [0;1;39mOpen-iSCSI iscsid Socket[0m.
+[[0;32m  OK  [0m] Listening on [0;1;39mSocket unix for snap application lxd.daemon[0m.
+         Starting [0;1;39mSocket activation for snappy daemon[0m.
+[[0;32m  OK  [0m] Listening on [0;1;39mUUID daemon activation socket[0m.
+[[0;32m  OK  [0m] Listening on [0;1;39mSocket activation for snappy daemon[0m.
+[[0;32m  OK  [0m] Reached target [0;1;39mSockets[0m.
+[[0;32m  OK  [0m] Reached target [0;1;39mBasic System[0m.
+         Starting [0;1;39mAccounts Service[0m...
+         Starting [0;1;39mAvahi mDNS/DNS-SD Stack[0m...
+[[0;32m  OK  [0m] Started [0;1;39mD-Bus System Message Bus[0m.
+         Starting [0;1;39mNetwork Manager[0m...
+[[0;32m  OK  [0m] Started [0;1;39mSave initial kernel messages after boot[0m.
+         Starting [0;1;39mRemove Stale Onli…t4 Metadata Check Snapshots[0m...
+         Starting [0;1;39mRecord successful boot for GRUB[0m...
+[[0;32m  OK  [0m] Started [0;1;39mirqbalance daemon[0m.
+         Starting [0;1;39mDispatcher daemon for systemd-networkd[0m...
+         Starting [0;1;39mAuthorization Manager[0m...
+         Starting [0;1;39mRestore /etc/reso… the ppp link was shut down[0m...
+         Starting [0;1;39mSystem Logging Service[0m...
+         Starting [0;1;39mSnap Daemon[0m...
+         Starting [0;1;39mSwitcheroo Control Proxy service[0m...
+         Starting [0;1;39mLogin Service[0m...
+         Starting [0;1;39mDisk Manager[0m...
+         Starting [0;1;39mWPA supplicant[0m...
+[[0;32m  OK  [0m] Finished [0;1;39mRestore /etc/reso…re the ppp link was shut down[0m.
+[[0;32m  OK  [0m] Finished [0;1;39mRemove Stale Onli…ext4 Metadata Check Snapshots[0m.
+[[0;32m  OK  [0m] Finished [0;1;39mRecord successful boot for GRUB[0m.
+         Starting [0;1;39mGRUB failed boot detection[0m...
+[[0;32m  OK  [0m] Finished [0;1;39mGRUB failed boot detection[0m.
+[[0;32m  OK  [0m] Started [0;1;39mSystem Logging Service[0m.
+[[0;32m  OK  [0m] Started [0;1;39mLogin Service[0m.
+[[0;32m  OK  [0m] Started [0;1;39mAvahi mDNS/DNS-SD Stack[0m.
+[[0;32m  OK  [0m] Started [0;1;39mWPA supplicant[0m.
+[[0;32m  OK  [0m] Started [0;1;39mSwitcheroo Control Proxy service[0m.
+[[0;32m  OK  [0m] Started [0;1;39mAuthorization Manager[0m.
+         Starting [0;1;39mModem Manager[0m...
+[[0;32m  OK  [0m] Started [0;1;39mAccounts Service[0m.
+[[0;32m  OK  [0m] Started [0;1;39mNetwork Manager[0m.
+[[0;32m  OK  [0m] Reached target [0;1;39mNetwork[0m.
+         Starting [0;1;39mNetwork Manager Wait Online[0m...
+[[0;32m  OK  [0m] Started [0;1;39mService for snap application docker.dockerd[0m.
+         Starting [0;1;39mService for snap application lxd.activate[0m...
+[[0;32m  OK  [0m] Started [0;1;39mService for snap a…rok8s.daemon-apiserver-kicker[0m.
+[[0;32m  OK  [0m] Started [0;1;39mService for snap a…ion microk8s.daemon-apiserver[0m.
+[[0;32m  OK  [0m] Started [0;1;39mService for snap a…microk8s.daemon-cluster-agent[0m.
+         Starting [0;1;39mService for snap … microk8s.daemon-containerd[0m...
+[[0;32m  OK  [0m] Started [0;1;39mService for snap a…s.daemon-control-plane-kicker[0m.
+[[0;32m  OK  [0m] Started [0;1;39mService for snap a…k8s.daemon-controller-manager[0m.
+[[0;32m  OK  [0m] Started [0;1;39mService for snap a…lication microk8s.daemon-etcd[0m.
+[[0;32m  OK  [0m] Started [0;1;39mService for snap a…tion microk8s.daemon-flanneld[0m.
+[[0;32m  OK  [0m] Started [0;1;39mService for snap a…on microk8s.daemon-k8s-dqlite[0m.
+[[0;32m  OK  [0m] Started [0;1;39mService for snap a…ation microk8s.daemon-kubelet[0m.
+[[0;32m  OK  [0m] Started [0;1;39mService for snap a…tion microk8s.daemon-kubelite[0m.
+[[0;32m  OK  [0m] Started [0;1;39mService for snap a…ication microk8s.daemon-proxy[0m.
+[[0;32m  OK  [0m] Started [0;1;39mService for snap a…ion microk8s.daemon-scheduler[0m.
+[[0;32m  OK  [0m] Started [0;1;39mService for snap a…ation microk8s.daemon-traefik[0m.
+[[0;32m  OK  [0m] Started [0;1;39mUnattended Upgrades Shutdown[0m.
+[[0;32m  OK  [0m] Started [0;1;39mDispatcher daemon for systemd-networkd[0m.
+         Starting [0;1;39mHostname Service[0m...
+[[0;32m  OK  [0m] Started [0;1;39mHostname Service[0m.
+         Starting [0;1;39mNetwork Manager Script Dispatcher Service[0m...
+[[0;32m  OK  [0m] Started [0;1;39mNetwork Manager Script Dispatcher Service[0m.
+[[0;32m  OK  [0m] Finished [0;1;39mNetwork Manager Wait Online[0m.
+[[0;32m  OK  [0m] Reached target [0;1;39mNetwork is Online[0m.
+[[0;32m  OK  [0m] Reached target [0;1;39mRemote File Systems (Pre)[0m.
+[[0;32m  OK  [0m] Reached target [0;1;39mRemote File Systems[0m.
+         Starting [0;1;39mLSB: automatic crash report generation[0m...
+         Starting [0;1;39mDeferred execution scheduler[0m...
+         Starting [0;1;39mAvailability of block devices[0m...
+[[0;32m  OK  [0m] Started [0;1;39mRegular background program processing daemon[0m.
+         Starting [0;1;39mOpenBSD Secure Shell server[0m...
+         Starting [0;1;39mPermit User Sessions[0m...
+[[0;32m  OK  [0m] Started [0;1;39mDeferred execution scheduler[0m.
+[[0;32m  OK  [0m] Finished [0;1;39mAvailability of block devices[0m.
+[[0;32m  OK  [0m] Started [0;1;39mDisk Manager[0m.
+[[0;32m  OK  [0m] Finished [0;1;39mPermit User Sessions[0m.
+         Starting [0;1;39mGNOME Display Manager[0m...
+         Starting [0;1;39mHold until boot process finishes up[0m...
+[[0;32m  OK  [0m] Finished [0;1;39mHold until boot process finishes up[0m.
+[[0;32m  OK  [0m] Started [0;1;39mSerial Getty on ttyS0[0m.
+[[0;32m  OK  [0m] Reached target [0;1;39mLogin Prompts[0m.
+         Starting [0;1;39mSet console scheme[0m...
+[[0;32m  OK  [0m] Finished [0;1;39mSet console scheme[0m.
+[[0;32m  OK  [0m] Created slice [0;1;39msystem-getty.slice[0m.
+[[0;32m  OK  [0m] Started [0;1;39mOpenBSD Secure Shell server[0m.
+[[0;32m  OK  [0m] Started [0;1;39mLSB: automatic crash report generation[0m.
+[[0;32m  OK  [0m] Started [0;1;39mGNOME Display Manager[0m.
+[[0;32m  OK  [0m] Started [0;1;39mModem Manager[0m.
+[[0;32m  OK  [0m] Created slice [0;1;39mUser Slice of UID 0[0m.
+         Starting [0;1;39mUser Runtime Directory /run/user/0[0m...
+[[0;32m  OK  [0m] Finished [0;1;39mUser Runtime Directory /run/user/0[0m.
+         Starting [0;1;39mUser Manager for UID 0[0m...
+[[0;32m  OK  [0m] Started [0;1;39mUser Manager for UID 0[0m.
+[[0;32m  OK  [0m] Started [0;1;39mSession 1 of user root[0m.
+         Starting [0;1;39mDaemon for power management[0m...
+         Starting [0;1;39mLocation Lookup Service[0m...
+[[0;32m  OK  [0m] Started [0;1;39mDaemon for power management[0m.
+[[0;32m  OK  [0m] Started [0;1;39mLocation Lookup Service[0m.
+         Starting [0;1;39mPackageKit Daemon[0m...
+         Starting [0;1;39mManage, Install and Generate Color Profiles[0m...
+[[0;32m  OK  [0m] Started [0;1;39mPackageKit Daemon[0m.
+[[0;32m  OK  [0m] Started [0;1;39mManage, Install and Generate Color Profiles[0m.
+         Starting [0;1;39mLocale Service[0m...
+[[0;32m  OK  [0m] Started [0;1;39mLocale Service[0m.
+[    7.527309] overlayfs: missing 'lowerdir'
+[[0;32m  OK  [0m] Started [0;1;39mSnap Daemon[0m.
+         Starting [0;1;39mWait until snapd is fully seeded[0m...
+         Starting [0;1;39mTime & Date Service[0m...
+[[0;32m  OK  [0m] Started [0;1;39mTime & Date Service[0m.
+[[0;32m  OK  [0m] Finished [0;1;39mWait until snapd is fully seeded[0m.
+         Starting [0;1;39mApply the settings specified in cloud-config[0m...
+[[0;32m  OK  [0m] Finished [0;1;39mService for snap application lxd.activate[0m.
+[    8.095794] cloud-init[1981]: Cloud-init v. 21.4-0ubuntu1~20.04.1 running 'modules:config' at Sat, 05 Mar 2022 07:16:14 +0000. Up 8.03 seconds.
+[[0;32m  OK  [0m] Finished [0;1;39mApply the settings specified in cloud-config[0m.
+
+
+Ubuntu 20.04.3 LTS inhoinnofemu ttyS0
+
+inhoinnofemu login: [   10.732405] cloud-init[2224]: Cloud-init v. 21.4-0ubuntu1~20.04.1 running 'modules:final' at Sat, 05 Mar 2022 07:16:16 +0000. Up 10.66 seconds.
+[   10.732532] cloud-init[2224]: Cloud-init v. 21.4-0ubuntu1~20.04.1 finished at Sat, 05 Mar 2022 07:16:16 +0000. Datasource DataSourceNone.  Up 10.73 seconds
+[   10.732732] cloud-init[2224]: 2022-03-05 07:16:16,801 - cc_final_message.py[WARNING]: Used fallback datasource
+inhoinno
+
+Password: 
+Welcome to Ubuntu 20.04.3 LTS (GNU/Linux 5.10.0-051000-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Sat 05 Mar 2022 07:16:22 AM UTC
+
+  System load:              1.38
+  Usage of /:               33.8% of 38.63GB
+  Memory usage:             19%
+  Swap usage:               0%
+  Processes:                206
+  Users logged in:          1
+  IPv4 address for docker0: 172.17.0.1
+  IPv4 address for ens3:    10.0.2.15
+  IPv6 address for ens3:    fec0::5054:ff:fe12:3456
+
+
+0 updates can be applied immediately.
+
+
+The list of available updates is more than a week old.
+To check for new updates run: sudo apt update
+
+Last login: Fri Mar  4 15:20:32 UTC 2022 on ttyS0
+root@inhoinnofemu:~# clear
+[H[Jroot@inhoinnofemu:~# nvme list
+Node             SN                   Model                                    Namespace Usage                      Format           FW Rev  
+---------------- -------------------- ---------------------------------------- --------- -------------------------- ---------------- --------
+/dev/nvme0n1     vZNSSD0              FEMU ZNS-SSD Controller                  1           4.29  GB /   4.29  GB    512   B +  0 B   1.0     
+root@inhoinnofemu:~# 
+
+
+root@inhoinnofemu:~# 
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          칟ㅁㄱ
+칟ㅁㄱ: command not found
+root@inhoinnofemu:~# clear
+[H[Jroot@inhoinnofemu:~# shutdown -h 0
+Shutdown scheduled for Sat 2022-03-05 14:32:43 UTC, use 'shutdown -c' to cancel.
+root@inhoinnofemu:~#          Stopping [0;1;39mSession 1 of user root[0m.
+logout
+         Stopping [0;1;39mSession 3 of user root[0m.
+[[0;32m  OK  [0m] Removed slice [0;1;39msystem-getty.slice[0m.
+[[0;32m  OK  [0m] Removed slice [0;1;39msystem-modprobe.slice[0m.
+[[0;32m  OK  [0m] Stopped target [0;1;39mCloud-init target[0m.
+[[0;32m  OK  [0m] Stopped target [0;1;39mGraphical Interface[0m.
+[[0;32m  OK  [0m] Stopped target [0;1;39mHost and Network Name Lookups[0m.
+[[0;32m  OK  [0m] Stopped target [0;1;39mTimers[0m.
+[[0;32m  OK  [0m] Stopped [0;1;39mDaily apt upgrade and clean activities[0m.
+[[0;32m  OK  [0m] Stopped [0;1;39mDaily apt download activities[0m.
+[[0;32m  OK  [0m] Stopped [0;1;39mPeriodic ext4 Onli…ata Check for All Filesystems[0m.
+[[0;32m  OK  [0m] Stopped [0;1;39mDiscard unused blocks once a week[0m.
+[[0;32m  OK  [0m] Stopped [0;1;39mRefresh fwupd metadata regularly[0m.
+[[0;32m  OK  [0m] Stopped [0;1;39mDaily rotation of log files[0m.
+[[0;32m  OK  [0m] Stopped [0;1;39mDaily man-db regeneration[0m.
+[[0;32m  OK  [0m] Stopped [0;1;39mMessage of the Day[0m.
+[[0;32m  OK  [0m] Stopped [0;1;39mDaily Cleanup of Temporary Directories[0m.
+[[0;32m  OK  [0m] Stopped [0;1;39mUbuntu Advantage Timer for running repeated jobs[0m.
+[[0;32m  OK  [0m] Stopped target [0;1;39mSystem Time Synchronized[0m.
+[[0;32m  OK  [0m] Stopped target [0;1;39mSystem Time Set[0m.
+[[0;32m  OK  [0m] Closed [0;1;39mLVM2 poll daemon socket[0m.
+[[0;32m  OK  [0m] Closed [0;1;39mLoad/Save RF Kill Switch Status /dev/rfkill Watch[0m.
+         Stopping [0;1;39mAccounts Service[0m...
+         Stopping [0;1;39mAvailability of block devices[0m...
+[[0;32m  OK  [0m] Stopped [0;1;39mExecute cloud user/final scripts[0m.
+[[0;32m  OK  [0m] Stopped target [0;1;39mMulti-User System[0m.
+[[0;32m  OK  [0m] Stopped target [0;1;39mLogin Prompts[0m.
+         Stopping [0;1;39mModem Manager[0m...
+         Stopping [0;1;39mLSB: automatic crash report generation[0m...
+         Stopping [0;1;39mDeferred execution scheduler[0m...
+         Stopping [0;1;39mAvahi mDNS/DNS-SD Stack[0m...
+[[0;32m  OK  [0m] Stopped [0;1;39mApply the settings specified in cloud-config[0m.
+[[0;32m  OK  [0m] Stopped target [0;1;39mCloud-config availability[0m.
+[[0;32m  OK  [0m] Stopped target [0;1;39mNetwork is Online[0m.
+[[0;32m  OK  [0m] Stopped [0;1;39mNetwork Manager Wait Online[0m.
+         Stopping [0;1;39mManage, Install and Generate Color Profiles[0m...
+         Stopping [0;1;39mRegular background program processing daemon[0m...
+         Stopping [0;1;39mCreate final runt…dir for shutdown pivot root[0m...
+         Stopping [0;1;39mGNOME Display Manager[0m...
+         Stopping [0;1;39mirqbalance daemon[0m...
+         Stopping [0;1;39mLVM event activation on device 8:3[0m...
+         Stopping [0;1;39mDispatcher daemon for systemd-networkd[0m...
+         Stopping [0;1;39mSystem Logging Service[0m...
+         Stopping [0;1;39mSerial Getty on ttyS0[0m...
+         Stopping [0;1;39mService for snap application docker.dockerd[0m...
+         Stopping [0;1;39mService for snap …k8s.daemon-apiserver-kicker[0m...
+         Stopping [0;1;39mService for snap …crok8s.daemon-cluster-agent[0m...
+         Stopping [0;1;39mService for snap … microk8s.daemon-containerd[0m...
+         Stopping [0;1;39mService for snap … microk8s.daemon-k8s-dqlite[0m...
+         Stopping [0;1;39mService for snap …on microk8s.daemon-kubelite[0m...
+[[0;32m  OK  [0m] Stopped [0;1;39mWait until snapd is fully seeded[0m.
+         Stopping [0;1;39mSnap Daemon[0m...
+         Stopping [0;1;39mOpenBSD Secure Shell server[0m...
+         Stopping [0;1;39mSwitcheroo Control Proxy service[0m...
+         Stopping [0;1;39mLoad/Save Random Seed[0m...
+         Stopping [0;1;39mDisk Manager[0m...
+         Stopping [0;1;39mDaemon for power management[0m...
+[[0;32m  OK  [0m] Stopped [0;1;39mAccounts Service[0m.
+[[0;32m  OK  [0m] Stopped [0;1;39mAvahi mDNS/DNS-SD Stack[0m.
+[[0;32m  OK  [0m] Stopped [0;1;39mirqbalance daemon[0m.
+[[0;32m  OK  [0m] Stopped [0;1;39mDispatcher daemon for systemd-networkd[0m.
+[[0;32m  OK  [0m] Stopped [0;1;39mSystem Logging Service[0m.
+[[0;32m  OK  [0m] Stopped [0;1;39mSnap Daemon[0m.
+[[0;32m  OK  [0m] Stopped [0;1;39mSwitcheroo Control Proxy service[0m.
+[[0;32m  OK  [0m] Stopped [0;1;39mModem Manager[0m.
+[[0;32m  OK  [0m] Stopped [0;1;39mService for snap a…rok8s.daemon-apiserver-kicker[0m.
+[[0;32m  OK  [0m] Stopped [0;1;39mRegular background program processing daemon[0m.
+[[0;32m  OK  [0m] Stopped [0;1;39mService for snap a…on microk8s.daemon-containerd[0m.
+[[0;32m  OK  [0m] Stopped [0;1;39mDeferred execution scheduler[0m.
+[[0;32m  OK  [0m] Stopped [0;1;39mSerial Getty on ttyS0[0m.
+[[0;32m  OK  [0m] Stopped [0;1;39mOpenBSD Secure Shell server[0m.
+[[0;32m  OK  [0m] Stopped [0;1;39mDaemon for power management[0m.
+[[0;32m  OK  [0m] Stopped [0;1;39mManage, Install and Generate Color Profiles[0m.
+[[0;32m  OK  [0m] Stopped [0;1;39mAvailability of block devices[0m.
+[[0;32m  OK  [0m] Stopped [0;1;39mLoad/Save Random Seed[0m.
+[[0;32m  OK  [0m] Stopped [0;1;39mDisk Manager[0m.
+[[0;32m  OK  [0m] Stopped [0;1;39mSession 3 of user root[0m.
+[[0;32m  OK  [0m] Stopped [0;1;39mLVM event activation on device 8:3[0m.
+[[0;32m  OK  [0m] Removed slice [0;1;39msystem-lvm2\x2dpvscan.slice[0m.
+[[0;32m  OK  [0m] Removed slice [0;1;39msystem-serial\x2dgetty.slice[0m.
+         Stopping [0;1;39mAuthorization Manager[0m...
+[[0;32m  OK  [0m] Stopped [0;1;39mGNOME Display Manager[0m.
+[[0;32m  OK  [0m] Stopped [0;1;39mLSB: automatic crash report generation[0m.
+[[0;32m  OK  [0m] Stopped [0;1;39mService for snap a…on microk8s.daemon-k8s-dqlite[0m.
+[[0;32m  OK  [0m] Stopped [0;1;39mAuthorization Manager[0m.
+[[0;32m  OK  [0m] Stopped [0;1;39mService for snap a…microk8s.daemon-cluster-agent[0m.
+[[0;32m  OK  [0m] Stopped [0;1;39mSession 1 of user root[0m.
+         Stopping [0;1;39mLogin Service[0m...
+         Stopping [0;1;39mUser Manager for UID 0[0m...
+[[0;32m  OK  [0m] Stopped [0;1;39mService for snap a…tion microk8s.daemon-kubelite[0m.
+[[0;32m  OK  [0m] Stopped [0;1;39mUser Manager for UID 0[0m.
+         Stopping [0;1;39mUser Runtime Directory /run/user/0[0m...
+[[0;32m  OK  [0m] Unmounted [0;1;39m/run/user/0[0m.
+[[0;32m  OK  [0m] Stopped [0;1;39mUser Runtime Directory /run/user/0[0m.
+[[0;32m  OK  [0m] Removed slice [0;1;39mUser Slice of UID 0[0m.
+         Stopping [0;1;39mPermit User Sessions[0m...
+[[0;32m  OK  [0m] Stopped [0;1;39mPermit User Sessions[0m.
+[[0;32m  OK  [0m] Stopped target [0;1;39mRemote File Systems[0m.
+[[0;32m  OK  [0m] Stopped target [0;1;39mRemote File Systems (Pre)[0m.
+[[0;32m  OK  [0m] Stopped [0;1;39mLogin Service[0m.
+[[0;32m  OK  [0m] Stopped target [0;1;39mUser and Group Name Lookups[0m.
+[[0;32m  OK  [0m] Stopped [0;1;39mCreate final runtime dir for shutdown pivot root[0m.
+[[0;32m  OK  [0m] Stopped [0;1;39mService for snap application docker.dockerd[0m.
+[[0;32m  OK  [0m] Stopped target [0;1;39mNetwork[0m.
+         Stopping [0;1;39mNetwork Manager[0m...
+         Stopping [0;1;39mNetwork Name Resolution[0m...
+         Stopping [0;1;39mWPA supplicant[0m...
+[[0;32m  OK  [0m] Stopped [0;1;39mWPA supplicant[0m.
+[[0;32m  OK  [0m] Stopped [0;1;39mNetwork Name Resolution[0m.
+[[0;32m  OK  [0m] Stopped [0;1;39mNetwork Manager[0m.
+         Stopping [0;1;39mD-Bus System Message Bus[0m...
+[[0;32m  OK  [0m] Stopped [0;1;39mD-Bus System Message Bus[0m.
+[[0;32m  OK  [0m] Stopped target [0;1;39mBasic System[0m.
+[[0;32m  OK  [0m] Stopped target [0;1;39mPaths[0m.
+[[0;32m  OK  [0m] Stopped [0;1;39mTrigger to poll fo…y enabled on GCP LTS non-pro)[0m.
+[[0;32m  OK  [0m] Stopped target [0;1;39mSlices[0m.
+[[0;32m  OK  [0m] Removed slice [0;1;39mUser and Session Slice[0m.
+[[0;32m  OK  [0m] Stopped target [0;1;39mSockets[0m.
+[[0;32m  OK  [0m] Closed [0;1;39mAvahi mDNS/DNS-SD Stack Activation Socket[0m.
+[[0;32m  OK  [0m] Closed [0;1;39mcloud-init hotplug hook socket[0m.
+[[0;32m  OK  [0m] Closed [0;1;39mD-Bus System Message Bus Socket[0m.
+[[0;32m  OK  [0m] Closed [0;1;39mOpen-iSCSI iscsid Socket[0m.
+[[0;32m  OK  [0m] Closed [0;1;39mSocket unix for snap application lxd.daemon[0m.
+[[0;32m  OK  [0m] Closed [0;1;39mSocket activation for snappy daemon[0m.
+[[0;32m  OK  [0m] Closed [0;1;39mSyslog Socket[0m.
+[[0;32m  OK  [0m] Closed [0;1;39mUUID daemon activation socket[0m.
+[[0;32m  OK  [0m] Stopped target [0;1;39mSystem Initialization[0m.
+[[0;32m  OK  [0m] Stopped target [0;1;39mLocal Encrypted Volumes[0m.
+[[0;32m  OK  [0m] Stopped [0;1;39mDispatch Password …ts to Console Directory Watch[0m.
+[[0;32m  OK  [0m] Stopped [0;1;39mForward Password R…uests to Wall Directory Watch[0m.
+[[0;32m  OK  [0m] Stopped [0;1;39mInitial cloud-init…ob (metadata service crawler)[0m.
+[[0;32m  OK  [0m] Stopped [0;1;39mWait for Network to be Configured[0m.
+         Stopping [0;1;39mNetwork Service[0m...
+         Stopping [0;1;39mNetwork Time Synchronization[0m...
+         Stopping [0;1;39mUpdate UTMP about System Boot/Shutdown[0m...
+[[0;32m  OK  [0m] Stopped [0;1;39mUpdate UTMP about System Boot/Shutdown[0m.
+[[0;32m  OK  [0m] Stopped [0;1;39mNetwork Time Synchronization[0m.
+[[0;32m  OK  [0m] Stopped [0;1;39mCreate Volatile Files and Directories[0m.
+[[0;32m  OK  [0m] Stopped target [0;1;39mLocal File Systems[0m.
+         Unmounting [0;1;39m/boot[0m...
+         Unmounting [0;1;39m/run/netns/cni-…0507-ed7c-f63a-11b0d1568353[0m...
+         Unmounting [0;1;39m/run/snapd/ns/docker.mnt[0m...
+         Unmounting [0;1;39m/run/snapd/ns/lxd.mnt[0m...
+         Unmounting [0;1;39mMount unit for core18, revision 2128[0m...
+         Unmounting [0;1;39mMount unit for core18, revision 2284[0m...
+         Unmounting [0;1;39mMount unit for core20, revision 1328[0m...
+         Unmounting [0;1;39mMount unit for core20, revision 1361[0m...
+         Unmounting [0;1;39mMount unit for docker, revision 1125[0m...
+         Unmounting [0;1;39mMount unit for docker, revision 1458[0m...
+         Unmounting [0;1;39mMount unit for lxd, revision 21835[0m...
+         Unmounting [0;1;39mMount unit for lxd, revision 22526[0m...
+         Unmounting [0;1;39mMount unit for microk8s, revision 2848[0m...
+         Unmounting [0;1;39mMount unit for microk8s, revision 2948[0m...
+         Unmounting [0;1;39mMount unit for snapd, revision 14978[0m...
+         Unmounting [0;1;39m/var/snap/micro…052b069ee3b8929d650d122/shm[0m...
+         Unmounting [0;1;39m/var/snap/micro…f3e637035ed98976d1a8c5f/shm[0m...
+         Unmounting [0;1;39m/var/snap/micro…f66508550a957cb1eef3/rootfs[0m...
+         Unmounting [0;1;39m/var/snap/micro…b069ee3b8929d650d122/rootfs[0m...
+         Unmounting [0;1;39m/var/snap/micro…55200e98999c284c4a73/rootfs[0m...
+         Unmounting [0;1;39m/var/snap/micro…637035ed98976d1a8c5f/rootfs[0m...
+         Unmounting [0;1;39m/var/snap/micro…ected/kube-api-access-fqw7z[0m...
+         Unmounting [0;1;39m/var/snap/micro…ected/kube-api-access-j5x8v[0m...
+[[0;32m  OK  [0m] Stopped [0;1;39mNetwork Service[0m.
+[[0;32m  OK  [0m] Unmounted [0;1;39m/boot[0m.
+[[0;32m  OK  [0m] Unmounted [0;1;39m/run/netns/cni-3…9-0507-ed7c-f63a-11b0d1568353[0m.
+[[0;32m  OK  [0m] Unmounted [0;1;39m/run/snapd/ns/docker.mnt[0m.
+[[0;32m  OK  [0m] Unmounted [0;1;39m/run/snapd/ns/lxd.mnt[0m.
+[[0;32m  OK  [0m] Unmounted [0;1;39mMount unit for core18, revision 2128[0m.
+[[0;32m  OK  [0m] Unmounted [0;1;39mMount unit for microk8s, revision 2948[0m.
+[[0;32m  OK  [0m] Unmounted [0;1;39m/var/snap/microk…f9052b069ee3b8929d650d122/shm[0m.
+[[0;32m  OK  [0m] Unmounted [0;1;39m/var/snap/microk…85f3e637035ed98976d1a8c5f/shm[0m.
+[[0;32m  OK  [0m] Unmounted [0;1;39m/var/snap/microk…3df66508550a957cb1eef3/rootfs[0m.
+[[0;32m  OK  [0m] Unmounted [0;1;39m/var/snap/microk…52b069ee3b8929d650d122/rootfs[0m.
+[[0;32m  OK  [0m] Unmounted [0;1;39m/var/snap/microk…7f55200e98999c284c4a73/rootfs[0m.
+[[0;32m  OK  [0m] Unmounted [0;1;39m/var/snap/microk…3e637035ed98976d1a8c5f/rootfs[0m.
+[[0;32m  OK  [0m] Unmounted [0;1;39m/var/snap/microk…ojected/kube-api-access-fqw7z[0m.
+[[0;32m  OK  [0m] Unmounted [0;1;39m/var/snap/microk…ojected/kube-api-access-j5x8v[0m.
+[[0;32m  OK  [0m] Stopped target [0;1;39mNetwork (Pre)[0m.
+         Unmounting [0;1;39m/run/snapd/ns[0m...
+[[0;32m  OK  [0m] Stopped [0;1;39mInitial cloud-init job (pre-networking)[0m.
+[[0;32m  OK  [0m] Stopped [0;1;39mFile System Check …e-e72d-4f51-ba47-71a8059660b3[0m.
+[[0;32m  OK  [0m] Removed slice [0;1;39msystem-systemd\x2dfsck.slice[0m.
+[[0;32m  OK  [0m] Stopped [0;1;39mApply Kernel Variables[0m.
+[[0;32m  OK  [0m] Stopped [0;1;39mLoad Kernel Modules[0m.
+[[0;32m  OK  [0m] Unmounted [0;1;39m/run/snapd/ns[0m.
+[[0;32m  OK  [0m] Stopped target [0;1;39mSwap[0m.
+         Deactivating swap [0;1;39m/swap.img[0m...
+[[0;32m  OK  [0m] Deactivated swap [0;1;39m/swap.img[0m.
+[[0;32m  OK  [0m] Unmounted [0;1;39mMount unit for core18, revision 2284[0m.
+[[0;32m  OK  [0m] Unmounted [0;1;39mMount unit for core20, revision 1328[0m.
+[[0;32m  OK  [0m] Unmounted [0;1;39mMount unit for core20, revision 1361[0m.
+[[0;32m  OK  [0m] Unmounted [0;1;39mMount unit for docker, revision 1125[0m.
+[[0;32m  OK  [0m] Unmounted [0;1;39mMount unit for docker, revision 1458[0m.
+[[0;32m  OK  [0m] Unmounted [0;1;39mMount unit for lxd, revision 21835[0m.
+[[0;32m  OK  [0m] Unmounted [0;1;39mMount unit for lxd, revision 22526[0m.
+[[0;32m  OK  [0m] Unmounted [0;1;39mMount unit for microk8s, revision 2848[0m.
+[[0;32m  OK  [0m] Unmounted [0;1;39mMount unit for snapd, revision 14978[0m.
+[[0;32m  OK  [0m] Stopped target [0;1;39mLocal File Systems (Pre)[0m.
+[[0;32m  OK  [0m] Reached target [0;1;39mUnmount All Filesystems[0m.
+         Stopping [0;1;39mMonitoring of LVM…meventd or progress polling[0m...
+         Stopping [0;1;39mDevice-Mapper Multipath Device Controller[0m...
+[[0;32m  OK  [0m] Stopped [0;1;39mCreate Static Device Nodes in /dev[0m.
+[[0;32m  OK  [0m] Stopped [0;1;39mCreate System Users[0m.
+[[0;32m  OK  [0m] Stopped [0;1;39mRemount Root and Kernel File Systems[0m.
+[[0;32m  OK  [0m] Stopped [0;1;39mDevice-Mapper Multipath Device Controller[0m.
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: zns.c : zns_io_cmd(), to inhoinno 
+[FEMU] Err: zns.c : zns_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_get_zone_by_slba(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_read(), to inhoinno 
+[FEMU] Err: zns.c : zns_check_zone_state_for_read(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[[0;32m  OK  [0m] Stopped [0;1;39mMonitoring of LVM2… dmeventd or progress polling[0m.
+[[0;32m  OK  [0m] Reached target [0;1;39mShutdown[0m.
+[[0;32m  OK  [0m] Reached target [0;1;39mFinal Step[0m.
+[[0;32m  OK  [0m] Finished [0;1;39mPower-Off[0m.
+[[0;32m  OK  [0m] Reached target [0;1;39mPower-Off[0m.
+[26208.615354] systemd-shutdown[1]: Waiting for process: containerd-shim, containerd-shim
+[FEMU] Err: /femu/nvme-io.c : nvme_post_cqes_io(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_post_cqes_io(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_post_cqes_io(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_post_cqes_io(), to inhoinno 
+[26288.897366] reboot: Power down

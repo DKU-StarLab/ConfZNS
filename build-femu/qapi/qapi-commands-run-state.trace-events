@@ -1,0 +1,8 @@
+# AUTOMATICALLY GENERATED, DO NOT MODIFY
+
+qmp_enter_query_status(const char *json) "%s"
+qmp_exit_query_status(const char *result, bool succeeded) "%s %d"
+qmp_enter_watchdog_set_action(const char *json) "%s"
+qmp_exit_watchdog_set_action(const char *result, bool succeeded) "%s %d"
+qmp_enter_set_action(const char *json) "%s"
+qmp_exit_set_action(const char *result, bool succeeded) "%s %d"

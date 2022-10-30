@@ -1,0 +1,249 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Booting from real channel-attached devices on s390x &#8212; QEMU  documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Modelling a clock tree in QEMU" href="clocks.html" />
+    <link rel="prev" title="Reset in QEMU: the Resettable interface" href="reset.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="booting-from-real-channel-attached-devices-on-s390x">
+<h1>Booting from real channel-attached devices on s390x<a class="headerlink" href="#booting-from-real-channel-attached-devices-on-s390x" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="s390-hardware-ipl">
+<h2>s390 hardware IPL<a class="headerlink" href="#s390-hardware-ipl" title="Permalink to this headline">¶</a></h2>
+<p>The s390 hardware IPL process consists of the following steps.</p>
+<ol class="arabic">
+<li><p class="first">A READ IPL ccw is constructed in memory location <code class="docutils literal notranslate"><span class="pre">0x0</span></code>.
+This ccw, by definition, reads the IPL1 record which is located on the disk
+at cylinder 0 track 0 record 1. Note that the chain flag is on in this ccw
+so when it is complete another ccw will be fetched and executed from memory
+location <code class="docutils literal notranslate"><span class="pre">0x08</span></code>.</p>
+</li>
+<li><p class="first">Execute the Read IPL ccw at <code class="docutils literal notranslate"><span class="pre">0x00</span></code>, thereby reading IPL1 data into <code class="docutils literal notranslate"><span class="pre">0x00</span></code>.
+IPL1 data is 24 bytes in length and consists of the following pieces of
+information: <code class="docutils literal notranslate"><span class="pre">[psw][read</span> <span class="pre">ccw][tic</span> <span class="pre">ccw]</span></code>. When the machine executes the Read
+IPL ccw it read the 24-bytes of IPL1 to be read into memory starting at
+location <code class="docutils literal notranslate"><span class="pre">0x0</span></code>. Then the ccw program at <code class="docutils literal notranslate"><span class="pre">0x08</span></code> which consists of a read
+ccw and a tic ccw is automatically executed because of the chain flag from
+the original READ IPL ccw. The read ccw will read the IPL2 data into memory
+and the TIC (Transfer In Channel) will transfer control to the channel
+program contained in the IPL2 data. The TIC channel command is the
+equivalent of a branch/jump/goto instruction for channel programs.</p>
+<p>NOTE: The ccws in IPL1 are defined by the architecture to be format 0.</p>
+</li>
+<li><p class="first">Execute IPL2.
+The TIC ccw instruction at the end of the IPL1 channel program will begin
+the execution of the IPL2 channel program. IPL2 is stage-2 of the boot
+process and will contain a larger channel program than IPL1. The point of
+IPL2 is to find and load either the operating system or a small program that
+loads the operating system from disk. At the end of this step all or some of
+the real operating system is loaded into memory and we are ready to hand
+control over to the guest operating system. At this point the guest
+operating system is entirely responsible for loading any more data it might
+need to function.</p>
+<p>NOTE: The IPL2 channel program might read data into memory
+location <code class="docutils literal notranslate"><span class="pre">0x0</span></code> thereby overwriting the IPL1 psw and channel program. This is ok
+as long as the data placed in location <code class="docutils literal notranslate"><span class="pre">0x0</span></code> contains a psw whose instruction
+address points to the guest operating system code to execute at the end of
+the IPL/boot process.</p>
+<p>NOTE: The ccws in IPL2 are defined by the architecture to be format 0.</p>
+</li>
+<li><p class="first">Start executing the guest operating system.
+The psw that was loaded into memory location <code class="docutils literal notranslate"><span class="pre">0x0</span></code> as part of the ipl process
+should contain the needed flags for the operating system we have loaded. The
+psw’s instruction address will point to the location in memory where we want
+to start executing the operating system. This psw is loaded (via LPSW
+instruction) causing control to be passed to the operating system code.</p>
+</li>
+</ol>
+<p>In a non-virtualized environment this process, handled entirely by the hardware,
+is kicked off by the user initiating a “Load” procedure from the hardware
+management console. This “Load” procedure crafts a special “Read IPL” ccw in
+memory location 0x0 that reads IPL1. It then executes this ccw thereby kicking
+off the reading of IPL1 data. Since the channel program from IPL1 will be
+written immediately after the special “Read IPL” ccw, the IPL1 channel program
+will be executed immediately (the special read ccw has the chaining bit turned
+on). The TIC at the end of the IPL1 channel program will cause the IPL2 channel
+program to be executed automatically. After this sequence completes the “Load”
+procedure then loads the psw from <code class="docutils literal notranslate"><span class="pre">0x0</span></code>.</p>
+</div>
+<div class="section" id="how-this-all-pertains-to-qemu-and-the-kernel">
+<h2>How this all pertains to QEMU (and the kernel)<a class="headerlink" href="#how-this-all-pertains-to-qemu-and-the-kernel" title="Permalink to this headline">¶</a></h2>
+<p>In theory we should merely have to do the following to IPL/boot a guest
+operating system from a DASD device:</p>
+<ol class="arabic simple">
+<li>Place a “Read IPL” ccw into memory location <code class="docutils literal notranslate"><span class="pre">0x0</span></code> with chaining bit on.</li>
+<li>Execute channel program at <code class="docutils literal notranslate"><span class="pre">0x0</span></code>.</li>
+<li>LPSW <code class="docutils literal notranslate"><span class="pre">0x0</span></code>.</li>
+</ol>
+<p>However, our emulation of the machine’s channel program logic within the kernel
+is missing one key feature that is required for this process to work:
+non-prefetch of ccw data.</p>
+<p>When we start a channel program we pass the channel subsystem parameters via an
+ORB (Operation Request Block). One of those parameters is a prefetch bit. If the
+bit is on then the vfio-ccw kernel driver is allowed to read the entire channel
+program from guest memory before it starts executing it. This means that any
+channel commands that read additional channel commands will not work as expected
+because the newly read commands will only exist in guest memory and NOT within
+the kernel’s channel subsystem memory. The kernel vfio-ccw driver currently
+requires this bit to be on for all channel programs. This is a problem because
+the IPL process consists of transferring control from the “Read IPL” ccw
+immediately to the IPL1 channel program that was read by “Read IPL”.</p>
+<p>Not being able to turn off prefetch will also prevent the TIC at the end of the
+IPL1 channel program from transferring control to the IPL2 channel program.</p>
+<p>Lastly, in some cases (the zipl bootloader for example) the IPL2 program also
+transfers control to another channel program segment immediately after reading
+it from the disk. So we need to be able to handle this case.</p>
+</div>
+<div class="section" id="what-qemu-does">
+<h2>What QEMU does<a class="headerlink" href="#what-qemu-does" title="Permalink to this headline">¶</a></h2>
+<p>Since we are forced to live with prefetch we cannot use the very simple IPL
+procedure we defined in the preceding section. So we compensate by doing the
+following.</p>
+<ol class="arabic">
+<li><p class="first">Place “Read IPL” ccw into memory location <code class="docutils literal notranslate"><span class="pre">0x0</span></code>, but turn off chaining bit.</p>
+</li>
+<li><p class="first">Execute “Read IPL” at <code class="docutils literal notranslate"><span class="pre">0x0</span></code>.</p>
+<p>So now IPL1’s psw is at <code class="docutils literal notranslate"><span class="pre">0x0</span></code> and IPL1’s channel program is at <code class="docutils literal notranslate"><span class="pre">0x08</span></code>.</p>
+</li>
+<li><p class="first">Write a custom channel program that will seek to the IPL2 record and then
+execute the READ and TIC ccws from IPL1.  Normally the seek is not required
+because after reading the IPL1 record the disk is automatically positioned
+to read the very next record which will be IPL2. But since we are not reading
+both IPL1 and IPL2 as part of the same channel program we must manually set
+the position.</p>
+</li>
+<li><p class="first">Grab the target address of the TIC instruction from the IPL1 channel program.
+This address is where the IPL2 channel program starts.</p>
+<p>Now IPL2 is loaded into memory somewhere, and we know the address.</p>
+</li>
+<li><p class="first">Execute the IPL2 channel program at the address obtained in step #4.</p>
+<p>Because this channel program can be dynamic, we must use a special algorithm
+that detects a READ immediately followed by a TIC and breaks the ccw chain
+by turning off the chain bit in the READ ccw. When control is returned from
+the kernel/hardware to the QEMU bios code we immediately issue another start
+subchannel to execute the remaining TIC instruction. This causes the entire
+channel program (starting from the TIC) and all needed data to be refetched
+thereby stepping around the limitation that would otherwise prevent this
+channel program from executing properly.</p>
+<p>Now the operating system code is loaded somewhere in guest memory and the psw
+in memory location <code class="docutils literal notranslate"><span class="pre">0x0</span></code> will point to entry code for the guest operating
+system.</p>
+</li>
+<li><p class="first">LPSW <code class="docutils literal notranslate"><span class="pre">0x0</span></code></p>
+<p>LPSW transfers control to the guest operating system and we’re done.</p>
+</li>
+</ol>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">QEMU</a></h1>
+
+
+
+<p class="blurb">Developers Guide</p>
+
+
+
+
+
+
+<div id="editpage">
+  <ul>
+    <li><a href="https://gitlab.com/qemu-project/qemu/-/blob/master/docs/devel/s390-dasd-ipl.rst">Page source</a></li>
+  </ul>
+</div><h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="build-system.html">The QEMU build system architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="kconfig.html">QEMU and Kconfig</a></li>
+<li class="toctree-l1"><a class="reference internal" href="loads-stores.html">Load and Store APIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="memory.html">The memory API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="migration.html">Migration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="atomics.html">Atomic operations in QEMU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stable-process.html">QEMU and the stable process</a></li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">Testing in QEMU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="qtest.html">QTest Device Emulation Testing Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fuzzing.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="decodetree.html">Decodetree Specification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="secure-coding-practices.html">Secure Coding Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tcg.html">Translator Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tcg-icount.html">TCG Instruction Counting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="multi-thread-tcg.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="multi-thread-tcg.html#vcpu-scheduling">vCPU Scheduling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="multi-thread-tcg.html#shared-data-structures">Shared Data Structures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="multi-thread-tcg.html#memory-consistency">Memory Consistency</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tcg-plugins.html">QEMU TCG Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bitops.html">Bitwise operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reset.html">Reset in QEMU: the Resettable interface</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Booting from real channel-attached devices on s390x</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#s390-hardware-ipl">s390 hardware IPL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#how-this-all-pertains-to-qemu-and-the-kernel">How this all pertains to QEMU (and the kernel)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#what-qemu-does">What QEMU does</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="clocks.html">Modelling a clock tree in QEMU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="qom.html">The QEMU Object Model (QOM)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="block-coroutine-wrapper.html">block-coroutine-wrapper</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, The QEMU Project Developers.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

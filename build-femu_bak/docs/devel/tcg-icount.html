@@ -1,0 +1,210 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>TCG Instruction Counting &#8212; QEMU  documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Introduction" href="multi-thread-tcg.html" />
+    <link rel="prev" title="Translator Internals" href="tcg.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="tcg-instruction-counting">
+<h1>TCG Instruction Counting<a class="headerlink" href="#tcg-instruction-counting" title="Permalink to this headline">¶</a></h1>
+<p>TCG has long supported a feature known as icount which allows for
+instruction counting during execution. This should not be confused
+with cycle accurate emulation - QEMU does not attempt to emulate how
+long an instruction would take on real hardware. That is a job for
+other more detailed (and slower) tools that simulate the rest of a
+micro-architecture.</p>
+<p>This feature is only available for system emulation and is
+incompatible with multi-threaded TCG. It can be used to better align
+execution time with wall-clock time so a “slow” device doesn’t run too
+fast on modern hardware. It can also provides for a degree of
+deterministic execution and is an essential part of the record/replay
+support in QEMU.</p>
+<div class="section" id="core-concepts">
+<h2>Core Concepts<a class="headerlink" href="#core-concepts" title="Permalink to this headline">¶</a></h2>
+<p>At its heart icount is simply a count of executed instructions which
+is stored in the TimersState of QEMU’s timer sub-system. The number of
+executed instructions can then be used to calculate QEMU_CLOCK_VIRTUAL
+which represents the amount of elapsed time in the system since
+execution started. Depending on the icount mode this may either be a
+fixed number of ns per instruction or adjusted as execution continues
+to keep wall clock time and virtual time in sync.</p>
+<p>To be able to calculate the number of executed instructions the
+translator starts by allocating a budget of instructions to be
+executed. The budget of instructions is limited by how long it will be
+until the next timer will expire. We store this budget as part of a
+vCPU icount_decr field which shared with the machinery for handling
+cpu_exit(). The whole field is checked at the start of every
+translated block and will cause a return to the outer loop to deal
+with whatever caused the exit.</p>
+<p>In the case of icount, before the flag is checked we subtract the
+number of instructions the translation block would execute. If this
+would cause the instruction budget to go negative we exit the main
+loop and regenerate a new translation block with exactly the right
+number of instructions to take the budget to 0 meaning whatever timer
+was due to expire will expire exactly when we exit the main run loop.</p>
+<div class="section" id="dealing-with-mmio">
+<h3>Dealing with MMIO<a class="headerlink" href="#dealing-with-mmio" title="Permalink to this headline">¶</a></h3>
+<p>While we can adjust the instruction budget for known events like timer
+expiry we cannot do the same for MMIO. Every load/store we execute
+might potentially trigger an I/O event, at which point we will need an
+up to date and accurate reading of the icount number.</p>
+<p>To deal with this case, when an I/O access is made we:</p>
+<blockquote>
+<div><ul class="simple">
+<li>restore un-executed instructions to the icount budget</li>
+<li>re-compile a single <a class="footnote-reference" href="#id2" id="id1">[1]</a> instruction block for the current PC</li>
+<li>exit the cpu loop and execute the re-compiled block</li>
+</ul>
+</div></blockquote>
+<p>The new block is created with the CF_LAST_IO compile flag which
+ensures the final instruction translation starts with a call to
+gen_io_start() so we don’t enter a perpetual loop constantly
+recompiling a single instruction block. For translators using the
+common translator_loop this is done automatically.</p>
+<table class="docutils footnote" frame="void" id="id2" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>sometimes two instructions if dealing with delay slots</td></tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="other-i-o-operations">
+<h3>Other I/O operations<a class="headerlink" href="#other-i-o-operations" title="Permalink to this headline">¶</a></h3>
+<p>MMIO isn’t the only type of operation for which we might need a
+correct and accurate clock. IO port instructions and accesses to
+system registers are the common examples here. These instructions have
+to be handled by the individual translators which have the knowledge
+of which operations are I/O operations.</p>
+<p>When the translator is handling an instruction of this kind:</p>
+<ul class="simple">
+<li><dl class="first docutils">
+<dt>it must call gen_io_start() if icount is enabled, at some</dt>
+<dd>point before the generation of the code which actually does
+the I/O, using a code fragment similar to:</dd>
+</dl>
+</li>
+</ul>
+<div class="code c highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="n">tb_cflags</span><span class="p">(</span><span class="n">s</span><span class="o">-&gt;</span><span class="n">base</span><span class="o">.</span><span class="n">tb</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">CF_USE_ICOUNT</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">gen_io_start</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>it must end the TB immediately after this instruction</li>
+</ul>
+<p>Note that some older front-ends call a “gen_io_end()” function:
+this is obsolete and should not be used.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">QEMU</a></h1>
+
+
+
+<p class="blurb">Developers Guide</p>
+
+
+
+
+
+
+<div id="editpage">
+  <ul>
+    <li><a href="https://gitlab.com/qemu-project/qemu/-/blob/master/docs/devel/tcg-icount.rst">Page source</a></li>
+  </ul>
+</div><h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="build-system.html">The QEMU build system architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="kconfig.html">QEMU and Kconfig</a></li>
+<li class="toctree-l1"><a class="reference internal" href="loads-stores.html">Load and Store APIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="memory.html">The memory API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="migration.html">Migration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="atomics.html">Atomic operations in QEMU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stable-process.html">QEMU and the stable process</a></li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">Testing in QEMU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="qtest.html">QTest Device Emulation Testing Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fuzzing.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="decodetree.html">Decodetree Specification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="secure-coding-practices.html">Secure Coding Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tcg.html">Translator Internals</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">TCG Instruction Counting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#core-concepts">Core Concepts</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="multi-thread-tcg.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="multi-thread-tcg.html#vcpu-scheduling">vCPU Scheduling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="multi-thread-tcg.html#shared-data-structures">Shared Data Structures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="multi-thread-tcg.html#memory-consistency">Memory Consistency</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tcg-plugins.html">QEMU TCG Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bitops.html">Bitwise operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reset.html">Reset in QEMU: the Resettable interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="s390-dasd-ipl.html">Booting from real channel-attached devices on s390x</a></li>
+<li class="toctree-l1"><a class="reference internal" href="clocks.html">Modelling a clock tree in QEMU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="qom.html">The QEMU Object Model (QOM)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="block-coroutine-wrapper.html">block-coroutine-wrapper</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, The QEMU Project Developers.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,226 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>QEMU persistent reservation helper &#8212; QEMU  documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="QEMU SystemTap trace tool" href="qemu-trace-stap.html" />
+    <link rel="prev" title="QEMU Disk Network Block Device Server" href="qemu-nbd.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="qemu-persistent-reservation-helper">
+<h1>QEMU persistent reservation helper<a class="headerlink" href="#qemu-persistent-reservation-helper" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="synopsis">
+<h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
+<p><strong>qemu-pr-helper</strong> [<em>OPTION</em>]</p>
+</div>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p>Implements the persistent reservation helper for QEMU.</p>
+<p>SCSI persistent reservations allow restricting access to block devices
+to specific initiators in a shared storage setup.  When implementing
+clustering of virtual machines, it is a common requirement for virtual
+machines to send persistent reservation SCSI commands.  However,
+the operating system restricts sending these commands to unprivileged
+programs because incorrect usage can disrupt regular operation of the
+storage fabric. QEMU’s SCSI passthrough devices <code class="docutils literal notranslate"><span class="pre">scsi-block</span></code>
+and <code class="docutils literal notranslate"><span class="pre">scsi-generic</span></code> support passing guest persistent reservation
+requests to a privileged external helper program. <strong class="program">qemu-pr-helper</strong>
+is that external helper; it creates a socket which QEMU can
+connect to to communicate with it.</p>
+<p>If you want to run VMs in a setup like this, this helper should be
+started as a system service, and you should read the QEMU manual
+section on “persistent reservation managers” to find out how to
+configure QEMU to connect to the socket created by
+<strong class="program">qemu-pr-helper</strong>.</p>
+<p>After connecting to the socket, <strong class="program">qemu-pr-helper</strong> can
+optionally drop root privileges, except for those capabilities that
+are needed for its operation.</p>
+<p><strong class="program">qemu-pr-helper</strong> can also use the systemd socket activation
+protocol.  In this case, the systemd socket unit should specify a
+Unix stream socket, like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">Socket</span><span class="p">]</span>
+<span class="n">ListenStream</span><span class="o">=/</span><span class="n">var</span><span class="o">/</span><span class="n">run</span><span class="o">/</span><span class="n">qemu</span><span class="o">-</span><span class="n">pr</span><span class="o">-</span><span class="n">helper</span><span class="o">.</span><span class="n">sock</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="options">
+<h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
+<dl class="option">
+<dt id="cmdoption-qemu-pr-helper-d">
+<code class="descname">-d</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--daemon</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-qemu-pr-helper-d" title="Permalink to this definition">¶</a></dt>
+<dd><p>run in the background (and create a PID file)</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-qemu-pr-helper-q">
+<code class="descname">-q</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--quiet</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-qemu-pr-helper-q" title="Permalink to this definition">¶</a></dt>
+<dd><p>decrease verbosity</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-qemu-pr-helper-v">
+<code class="descname">-v</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--verbose</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-qemu-pr-helper-v" title="Permalink to this definition">¶</a></dt>
+<dd><p>increase verbosity</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-qemu-pr-helper-f">
+<code class="descname">-f</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--pidfile</code><code class="descclassname">=PATH</code><a class="headerlink" href="#cmdoption-qemu-pr-helper-f" title="Permalink to this definition">¶</a></dt>
+<dd><p>PID file when running as a daemon. By default the PID file
+is created in the system runtime state directory, for example
+<code class="file docutils literal notranslate"><span class="pre">/var/run/qemu-pr-helper.pid</span></code>.</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-qemu-pr-helper-k">
+<code class="descname">-k</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--socket</code><code class="descclassname">=PATH</code><a class="headerlink" href="#cmdoption-qemu-pr-helper-k" title="Permalink to this definition">¶</a></dt>
+<dd><p>path to the socket. By default the socket is created in
+the system runtime state directory, for example
+<code class="file docutils literal notranslate"><span class="pre">/var/run/qemu-pr-helper.sock</span></code>.</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-qemu-pr-helper-t">
+<code class="descname">-T</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--trace</code><code class="descclassname"> [[enable=]PATTERN][,events=FILE][,file=FILE]</code><a class="headerlink" href="#cmdoption-qemu-pr-helper-t" title="Permalink to this definition">¶</a></dt>
+<dd><p>Specify tracing options.</p>
+<p><code class="docutils literal notranslate"><span class="pre">[enable=]PATTERN</span></code></p>
+<blockquote>
+<div><p>Immediately enable events matching <em>PATTERN</em>
+(either event name or a globbing pattern).  This option is only
+available if QEMU has been compiled with the <code class="docutils literal notranslate"><span class="pre">simple</span></code>, <code class="docutils literal notranslate"><span class="pre">log</span></code>
+or <code class="docutils literal notranslate"><span class="pre">ftrace</span></code> tracing backend.  To specify multiple events or patterns,
+specify the <code class="xref std std-option docutils literal notranslate"><span class="pre">-trace</span></code> option multiple times.</p>
+<p>Use <code class="xref std std-option docutils literal notranslate"><span class="pre">-trace</span> <span class="pre">help</span></code> to print a list of names of trace points.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">events=FILE</span></code></p>
+<blockquote>
+<div>Immediately enable events listed in <em>FILE</em>.
+The file must contain one event name (as listed in the <code class="docutils literal notranslate"><span class="pre">trace-events-all</span></code>
+file) per line; globbing patterns are accepted too.  This option is only
+available if QEMU has been compiled with the <code class="docutils literal notranslate"><span class="pre">simple</span></code>, <code class="docutils literal notranslate"><span class="pre">log</span></code> or
+<code class="docutils literal notranslate"><span class="pre">ftrace</span></code> tracing backend.</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">file=FILE</span></code></p>
+<blockquote>
+<div>Log output traces to <em>FILE</em>.
+This option is only available if QEMU has been compiled with
+the <code class="docutils literal notranslate"><span class="pre">simple</span></code> tracing backend.</div></blockquote>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-qemu-pr-helper-u">
+<code class="descname">-u</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--user</code><code class="descclassname">=USER</code><a class="headerlink" href="#cmdoption-qemu-pr-helper-u" title="Permalink to this definition">¶</a></dt>
+<dd><p>user to drop privileges to</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-qemu-pr-helper-g">
+<code class="descname">-g</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--group</code><code class="descclassname">=GROUP</code><a class="headerlink" href="#cmdoption-qemu-pr-helper-g" title="Permalink to this definition">¶</a></dt>
+<dd><p>group to drop privileges to</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-qemu-pr-helper-h">
+<code class="descname">-h</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--help</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-qemu-pr-helper-h" title="Permalink to this definition">¶</a></dt>
+<dd><p>Display a help message and exit.</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-qemu-pr-helper-version">
+<code class="descname">-V</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--version</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-qemu-pr-helper-version" title="Permalink to this definition">¶</a></dt>
+<dd><p>Display version information and exit.</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">QEMU</a></h1>
+
+
+
+<p class="blurb">Tools Guide</p>
+
+
+
+
+
+
+<div id="editpage">
+  <ul>
+    <li><a href="https://gitlab.com/qemu-project/qemu/-/blob/master/docs/tools/qemu-pr-helper.rst">Page source</a></li>
+  </ul>
+</div><h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="qemu-img.html">QEMU disk image utility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="qemu-nbd.html">QEMU Disk Network Block Device Server</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">QEMU persistent reservation helper</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#synopsis">Synopsis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#description">Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#options">Options</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="qemu-trace-stap.html">QEMU SystemTap trace tool</a></li>
+<li class="toctree-l1"><a class="reference internal" href="virtfs-proxy-helper.html">QEMU 9p virtfs proxy filesystem helper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="virtiofsd.html">QEMU virtio-fs shared file system daemon</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, The QEMU Project Developers.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

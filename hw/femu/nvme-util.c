@@ -194,6 +194,7 @@ uint16_t nvme_init_sq(NvmeSQueue *sq, FemuCtrl *n, uint64_t dma_addr, uint16_t
         sq->arb_burst = (1 << NVME_ARB_AB(n->features.arbitration));
         break;
     case NVME_Q_PRIO_HIGH:
+        //((n->features.arbitration >> 24) & 0xff);
         sq->arb_burst = NVME_ARB_HPW(n->features.arbitration) + 1;
         break;
     case NVME_Q_PRIO_NORMAL:

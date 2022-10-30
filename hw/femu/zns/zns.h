@@ -9,10 +9,10 @@ enum {
     NAND_ERASE = 2,
 
  /* FIXME: Just simply add SLC NAND latency numbers in nanoseconds in nand.h for now,(Inhoinno) */
-    NAND_READ_LATENCY  = 65000/4,  //65us TLC_tREAD(65us : 16K page time)   =16.25
-    NAND_PROG_LATENCY  = 450000/12,//450us TLC_tProg(450us: 16K page(/4),TLC(/3) time)  =37.5
+    NAND_READ_LATENCY  = 65000/6,  //65us /4plane TLC_tREAD(65us : 16K page time)   =16.25
+    NAND_PROG_LATENCY  = 450000/12,//450us TLC_tProg(450us: 16K page(/4),3D(/3) time)  =37.5
     NAND_ERASE_LATENCY = SLC_BLOCK_ERASE_LATENCY_NS,//2000000
-    NAND_CHNL_PAGE_TRANSFER_LATENCY = 2441, // =2.5? 1200MT
+    NAND_CHNL_PAGE_TRANSFER_LATENCY = 2441,//2441, // =2.5? 1200MT = 9600MB/s = 0.1ms per 1MB 
     //SK Hynix read : 400Mb/s for 1 chip..
     //ZEMU read     : 
     //SK Hynix write: 100Mb/s for 1 chip..
@@ -32,7 +32,9 @@ enum {
 typedef struct zns_ssd_channel {
     int nzones;
     uint64_t next_ch_avail_time; 
+    pthread_spinlock_t time_lock;
     bool busy;
+
 }zns_ssd_channel;
 
 /**
@@ -44,7 +46,9 @@ typedef struct zns_ssd_channel {
  */
 typedef struct zns_ssd_lun {
     uint64_t next_avail_time; // in nanoseconds
+    pthread_spinlock_t time_lock;
     bool busy;
+
 }zns_ssd_lun;
 
 /**
@@ -57,7 +61,8 @@ struct zns_ssdparams{
     uint64_t nchnls;            /* # of channels in the SSD */
     uint64_t ways;              /* # of ways in the SSD */
     uint64_t zones;             /* # of zones in ZNS SSD */
-    uint64_t chnls_per_zone;    /* ZNS Association degree. # of zones per channel, must be divisor of nchnls */
+    uint64_t chnls_per_zone;    /* ZNS Association degree. # of channels per zone, must be divisor of nchnls */
+    uint64_t ways_per_zone;     /* another ZNS Association degree. # of ways per zone, must be divisor of nways */
     uint64_t csze_pages;        /* #of Pages in Chip (Inhoinno:I guess lun in femu)*/
     uint64_t nchips;            /* # of chips in SSD*/
 
@@ -83,6 +88,7 @@ typedef struct zns {
     struct NvmeNamespace    * namespaces;      //FEMU only support 1 namespace For now, 
     struct NvmeZone      * zone_array;
     uint32_t            num_zones;
+    /* lockless ring for communication with NVMe IO thread */
 
     QemuThread          zns_thread;
 
@@ -241,12 +247,20 @@ static inline size_t zns_l2b(NvmeNamespace *ns, uint64_t lba)
 
 static inline NvmeZoneState zns_get_zone_state(NvmeZone *zone)
 {
-    return zone->d.zs >> 4;
+    //pthread_spin_lock(&zone->w_ptr_lock);
+    uint8_t zs = zone->d.zs >> 4;
+    //pthread_spin_unlock(&zone->w_ptr_lock);
+
+    return zs;
+
 }
 
 static inline void zns_set_zone_state(NvmeZone *zone, NvmeZoneState state)
 {
+    //pthread_spin_lock(&zone->w_ptr_lock);
     zone->d.zs = state << 4;
+    //pthread_spin_unlock(&zone->w_ptr_lock);
+
 }
 
 static inline uint64_t zns_zone_rd_boundary(NvmeNamespace *ns, NvmeZone *zone)

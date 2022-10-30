@@ -148,7 +148,8 @@ static void nvme_process_db_admin(FemuCtrl *n, hwaddr addr, int val)
     uint32_t qid;
     uint16_t new_val = val & 0xffff;
     NvmeSQueue *sq;
-
+    //inho debug
+    femu_err("Seq 1 nvme_process_db_admin femu.c:146\n");
     if (((addr - 0x1000) >> (2 + n->db_stride)) & 1) {
         NvmeCQueue *cq;
 
@@ -470,7 +471,7 @@ static void nvme_init_pci(FemuCtrl *n)
     #ifdef INHOINNO_VERBOSE_SETTING
     femu_err("femu.c : nvme_init_pci(), to inhoinno \n");
     #endif
-#if SK_HYNIX_VALIDATION
+#if PCIe_TIME_SIMULATION
     n->pci_simulation =g_malloc0(sizeof(PCIe_Gen3_x4));
     n->pci_simulation->stime=0;
     n->pci_simulation->ntime=0;
@@ -529,6 +530,72 @@ static int nvme_register_extensions(FemuCtrl *n)
     return 0;
 }
 
+static uint16_t _nvme_init_sched_queue(NvmeSQueue * sq, FemuCtrl *n, 
+                    //uint64_t dma_addr, 
+                    uint16_t sqid, 
+                    //uint16_t cqid, 
+                    uint16_t size, 
+                    enum NvmeQueueFlags prio//, int contig
+                    )
+{
+    sq = g_malloc0(sizeof(*sq));
+    sq->ctrl = n;
+    sq->sqid = sqid;
+    sq->size = size;
+    //sq->cqid = cqid;
+    sq->head = sq->tail = 0;
+    sq->io_req = g_malloc0(sq->size * sizeof(*sq->io_req));
+    QTAILQ_INIT(&sq->req_list);
+    QTAILQ_INIT(&sq->out_req_list);
+    for (int i = 0; i < sq->size; i++) {
+        sq->io_req[i].sq = sq;
+        QTAILQ_INSERT_TAIL(&(sq->req_list), &sq->io_req[i], entry);
+    }
+
+    switch (prio) {
+    case NVME_Q_PRIO_URGENT:
+        sq->arb_burst = (1 << NVME_ARB_AB(n->features.arbitration));
+        break;
+    case NVME_Q_PRIO_HIGH:
+        sq->arb_burst = NVME_ARB_HPW(n->features.arbitration) + 1;
+        break;
+    case NVME_Q_PRIO_NORMAL:
+        sq->arb_burst = NVME_ARB_MPW(n->features.arbitration) + 1;
+        break;
+    case NVME_Q_PRIO_LOW:
+    default:
+        sq->arb_burst = NVME_ARB_LPW(n->features.arbitration) + 1;
+        break;
+    }
+
+    QTAILQ_INIT(&sq->req_list);
+    QTAILQ_INIT(&sq->out_req_list);
+    return 0;
+}
+
+static void nvme_init_sched_queue(FemuCtrl *n )
+{
+    NvmeSQueue *sq;
+    uint32_t num_of_priority = 4;
+    uint32_t weight_per_pqueue = 1;
+
+
+    n->psched_q = g_malloc0(sizeof(*n->psched_q) * (num_of_priority*weight_per_pqueue)); //High , Med , Low 
+    
+    for (uint32_t i = 0; i < num_of_priority*weight_per_pqueue; i++){
+        sq = g_malloc0(sizeof(*sq));
+        // 0 1 2 : 0 Urgent = i/weight_per_pqueue
+        // 0 1 2 : 0 1 2 order = i % weight_per_pqueue
+        if((_nvme_init_sched_queue(sq, n, i, UINT16_MAX, i/weight_per_pqueue) == 0)){
+            n->psched_q[i] = sq; 
+            femu_log("NVMe Priority Queue [idx]:%u [Prio]:%u [#th order in same prio]:%u created",i,i/weight_per_pqueue, i%weight_per_pqueue);
+        }else{
+            g_free(sq);
+            femu_err("Inhoinno Err femu.c:557 nvme_init_sched_queue\n");
+        }
+    }
+
+}
 static void femu_realize(PCIDevice *pci_dev, Error **errp)
 {
     FemuCtrl *n = FEMU(pci_dev);
@@ -553,6 +620,7 @@ static void femu_realize(PCIDevice *pci_dev, Error **errp)
     n->ns_size = bs_size / (uint64_t)n->num_namespaces;
 
     /* Coperd: [1..num_io_queues] are used as IO queues */
+    //inhoinno : watchpoint
     n->sq = g_malloc0(sizeof(*n->sq) * (n->num_io_queues + 1));
     n->cq = g_malloc0(sizeof(*n->cq) * (n->num_io_queues + 1));
     n->namespaces = g_malloc0(sizeof(*n->namespaces) * n->num_namespaces);
@@ -563,6 +631,8 @@ static void femu_realize(PCIDevice *pci_dev, Error **errp)
     nvme_init_pci(n);
     nvme_init_ctrl(n);
     nvme_init_namespaces(n, errp);
+
+    nvme_init_sched_queue(n);
 
     nvme_register_extensions(n);
 
@@ -619,9 +689,9 @@ static Property femu_props[] = {
     DEFINE_PROP_STRING("serial", FemuCtrl, serial),
     DEFINE_PROP_UINT32("devsz_mb", FemuCtrl, memsz, 1024), /* in MB */
     DEFINE_PROP_UINT32("namespaces", FemuCtrl, num_namespaces, 1),
-    DEFINE_PROP_UINT32("queues", FemuCtrl, num_io_queues, 8),
+    DEFINE_PROP_UINT32("queues", FemuCtrl, num_io_queues, 16),
     DEFINE_PROP_UINT32("entries", FemuCtrl, max_q_ents, 0x7ff),
-    DEFINE_PROP_UINT8("multipoller_enabled", FemuCtrl, multipoller_enabled, 0),
+    DEFINE_PROP_UINT8("multipoller_enabled", FemuCtrl, multipoller_enabled, 1),
     DEFINE_PROP_UINT8("max_cqes", FemuCtrl, max_cqes, 0x4),
     DEFINE_PROP_UINT8("max_sqes", FemuCtrl, max_sqes, 0x6),
     DEFINE_PROP_UINT8("stride", FemuCtrl, db_stride, 0),

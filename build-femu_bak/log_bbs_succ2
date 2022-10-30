@@ -1,0 +1,2020 @@
+[FEMU] Err: femu.c : femu_class_init(), to inhoinno 
+[FEMU] Err: femu.c : femu_realize(), to inhoinno 
+[FEMU] Err: femu.c : nvme_init_pci(), to inhoinno 
+[FEMU] Err: femu.c : nvme_init_ctrl(), to inhoinno 
+[FEMU] Err: femu.c : nvme_init_namespaces(), to inhoinno 
+[FEMU] Err: femu.c : nvme_register_extensions(), to inhoinno 
+c[?7l[2J[0mSeaBIOS (version rel-1.14.0-0-g155821a1990b-prebuilt.qemu.org)
+
+
+iPXE (http://ipxe.org) 00:03.0 CA00 PCI2.10 PnP PMM+BFF8F0F0+BFEEF0F0 CA00
+Press Ctrl-B to configure iPXE (PCI 00:03.0)...                                                                               
+
+
+Booting from Hard Disk...
+[H[J[1;1H[    0.000000] Linux version 5.10.0-051000-generic (kernel@kathleen) (gcc (Ubuntu 10.2.0-13ubuntu1) 10.2.0, GNU ld (GNU Binutils for Ubuntu) 2.35.1) #202012132330 SMP Sun Dec 13 23:33:36 UTC 2020
+[    0.000000] Command line: BOOT_IMAGE=/vmlinuz-5.10.0-051000-generic root=/dev/mapper/ubuntu--vg-ubuntu--lv ro ip=dhcp console=ttyS0, 38400 console=tty console=ttyS0 maybe-ubiquity
+[    0.000000] KERNEL supported cpus:
+[    0.000000]   Intel GenuineIntel
+[    0.000000]   AMD AuthenticAMD
+[    0.000000]   Hygon HygonGenuine
+[    0.000000]   Centaur CentaurHauls
+[    0.000000]   zhaoxin   Shanghai  
+[    0.000000] x86/fpu: Supporting XSAVE feature 0x001: 'x87 floating point registers'
+[    0.000000] x86/fpu: Supporting XSAVE feature 0x002: 'SSE registers'
+[    0.000000] x86/fpu: Supporting XSAVE feature 0x004: 'AVX registers'
+[    0.000000] x86/fpu: Supporting XSAVE feature 0x008: 'MPX bounds registers'
+[    0.000000] x86/fpu: Supporting XSAVE feature 0x010: 'MPX CSR'
+[    0.000000] x86/fpu: Supporting XSAVE feature 0x200: 'Protection Keys User registers'
+[    0.000000] x86/fpu: xstate_offset[2]:  576, xstate_sizes[2]:  256
+[    0.000000] x86/fpu: xstate_offset[3]:  832, xstate_sizes[3]:   64
+[    0.000000] x86/fpu: xstate_offset[4]:  896, xstate_sizes[4]:   64
+[    0.000000] x86/fpu: xstate_offset[9]:  960, xstate_sizes[9]:    8
+[    0.000000] x86/fpu: Enabled xstate features 0x21f, context size is 968 bytes, using 'compacted' format.
+[    0.000000] BIOS-provided physical RAM map:
+[    0.000000] BIOS-e820: [mem 0x0000000000000000-0x000000000009fbff] usable
+[    0.000000] BIOS-e820: [mem 0x000000000009fc00-0x000000000009ffff] reserved
+[    0.000000] BIOS-e820: [mem 0x00000000000f0000-0x00000000000fffff] reserved
+[    0.000000] BIOS-e820: [mem 0x0000000000100000-0x00000000bffd4fff] usable
+[    0.000000] BIOS-e820: [mem 0x00000000bffd5000-0x00000000bfffffff] reserved
+[    0.000000] BIOS-e820: [mem 0x00000000feffc000-0x00000000feffffff] reserved
+[    0.000000] BIOS-e820: [mem 0x00000000fffc0000-0x00000000ffffffff] reserved
+[    0.000000] BIOS-e820: [mem 0x0000000100000000-0x000000013fffffff] usable
+[    0.000000] NX (Execute Disable) protection: active
+[    0.000000] SMBIOS 2.8 present.
+[    0.000000] DMI: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.14.0-0-g155821a1990b-prebuilt.qemu.org 04/01/2014
+[    0.000000] Hypervisor detected: KVM
+[    0.000000] kvm-clock: Using msrs 4b564d01 and 4b564d00
+[    0.000000] kvm-clock: cpu 0, msr 3c201001, primary cpu clock
+[    0.000000] kvm-clock: using sched offset of 4237539203 cycles
+[    0.000003] clocksource: kvm-clock: mask: 0xffffffffffffffff max_cycles: 0x1cd42e4dffb, max_idle_ns: 881590591483 ns
+[    0.000007] tsc: Detected 3792.034 MHz processor
+[    0.000596] last_pfn = 0x140000 max_arch_pfn = 0x400000000
+[    0.000629] x86/PAT: Configuration [0-7]: WB  WC  UC- UC  WB  WP  UC- WT  
+[    0.000637] last_pfn = 0xbffd5 max_arch_pfn = 0x400000000
+[    0.005737] found SMP MP-table at [mem 0x000f5a60-0x000f5a6f]
+[    0.005816] check: Scanning 1 areas for low memory corruption
+[    0.005840] Using GB pages for direct mapping
+[    0.006093] RAMDISK: [mem 0x2d769000-0x32babfff]
+[    0.006111] ACPI: Early table checksum verification disabled
+[    0.006122] ACPI: RSDP 0x00000000000F5A20 000014 (v00 BOCHS )
+[    0.006124] ACPI: RSDT 0x00000000BFFE13A7 000034 (v01 BOCHS  BXPCRSDT 00000001 BXPC 00000001)
+[    0.006129] ACPI: FACP 0x00000000BFFE1243 000074 (v01 BOCHS  BXPCFACP 00000001 BXPC 00000001)
+[    0.006133] ACPI: DSDT 0x00000000BFFDFD80 0014C3 (v01 BOCHS  BXPCDSDT 00000001 BXPC 00000001)
+[    0.006135] ACPI: FACS 0x00000000BFFDFD40 000040
+[    0.006138] ACPI: APIC 0x00000000BFFE12B7 000090 (v01 BOCHS  BXPCAPIC 00000001 BXPC 00000001)
+[    0.006140] ACPI: HPET 0x00000000BFFE1347 000038 (v01 BOCHS  BXPCHPET 00000001 BXPC 00000001)
+[    0.006142] ACPI: WAET 0x00000000BFFE137F 000028 (v01 BOCHS  BXPCWAET 00000001 BXPC 00000001)
+[    0.006283] No NUMA configuration found
+[    0.006284] Faking a node at [mem 0x0000000000000000-0x000000013fffffff]
+[    0.006293] NODE_DATA(0) allocated [mem 0x13ffd4000-0x13fffdfff]
+[    0.006481] Zone ranges:
+[    0.006482]   DMA      [mem 0x0000000000001000-0x0000000000ffffff]
+[    0.006483]   DMA32    [mem 0x0000000001000000-0x00000000ffffffff]
+[    0.006484]   Normal   [mem 0x0000000100000000-0x000000013fffffff]
+[    0.006485]   Device   empty
+[    0.006486] Movable zone start for each node
+[    0.006488] Early memory node ranges
+[    0.006488]   node   0: [mem 0x0000000000001000-0x000000000009efff]
+[    0.006489]   node   0: [mem 0x0000000000100000-0x00000000bffd4fff]
+[    0.006490]   node   0: [mem 0x0000000100000000-0x000000013fffffff]
+[    0.006760] Zeroed struct page in unavailable ranges: 141 pages
+[    0.006760] Initmem setup node 0 [mem 0x0000000000001000-0x000000013fffffff]
+[    0.013445] ACPI: PM-Timer IO Port: 0x608
+[    0.013464] ACPI: LAPIC_NMI (acpi_id[0xff] dfl dfl lint[0x1])
+[    0.013488] IOAPIC[0]: apic_id 0, version 17, address 0xfec00000, GSI 0-23
+[    0.013490] ACPI: INT_SRC_OVR (bus 0 bus_irq 0 global_irq 2 dfl dfl)
+[    0.013491] ACPI: INT_SRC_OVR (bus 0 bus_irq 5 global_irq 5 high level)
+[    0.013491] ACPI: INT_SRC_OVR (bus 0 bus_irq 9 global_irq 9 high level)
+[    0.013496] ACPI: INT_SRC_OVR (bus 0 bus_irq 10 global_irq 10 high level)
+[    0.013497] ACPI: INT_SRC_OVR (bus 0 bus_irq 11 global_irq 11 high level)
+[    0.013501] Using ACPI (MADT) for SMP configuration information
+[    0.013503] ACPI: HPET id: 0x8086a201 base: 0xfed00000
+[    0.013506] TSC deadline timer available
+[    0.013507] smpboot: Allowing 4 CPUs, 0 hotplug CPUs
+[    0.013515] kvm-guest: KVM setup pv remote TLB flush
+[    0.013521] kvm-guest: setup PV sched yield
+[    0.013529] PM: hibernation: Registered nosave memory: [mem 0x00000000-0x00000fff]
+[    0.013530] PM: hibernation: Registered nosave memory: [mem 0x0009f000-0x0009ffff]
+[    0.013531] PM: hibernation: Registered nosave memory: [mem 0x000a0000-0x000effff]
+[    0.013532] PM: hibernation: Registered nosave memory: [mem 0x000f0000-0x000fffff]
+[    0.013532] PM: hibernation: Registered nosave memory: [mem 0xbffd5000-0xbfffffff]
+[    0.013533] PM: hibernation: Registered nosave memory: [mem 0xc0000000-0xfeffbfff]
+[    0.013533] PM: hibernation: Registered nosave memory: [mem 0xfeffc000-0xfeffffff]
+[    0.013534] PM: hibernation: Registered nosave memory: [mem 0xff000000-0xfffbffff]
+[    0.013534] PM: hibernation: Registered nosave memory: [mem 0xfffc0000-0xffffffff]
+[    0.013536] [mem 0xc0000000-0xfeffbfff] available for PCI devices
+[    0.013536] Booting paravirtualized kernel on KVM
+[    0.013538] clocksource: refined-jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 7645519600211568 ns
+[    0.013544] setup_percpu: NR_CPUS:8192 nr_cpumask_bits:4 nr_cpu_ids:4 nr_node_ids:1
+[    0.013774] percpu: Embedded 56 pages/cpu s192512 r8192 d28672 u524288
+[    0.013799] kvm-guest: KVM setup async PF for cpu 0
+[    0.013802] kvm-guest: stealtime: cpu 0, msr 13bc2e080
+[    0.013806] kvm-guest: PV spinlocks enabled
+[    0.013809] PV qspinlock hash table entries: 256 (order: 0, 4096 bytes, linear)
+[    0.013813] Built 1 zonelists, mobility grouping on.  Total pages: 1032030
+[    0.013814] Policy zone: Normal
+[    0.013815] Kernel command line: BOOT_IMAGE=/vmlinuz-5.10.0-051000-generic root=/dev/mapper/ubuntu--vg-ubuntu--lv ro ip=dhcp console=ttyS0, 38400 console=tty console=ttyS0 maybe-ubiquity
+[    0.014208] Dentry cache hash table entries: 524288 (order: 10, 4194304 bytes, linear)
+[    0.014378] Inode-cache hash table entries: 262144 (order: 9, 2097152 bytes, linear)
+[    0.014423] mem auto-init: stack:off, heap alloc:on, heap free:off
+[    0.024273] Memory: 3927372K/4193740K available (16393K kernel code, 3480K rwdata, 8984K rodata, 2664K init, 5996K bss, 266108K reserved, 0K cma-reserved)
+[    0.024286] random: get_random_u64 called from kmem_cache_open+0x29/0x220 with crng_init=0
+[    0.024342] SLUB: HWalign=64, Order=0-3, MinObjects=0, CPUs=4, Nodes=1
+[    0.024358] ftrace: allocating 50596 entries in 198 pages
+[    0.036484] ftrace: allocated 198 pages with 4 groups
+[    0.036676] rcu: Hierarchical RCU implementation.
+[    0.036678] rcu: 	RCU restricting CPUs from NR_CPUS=8192 to nr_cpu_ids=4.
+[    0.036678] 	Rude variant of Tasks RCU enabled.
+[    0.036679] 	Tracing variant of Tasks RCU enabled.
+[    0.036680] rcu: RCU calculated value of scheduler-enlistment delay is 25 jiffies.
+[    0.036680] rcu: Adjusting geometry for rcu_fanout_leaf=16, nr_cpu_ids=4
+[    0.038793] NR_IRQS: 524544, nr_irqs: 456, preallocated irqs: 16
+[    0.038976] random: crng done (trusting CPU's manufacturer)
+[    0.045734] Console: colour VGA+ 80x25
+[    0.062057] printk: console [tty0] enabled
+[    0.118848] printk: console [ttyS0] enabled
+[    0.119251] ACPI: Core revision 20200925
+[    0.119696] clocksource: hpet: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 19112604467 ns
+[    0.120511] APIC: Switch to symmetric I/O mode setup
+[    0.121067] x2apic enabled
+[    0.121474] Switched APIC routing to physical x2apic.
+[    0.121966] kvm-guest: setup PV IPIs
+[    0.122927] ..TIMER: vector=0x30 apic1=0 pin1=2 apic2=-1 pin2=-1
+[    0.123504] clocksource: tsc-early: mask: 0xffffffffffffffff max_cycles: 0x6d51e514936, max_idle_ns: 881590614020 ns
+[    0.124456] Calibrating delay loop (skipped) preset value.. 7584.06 BogoMIPS (lpj=15168136)
+[    0.128455] pid_max: default: 32768 minimum: 301
+[    0.128880] LSM: Security Framework initializing
+[    0.129297] Yama: becoming mindful.
+[    0.129776] AppArmor: AppArmor initialized
+[    0.130183] Mount-cache hash table entries: 8192 (order: 4, 65536 bytes, linear)
+[    0.130831] Mountpoint-cache hash table entries: 8192 (order: 4, 65536 bytes, linear)
+[    0.131696] x86/cpu: User Mode Instruction Prevention (UMIP) activated
+[    0.132496] Last level iTLB entries: 4KB 0, 2MB 0, 4MB 0
+[    0.132957] Last level dTLB entries: 4KB 0, 2MB 0, 4MB 0, 1GB 0
+[    0.133443] Spectre V1 : Mitigation: usercopy/swapgs barriers and __user pointer sanitization
+[    0.134157] Spectre V2 : Mitigation: Enhanced IBRS
+[    0.134549] Spectre V2 : Spectre v2 / SpectreRSB mitigation: Filling RSB on context switch
+[    0.135309] Spectre V2 : mitigation: Enabling conditional Indirect Branch Prediction Barrier
+[    0.136455] Speculative Store Bypass: Mitigation: Speculative Store Bypass disabled via prctl and seccomp
+[    0.137382] Freeing SMP alternatives memory: 40K
+[    0.138953] smpboot: CPU0: Intel(R) Core(TM) i7-10700K CPU @ 3.80GHz (family: 0x6, model: 0xa5, stepping: 0x5)
+[    0.139808] Performance Events: Skylake events, full-width counters, Intel PMU driver.
+[    0.140453] ... version:                2
+[    0.140453] ... bit width:              48
+[    0.140453] ... generic registers:      4
+[    0.140453] ... value mask:             0000ffffffffffff
+[    0.140453] ... max period:             00007fffffffffff
+[    0.140453] ... fixed-purpose events:   3
+[    0.140453] ... event mask:             000000070000000f
+[    0.140513] rcu: Hierarchical SRCU implementation.
+[    0.141280] smp: Bringing up secondary CPUs ...
+[    0.141728] x86: Booting SMP configuration:
+[    0.142090] .... node  #0, CPUs:      #1
+[    0.085504] kvm-clock: cpu 1, msr 3c201041, secondary cpu clock
+[    0.085504] smpboot: CPU 1 Converting physical 0 to logical die 1
+[    0.144469] kvm-guest: KVM setup async PF for cpu 1
+[    0.148453] kvm-guest: stealtime: cpu 1, msr 13bcae080
+[    0.148529]  #2
+[    0.085504] kvm-clock: cpu 2, msr 3c201081, secondary cpu clock
+[    0.085504] smpboot: CPU 2 Converting physical 0 to logical die 2
+[    0.152480] kvm-guest: KVM setup async PF for cpu 2
+[    0.152965] kvm-guest: stealtime: cpu 2, msr 13bd2e080
+[    0.153464]  #3
+[    0.085504] kvm-clock: cpu 3, msr 3c2010c1, secondary cpu clock
+[    0.085504] smpboot: CPU 3 Converting physical 0 to logical die 3
+[    0.156470] kvm-guest: KVM setup async PF for cpu 3
+[    0.156972] kvm-guest: stealtime: cpu 3, msr 13bdae080
+[    0.157508] smp: Brought up 1 node, 4 CPUs
+[    0.157508] smpboot: Max logical packages: 4
+[    0.157508] smpboot: Total of 4 processors activated (30336.27 BogoMIPS)
+[    0.158093] devtmpfs: initialized
+[    0.158093] x86/mm: Memory block size: 128MB
+[    0.158093] clocksource: jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 7645041785100000 ns
+[    0.160461] futex hash table entries: 1024 (order: 4, 65536 bytes, linear)
+[    0.161123] pinctrl core: initialized pinctrl subsystem
+[    0.161652] PM: RTC time: 15:29:28, date: 2022-03-05
+[    0.162259] NET: Registered protocol family 16
+[    0.162724] DMA: preallocated 512 KiB GFP_KERNEL pool for atomic allocations
+[    0.163437] DMA: preallocated 512 KiB GFP_KERNEL|GFP_DMA pool for atomic allocations
+[    0.164231] DMA: preallocated 512 KiB GFP_KERNEL|GFP_DMA32 pool for atomic allocations
+[    0.164466] audit: initializing netlink subsys (disabled)
+[    0.164914] audit: type=2000 audit(1646494168.404:1): state=initialized audit_enabled=0 res=1
+[    0.164914] thermal_sys: Registered thermal governor 'fair_share'
+[    0.165470] thermal_sys: Registered thermal governor 'bang_bang'
+[    0.165969] thermal_sys: Registered thermal governor 'step_wise'
+[    0.166441] thermal_sys: Registered thermal governor 'user_space'
+[    0.166906] thermal_sys: Registered thermal governor 'power_allocator'
+[    0.167382] EISA bus registered
+[    0.168461] cpuidle: using governor ladder
+[    0.168815] cpuidle: using governor menu
+[    0.169201] ACPI: bus type PCI registered
+[    0.169544] acpiphp: ACPI Hot Plug PCI Controller Driver version: 0.5
+[    0.170124] PCI: Using configuration type 1 for base access
+[    0.171349] HugeTLB registered 1.00 GiB page size, pre-allocated 0 pages
+[    0.171349] HugeTLB registered 2.00 MiB page size, pre-allocated 0 pages
+[    0.172607] ACPI: Added _OSI(Module Device)
+[    0.172952] ACPI: Added _OSI(Processor Device)
+[    0.173416] ACPI: Added _OSI(3.0 _SCP Extensions)
+[    0.173899] ACPI: Added _OSI(Processor Aggregator Device)
+[    0.174438] ACPI: Added _OSI(Linux-Dell-Video)
+[    0.174896] ACPI: Added _OSI(Linux-Lenovo-NV-HDMI-Audio)
+[    0.176457] ACPI: Added _OSI(Linux-HPI-Hybrid-Graphics)
+[    0.177529] ACPI: 1 ACPI AML tables successfully acquired and loaded
+[    0.178794] ACPI: Interpreter enabled
+[    0.179199] ACPI: (supports S0 S3 S4 S5)
+[    0.179681] ACPI: Using IOAPIC for interrupt routing
+[    0.180204] PCI: Using host bridge windows from ACPI; if necessary, use "pci=nocrs" and report a bug
+[    0.180553] ACPI: Enabled 2 GPEs in block 00 to 0F
+[    0.182866] ACPI: PCI Root Bridge [PCI0] (domain 0000 [bus 00-ff])
+[    0.183371] acpi PNP0A03:00: _OSC: OS supports [ASPM ClockPM Segments MSI HPX-Type3]
+[    0.184024] acpi PNP0A03:00: fail to add MMCONFIG information, can't access extended PCI configuration space under this bridge.
+[    0.184635] acpiphp: Slot [3] registered
+[    0.184990] acpiphp: Slot [4] registered
+[    0.185346] acpiphp: Slot [5] registered
+[    0.185716] acpiphp: Slot [6] registered
+[    0.186061] acpiphp: Slot [7] registered
+[    0.186468] acpiphp: Slot [8] registered
+[    0.186869] acpiphp: Slot [9] registered
+[    0.187277] acpiphp: Slot [10] registered
+[    0.187673] acpiphp: Slot [11] registered
+[    0.188078] acpiphp: Slot [12] registered
+[    0.188469] acpiphp: Slot [13] registered
+[    0.188836] acpiphp: Slot [14] registered
+[    0.189229] acpiphp: Slot [15] registered
+[    0.189576] acpiphp: Slot [16] registered
+[    0.189915] acpiphp: Slot [17] registered
+[    0.190262] acpiphp: Slot [18] registered
+[    0.190602] acpiphp: Slot [19] registered
+[    0.190945] acpiphp: Slot [20] registered
+[    0.191279] acpiphp: Slot [21] registered
+[    0.191614] acpiphp: Slot [22] registered
+[    0.191954] acpiphp: Slot [23] registered
+[    0.192300] acpiphp: Slot [24] registered
+[    0.192466] acpiphp: Slot [25] registered
+[    0.192806] acpiphp: Slot [26] registered
+[    0.193147] acpiphp: Slot [27] registered
+[    0.193491] acpiphp: Slot [28] registered
+[    0.193830] acpiphp: Slot [29] registered
+[    0.194168] acpiphp: Slot [30] registered
+[    0.194511] acpiphp: Slot [31] registered
+[    0.194853] PCI host bridge to bus 0000:00
+[    0.195192] pci_bus 0000:00: root bus resource [io  0x0000-0x0cf7 window]
+[    0.195702] pci_bus 0000:00: root bus resource [io  0x0d00-0xffff window]
+[    0.196210] pci_bus 0000:00: root bus resource [mem 0x000a0000-0x000bffff window]
+[    0.196456] pci_bus 0000:00: root bus resource [mem 0xc0000000-0xfebfffff window]
+[    0.197029] pci_bus 0000:00: root bus resource [mem 0x140000000-0x1bfffffff window]
+[    0.197624] pci_bus 0000:00: root bus resource [bus 00-ff]
+[    0.198066] pci 0000:00:00.0: [8086:1237] type 00 class 0x060000
+[    0.198878] pci 0000:00:01.0: [8086:7000] type 00 class 0x060100
+[    0.199612] pci 0000:00:01.1: [8086:7010] type 00 class 0x010180
+[    0.201398] pci 0000:00:01.1: reg 0x20: [io  0xc060-0xc06f]
+[    0.202437] pci 0000:00:01.1: legacy IDE quirk: reg 0x10: [io  0x01f0-0x01f7]
+[    0.202975] pci 0000:00:01.1: legacy IDE quirk: reg 0x14: [io  0x03f6]
+[    0.203462] pci 0000:00:01.1: legacy IDE quirk: reg 0x18: [io  0x0170-0x0177]
+[    0.203999] pci 0000:00:01.1: legacy IDE quirk: reg 0x1c: [io  0x0376]
+[    0.204560] pci 0000:00:01.3: [8086:7113] type 00 class 0x068000
+[    0.205196] pci 0000:00:01.3: quirk: [io  0x0600-0x063f] claimed by PIIX4 ACPI
+[    0.205773] pci 0000:00:01.3: quirk: [io  0x0700-0x070f] claimed by PIIX4 SMB
+[    0.206560] pci 0000:00:02.0: [1234:1111] type 00 class 0x030000
+[    0.208713] pci 0000:00:02.0: reg 0x10: [mem 0xfd000000-0xfdffffff pref]
+[    0.210264] pci 0000:00:02.0: reg 0x18: [mem 0xfebd2000-0xfebd2fff]
+[    0.213126] pci 0000:00:02.0: reg 0x30: [mem 0xfebc0000-0xfebcffff pref]
+[    0.214070] pci 0000:00:03.0: [1af4:1000] type 00 class 0x020000
+[    0.215357] pci 0000:00:03.0: reg 0x10: [io  0xc040-0xc05f]
+[    0.216732] pci 0000:00:03.0: reg 0x14: [mem 0xfebd3000-0xfebd3fff]
+[    0.218863] pci 0000:00:03.0: reg 0x20: [mem 0xfe000000-0xfe003fff 64bit pref]
+[    0.219976] pci 0000:00:03.0: reg 0x30: [mem 0xfeb80000-0xfebbffff pref]
+[    0.220924] pci 0000:00:04.0: [1af4:1004] type 00 class 0x010000
+[    0.222034] pci 0000:00:04.0: reg 0x10: [io  0xc000-0xc03f]
+[    0.223096] pci 0000:00:04.0: reg 0x14: [mem 0xfebd4000-0xfebd4fff]
+[    0.225789] pci 0000:00:04.0: reg 0x20: [mem 0xfe004000-0xfe007fff 64bit pref]
+[    0.228266] pci 0000:00:05.0: [1d1d:1f1f] type 00 class 0x010802
+[    0.228863] pci 0000:00:05.0: reg 0x10: [mem 0xfebd0000-0xfebd1fff 64bit]
+[    0.230472] pci 0000:00:05.0: reg 0x20: [mem 0xfebd5000-0xfebd5fff]
+[    0.235957] ACPI: PCI Interrupt Link [LNKA] (IRQs 5 *10 11)
+[    0.236471] ACPI: PCI Interrupt Link [LNKB] (IRQs 5 *10 11)
+[    0.237468] ACPI: PCI Interrupt Link [LNKC] (IRQs 5 10 *11)
+[    0.237975] ACPI: PCI Interrupt Link [LNKD] (IRQs 5 10 *11)
+[    0.238461] ACPI: PCI Interrupt Link [LNKS] (IRQs *9)
+[    0.239236] iommu: Default domain type: Translated 
+[    0.239236] pci 0000:00:02.0: vgaarb: setting as boot VGA device
+[    0.239236] pci 0000:00:02.0: vgaarb: VGA device added: decodes=io+mem,owns=io+mem,locks=none
+[    0.240459] pci 0000:00:02.0: vgaarb: bridge control possible
+[    0.240906] vgaarb: loaded
+[    0.241310] SCSI subsystem initialized
+[    0.241660] ACPI: bus type USB registered
+[    0.241660] usbcore: registered new interface driver usbfs
+[    0.241660] usbcore: registered new interface driver hub
+[    0.241746] usbcore: registered new device driver usb
+[    0.242170] pps_core: LinuxPPS API ver. 1 registered
+[    0.242561] pps_core: Software ver. 5.3.6 - Copyright 2005-2007 Rodolfo Giometti <giometti@linux.it>
+[    0.244457] PTP clock support registered
+[    0.244817] EDAC MC: Ver: 3.0.0
+[    0.244838] NetLabel: Initializing
+[    0.244898] NetLabel:  domain hash size = 128
+[    0.245256] NetLabel:  protocols = UNLABELED CIPSOv4 CALIPSO
+[    0.245720] NetLabel:  unlabeled traffic allowed by default
+[    0.246204] PCI: Using ACPI for IRQ routing
+[    0.246204] hpet0: at MMIO 0xfed00000, IRQs 2, 8, 0
+[    0.248458] hpet0: 3 comparators, 64-bit 100.000000 MHz counter
+[    0.251974] clocksource: Switched to clocksource kvm-clock
+[    0.257130] VFS: Disk quotas dquot_6.6.0
+[    0.257482] VFS: Dquot-cache hash table entries: 512 (order 0, 4096 bytes)
+[    0.258279] AppArmor: AppArmor Filesystem Enabled
+[    0.258684] pnp: PnP ACPI init
+[    0.259209] pnp: PnP ACPI: found 6 devices
+[    0.265229] clocksource: acpi_pm: mask: 0xffffff max_cycles: 0xffffff, max_idle_ns: 2085701024 ns
+[    0.266067] NET: Registered protocol family 2
+[    0.266663] tcp_listen_portaddr_hash hash table entries: 2048 (order: 3, 32768 bytes, linear)
+[    0.267469] TCP established hash table entries: 32768 (order: 6, 262144 bytes, linear)
+[    0.268165] TCP bind hash table entries: 32768 (order: 7, 524288 bytes, linear)
+[    0.268806] TCP: Hash tables configured (established 32768 bind 32768)
+[    0.269410] MPTCP token hash table entries: 4096 (order: 4, 98304 bytes, linear)
+[    0.270070] UDP hash table entries: 2048 (order: 4, 65536 bytes, linear)
+[    0.270674] UDP-Lite hash table entries: 2048 (order: 4, 65536 bytes, linear)
+[    0.271282] NET: Registered protocol family 1
+[    0.271668] NET: Registered protocol family 44
+[    0.272038] pci_bus 0000:00: resource 4 [io  0x0000-0x0cf7 window]
+[    0.272559] pci_bus 0000:00: resource 5 [io  0x0d00-0xffff window]
+[    0.273052] pci_bus 0000:00: resource 6 [mem 0x000a0000-0x000bffff window]
+[    0.273618] pci_bus 0000:00: resource 7 [mem 0xc0000000-0xfebfffff window]
+[    0.274222] pci_bus 0000:00: resource 8 [mem 0x140000000-0x1bfffffff window]
+[    0.279525] pci 0000:00:01.0: PIIX3: Enabling Passive Release
+[    0.280062] pci 0000:00:00.0: Limiting direct PCI/PCI transfers
+[    0.280593] pci 0000:00:01.0: Activating ISA DMA hang workarounds
+[    0.281091] pci 0000:00:02.0: Video device with shadowed ROM at [mem 0x000c0000-0x000dffff]
+[    0.281754] PCI: CLS 0 bytes, default 64
+[    0.282147] Trying to unpack rootfs image as initramfs...
+[    0.402562] Freeing initrd memory: 86284K
+[    0.403058] PCI-DMA: Using software bounce buffering for IO (SWIOTLB)
+[    0.403614] software IO TLB: mapped [mem 0x00000000bbfd5000-0x00000000bffd5000] (64MB)
+[    0.404276] clocksource: tsc: mask: 0xffffffffffffffff max_cycles: 0x6d51e514936, max_idle_ns: 881590614020 ns
+[    0.405177] check: Scanning for low memory corruption every 60 seconds
+[    0.405961] Initialise system trusted keyrings
+[    0.406360] Key type blacklist registered
+[    0.406748] workingset: timestamp_bits=36 max_order=20 bucket_order=0
+[    0.407889] zbud: loaded
+[    0.408290] squashfs: version 4.0 (2009/01/31) Phillip Lougher
+[    0.408884] fuse: init (API version 7.32)
+[    0.409360] integrity: Platform Keyring initialized
+[    0.414646] Key type asymmetric registered
+[    0.415021] Asymmetric key parser 'x509' registered
+[    0.415461] Block layer SCSI generic (bsg) driver version 0.4 loaded (major 243)
+[    0.416153] io scheduler mq-deadline registered
+[    0.416676] shpchp: Standard Hot Plug PCI Controller Driver version: 0.4
+[    0.417321] input: Power Button as /devices/LNXSYSTM:00/LNXPWRBN:00/input/input0
+[    0.417979] ACPI: Power Button [PWRF]
+[    0.435673] PCI Interrupt Link [LNKC] enabled at IRQ 11
+[    0.453964] PCI Interrupt Link [LNKD] enabled at IRQ 10
+[    0.454925] Serial: 8250/16550 driver, 32 ports, IRQ sharing enabled
+[    0.477350] 00:04: ttyS0 at I/O 0x3f8 (irq = 4, base_baud = 115200) is a 16550A
+[    0.479016] Linux agpgart interface v0.103
+[    0.480485] loop: module loaded
+[    0.481312] scsi host0: ata_piix
+[    0.481721] scsi host1: ata_piix
+[    0.482059] ata1: PATA max MWDMA2 cmd 0x1f0 ctl 0x3f6 bmdma 0xc060 irq 14
+[    0.482642] ata2: PATA max MWDMA2 cmd 0x170 ctl 0x376 bmdma 0xc068 irq 15
+[    0.483327] libphy: Fixed MDIO Bus: probed
+[    0.483750] tun: Universal TUN/TAP device driver, 1.6
+[    0.484231] PPP generic driver version 2.4.2
+[    0.484681] VFIO - User Level meta-driver version: 0.3
+[    0.485159] ehci_hcd: USB 2.0 'Enhanced' Host Controller (EHCI) Driver
+[    0.485701] ehci-pci: EHCI PCI platform driver
+[    0.486077] ehci-platform: EHCI generic platform driver
+[    0.486506] ohci_hcd: USB 1.1 'Open' Host Controller (OHCI) Driver
+[    0.487033] ohci-pci: OHCI PCI platform driver
+[    0.487410] ohci-platform: OHCI generic platform driver
+[    0.487831] uhci_hcd: USB Universal Host Controller Interface driver
+[    0.488370] i8042: PNP: PS/2 Controller [PNP0303:KBD,PNP0f13:MOU] at 0x60,0x64 irq 1,12
+[    0.489437] serio: i8042 KBD port at 0x60,0x64 irq 1
+[    0.489889] serio: i8042 AUX port at 0x60,0x64 irq 12
+[    0.490414] mousedev: PS/2 mouse device common for all mice
+[    0.490960] rtc_cmos 00:05: RTC can wake from S4
+[    0.491556] input: AT Translated Set 2 keyboard as /devices/platform/i8042/serio0/input/input1
+[    0.492395] rtc_cmos 00:05: registered as rtc0
+[    0.492783] rtc_cmos 00:05: setting system clock to 2022-03-05T15:29:28 UTC (1646494168)
+[    0.493392] rtc_cmos 00:05: alarms up to one day, y3k, 242 bytes nvram, hpet irqs
+[    0.493956] i2c /dev entries driver
+[    0.494279] device-mapper: uevent: version 1.0.3
+[    0.494679] device-mapper: ioctl: 4.43.0-ioctl (2020-10-01) initialised: dm-devel@redhat.com
+[    0.495314] platform eisa.0: Probing EISA bus 0
+[    0.495663] platform eisa.0: EISA: Cannot allocate resource for mainboard
+[    0.496150] platform eisa.0: Cannot allocate resource for EISA slot 1
+[    0.496618] platform eisa.0: Cannot allocate resource for EISA slot 2
+[    0.497083] platform eisa.0: Cannot allocate resource for EISA slot 3
+[    0.497543] platform eisa.0: Cannot allocate resource for EISA slot 4
+[    0.498006] platform eisa.0: Cannot allocate resource for EISA slot 5
+[    0.498472] platform eisa.0: Cannot allocate resource for EISA slot 6
+[    0.498932] platform eisa.0: Cannot allocate resource for EISA slot 7
+[    0.499392] platform eisa.0: Cannot allocate resource for EISA slot 8
+[    0.499858] platform eisa.0: EISA: Detected 0 cards
+[    0.500228] intel_pstate: CPU model not supported
+[    0.500639] ledtrig-cpu: registered to indicate activity on CPUs
+[    0.501134] intel_pmc_core intel_pmc_core.0:  initialized
+[    0.501572] drop_monitor: Initializing network drop monitor service
+[    0.502108] NET: Registered protocol family 10
+[    0.505931] Segment Routing with IPv6
+[    0.506250] NET: Registered protocol family 17
+[    0.506634] Key type dns_resolver registered
+[    0.507176] IPI shorthand broadcast: enabled
+[    0.507531] sched_clock: Marking stable (425635508, 81504313)->(571555190, -64415369)
+[    0.508186] registered taskstats version 1
+[    0.508541] Loading compiled-in X.509 certificates
+[    0.509327] Loaded X.509 cert 'Build time autogenerated kernel key: 5296574db5a9a84d509e62c03d1666703cc22ca1'
+[    0.510103] zswap: loaded using pool lzo/zbud
+[    0.510552] Key type ._fscrypt registered
+[    0.510887] Key type .fscrypt registered
+[    0.511207] Key type fscrypt-provisioning registered
+[    0.513053] Key type encrypted registered
+[    0.513384] AppArmor: AppArmor sha1 policy hashing enabled
+[    0.513815] ima: No TPM chip found, activating TPM-bypass!
+[    0.514243] ima: Allocated hash algorithm: sha1
+[    0.514609] ima: No architecture policies found
+[    0.514975] evm: Initialising EVM extended attributes:
+[    0.515370] evm: security.selinux
+[    0.515655] evm: security.SMACK64
+[    0.515942] evm: security.SMACK64EXEC
+[    0.516248] evm: security.SMACK64TRANSMUTE
+[    0.516586] evm: security.SMACK64MMAP
+[    0.516895] evm: security.apparmor
+[    0.517184] evm: security.ima
+[    0.517445] evm: security.capability
+[    0.517749] evm: HMAC attrs: 0x1
+[    0.518189] PM:   Magic number: 14:871:486
+[    0.518677] RAS: Correctable Errors collector initialized.
+[    0.645801] Freeing unused decrypted memory: 2036K
+[    0.651187] Freeing unused kernel image (initmem) memory: 2664K
+[    0.651641] Write protecting the kernel read-only data: 28672k
+[    0.652792] Freeing unused kernel image (text/rodata gap) memory: 2036K
+[    0.653414] Freeing unused kernel image (rodata/data gap) memory: 1256K
+[    0.661425] x86/mm: Checked W+X mappings: passed, no W+X pages found.
+[    0.661931] Run /init as init process
+Loading, please wait...
+Starting version 245.4-4ubuntu3.15
+[    0.696174] Floppy drive(s): fd0 is 2.88M AMI BIOS
+[    0.699597] piix4_smbus 0000:00:01.3: SMBus Host Controller at 0x700, revision 0
+[    0.703880] nvme nvme0: pci function 0000:00:05.0
+[    0.704706] input: VirtualPS/2 VMware VMMouse as /devices/platform/i8042/serio1/input/input4
+[    0.705599] input: VirtualPS/2 VMware VMMouse as /devices/platform/i8042/serio1/input/input3
+[    0.712497] cryptd: max_cpu_qlen set to 1000
+[    0.715166] AVX2 version of gcm_enc/dec engaged.
+[    0.715634] AES CTR mode by8 optimization enabled
+[    0.716695] FDC 0 is a S82078B
+[    0.719501] bochs-drm 0000:00:02.0: vgaarb: deactivate vga console
+[    0.725252] Console: switching to colour dummy device 80x25
+[    0.725820] [drm] Found bochs VGA, ID 0xb0c0.
+[    0.726105] [drm] Framebuffer size 16384 kB @ 0xfd000000, mmio @ 0xfebd2000.
+[    0.726900] [TTM] Zone  kernel: Available graphics memory: 2010974 KiB
+[    0.727270] [TTM] Initializing pool allocator
+[    0.727617] [TTM] Initializing DMA pool allocator
+[    0.728320] scsi host2: Virtio SCSI HBA
+[    0.729052] [drm] Found EDID data blob.
+[    0.729176] scsi 2:0:0:0: Direct-Access     QEMU     QEMU HARDDISK    2.5+ PQ: 0 ANSI: 5
+[    0.729944] [drm] Initialized bochs-drm 1.0.0 20130925 for 0000:00:02.0 on minor 0
+[    0.730480] PCI Interrupt Link [LNKA] enabled at IRQ 10
+[    0.731767] fbcon: bochs-drmdrmfb (fb0) is primary device
+[    0.734132] Console: switching to colour frame buffer device 128x48
+[    0.735398] nvme nvme0:[FEMU] Err: nvme-io.c : nvme_create_poller(), to inhoinno 
+ 4/0/0 default/read/poll queues
+[  [FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+ [FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+ [FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+0[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+.[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+7[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+3[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[5FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[7FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+89] bochs-drm 0000:00:02.0: [drm] fb0: bochs-drmdrmfb frame buffer device
+[    0.738836] virtio_net virtio0 ens3: renamed from eth0
+[    0.739602] sd 2:0:0:0: Attached scsi generic sg0 type 0
+[    0.739629] sd 2:0:0:0: Power-on or device reset occurred
+[    0.740537] sd 2:0:0:0: [sda] 167772160 512-byte logical blocks: (85.9 GB/80.0 GiB)
+[    0.741106] sd 2:0:0:0: [sda] Write Protect is off
+[    0.741472] sd 2:0:0:0: [sda] Write cache: enabled, read cache: enabled, doesn't support DPO or FUA
+[    0.745554]  sda: sda1 sda2 sda3
+[    0.746114] sd 2:0:0:0: [sda] Attached SCSI disk
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+Begin: Loading essential drivers ... [    0.984500] raid6: avx2x4   gen() 52434 MB/s
+[    1.052492] raid6: avx2x4   xor() 19337 MB/s
+[    1.120499] raid6: avx2x2   gen() 53114 MB/s
+[    1.188493] raid6: avx2x2   xor() 31524 MB/s
+[    1.256519] raid6: avx2x1   gen() 44433 MB/s
+[    1.324506] raid6: avx2x1   xor() 26972 MB/s
+[    1.392491] raid6: sse2x4   gen() 21595 MB/s
+[    1.460493] raid6: sse2x4   xor() 12529 MB/s
+[    1.528512] raid6: sse2x2   gen() 21972 MB/s
+[    1.596492] raid6: sse2x2   xor() 13274 MB/s
+[    1.664492] raid6: sse2x1   gen() 18512 MB/s
+[    1.732485] raid6: sse2x1   xor()  9078 MB/s
+[    1.733082] raid6: using algorithm avx2x2 gen() 53114 MB/s
+[    1.733707] raid6: .... xor() 31524 MB/s, rmw enabled
+[    1.734296] raid6: using avx2x2 recovery algorithm
+[    1.735477] xor: automatically using best checksumming function   avx       
+[    1.736931] async_tx: api initialized (async)
+done.
+Begin: Running /scripts/init-premount ... done.
+Begin: Mounting root file system ... Begin: Running /scripts/local-top ... [FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+done.
+Begin: Running /scripts/local-premount ... [    1.806726] Btrfs loaded, crc32c=crc32c-intel
+Scanning for Btrfs filesystems
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[    1.880546] blk_update_request: I/O error, dev fd0, sector 0 op 0x0:(READ) flags 0x0 phys_seg 1 prio class 0
+[    1.881617] floppy: error 10 while reading block 0
+done.
+Begin: Will now check root file system ... fsck from util-linux 2.34
+[/usr/sbin/fsck.ext4 (1) -- /dev/mapper/ubuntu--vg-ubuntu--lv] fsck.ext4 -a -C0 /dev/mapper/ubuntu--vg-ubuntu--lv 
+/dev/mapper/ubuntu--vg-ubuntu--lv: recovering journal
+/dev/mapper/ubuntu--vg-ubuntu--lv: Clearing orphaned inode 131078 (uid=0, gid=0, mode=0100000, size=0)
+/dev/mapper/ubuntu--vg-ubuntu--lv: clean, 219703/2588672 files, 3664160/10354688 blocks
+done.
+[    2.263634] EXT4-fs (dm-0): mounted filesystem with ordered data mode. Opts: (null)
+done.
+Begin: Running /scripts/local-bottom ... done.
+Begin: Running /scripts/init-bottom ... Internet Systems Consortium DHCP Client 4.4.1
+Copyright 2004-2018 Internet Systems Consortium.
+All rights reserved.
+For info, please visit https://www.isc.org/software/dhcp/
+
+Listening on LPF/ens3/52:54:00:12:34:56
+Sending on   LPF/ens3/52:54:00:12:34:56
+Sending on   Socket/fallback
+DHCPDISCOVER on ens3 to 255.255.255.255 port 67 interval 3 (xid=0x9ca0786a)
+DHCPOFFER of 10.0.2.15 from 10.0.2.2
+DHCPREQUEST for 10.0.2.15 on ens3 to 255.255.255.255 port 67 (xid=0x6a78a09c)
+DHCPACK of 10.0.2.15 from 10.0.2.2 (xid=0x9ca0786a)
+bound to 10.0.2.15 -- renewal in 40923 seconds.
+done.
+[    2.481223] systemd[1]: Inserted module 'autofs4'
+[    2.624693] systemd[1]: systemd 245.4-4ubuntu3.15 running in system mode. (+PAM +AUDIT +SELINUX +IMA +APPARMOR +SMACK +SYSVINIT +UTMP +LIBCRYPTSETUP +GCRYPT +GNUTLS +ACL +XZ +LZ4 +SECCOMP +BLKID +ELFUTILS +KMOD +IDN2 -IDN +PCRE2 default-hierarchy=hybrid)
+[    2.627650] systemd[1]: Detected virtualization kvm.
+[    2.628449] systemd[1]: Detected architecture x86-64.
+
+Welcome to [1mUbuntu 20.04.3 LTS[0m!
+
+[    2.675252] systemd[1]: Set hostname to <inhoinnofemu>.
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[    3.016506] blk_update_request: I/O error, dev fd0, sector 0 op 0x0:(READ) flags 0x0 phys_seg 1 prio class 0
+[    3.017542] floppy: error 10 while reading block 0
+[    3.523751] systemd[1]: Created slice system-modprobe.slice.
+[[0;32m  OK  [0m] Created slice [0;1;39msystem-modprobe.slice[0m.
+[    3.525483] systemd[1]: Created slice system-serial\x2dgetty.slice.
+[[0;32m  OK  [0m] Created slice [0;1;39msystem-serial\x2dgetty.slice[0m.
+[    3.527081] systemd[1]: Created slice system-systemd\x2dfsck.slice.
+[[0;32m  OK  [0m] Created slice [0;1;39msystem-systemd\x2dfsck.slice[0m.
+[    3.528631] systemd[1]: Created slice User and Session Slice.
+[[0;32m  OK  [0m] Created slice [0;1;39mUser and Session Slice[0m.
+[    3.529889] systemd[1]: Started Forward Password Requests to Wall Directory Watch.
+[[0;32m  OK  [0m] Started [0;1;39mForward Password R…uests to Wall Directory Watch[0m.
+[    3.531554] systemd[1]: Set up automount Arbitrary Executable File Formats File System Automount Point.
+[[0;32m  OK  [0m] Set up automount [0;1;39mArbitrary…s File System Automount Point[0m.
+[    3.533293] systemd[1]: Reached target User and Group Name Lookups.
+[[0;32m  OK  [0m] Reached target [0;1;39mUser and Group Name Lookups[0m.
+[    3.534704] systemd[1]: Reached target Slices.
+[[0;32m  OK  [0m] Reached target [0;1;39mSlices[0m.
+[    3.535818] systemd[1]: Listening on Device-mapper event daemon FIFOs.
+[[0;32m  OK  [0m] Listening on [0;1;39mDevice-mapper event daemon FIFOs[0m.
+[    3.537215] systemd[1]: Listening on LVM2 poll daemon socket.
+[[0;32m  OK  [0m] Listening on [0;1;39mLVM2 poll daemon socket[0m.
+[    3.538473] systemd[1]: Listening on multipathd control socket.
+[[0;32m  OK  [0m] Listening on [0;1;39mmultipathd control socket[0m.
+[    3.539753] systemd[1]: Listening on Syslog Socket.
+[[0;32m  OK  [0m] Listening on [0;1;39mSyslog Socket[0m.
+[    3.540925] systemd[1]: Listening on fsck to fsckd communication Socket.
+[[0;32m  OK  [0m] Listening on [0;1;39mfsck to fsckd communication Socket[0m.
+[    3.542232] systemd[1]: Listening on initctl Compatibility Named Pipe.
+[[0;32m  OK  [0m] Listening on [0;1;39minitctl Compatibility Named Pipe[0m.
+[    3.543575] systemd[1]: Listening on Journal Audit Socket.
+[[0;32m  OK  [0m] Listening on [0;1;39mJournal Audit Socket[0m.
+[    3.544887] systemd[1]: Listening on Journal Socket (/dev/log).
+[[0;32m  OK  [0m] Listening on [0;1;39mJournal Socket (/dev/log)[0m.
+[    3.546355] systemd[1]: Listening on Journal Socket.
+[[0;32m  OK  [0m] Listening on [0;1;39mJournal Socket[0m.
+[    3.547705] systemd[1]: Listening on Network Service Netlink Socket.
+[[0;32m  OK  [0m] Listening on [0;1;39mNetwork Service Netlink Socket[0m.
+[    3.549198] systemd[1]: Listening on udev Control Socket.
+[[0;32m  OK  [0m] Listening on [0;1;39mudev Control Socket[0m.
+[    3.550534] systemd[1]: Listening on udev Kernel Socket.
+[[0;32m  OK  [0m] Listening on [0;1;39mudev Kernel Socket[0m.
+[    3.552251] systemd[1]: Mounting Huge Pages File System...
+         Mounting [0;1;39mHuge Pages File System[0m...
+[    3.553932] systemd[1]: Mounting POSIX Message Queue File System...
+         Mounting [0;1;39mPOSIX Message Queue File System[0m...
+[    3.555970] systemd[1]: Mounting Kernel Debug File System...
+         Mounting [0;1;39mKernel Debug File System[0m...
+[    3.558000] systemd[1]: Mounting Kernel Trace File System...
+         Mounting [0;1;39mKernel Trace File System[0m...
+[    3.559923] systemd[1]: Starting Journal Service...
+         Starting [0;1;39mJournal Service[0m...
+[    3.562172] systemd[1]: Starting Set the console keyboard layout...
+         Starting [0;1;39mSet the console keyboard layout[0m...
+[    3.564386] systemd[1]: Starting Create list of static device nodes for the current kernel...
+         Starting [0;1;39mCreate list of st…odes for the current kernel[0m...
+[    3.566862] systemd[1]: Starting Monitoring of LVM2 mirrors, snapshots etc. using dmeventd or progress polling...
+         Starting [0;1;39mMonitoring of LVM…meventd or progress polling[0m...
+[    3.568889] systemd[1]: Condition check resulted in Load Kernel Module drm being skipped.
+[    3.570135] systemd[1]: Condition check resulted in OpenVSwitch configuration for cleanup being skipped.
+[    3.572261] systemd[1]: Condition check resulted in Set Up Additional Binary Formats being skipped.
+[    3.573543] systemd[1]: Condition check resulted in File System Check on Root Device being skipped.
+[    3.575903] systemd[1]: Starting Load Kernel Modules...
+         Starting [0;1;39mLoad Kernel Modules[0m...
+[    3.577951] systemd[1]: Starting Remount Root and Kernel File Systems...
+         Starting [0;1;39mRemount Root and Kernel File Systems[0m...
+[    3.580240] systemd[1]: Starting udev Coldplug all Devices...
+         Starting [0;1;39mudev Coldplug all Devices[0m...
+[    3.582433] systemd[1]: Starting Uncomplicated firewall...
+         Starting [0;1;39mUncomplicated firewall[0m...
+[    3.585322] systemd[1]: Mounted Huge Pages File System.
+[[0;32m  OK  [0m] Mounted [0;1;39mHuge Pages File System[0m.
+[    3.587421] systemd[1]: Mounted POSIX Message Queue File System.
+[    3.588467] EXT4-fs (dm-0): re-mounted. Opts: (null)
+[[0;32m  OK  [0m] Mounted [0;1;39mPOSIX Message Queue File System[0m.
+[    3.590654] systemd[1]: Mounted Kernel Debug File System.
+[[0;32m  OK  [0m] Mounted [0;1;39mKernel Debug File System[0m.
+[    3.592816] systemd[1]: Mounted Kernel Trace File System.
+[[0;32m  OK  [0m] Mounted [0;1;39mKernel Trace File System[0m.
+[    3.594491] systemd[1]: Started Journal Service.
+[[0;32m  OK  [0m] Started [0;1;39mJournal Service[0m.
+[    3.595923] bridge: filtering via arp/ip/ip6tables is no longer available by default. Update your scripts to load br_netfilter if you need this.
+[[0;32m  OK  [0m] Finished [0;1;39mCreate list of st… nodes for the current kernel[0m.
+[    3.598586] Bridge firewalling registered
+[[0;32m  OK  [0m] Finished [0;1;39mRemount Root and Kernel File Systems[0m.
+[[0;32m  OK  [0m] Finished [0;1;39mUncomplicated firewall[0m.
+         Activating swap [0;1;39m/swap.img[0m...
+         Starting [0;1;39mFlush Journal to Persistent Storage[0m...
+         Starting [0;1;39mLoad/Save Random Seed[0m...
+         Starting [0;1;39mCreate System Users[0m...
+[    3.608490] systemd-journald[419]: Received client request to flush runtime journal.
+[[0;32m  OK  [0m] Finished [0;1;39mMonitoring of LVM… dmeventd or progress polling[0m.
+[[0;32m  OK  [0m] Finished [0;1;39mCreate System Users[0m.
+         Starting [0;1;39mCreate Static Device Nodes in /dev[0m...
+[[0;32m  OK  [0m] Finished [0;1;39mudev Coldplug all Devices[0m.
+         Starting [0;1;39mudev Wait for Complete Device Initialization[0m...
+[[0;32m  OK  [0m] Finished [0;1;39mSet the console keyboard layout[0m.
+[    3.622888] systemd-journald[419]: File /var/log/journal/ae22bc31d4cc49a5b05e4203c7927874/system.journal corrupted or uncleanly shut down, renaming and replacing.
+[[0;32m  OK  [0m] Finished [0;1;39mCreate Static Device Nodes in /dev[0m.
+[    3.628497] Adding 4194300k swap on /swap.img.  Priority:-2 extents:6 across:4726780k FS
+         Starting [0;1;39mudev Kernel Device Manager[0m...
+[[0;32m  OK  [0m] Activated swap [0;1;39m/swap.img[0m.
+[[0;32m  OK  [0m] Finished [0;1;39mLoad/Save Random Seed[0m.
+[[0;32m  OK  [0m] Reached target [0;1;39mSwap[0m.
+[    3.697174] IPVS: Registered protocols (TCP, UDP, SCTP, AH, ESP)
+[    3.698702] IPVS: Connection hash table configured (size=4096, memory=64Kbytes)
+[    3.700516] IPVS: ipvs loaded.
+[    3.702041] IPVS: [rr] scheduler registered.
+[    3.703982] IPVS: [sh] scheduler registered.
+[    3.705990] IPVS: [wrr] scheduler registered.
+[[0;32m  OK  [0m] Finished [0;1;39mLoad Kernel Modules[0m.
+         Mounting [0;1;39mFUSE Control File System[0m...
+         Mounting [0;1;39mKernel Configuration File System[0m...
+         Starting [0;1;39mApply Kernel Variables[0m...
+[[0;32m  OK  [0m] Mounted [0;1;39mFUSE Control File System[0m.
+[[0;32m  OK  [0m] Mounted [0;1;39mKernel Configuration File System[0m.
+[[0;32m  OK  [0m] Finished [0;1;39mApply Kernel Variables[0m.
+[[0;32m  OK  [0m] Finished [0;1;39mFlush Journal to Persistent Storage[0m.
+[[0;32m  OK  [0m] Started [0;1;39mudev Kernel Device Manager[0m.
+[[0;32m  OK  [0m] Started [0;1;39mDispatch Password …ts to Console Directory Watch[0m.
+[[0;32m  OK  [0m] Reached target [0;1;39mLocal Encrypted Volumes[0m.
+[[0;32m  OK  [0m] Found device [0;1;39m/dev/ttyS0[0m.
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(), to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_io_cmd(): default, to inhoinno 
+[FEMU] Err: /femu/nvme-io.c : nvme_rw(), to inhoinno 
+[FEMU] Err: dram.c : backend_rw(), to inhoinno 
+[FEMU] Err: nvme-io.c : nvme_post_cqe(), to inhoinno 
+[[0;32m  OK  [0m] Listening on [0;1;39mLoad/Save RF …itch Status /dev/rfkill Watch[0m.
+[[0;32m  OK  [0m] Created slice [0;1;39msystem-lvm2\x2dpvscan.slice[0m.
+         Starting [0;1;39mLVM event activation on device 8:3[0m...
+[[0;32m  OK  [0m] Found device [0;1;39mQEMU_HARDDISK 2[0m.
+[[0;32m  OK  [0m] Finished [0;1;39mLVM event activation on device 8:3[0m.
+[[0;32m  OK  [0m] Finished [0;1;39mudev Wait for Complete Device Initialization[0m.
+         Starting [0;1;39mDevice-Mapper Multipath Device Controller[0m...
+[[0;32m  OK  [0m] Started [0;1;39mDevice-Mapper Multipath Device Controller[0m.
+[[0;32m  OK  [0m] Reached target [0;1;39mLocal File Systems (Pre)[0m.
+         Mounting [0;1;39mMount unit for core18, revision 2128[0m...
+         Mounting [0;1;39mMount unit for core18, revision 2284[0m...
+         Mounting [0;1;39mMount unit for core20, revision 1328[0m...
+         Mounting [0;1;39mMount unit for core20, revision 1361[0m...
+         Mounting [0;1;39mMount unit for docker, revision 1125[0m...
+         Mounting [0;1;39mMount unit for docker, revision 1458[0m...
+         Mounting [0;1;39mMount unit for lxd, revision 21835[0m...
+         Mounting [0;1;39mMount unit for lxd, revision 22526[0m...
+         Mounting [0;1;39mMount unit for microk8s, revision 2848[0m...
+         Mounting [0;1;39mMount unit for microk8s, revision 2948[0m...
+         Mounting [0;1;39mMount unit for snapd, revision 14978[0m...
+         Starting [0;1;39mFile System Check…e72d-4f51-ba47-71a8059660b3[0m...
+[[0;32m  OK  [0m] Started [0;1;39mFile System Check Daemon to report status[0m.
+[[0;32m  OK  [0m] Mounted [0;1;39mMount unit for core18, revision 2284[0m.
+[[0;32m  OK  [0m] Mounted [0;1;39mMount unit for core18, revision 2128[0m.
+[[0;32m  OK  [0m] Mounted [0;1;39mMount unit for core20, revision 1328[0m.
+[[0;32m  OK  [0m] Mounted [0;1;39mMount unit for core20, revision 1361[0m.
+[[0;32m  OK  [0m] Mounted [0;1;39mMount unit for docker, revision 1125[0m.
+[[0;32m  OK  [0m] Finished [0;1;39mFile System Check…e-e72d-4f51-ba47-71a8059660b3[0m.
+         Mounting [0;1;39m/boot[0m...
+[[0;32m  OK  [0m] Mounted [0;1;39mMount unit for docker, revision 1458[0m.
+[[0;32m  OK  [0m] Mounted [0;1;39m/boot[0m.
+[[0;32m  OK  [0m] Mounted [0;1;39mMount unit for lxd, revision 21835[0m.
+[[0;32m  OK  [0m] Mounted [0;1;39mMount unit for microk8s, revision 2848[0m.
+[[0;32m  OK  [0m] Mounted [0;1;39mMount unit for microk8s, revision 2948[0m.
+[[0;32m  OK  [0m] Mounted [0;1;39mMount unit for snapd, revision 14978[0m.
+[[0;32m  OK  [0m] Mounted [0;1;39mMount unit for lxd, revision 22526[0m.
+[[0;32m  OK  [0m] Reached target [0;1;39mLocal File Systems[0m.
+         Starting [0;1;39mLoad AppArmor profiles[0m...
+         Starting [0;1;39mSet console font and keymap[0m...
+         Starting [0;1;39mCreate final runt…dir for shutdown pivot root[0m...
+         Starting [0;1;39mTell Plymouth To Write Out Runtime Data[0m...
+         Starting [0;1;39mCreate Volatile Files and Directories[0m...
+[[0;32m  OK  [0m] Finished [0;1;39mSet console font and keymap[0m.
+[[0;32m  OK  [0m] Finished [0;1;39mCreate final runt…e dir for shutdown pivot root[0m.
+[[0;32m  OK  [0m] Finished [0;1;39mTell Plymouth To Write Out Runtime Data[0m.
+[[0;32m  OK  [0m] Finished [0;1;39mCreate Volatile Files and Directories[0m.
+         Starting [0;1;39mNetwork Time Synchronization[0m...
+         Starting [0;1;39mUpdate UTMP about System Boot/Shutdown[0m...
+[[0;32m  OK  [0m] Finished [0;1;39mLoad AppArmor profiles[0m.
+[[0;32m  OK  [0m] Finished [0;1;39mUpdate UTMP about System Boot/Shutdown[0m.
+         Starting [0;1;39mLoad AppArmor pro…managed internally by snapd[0m...
+         Starting [0;1;39mInitial cloud-init job (pre-networking)[0m...
+[[0;32m  OK  [0m] Started [0;1;39mNetwork Time Synchronization[0m.
+[[0;32m  OK  [0m] Reached target [0;1;39mSystem Time Set[0m.
+[[0;32m  OK  [0m] Reached target [0;1;39mSystem Time Synchronized[0m.
+[[0;32m  OK  [0m] Finished [0;1;39mLoad AppArmor pro…s managed internally by snapd[0m.
+[    4.805022] cloud-init[793]: Cloud-init v. 21.4-0ubuntu1~20.04.1 running 'init-local' at Sat, 05 Mar 2022 15:29:32 +0000. Up 4.61 seconds.
+[[0;32m  OK  [0m] Finished [0;1;39mInitial cloud-init job (pre-networking)[0m.
+[[0;32m  OK  [0m] Reached target [0;1;39mNetwork (Pre)[0m.
+         Starting [0;1;39mNetwork Service[0m...
+[[0;32m  OK  [0m] Started [0;1;39mNetwork Service[0m.
+         Starting [0;1;39mWait for Network to be Configured[0m...
+         Starting [0;1;39mNetwork Name Resolution[0m...
+[[0;32m  OK  [0m] Finished [0;1;39mWait for Network to be Configured[0m.
+         Starting [0;1;39mInitial cloud-ini… (metadata service crawler)[0m...
+[[0;32m  OK  [0m] Started [0;1;39mNetwork Name Resolution[0m.
+[[0;32m  OK  [0m] Reached target [0;1;39mHost and Network Name Lookups[0m.
+[    5.172798] cloud-init[819]: Cloud-init v. 21.4-0ubuntu1~20.04.1 running 'init' at Sat, 05 Mar 2022 15:29:33 +0000. Up 5.09 seconds.
+[    5.173943] cloud-init[819]: ci-info: ++++++++++++++++++++++++++++++++++++++Net device info++++++++++++++++++++++++++++++++++++++
+[    5.174960] cloud-init[819]: ci-info: +--------+------+----------------------------+---------------+--------+-------------------+
+[    5.175979] cloud-init[819]: ci-info: | Device |  Up  |          Address           |      Mask     | Scope  |     Hw-Address    |
+[    5.177010] cloud-init[819]: ci-info: +--------+------+----------------------------+---------------+--------+-------------------+
+[    5.177996] cloud-init[819]: ci-info: |  ens3  | True |         10.0.2.15          | 255.255.255.0 | global | 52:54:00:12:34:56 |
+[    5.179018] cloud-init[819]: ci-info: |  ens3  | True | fec0::5054:ff:fe12:3456/64 |       .       |  site  | 52:54:00:12:34:56 |
+[    5.180012] cloud-init[819]: ci-info: |  ens3  | True | fe80::5054:ff:fe12:3456/64 |       .       |  link  | 52:54:00:12:34:56 |
+[    5.180924] cloud-init[819]: ci-info: |   lo   | True |         127.0.0.1          |   255.0.0.0   |  host  |         .         |
+[    5.181736] cloud-init[819]: ci-info: |   lo   | True |          ::1/128           |       .       |  host  |         .         |
+[    5.182625] cloud-init[819]: ci-info: +--------+------+----------------------------+---------------+--------+-------------------+
+[    5.183430] cloud-init[819]: ci-info: ++++++++++++++++++++++++++++Route IPv4 info+++++++++++++++++++++++++++++
+[    5.184227] cloud-init[819]: ci-info: +-------+-------------+----------+-----------------+-----------+-------+
+[    5.185102] cloud-init[819]: ci-info: | Route | Destination | Gateway  |     Genmask     | Interface | Flags |
+[    5.186000] cloud-init[819]: ci-info: +-------+-------------+----------+-----------------+-----------+-------+
+[    5.186900] cloud-init[819]: ci-info: |   0   |   0.0.0.0   | 10.0.2.2 |     0.0.0.0     |    ens3   |   UG  |
+[    5.187941] cloud-init[819]: ci-info: |   1   |   0.0.0.0   | 10.0.2.2 |     0.0.0.0     |    ens3   |   UG  |
+[    5.188891] cloud-init[819]: ci-info: |   2   |   10.0.2.0  | 0.0.0.0  |  255.255.255.0  |    ens3   |   U   |
+[    5.189673] cloud-init[819]: ci-info: |   3   |   10.0.2.2  | 0.0.0.0  | 255.255.255.255 |    ens3   |   UH  |
+[    5.190505] cloud-init[819]: ci-info: +-------+-------------+----------+-----------------+-----------+-------+
+[    5.191258] cloud-init[819]: ci-info: +++++++++++++++++++Route IPv6 info+++++++++++++++++++
+[    5.191992] cloud-init[819]: ci-info: +-------+-------------+---------+-----------+-------+
+[    5.192665] cloud-init[819]: ci-info: | Route | Destination | Gateway | Interface | Flags |
+[    5.193348] cloud-init[819]: ci-info: +-------+-------------+---------+-----------+-------+
+[    5.194026] cloud-init[819]: ci-info: |   1   |  fe80::/64  |    ::   |    ens3   |   U   |
+[    5.194768] cloud-init[819]: ci-info: |   2   |  fec0::/64  |    ::   |    ens3   |   Ue  |
+[    5.195568] cloud-init[819]: ci-info: |   3   |     ::/0    | fe80::2 |    ens3   |  UGe  |
+[    5.196257] cloud-init[819]: ci-info: |   5   |    local    |    ::   |    ens3   |   U   |
+[    5.196902] cloud-init[819]: ci-info: |   6   |   ff00::/8  |    ::   |    ens3   |   U   |
+[    5.197698] cloud-init[819]: ci-info: +-------+-------------+---------+-----------+-------+
+[[0;32m  OK  [0m] Finished [0;1;39mInitial cloud-ini…ob (metadata service crawler)[0m.
+[[0;32m  OK  [0m] Reached target [0;1;39mCloud-config availability[0m.
+[[0;32m  OK  [0m] Reached target [0;1;39mSystem Initialization[0m.
+[[0;32m  OK  [0m] Started [0;1;39mTrigger to poll fo…y enabled on GCP LTS non-pro)[0m.
+[[0;32m  OK  [0m] Started [0;1;39mDaily apt download activities[0m.
+[[0;32m  OK  [0m] Started [0;1;39mDaily apt upgrade and clean activities[0m.
+[[0;32m  OK  [0m] Started [0;1;39mPeriodic ext4 Onli…ata Check for All Filesystems[0m.
+[[0;32m  OK  [0m] Started [0;1;39mDiscard unused blocks once a week[0m.
+[[0;32m  OK  [0m] Started [0;1;39mRefresh fwupd metadata regularly[0m.
+[[0;32m  OK  [0m] Started [0;1;39mDaily rotation of log files[0m.
+[[0;32m  OK  [0m] Started [0;1;39mDaily man-db regeneration[0m.
+[[0;32m  OK  [0m] Started [0;1;39mMessage of the Day[0m.
+[[0;32m  OK  [0m] Started [0;1;39mDaily Cleanup of Temporary Directories[0m.
+[[0;32m  OK  [0m] Started [0;1;39mUbuntu Advantage Timer for running repeated jobs[0m.
+[[0;32m  OK  [0m] Reached target [0;1;39mPaths[0m.
+[[0;32m  OK  [0m] Reached target [0;1;39mTimers[0m.
+[[0;32m  OK  [0m] Listening on [0;1;39mAvahi mDNS/DNS-SD Stack Activation Socket[0m.
+[[0;32m  OK  [0m] Listening on [0;1;39mcloud-init hotplug hook socket[0m.
+[[0;32m  OK  [0m] Listening on [0;1;39mD-Bus System Message Bus Socket[0m.
+[[0;32m  OK  [0m] Listening on [0;1;39mOpen-iSCSI iscsid Socket[0m.
+[[0;32m  OK  [0m] Listening on [0;1;39mSocket unix for snap application lxd.daemon[0m.
+         Starting [0;1;39mSocket activation for snappy daemon[0m.
+[[0;32m  OK  [0m] Listening on [0;1;39mUUID daemon activation socket[0m.
+[[0;32m  OK  [0m] Listening on [0;1;39mSocket activation for snappy daemon[0m.
+[[0;32m  OK  [0m] Reached target [0;1;39mSockets[0m.
+[[0;32m  OK  [0m] Reached target [0;1;39mBasic System[0m.
+         Starting [0;1;39mAccounts Service[0m...
+         Starting [0;1;39mAvahi mDNS/DNS-SD Stack[0m...
+[[0;32m  OK  [0m] Started [0;1;39mD-Bus System Message Bus[0m.
+         Starting [0;1;39mNetwork Manager[0m...
+[[0;32m  OK  [0m] Started [0;1;39mSave initial kernel messages after boot[0m.
+         Starting [0;1;39mRemove Stale Onli…t4 Metadata Check Snapshots[0m...
+         Starting [0;1;39mRecord successful boot for GRUB[0m...
+[[0;32m  OK  [0m] Started [0;1;39mirqbalance daemon[0m.
+         Starting [0;1;39mDispatcher daemon for systemd-networkd[0m...
+         Starting [0;1;39mAuthorization Manager[0m...
+         Starting [0;1;39mRestore /etc/reso… the ppp link was shut down[0m...
+         Starting [0;1;39mSystem Logging Service[0m...
+         Starting [0;1;39mSnap Daemon[0m...
+         Starting [0;1;39mSwitcheroo Control Proxy service[0m...
+         Starting [0;1;39mLogin Service[0m...
+         Starting [0;1;39mDisk Manager[0m...
+         Starting [0;1;39mWPA supplicant[0m...
+[[0;32m  OK  [0m] Finished [0;1;39mRemove Stale Onli…ext4 Metadata Check Snapshots[0m.
+[[0;32m  OK  [0m] Finished [0;1;39mRestore /etc/reso…re the ppp link was shut down[0m.
+[[0;32m  OK  [0m] Started [0;1;39mSystem Logging Service[0m.
+[[0;32m  OK  [0m] Finished [0;1;39mRecord successful boot for GRUB[0m.
+         Starting [0;1;39mGRUB failed boot detection[0m...
+[[0;32m  OK  [0m] Finished [0;1;39mGRUB failed boot detection[0m.
+[[0;32m  OK  [0m] Started [0;1;39mLogin Service[0m.
+[[0;32m  OK  [0m] Started [0;1;39mAvahi mDNS/DNS-SD Stack[0m.
+[[0;32m  OK  [0m] Started [0;1;39mWPA supplicant[0m.
+[[0;32m  OK  [0m] Started [0;1;39mSwitcheroo Control Proxy service[0m.
+[[0;32m  OK  [0m] Started [0;1;39mDispatcher daemon for systemd-networkd[0m.
+[[0;32m  OK  [0m] Started [0;1;39mAuthorization Manager[0m.
+         Starting [0;1;39mModem Manager[0m...
+[[0;32m  OK  [0m] Started [0;1;39mNetwork Manager[0m.
+[[0;32m  OK  [0m] Reached target [0;1;39mNetwork[0m.
+         Starting [0;1;39mNetwork Manager Wait Online[0m...
+[[0;32m  OK  [0m] Started [0;1;39mService for snap application docker.dockerd[0m.
+         Starting [0;1;39mService for snap application lxd.activate[0m...
+[[0;32m  OK  [0m] Started [0;1;39mService for snap a…rok8s.daemon-apiserver-kicker[0m.
+[[0;32m  OK  [0m] Started [0;1;39mService for snap a…ion microk8s.daemon-apiserver[0m.
+[[0;32m  OK  [0m] Started [0;1;39mService for snap a…microk8s.daemon-cluster-agent[0m.
+         Starting [0;1;39mService for snap … microk8s.daemon-containerd[0m...
+[[0;32m  OK  [0m] Started [0;1;39mService for snap a…s.daemon-control-plane-kicker[0m.
+[[0;32m  OK  [0m] Started [0;1;39mService for snap a…k8s.daemon-controller-manager[0m.
+[[0;32m  OK  [0m] Started [0;1;39mService for snap a…lication microk8s.daemon-etcd[0m.
+[[0;32m  OK  [0m] Started [0;1;39mService for snap a…tion microk8s.daemon-flanneld[0m.
+[[0;32m  OK  [0m] Started [0;1;39mService for snap a…on microk8s.daemon-k8s-dqlite[0m.
+[[0;32m  OK  [0m] Started [0;1;39mService for snap a…ation microk8s.daemon-kubelet[0m.
+[[0;32m  OK  [0m] Started [0;1;39mService for snap a…tion microk8s.daemon-kubelite[0m.
+[[0;32m  OK  [0m] Started [0;1;39mService for snap a…ication microk8s.daemon-proxy[0m.
+[[0;32m  OK  [0m] Started [0;1;39mService for snap a…ion microk8s.daemon-scheduler[0m.
+[[0;32m  OK  [0m] Started [0;1;39mService for snap a…ation microk8s.daemon-traefik[0m.
+[[0;32m  OK  [0m] Started [0;1;39mUnattended Upgrades Shutdown[0m.
+[[0;32m  OK  [0m] Started [0;1;39mAccounts Service[0m.
+         Starting [0;1;39mHostname Service[0m...
+[[0;32m  OK  [0m] Started [0;1;39mModem Manager[0m.
+[[0;32m  OK  [0m] Started [0;1;39mDisk Manager[0m.
+[[0;32m  OK  [0m] Started [0;1;39mHostname Service[0m.
+         Starting [0;1;39mNetwork Manager Script Dispatcher Service[0m...
+[[0;32m  OK  [0m] Started [0;1;39mNetwork Manager Script Dispatcher Service[0m.
+[[0;32m  OK  [0m] Finished [0;1;39mNetwork Manager Wait Online[0m.
+[[0;32m  OK  [0m] Reached target [0;1;39mNetwork is Online[0m.
+[[0;32m  OK  [0m] Reached target [0;1;39mRemote File Systems (Pre)[0m.
+[[0;32m  OK  [0m] Reached target [0;1;39mRemote File Systems[0m.
+         Starting [0;1;39mLSB: automatic crash report generation[0m...
+         Starting [0;1;39mDeferred execution scheduler[0m...
+         Starting [0;1;39mAvailability of block devices[0m...
+[[0;32m  OK  [0m] Started [0;1;39mRegular background program processing daemon[0m.
+         Starting [0;1;39mOpenBSD Secure Shell server[0m...
+         Starting [0;1;39mPermit User Sessions[0m...
+[[0;32m  OK  [0m] Started [0;1;39mDeferred execution scheduler[0m.
+[[0;32m  OK  [0m] Finished [0;1;39mAvailability of block devices[0m.
+[[0;32m  OK  [0m] Finished [0;1;39mPermit User Sessions[0m.
+         Starting [0;1;39mGNOME Display Manager[0m...
+         Starting [0;1;39mHold until boot process finishes up[0m...
+[[0;32m  OK  [0m] Finished [0;1;39mHold until boot process finishes up[0m.
+[[0;32m  OK  [0m] Started [0;1;39mSerial Getty on ttyS0[0m.
+[[0;32m  OK  [0m] Reached target [0;1;39mLogin Prompts[0m.
+         Starting [0;1;39mSet console scheme[0m...
+[[0;32m  OK  [0m] Finished [0;1;39mSet console scheme[0m.
+[[0;32m  OK  [0m] Created slice [0;1;39msystem-getty.slice[0m.
+[[0;32m  OK  [0m] Started [0;1;39mLSB: automatic crash report generation[0m.
+[[0;32m  OK  [0m] Started [0;1;39mOpenBSD Secure Shell server[0m.
+[[0;32m  OK  [0m] Started [0;1;39mGNOME Display Manager[0m.
+[[0;32m  OK  [0m] Created slice [0;1;39mUser Slice of UID 0[0m.
+         Starting [0;1;39mUser Runtime Directory /run/user/0[0m...
+[[0;32m  OK  [0m] Finished [0;1;39mUser Runtime Directory /run/user/0[0m.
+         Starting [0;1;39mUser Manager for UID 0[0m...
+[[0;32m  OK  [0m] Started [0;1;39mUser Manager for UID 0[0m.
+[[0;32m  OK  [0m] Started [0;1;39mSession 1 of user root[0m.
+         Starting [0;1;39mDaemon for power management[0m...
+         Starting [0;1;39mLocation Lookup Service[0m...
+[[0;32m  OK  [0m] Started [0;1;39mDaemon for power management[0m.
+[[0;32m  OK  [0m] Started [0;1;39mLocation Lookup Service[0m.
+         Starting [0;1;39mPackageKit Daemon[0m...
+[[0;32m  OK  [0m] Started [0;1;39mPackageKit Daemon[0m.
+         Starting [0;1;39mLocale Service[0m...
+[[0;32m  OK  [0m] Started [0;1;39mLocale Service[0m.
+         Starting [0;1;39mManage, Install and Generate Color Profiles[0m...
+[[0;32m  OK  [0m] Started [0;1;39mManage, Install and Generate Color Profiles[0m.
+[    8.565800] overlayfs: missing 'lowerdir'
+[[0;32m  OK  [0m] Started [0;1;39mSnap Daemon[0m.
+         Starting [0;1;39mWait until snapd is fully seeded[0m...
+         Starting [0;1;39mTime & Date Service[0m...
+[[0;32m  OK  [0m] Started [0;1;39mTime & Date Service[0m.
+[[0;32m  OK  [0m] Finished [0;1;39mWait until snapd is fully seeded[0m.
+         Starting [0;1;39mApply the settings specified in cloud-config[0m...
+[[0;32m  OK  [0m] Finished [0;1;39mService for snap application lxd.activate[0m.
+[    9.081580] cloud-init[2038]: Cloud-init v. 21.4-0ubuntu1~20.04.1 running 'modules:config' at Sat, 05 Mar 2022 15:29:37 +0000. Up 9.02 seconds.
+[[0;32m  OK  [0m] Finished [0;1;39mApply the settings specified in cloud-config[0m.
+
+Ubuntu 20.04.3 LTS inhoinnofemu ttyS0
+
+inhoinnofemu login: [   11.353439] cloud-init[2223]: Cloud-init v. 21.4-0ubuntu1~20.04.1 running 'modules:final' at Sat, 05 Mar 2022 15:29:39 +0000. Up 11.28 seconds.
+[   11.354845] cloud-init[2223]: Cloud-init v. 21.4-0ubuntu1~20.04.1 finished at Sat, 05 Mar 2022 15:29:39 +0000. Datasource DataSourceNone.  Up 11.35 seconds
+[   11.356037] cloud-init[2223]: 2022-03-05 15:29:39,441 - cc_final_message.py[WARNING]: Used fallback datasource
+inhoinno
+Password: 
+Welcome to Ubuntu 20.04.3 LTS (GNU/Linux 5.10.0-051000-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Sat 05 Mar 2022 03:29:52 PM UTC
+
+  System load:              0.97
+  Usage of /:               33.9% of 38.63GB
+  Memory usage:             27%
+  Swap usage:               0%
+  Processes:                212
+  Users logged in:          1
+  IPv4 address for docker0: 172.17.0.1
+  IPv4 address for ens3:    10.0.2.15
+  IPv6 address for ens3:    fec0::5054:ff:fe12:3456
+
+ * Super-optimized for small spaces - read how we shrank the memory
+   footprint of MicroK8s to make it the smallest full K8s around.
+
+   https://ubuntu.com/blog/microk8s-memory-optimisation
+
+0 updates can be applied immediately.
+
+
+The list of available updates is more than a week old.
+To check for new updates run: sudo apt update
+
+Last login: Sat Mar  5 07:16:22 UTC 2022 on ttyS0
+root@inhoinnofemu:~# 

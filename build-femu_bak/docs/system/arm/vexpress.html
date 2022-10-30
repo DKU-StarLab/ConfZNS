@@ -1,0 +1,192 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Arm Versatile Express boards (vexpress-a9, vexpress-a15) &#8212; QEMU  documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Aspeed family boards (*-bmc, ast2500-evb, ast2600-evb)" href="aspeed.html" />
+    <link rel="prev" title="Arm Versatile boards (versatileab, versatilepb)" href="versatile.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="arm-versatile-express-boards-vexpress-a9-vexpress-a15">
+<h1>Arm Versatile Express boards (<code class="docutils literal notranslate"><span class="pre">vexpress-a9</span></code>, <code class="docutils literal notranslate"><span class="pre">vexpress-a15</span></code>)<a class="headerlink" href="#arm-versatile-express-boards-vexpress-a9-vexpress-a15" title="Permalink to this headline">¶</a></h1>
+<p>QEMU models two variants of the Arm Versatile Express development
+board family:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">vexpress-a9</span></code> models the combination of the Versatile Express
+motherboard and the CoreTile Express A9x4 daughterboard</li>
+<li><code class="docutils literal notranslate"><span class="pre">vexpress-a15</span></code> models the combination of the Versatile Express
+motherboard and the CoreTile Express A15x2 daughterboard</li>
+</ul>
+<p>Note that as this hardware does not have PCI, IDE or SCSI,
+the only available storage option is emulated SD card.</p>
+<p>Implemented devices:</p>
+<ul class="simple">
+<li>PL041 audio</li>
+<li>PL181 SD controller</li>
+<li>PL050 keyboard and mouse</li>
+<li>PL011 UARTs</li>
+<li>SP804 timers</li>
+<li>I2C controller</li>
+<li>PL031 RTC</li>
+<li>PL111 LCD display controller</li>
+<li>Flash memory</li>
+<li>LAN9118 ethernet</li>
+</ul>
+<p>Unimplemented devices:</p>
+<ul class="simple">
+<li>SP810 system control block</li>
+<li>PCI-express</li>
+<li>USB controller (Philips ISP1761)</li>
+<li>Local DAP ROM</li>
+<li>CoreSight interfaces</li>
+<li>PL301 AXI interconnect</li>
+<li>SCC</li>
+<li>System counter</li>
+<li>HDLCD controller (<code class="docutils literal notranslate"><span class="pre">vexpress-a15</span></code>)</li>
+<li>SP805 watchdog</li>
+<li>PL341 dynamic memory controller</li>
+<li>DMA330 DMA controller</li>
+<li>PL354 static memory controller</li>
+<li>BP147 TrustZone Protection Controller</li>
+<li>TrustZone Address Space Controller</li>
+</ul>
+<p>Other differences between the hardware and the QEMU model:</p>
+<ul class="simple">
+<li>QEMU will default to creating one CPU unless you pass a different
+<code class="docutils literal notranslate"><span class="pre">-smp</span></code> argument</li>
+<li>QEMU allows the amount of RAM provided to be specified with the
+<code class="docutils literal notranslate"><span class="pre">-m</span></code> argument</li>
+<li>QEMU defaults to providing a CPU which does not provide either
+TrustZone or the Virtualization Extensions: if you want these you
+must enable them with <code class="docutils literal notranslate"><span class="pre">-machine</span> <span class="pre">secure=on</span></code> and <code class="docutils literal notranslate"><span class="pre">-machine</span>
+<span class="pre">virtualization=on</span></code></li>
+<li>QEMU provides 4 virtio-mmio virtio transports; these start at
+address <code class="docutils literal notranslate"><span class="pre">0x10013000</span></code> for <code class="docutils literal notranslate"><span class="pre">vexpress-a9</span></code> and at <code class="docutils literal notranslate"><span class="pre">0x1c130000</span></code> for
+<code class="docutils literal notranslate"><span class="pre">vexpress-a15</span></code>, and have IRQs from 40 upwards. If a dtb is
+provided on the command line then QEMU will edit it to include
+suitable entries describing these transports for the guest.</li>
+</ul>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">QEMU</a></h1>
+
+
+
+<p class="blurb">System Emulation Users Guide</p>
+
+
+
+
+
+
+<div id="editpage">
+  <ul>
+    <li><a href="https://gitlab.com/qemu-project/qemu/-/blob/master/docs/system/arm/vexpress.rst">Page source</a></li>
+  </ul>
+</div><h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../invocation.html">Invocation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../keys.html">Keys in the graphical frontends</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mux-chardev.html">Keys in the character backend multiplexer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../monitor.html">QEMU Monitor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../images.html">Disk Images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../net.html">Network emulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../virtio-net-failover.html">QEMU virtio-net standby (net_failover)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../usb.html">USB emulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ivshmem.html">Inter-VM Shared Memory device</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../linuxboot.html">Direct Linux Boot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vnc-security.html">VNC security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tls.html">TLS setup for network services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gdb.html">GDB usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../managed-startup.html">Managed start up options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cpu-hotplug.html">Virtual CPU hotplug</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../virtio-pmem.html">virtio pmem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pr-manager.html">Persistent reservation managers</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../targets.html">QEMU System Emulator Targets</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../target-i386.html">x86 System emulator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../target-ppc.html">PowerPC System emulator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../target-sparc.html">Sparc32 System emulator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../target-sparc64.html">Sparc64 System emulator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../target-mips.html">MIPS System emulator</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../target-arm.html">Arm System emulator</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../target-arm.html#choosing-a-board-model">Choosing a board model</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../target-arm.html#board-specific-documentation">Board-specific documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../target-arm.html#arm-cpu-features">Arm CPU features</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../target-m68k.html">ColdFire System emulator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../target-xtensa.html">Xtensa System emulator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../target-s390x.html">s390x System emulator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../target-rx.html">RX System emulator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../target-avr.html">AVR System emulator</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deprecated.html">Deprecated features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deprecated.html#recently-removed-features">Recently removed features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../build-platforms.html">Supported build platforms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, The QEMU Project Developers.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

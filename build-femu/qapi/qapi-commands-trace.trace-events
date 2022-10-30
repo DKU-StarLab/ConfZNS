@@ -1,0 +1,6 @@
+# AUTOMATICALLY GENERATED, DO NOT MODIFY
+
+qmp_enter_trace_event_get_state(const char *json) "%s"
+qmp_exit_trace_event_get_state(const char *result, bool succeeded) "%s %d"
+qmp_enter_trace_event_set_state(const char *json) "%s"
+qmp_exit_trace_event_set_state(const char *result, bool succeeded) "%s %d"

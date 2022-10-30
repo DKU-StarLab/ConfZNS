@@ -1,0 +1,207 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>The virtual channel subsystem &#8212; QEMU  documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="3270 devices" href="3270.html" />
+    <link rel="prev" title="Adjunct Processor (AP) Device" href="vfio-ap.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="the-virtual-channel-subsystem">
+<h1>The virtual channel subsystem<a class="headerlink" href="#the-virtual-channel-subsystem" title="Permalink to this headline">¶</a></h1>
+<p>QEMU implements a virtual channel subsystem with subchannels, (mostly
+functionless) channel paths, and channel devices (virtio-ccw, 3270, and
+devices passed via vfio-ccw). It supports multiple subchannel sets (MSS) and
+multiple channel subsystems extended (MCSS-E).</p>
+<p>All channel devices support the <code class="docutils literal notranslate"><span class="pre">devno</span></code> property, which takes a parameter
+in the form <code class="docutils literal notranslate"><span class="pre">&lt;cssid&gt;.&lt;ssid&gt;.&lt;device</span> <span class="pre">number&gt;</span></code>.</p>
+<p>The default channel subsystem image id (<code class="docutils literal notranslate"><span class="pre">&lt;cssid&gt;</span></code>) is <code class="docutils literal notranslate"><span class="pre">0xfe</span></code>. Devices in
+there will show up in channel subsystem image <code class="docutils literal notranslate"><span class="pre">0</span></code> to guests that do not
+enable MCSS-E. Note that devices with a different cssid will not be visible
+if the guest OS does not enable MCSS-E (which is true for all supported guest
+operating systems today).</p>
+<p>Supported values for the subchannel set id (<code class="docutils literal notranslate"><span class="pre">&lt;ssid&gt;</span></code>) range from <code class="docutils literal notranslate"><span class="pre">0-3</span></code>.
+Devices with a ssid that is not <code class="docutils literal notranslate"><span class="pre">0</span></code> will not be visible if the guest OS
+does not enable MSS (any Linux version that supports virtio also enables MSS).
+Any device may be put into any subchannel set, there is no restriction by
+device type.</p>
+<p>The device number can range from <code class="docutils literal notranslate"><span class="pre">0-0xffff</span></code>.</p>
+<p>If the <code class="docutils literal notranslate"><span class="pre">devno</span></code> property is not specified for a device, QEMU will choose the
+next free device number in subchannel set 0, skipping to the next subchannel
+set if no more device numbers are free.</p>
+<p>QEMU places a device at the first free subchannel in the specified subchannel
+set. If a device is hotunplugged and later replugged, it may appear at a
+different subchannel. (This is similar to how z/VM works.)</p>
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first">a virtio-net device, cssid/ssid/devno automatically assigned:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">device</span> <span class="n">virtio</span><span class="o">-</span><span class="n">net</span><span class="o">-</span><span class="n">ccw</span>
+</pre></div>
+</div>
+<p>In a Linux guest (without default devices and no other devices specified
+prior to this one), this will show up as <code class="docutils literal notranslate"><span class="pre">0.0.0000</span></code> under subchannel
+<code class="docutils literal notranslate"><span class="pre">0.0.0000</span></code>.</p>
+<p>The auto-assigned-properties in QEMU (as seen via e.g. <code class="docutils literal notranslate"><span class="pre">info</span> <span class="pre">qtree</span></code>)
+would be <code class="docutils literal notranslate"><span class="pre">dev_id</span> <span class="pre">=</span> <span class="pre">&quot;fe.0.0000&quot;</span></code> and <code class="docutils literal notranslate"><span class="pre">subch_id</span> <span class="pre">=</span> <span class="pre">&quot;fe.0.0000&quot;</span></code>.</p>
+</li>
+<li><p class="first">a virtio-rng device in subchannel set <code class="docutils literal notranslate"><span class="pre">0</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">device</span> <span class="n">virtio</span><span class="o">-</span><span class="n">rng</span><span class="o">-</span><span class="n">ccw</span><span class="p">,</span><span class="n">devno</span><span class="o">=</span><span class="n">fe</span><span class="o">.</span><span class="mf">0.0042</span>
+</pre></div>
+</div>
+<p>If added to the same Linux guest as above, it would show up as <code class="docutils literal notranslate"><span class="pre">0.0.0042</span></code>
+under subchannel <code class="docutils literal notranslate"><span class="pre">0.0.0001</span></code>.</p>
+<p>The properties for the device would be <code class="docutils literal notranslate"><span class="pre">dev_id</span> <span class="pre">=</span> <span class="pre">&quot;fe.0.0042&quot;</span></code> and
+<code class="docutils literal notranslate"><span class="pre">subch_id</span> <span class="pre">=</span> <span class="pre">&quot;fe.0.0001&quot;</span></code>.</p>
+</li>
+<li><p class="first">a virtio-gpu device in subchannel set <code class="docutils literal notranslate"><span class="pre">2</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">device</span> <span class="n">virtio</span><span class="o">-</span><span class="n">gpu</span><span class="o">-</span><span class="n">ccw</span><span class="p">,</span><span class="n">devno</span><span class="o">=</span><span class="n">fe</span><span class="o">.</span><span class="mf">2.1111</span>
+</pre></div>
+</div>
+<p>If added to the same Linux guest as above, it would show up as <code class="docutils literal notranslate"><span class="pre">0.2.1111</span></code>
+under subchannel <code class="docutils literal notranslate"><span class="pre">0.2.0000</span></code>.</p>
+<p>The properties for the device would be <code class="docutils literal notranslate"><span class="pre">dev_id</span> <span class="pre">=</span> <span class="pre">&quot;fe.2.1111&quot;</span></code> and
+<code class="docutils literal notranslate"><span class="pre">subch_id</span> <span class="pre">=</span> <span class="pre">&quot;fe.2.0000&quot;</span></code>.</p>
+</li>
+<li><p class="first">a virtio-mouse device in a non-standard channel subsystem image:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">device</span> <span class="n">virtio</span><span class="o">-</span><span class="n">mouse</span><span class="o">-</span><span class="n">ccw</span><span class="p">,</span><span class="n">devno</span><span class="o">=</span><span class="mf">2.0</span><span class="o">.</span><span class="mi">2222</span>
+</pre></div>
+</div>
+<p>This would not show up in a standard Linux guest.</p>
+<p>The properties for the device would be <code class="docutils literal notranslate"><span class="pre">dev_id</span> <span class="pre">=</span> <span class="pre">&quot;2.0.2222&quot;</span></code> and
+<code class="docutils literal notranslate"><span class="pre">subch_id</span> <span class="pre">=</span> <span class="pre">&quot;2.0.0000&quot;</span></code>.</p>
+</li>
+<li><p class="first">a virtio-keyboard device in another non-standard channel subsystem image:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">device</span> <span class="n">virtio</span><span class="o">-</span><span class="n">keyboard</span><span class="o">-</span><span class="n">ccw</span><span class="p">,</span><span class="n">devno</span><span class="o">=</span><span class="mf">0.0</span><span class="o">.</span><span class="mi">1234</span>
+</pre></div>
+</div>
+<p>This would not show up in a standard Linux guest, either, as <code class="docutils literal notranslate"><span class="pre">0</span></code> is not
+the standard channel subsystem image id.</p>
+<p>The properties for the device would be <code class="docutils literal notranslate"><span class="pre">dev_id</span> <span class="pre">=</span> <span class="pre">&quot;0.0.1234&quot;</span></code> and
+<code class="docutils literal notranslate"><span class="pre">subch_id</span> <span class="pre">=</span> <span class="pre">&quot;0.0.0000&quot;</span></code>.</p>
+</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">QEMU</a></h1>
+
+
+
+<p class="blurb">System Emulation Users Guide</p>
+
+
+
+
+
+
+<div id="editpage">
+  <ul>
+    <li><a href="https://gitlab.com/qemu-project/qemu/-/blob/master/docs/system/s390x/css.rst">Page source</a></li>
+  </ul>
+</div><h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../invocation.html">Invocation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../keys.html">Keys in the graphical frontends</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mux-chardev.html">Keys in the character backend multiplexer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../monitor.html">QEMU Monitor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../images.html">Disk Images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../net.html">Network emulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../virtio-net-failover.html">QEMU virtio-net standby (net_failover)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../usb.html">USB emulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ivshmem.html">Inter-VM Shared Memory device</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../linuxboot.html">Direct Linux Boot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vnc-security.html">VNC security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tls.html">TLS setup for network services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gdb.html">GDB usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../managed-startup.html">Managed start up options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cpu-hotplug.html">Virtual CPU hotplug</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../virtio-pmem.html">virtio pmem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pr-manager.html">Persistent reservation managers</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../targets.html">QEMU System Emulator Targets</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../target-i386.html">x86 System emulator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../target-ppc.html">PowerPC System emulator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../target-sparc.html">Sparc32 System emulator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../target-sparc64.html">Sparc64 System emulator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../target-mips.html">MIPS System emulator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../target-arm.html">Arm System emulator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../target-m68k.html">ColdFire System emulator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../target-xtensa.html">Xtensa System emulator</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../target-s390x.html">s390x System emulator</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../target-s390x.html#device-support">Device support</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../target-s390x.html#architectural-features">Architectural features</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../target-rx.html">RX System emulator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../target-avr.html">AVR System emulator</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deprecated.html">Deprecated features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deprecated.html#recently-removed-features">Recently removed features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../build-platforms.html">Supported build platforms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, The QEMU Project Developers.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

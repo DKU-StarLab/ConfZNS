@@ -1,0 +1,10 @@
+# AUTOMATICALLY GENERATED, DO NOT MODIFY
+
+qmp_enter_qmp_capabilities(const char *json) "%s"
+qmp_exit_qmp_capabilities(const char *result, bool succeeded) "%s %d"
+qmp_enter_query_version(const char *json) "%s"
+qmp_exit_query_version(const char *result, bool succeeded) "%s %d"
+qmp_enter_query_commands(const char *json) "%s"
+qmp_exit_query_commands(const char *result, bool succeeded) "%s %d"
+qmp_enter_quit(const char *json) "%s"
+qmp_exit_quit(const char *result, bool succeeded) "%s %d"

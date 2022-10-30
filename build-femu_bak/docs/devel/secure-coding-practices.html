@@ -1,0 +1,222 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Secure Coding Practices &#8212; QEMU  documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Translator Internals" href="tcg.html" />
+    <link rel="prev" title="Decodetree Specification" href="decodetree.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="secure-coding-practices">
+<h1>Secure Coding Practices<a class="headerlink" href="#secure-coding-practices" title="Permalink to this headline">¶</a></h1>
+<p>This document covers topics that both developers and security researchers must
+be aware of so that they can develop safe code and audit existing code
+properly.</p>
+<div class="section" id="reporting-security-bugs">
+<h2>Reporting Security Bugs<a class="headerlink" href="#reporting-security-bugs" title="Permalink to this headline">¶</a></h2>
+<p>For details on how to report security bugs or ask questions about potential
+security bugs, see the <a class="reference external" href="https://wiki.qemu.org/SecurityProcess">Security Process wiki page</a>.</p>
+</div>
+<div class="section" id="general-secure-c-coding-practices">
+<h2>General Secure C Coding Practices<a class="headerlink" href="#general-secure-c-coding-practices" title="Permalink to this headline">¶</a></h2>
+<p>Most CVEs (security bugs) reported against QEMU are not specific to
+virtualization or emulation.  They are simply C programming bugs.  Therefore
+it’s critical to be aware of common classes of security bugs.</p>
+<p>There is a wide selection of resources available covering secure C coding.  For
+example, the <a class="reference external" href="https://wiki.sei.cmu.edu/confluence/display/c/SEI+CERT+C+Coding+Standard">CERT C Coding Standard</a>
+covers the most important classes of security bugs.</p>
+<p>Instead of describing them in detail here, only the names of the most important
+classes of security bugs are mentioned:</p>
+<ul class="simple">
+<li>Buffer overflows</li>
+<li>Use-after-free and double-free</li>
+<li>Integer overflows</li>
+<li>Format string vulnerabilities</li>
+</ul>
+<p>Some of these classes of bugs can be detected by analyzers.  Static analysis is
+performed regularly by Coverity and the most obvious of these bugs are even
+reported by compilers.  Dynamic analysis is possible with valgrind, tsan, and
+asan.</p>
+</div>
+<div class="section" id="input-validation">
+<h2>Input Validation<a class="headerlink" href="#input-validation" title="Permalink to this headline">¶</a></h2>
+<p>Inputs from the guest or external sources (e.g. network, files) cannot be
+trusted and may be invalid.  Inputs must be checked before using them in a way
+that could crash the program, expose host memory to the guest, or otherwise be
+exploitable by an attacker.</p>
+<p>The most sensitive attack surface is device emulation.  All hardware register
+accesses and data read from guest memory must be validated.  A typical example
+is a device that contains multiple units that are selectable by the guest via
+an index register:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">typedef</span> <span class="n">struct</span> <span class="p">{</span>
+    <span class="n">ProcessingUnit</span> <span class="n">unit</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+    <span class="o">...</span>
+<span class="p">}</span> <span class="n">MyDeviceState</span><span class="p">;</span>
+
+<span class="n">static</span> <span class="n">void</span> <span class="n">mydev_writel</span><span class="p">(</span><span class="n">void</span> <span class="o">*</span><span class="n">opaque</span><span class="p">,</span> <span class="n">uint32_t</span> <span class="n">addr</span><span class="p">,</span> <span class="n">uint32_t</span> <span class="n">val</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">MyDeviceState</span> <span class="o">*</span><span class="n">mydev</span> <span class="o">=</span> <span class="n">opaque</span><span class="p">;</span>
+    <span class="n">ProcessingUnit</span> <span class="o">*</span><span class="n">unit</span><span class="p">;</span>
+
+    <span class="n">switch</span> <span class="p">(</span><span class="n">addr</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">case</span> <span class="n">MYDEV_SELECT_UNIT</span><span class="p">:</span>
+        <span class="n">unit</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">mydev</span><span class="o">-&gt;</span><span class="n">unit</span><span class="p">[</span><span class="n">val</span><span class="p">];</span>   <span class="o">&lt;--</span> <span class="n">this</span> <span class="nb">input</span> <span class="n">wasn</span><span class="s1">&#39;t validated!</span>
+        <span class="o">...</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>If <code class="docutils literal notranslate"><span class="pre">val</span></code> is not in range [0, 1] then an out-of-bounds memory access will take
+place when <code class="docutils literal notranslate"><span class="pre">unit</span></code> is dereferenced.  The code must check that <code class="docutils literal notranslate"><span class="pre">val</span></code> is 0 or
+1 and handle the case where it is invalid.</p>
+</div>
+<div class="section" id="unexpected-device-accesses">
+<h2>Unexpected Device Accesses<a class="headerlink" href="#unexpected-device-accesses" title="Permalink to this headline">¶</a></h2>
+<p>The guest may access device registers in unusual orders or at unexpected
+moments.  Device emulation code must not assume that the guest follows the
+typical “theory of operation” presented in driver writer manuals.  The guest
+may make nonsense accesses to device registers such as starting operations
+before the device has been fully initialized.</p>
+<p>A related issue is that device emulation code must be prepared for unexpected
+device register accesses while asynchronous operations are in progress.  A
+well-behaved guest might wait for a completion interrupt before accessing
+certain device registers.  Device emulation code must handle the case where the
+guest overwrites registers or submits further requests before an ongoing
+request completes.  Unexpected accesses must not cause memory corruption or
+leaks in QEMU.</p>
+<p>Invalid device register accesses can be reported with
+<code class="docutils literal notranslate"><span class="pre">qemu_log_mask(LOG_GUEST_ERROR,</span> <span class="pre">...)</span></code>.  The <code class="docutils literal notranslate"><span class="pre">-d</span> <span class="pre">guest_errors</span></code> command-line
+option enables these log messages.</p>
+</div>
+<div class="section" id="live-migration">
+<h2>Live Migration<a class="headerlink" href="#live-migration" title="Permalink to this headline">¶</a></h2>
+<p>Device state can be saved to disk image files and shared with other users.
+Live migration code must validate inputs when loading device state so an
+attacker cannot gain control by crafting invalid device states.  Device state
+is therefore considered untrusted even though it is typically generated by QEMU
+itself.</p>
+</div>
+<div class="section" id="guest-memory-access-races">
+<h2>Guest Memory Access Races<a class="headerlink" href="#guest-memory-access-races" title="Permalink to this headline">¶</a></h2>
+<p>Guests with multiple vCPUs may modify guest RAM while device emulation code is
+running.  Device emulation code must copy in descriptors and other guest RAM
+structures and only process the local copy.  This prevents
+time-of-check-to-time-of-use (TOCTOU) race conditions that could cause QEMU to
+crash when a vCPU thread modifies guest RAM while device emulation is
+processing it.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">QEMU</a></h1>
+
+
+
+<p class="blurb">Developers Guide</p>
+
+
+
+
+
+
+<div id="editpage">
+  <ul>
+    <li><a href="https://gitlab.com/qemu-project/qemu/-/blob/master/docs/devel/secure-coding-practices.rst">Page source</a></li>
+  </ul>
+</div><h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="build-system.html">The QEMU build system architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="kconfig.html">QEMU and Kconfig</a></li>
+<li class="toctree-l1"><a class="reference internal" href="loads-stores.html">Load and Store APIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="memory.html">The memory API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="migration.html">Migration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="atomics.html">Atomic operations in QEMU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stable-process.html">QEMU and the stable process</a></li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">Testing in QEMU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="qtest.html">QTest Device Emulation Testing Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fuzzing.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="decodetree.html">Decodetree Specification</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Secure Coding Practices</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#reporting-security-bugs">Reporting Security Bugs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#general-secure-c-coding-practices">General Secure C Coding Practices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#input-validation">Input Validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#unexpected-device-accesses">Unexpected Device Accesses</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#live-migration">Live Migration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#guest-memory-access-races">Guest Memory Access Races</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tcg.html">Translator Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tcg-icount.html">TCG Instruction Counting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="multi-thread-tcg.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="multi-thread-tcg.html#vcpu-scheduling">vCPU Scheduling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="multi-thread-tcg.html#shared-data-structures">Shared Data Structures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="multi-thread-tcg.html#memory-consistency">Memory Consistency</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tcg-plugins.html">QEMU TCG Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bitops.html">Bitwise operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reset.html">Reset in QEMU: the Resettable interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="s390-dasd-ipl.html">Booting from real channel-attached devices on s390x</a></li>
+<li class="toctree-l1"><a class="reference internal" href="clocks.html">Modelling a clock tree in QEMU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="qom.html">The QEMU Object Model (QOM)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="block-coroutine-wrapper.html">block-coroutine-wrapper</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, The QEMU Project Developers.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

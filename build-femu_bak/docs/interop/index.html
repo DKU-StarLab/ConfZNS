@@ -1,0 +1,214 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>QEMU System Emulation Management and Interoperability Guide &#8212; QEMU  documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Dirty Bitmaps and Incremental Backup" href="bitmaps.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="qemu-system-emulation-management-and-interoperability-guide">
+<h1>QEMU System Emulation Management and Interoperability Guide<a class="headerlink" href="#qemu-system-emulation-management-and-interoperability-guide" title="Permalink to this headline">¶</a></h1>
+<p>This manual contains documents and specifications that are useful
+for making QEMU interoperate with other software.</p>
+<p>Contents:</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="bitmaps.html">Dirty Bitmaps and Incremental Backup</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="bitmaps.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bitmaps.html#supported-image-formats">Supported Image Formats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bitmaps.html#dirty-bitmap-names">Dirty Bitmap Names</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bitmaps.html#bitmap-status">Bitmap Status</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bitmaps.html#basic-qmp-usage">Basic QMP Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bitmaps.html#bitmap-persistence">Bitmap Persistence</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bitmaps.html#transactions">Transactions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bitmaps.html#incremental-backups-push-model">Incremental Backups - Push Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bitmaps.html#push-backup-errors-recovery">Push Backup Errors &amp; Recovery</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dbus.html">D-Bus</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dbus.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dbus.html#security">Security</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dbus.html#guidelines">Guidelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dbus.html#qemu-interfaces">QEMU Interfaces</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dbus-vmstate.html">D-Bus VMState</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dbus-vmstate.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dbus-vmstate.html#interface">Interface</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="live-block-operations.html">Live Block Device Operations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="live-block-operations.html#disk-image-backing-chain-notation">Disk image backing chain notation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="live-block-operations.html#brief-overview-of-live-block-qmp-primitives">Brief overview of live block QMP primitives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="live-block-operations.html#interacting-with-a-qemu-instance">Interacting with a QEMU instance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="live-block-operations.html#example-disk-image-chain">Example disk image chain</a></li>
+<li class="toctree-l2"><a class="reference internal" href="live-block-operations.html#a-note-on-points-in-time-vs-file-names">A note on points-in-time vs file names</a></li>
+<li class="toctree-l2"><a class="reference internal" href="live-block-operations.html#live-block-streaming-block-stream">Live block streaming — <code class="docutils literal notranslate"><span class="pre">block-stream</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="live-block-operations.html#live-block-commit-block-commit">Live block commit — <code class="docutils literal notranslate"><span class="pre">block-commit</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="live-block-operations.html#live-disk-synchronization-drive-mirror-and-blockdev-mirror">Live disk synchronization — <code class="docutils literal notranslate"><span class="pre">drive-mirror</span></code> and <code class="docutils literal notranslate"><span class="pre">blockdev-mirror</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="live-block-operations.html#live-disk-backup-drive-backup-and-blockdev-backup">Live disk backup — <code class="docutils literal notranslate"><span class="pre">drive-backup</span></code> and <code class="docutils literal notranslate"><span class="pre">blockdev-backup</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pr-helper.html">Persistent reservation helper protocol</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pr-helper.html#connection-and-initialization">Connection and initialization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pr-helper.html#command-format">Command format</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="qemu-ga.html">QEMU Guest Agent</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="qemu-ga.html#synopsis">Synopsis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qemu-ga.html#description">Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qemu-ga.html#options">Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qemu-ga.html#files">Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qemu-ga.html#see-also">See also</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="qemu-ga-ref.html">QEMU Guest Agent Protocol Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="qemu-ga-ref.html#qapidoc-0">General note concerning the use of guest agent interfaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qemu-ga-ref.html#qapidoc-2">QEMU guest agent protocol commands and structs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="qemu-qmp-ref.html">QEMU QMP Reference Manual</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="qemu-qmp-ref.html#qapidoc-0">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qemu-qmp-ref.html#qapidoc-2">Stability Considerations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qemu-qmp-ref.html#qapidoc-4">QMP errors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qemu-qmp-ref.html#qapidoc-8">Common data types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qemu-qmp-ref.html#qapidoc-33">Socket data types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qemu-qmp-ref.html#qapidoc-59">VM run state</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qemu-qmp-ref.html#qapidoc-151">Cryptography</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qemu-qmp-ref.html#qapidoc-212">Block devices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qemu-qmp-ref.html#qapidoc-1020">Character devices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qemu-qmp-ref.html#qapidoc-1115">Dump guest memory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qemu-qmp-ref.html#qapidoc-1146">Net devices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qemu-qmp-ref.html#qapidoc-1231">RDMA device</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qemu-qmp-ref.html#qapidoc-1237">Rocker switch device</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qemu-qmp-ref.html#qapidoc-1289">TPM (trusted platform module) devices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qemu-qmp-ref.html#qapidoc-1320">Remote desktop</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qemu-qmp-ref.html#qapidoc-1446">Input</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qemu-qmp-ref.html#qapidoc-1514">User authorization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qemu-qmp-ref.html#qapidoc-1527">Migration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qemu-qmp-ref.html#qapidoc-1736">Transactions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qemu-qmp-ref.html#qapidoc-1754">Tracing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qemu-qmp-ref.html#qapidoc-1772">QMP monitor control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qemu-qmp-ref.html#qapidoc-1817">QMP introspection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qemu-qmp-ref.html#qapidoc-1867">QEMU Object Model (QOM)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qemu-qmp-ref.html#qapidoc-1908">Device infrastructure (qdev)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qemu-qmp-ref.html#qapidoc-1931">Machines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qemu-qmp-ref.html#qapidoc-2213">Record/replay</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qemu-qmp-ref.html#qapidoc-2235">Miscellanea</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qemu-qmp-ref.html#qapidoc-2388">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qemu-qmp-ref.html#qapidoc-2440">ACPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qemu-qmp-ref.html#qapidoc-2456">PCI</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="vhost-user.html">Vhost-user Protocol</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="vhost-user.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vhost-user.html#message-specification">Message Specification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vhost-user.html#communication">Communication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vhost-user.html#backend-program-conventions">Backend program conventions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="vhost-user-gpu.html">Vhost-user-gpu Protocol</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="vhost-user-gpu.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vhost-user-gpu.html#wire-format">Wire format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vhost-user-gpu.html#communication">Communication</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="vhost-vdpa.html">Vhost-vdpa Protocol</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="vhost-vdpa.html#introduction">Introduction</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="#">QEMU</a></h1>
+
+
+
+<p class="blurb">System Emulation Management and Interoperability Guide</p>
+
+
+
+
+
+
+<div id="editpage">
+  <ul>
+    <li><a href="https://gitlab.com/qemu-project/qemu/-/blob/master/docs/interop/index.rst">Page source</a></li>
+  </ul>
+</div><h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="bitmaps.html">Dirty Bitmaps and Incremental Backup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dbus.html">D-Bus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dbus-vmstate.html">D-Bus VMState</a></li>
+<li class="toctree-l1"><a class="reference internal" href="live-block-operations.html">Live Block Device Operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pr-helper.html">Persistent reservation helper protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="qemu-ga.html">QEMU Guest Agent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="qemu-ga-ref.html">QEMU Guest Agent Protocol Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="qemu-qmp-ref.html">QEMU QMP Reference Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vhost-user.html">Vhost-user Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vhost-user-gpu.html">Vhost-user-gpu Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vhost-vdpa.html">Vhost-vdpa Protocol</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, The QEMU Project Developers.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>
