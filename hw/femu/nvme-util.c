@@ -192,17 +192,21 @@ uint16_t nvme_init_sq(NvmeSQueue *sq, FemuCtrl *n, uint64_t dma_addr, uint16_t
     switch (prio) {
     case NVME_Q_PRIO_URGENT:
         sq->arb_burst = (1 << NVME_ARB_AB(n->features.arbitration));
+        femu_debug("DBBUF,sq[%u]: Urgent", sq->sqid);
         break;
     case NVME_Q_PRIO_HIGH:
         //((n->features.arbitration >> 24) & 0xff);
         sq->arb_burst = NVME_ARB_HPW(n->features.arbitration) + 1;
+        femu_debug("DBBUF,sq[%u]: High", sq->sqid);
         break;
     case NVME_Q_PRIO_NORMAL:
         sq->arb_burst = NVME_ARB_MPW(n->features.arbitration) + 1;
+        femu_debug("DBBUF,sq[%u]: Normal", sq->sqid);
         break;
     case NVME_Q_PRIO_LOW:
     default:
         sq->arb_burst = NVME_ARB_LPW(n->features.arbitration) + 1;
+        femu_debug("DBBUF,sq[%u]: Low", sq->sqid);
         break;
     }
 

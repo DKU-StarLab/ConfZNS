@@ -127,9 +127,7 @@ static uint16_t nvme_create_sq(FemuCtrl *n, NvmeCmd *cmd)
 
     sq = g_malloc0(sizeof(*sq));
     femu_err("NVMe sq priority %u qflags %u nvme-admin.c:129\n",NVME_SQ_FLAGS_QPRIO(qflags),qflags);
-    if (nvme_init_sq(sq, n, prp1, sqid, cqid, qsize + 1,
-                NVME_SQ_FLAGS_QPRIO(qflags),
-                NVME_SQ_FLAGS_PC(qflags))) {
+    if (nvme_init_sq(sq, n, prp1, sqid, cqid, qsize + 1, NVME_SQ_FLAGS_QPRIO(qflags), NVME_SQ_FLAGS_PC(qflags))) {
         g_free(sq);
         return NVME_INVALID_FIELD | NVME_DNR;
     }
@@ -237,8 +235,7 @@ static uint16_t nvme_set_db_memory(FemuCtrl *n, const NvmeCmd *cmd)
             sq->db_addr_hva = n->dbs_addr_hva + 2 * i * dbbuf_entry_sz;
             sq->eventidx_addr = eis_addr + 2 * i * dbbuf_entry_sz;
             sq->eventidx_addr_hva = n->eis_addr_hva + 2 * i * dbbuf_entry_sz;
-            femu_debug("DBBUF,sq[%d]:db=%" PRIu64 ",ei=%" PRIu64 "\n", i,
-                    sq->db_addr, sq->eventidx_addr);
+            femu_debug("DBBUF,sq[%d]:arb=%" PRIu8 " db=%" PRIu64 ",ei=%" PRIu64 "\n", i, sq->arb_burst,sq->db_addr, sq->eventidx_addr);
         }
         if (cq) {
             /* Completion queue head pointer location, (2 * QID + 1) * stride. */
@@ -952,7 +949,7 @@ static uint16_t nvme_format(FemuCtrl *n, NvmeCmd *cmd)
 static uint16_t nvme_admin_cmd(FemuCtrl *n, NvmeCmd *cmd, NvmeCqe *cqe)
 {
     //inho debug
-    femu_err("Seq 3 nvme_admin_cmd nvme-admin.c:955\n");
+    //femu_err("Seq 3 nvme_admin_cmd nvme-admin.c:955\n");
     switch (cmd->opcode) {
     case NVME_ADM_CMD_FEMU_DEBUG:
         n->upg_rd_lat_ns = le64_to_cpu(cmd->cdw10);
@@ -1027,7 +1024,7 @@ void nvme_process_sq_admin(void *opaque)
     NvmeCmd cmd;
     NvmeCqe cqe;
     //inho debug
-    femu_err("Seq 2 nvme_process_sq_admin nvme-admin.c:1030\n");
+    //femu_err("Seq 2 nvme_process_sq_admin nvme-admin.c:1030\n");
     while (!(nvme_sq_empty(sq))) {
         if (sq->phys_contig) {
             addr = sq->dma_addr + sq->head * n->sqe_size;

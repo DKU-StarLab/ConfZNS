@@ -8,18 +8,23 @@ enum {
     NAND_WRITE = 1,
     NAND_ERASE = 2,
 
- /* FIXME: Just simply add SLC NAND latency numbers in nanoseconds in nand.h for now,(Inhoinno) */
-    NAND_READ_LATENCY  = 65000/6,  //65us /4plane TLC_tREAD(65us : 16K page time)   =16.25
-    NAND_PROG_LATENCY  = 450000/12,//450us TLC_tProg(450us: 16K page(/4),3D(/3) time)  =37.5
+ /* FIXME: */
+    //NAND_READ_LATENCY  = 65000/6,  //65us /4plane TLC_tREAD(65us : 16K page time)   =16.25
+    NAND_READ_LATENCY  = 65000/6,
+    NAND_PROG_LATENCY  = 900000/12,//450us TLC_tProg(450us: 16K page(/4),3D(/3) time)  =37.5
+    //NAND_PROG_LATENCY  = 0,
     NAND_ERASE_LATENCY = SLC_BLOCK_ERASE_LATENCY_NS,//2000000
-    NAND_CHNL_PAGE_TRANSFER_LATENCY = 2441,//2441, // =2.5? 1200MT = 9600MB/s = 0.1ms per 1MB 
-    //SK Hynix read : 400Mb/s for 1 chip..
-    //ZEMU read     : 
-    //SK Hynix write: 100Mb/s for 1 chip..
-    //ZEMU write    : 5Mb/s for 1 chip...
+    NAND_CHNL_PAGE_TRANSFER_LATENCY = 2441, // =2.5? 1200MT = 9600MB/s = 0.1ms per 1MB 
+    //NAND_CHNL_PAGE_TRANSFER_LATENCY = 0,
+    //SK Hynix read     : 400Mb/s for 1 chip..
+    //WD ZN540 4TB read : avg 80us 
+    //ZEMU read         : 
+    //SK Hynix write    : 100Mb/s for 1 chip..
+    //WD ZN540 4TB write: 
+    //ZEMU write        : 5Mb/s for 1 chip...
 
 /* As best I know, ZONE RESET time is way more faster than ERASE_LAT (Inhoinno) */
-    ZONE_RESET_LATENCY =  200000,
+    ZONE_RESET_LATENCY =  SLC_BLOCK_ERASE_LATENCY_NS,
 };
 
 
@@ -65,7 +70,8 @@ struct zns_ssdparams{
     uint64_t ways_per_zone;     /* another ZNS Association degree. # of ways per zone, must be divisor of nways */
     uint64_t csze_pages;        /* #of Pages in Chip (Inhoinno:I guess lun in femu)*/
     uint64_t nchips;            /* # of chips in SSD*/
-
+    bool     is_another_namespace;
+    uint64_t chnls_per_another_zone;    
     uint64_t pg_rd_lat;         /* NAND page read latency in nanoseconds */
     uint64_t pg_wr_lat;         /* NAND page program latency in nanoseconds */
     uint64_t blk_er_lat;        /* NAND block erase latency in nanoseconds */

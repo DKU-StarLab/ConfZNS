@@ -1,4 +1,4 @@
-Build started at 2022-10-31T04:48:29.684602
+Build started at 2023-01-05T08:17:39.869494
 Main binary: /usr/bin/python3
 Build Options: -Daudio_drv_list=default -Ddefault_devices=true -Ddocdir=/usr/local/share/doc -Diasl= -Dqemu_firmwarepath=/usr/local/share/qemu-firmware -Dqemu_suffix=qemu -Dsmbd= -Dsphinx_build= -Dtrace_file=trace -Doptimization=2 -Ddebug=true -Dwerror=true -Db_pie=true -Db_coverage=false -Db_lto=false -Dcfi=false -Dtcg=enabled -Dxen=disabled -Dcapstone=auto -Dfdt=auto -Dslirp=auto -Dkvm=enabled -Dprefix=/usr/local -Dbindir=/usr/local/bin -Ddatadir=/usr/local/share -Dincludedir=/usr/local/include -Dlibdir=/usr/local/lib -Dlibexecdir=/usr/local/libexec -Dlocaledir=/usr/local/share/locale -Dlocalstatedir=/usr/local/var -Dmandir=/usr/local/share/man -Dsysconfdir=/usr/local/etc -Dbackend=ninja
 Python system: Linux
@@ -27,8 +27,8 @@ C++ compiler for the host machine: c++ -m64 -mcx16 (gcc 9.4.0 "c++ (Ubuntu 9.4.0
 C++ linker for the host machine: c++ -m64 -mcx16 ld.bfd 2.34
 Program cgcc found: NO
 Running compile:
-Working directory:  /home/inhoinno/FEMU/build-femu/meson-private/tmpo9ve6mmr
-Command line:  cc -m64 -mcx16 /home/inhoinno/FEMU/build-femu/meson-private/tmpo9ve6mmr/testfile.c -o /home/inhoinno/FEMU/build-femu/meson-private/tmpo9ve6mmr/output.exe -D_FILE_OFFSET_BITS=64 -O0 -Wl,--start-group -lm -Wl,--end-group -Wl,--allow-shlib-undefined 
+Working directory:  /home/inhoinno/FEMU/build-femu/meson-private/tmpw88ho3fb
+Command line:  cc -m64 -mcx16 /home/inhoinno/FEMU/build-femu/meson-private/tmpw88ho3fb/testfile.c -o /home/inhoinno/FEMU/build-femu/meson-private/tmpw88ho3fb/output.exe -D_FILE_OFFSET_BITS=64 -O0 -Wl,--start-group -lm -Wl,--end-group -Wl,--allow-shlib-undefined 
 
 Code:
  int main(void) { return 0; }
@@ -40,8 +40,8 @@ Compiler stderr:
 Library m found: YES
 Dependency threads found: YES unknown (cached)
 Running compile:
-Working directory:  /home/inhoinno/FEMU/build-femu/meson-private/tmpdt8ci3gk
-Command line:  cc -m64 -mcx16 /home/inhoinno/FEMU/build-femu/meson-private/tmpdt8ci3gk/testfile.c -o /home/inhoinno/FEMU/build-femu/meson-private/tmpdt8ci3gk/output.exe -D_FILE_OFFSET_BITS=64 -O0 -Wl,--start-group -lutil -Wl,--end-group -Wl,--allow-shlib-undefined 
+Working directory:  /home/inhoinno/FEMU/build-femu/meson-private/tmpkrij8ahn
+Command line:  cc -m64 -mcx16 /home/inhoinno/FEMU/build-femu/meson-private/tmpkrij8ahn/testfile.c -o /home/inhoinno/FEMU/build-femu/meson-private/tmpkrij8ahn/output.exe -D_FILE_OFFSET_BITS=64 -O0 -Wl,--start-group -lutil -Wl,--end-group -Wl,--allow-shlib-undefined 
 
 Code:
  int main(void) { return 0; }
@@ -72,8 +72,8 @@ Cached compiler stderr:
  
 Has header "libaio.h" : YES (cached)
 Running compile:
-Working directory:  /home/inhoinno/FEMU/build-femu/meson-private/tmp1esl3ucq
-Command line:  cc -m64 -mcx16 /home/inhoinno/FEMU/build-femu/meson-private/tmp1esl3ucq/testfile.c -o /home/inhoinno/FEMU/build-femu/meson-private/tmp1esl3ucq/output.exe -D_FILE_OFFSET_BITS=64 -O0 -Wl,--start-group -laio -Wl,--end-group -Wl,--allow-shlib-undefined 
+Working directory:  /home/inhoinno/FEMU/build-femu/meson-private/tmp5ndmljyc
+Command line:  cc -m64 -mcx16 /home/inhoinno/FEMU/build-femu/meson-private/tmp5ndmljyc/testfile.c -o /home/inhoinno/FEMU/build-femu/meson-private/tmp5ndmljyc/output.exe -D_FILE_OFFSET_BITS=64 -O0 -Wl,--start-group -laio -Wl,--end-group -Wl,--allow-shlib-undefined 
 
 Code:
  int main(void) { return 0; }
@@ -136,7 +136,7 @@ Code:
 Cached compiler stdout:
  
 Cached compiler stderr:
- /home/inhoinno/FEMU/build-femu/meson-private/tmpg89tbazk/testfile.c:4:12: error: #error "Header 'cap-ng.h' could not be found"
+ /home/inhoinno/FEMU/build-femu/meson-private/tmp9wxpvzr1/testfile.c:4:12: error: #error "Header 'cap-ng.h' could not be found"
     4 |           #error "Header 'cap-ng.h' could not be found"
       |            ^~~~~
 
@@ -162,7 +162,7 @@ Code:
 Cached compiler stdout:
  
 Cached compiler stderr:
- /home/inhoinno/FEMU/build-femu/meson-private/tmpp2lfno04/testfile.c:4:12: error: #error "Header 'libvdeplug.h' could not be found"
+ /home/inhoinno/FEMU/build-femu/meson-private/tmppo0m6nin/testfile.c:4:12: error: #error "Header 'libvdeplug.h' could not be found"
     4 |           #error "Header 'libvdeplug.h' could not be found"
       |            ^~~~~
 
@@ -198,8 +198,8 @@ Called `/usr/bin/pkg-config --modversion spice-server` -> 1
 
 Run-time dependency spice-server found: NO (tried pkgconfig)
 Running compile:
-Working directory:  /home/inhoinno/FEMU/build-femu/meson-private/tmphk8zk5_b
-Command line:  cc -m64 -mcx16 /home/inhoinno/FEMU/build-femu/meson-private/tmphk8zk5_b/testfile.c -o /home/inhoinno/FEMU/build-femu/meson-private/tmphk8zk5_b/output.exe -D_FILE_OFFSET_BITS=64 -O0 -Wl,--start-group -lrt -Wl,--end-group -Wl,--allow-shlib-undefined 
+Working directory:  /home/inhoinno/FEMU/build-femu/meson-private/tmpx6hdeebh
+Command line:  cc -m64 -mcx16 /home/inhoinno/FEMU/build-femu/meson-private/tmpx6hdeebh/testfile.c -o /home/inhoinno/FEMU/build-femu/meson-private/tmpx6hdeebh/output.exe -D_FILE_OFFSET_BITS=64 -O0 -Wl,--start-group -lrt -Wl,--end-group -Wl,--allow-shlib-undefined 
 
 Code:
  int main(void) { return 0; }
@@ -240,8 +240,8 @@ Called `/usr/bin/pkg-config --modversion libudev` -> 1
 
 Run-time dependency libudev found: NO (tried pkgconfig)
 Running compile:
-Working directory:  /home/inhoinno/FEMU/build-femu/meson-private/tmptwnf8bdl
-Command line:  cc -m64 -mcx16 /home/inhoinno/FEMU/build-femu/meson-private/tmptwnf8bdl/testfile.c -o /home/inhoinno/FEMU/build-femu/meson-private/tmptwnf8bdl/output.exe -D_FILE_OFFSET_BITS=64 -O0 -Wl,--start-group -lmpathpersist -Wl,--end-group -Wl,--allow-shlib-undefined 
+Working directory:  /home/inhoinno/FEMU/build-femu/meson-private/tmpdk09tya6
+Command line:  cc -m64 -mcx16 /home/inhoinno/FEMU/build-femu/meson-private/tmpdk09tya6/testfile.c -o /home/inhoinno/FEMU/build-femu/meson-private/tmpdk09tya6/output.exe -D_FILE_OFFSET_BITS=64 -O0 -Wl,--start-group -lmpathpersist -Wl,--end-group -Wl,--allow-shlib-undefined 
 
 Code:
  int main(void) { return 0; }
@@ -253,8 +253,8 @@ Compiler stderr:
 collect2: error: ld returned 1 exit status
 
 Running compile:
-Working directory:  /home/inhoinno/FEMU/build-femu/meson-private/tmp6vjyous6
-Command line:  cc -m64 -mcx16 /home/inhoinno/FEMU/build-femu/meson-private/tmp6vjyous6/testfile.c -o /home/inhoinno/FEMU/build-femu/meson-private/tmp6vjyous6/output.exe -D_FILE_OFFSET_BITS=64 -O0 
+Working directory:  /home/inhoinno/FEMU/build-femu/meson-private/tmp6lfe524y
+Command line:  cc -m64 -mcx16 /home/inhoinno/FEMU/build-femu/meson-private/tmp6lfe524y/testfile.c -o /home/inhoinno/FEMU/build-femu/meson-private/tmp6lfe524y/output.exe -D_FILE_OFFSET_BITS=64 -O0 
 
 Code:
  #include<stdio.h>
@@ -275,8 +275,8 @@ Program stderr:
 
 
 Running compile:
-Working directory:  /home/inhoinno/FEMU/build-femu/meson-private/tmpj_u7g2_n
-Command line:  cc -m64 -mcx16 /home/inhoinno/FEMU/build-femu/meson-private/tmpj_u7g2_n/testfile.c -o /home/inhoinno/FEMU/build-femu/meson-private/tmpj_u7g2_n/output.obj -c -D_FILE_OFFSET_BITS=64 -O0 --print-search-dirs 
+Working directory:  /home/inhoinno/FEMU/build-femu/meson-private/tmpo9t0zhbm
+Command line:  cc -m64 -mcx16 /home/inhoinno/FEMU/build-femu/meson-private/tmpo9t0zhbm/testfile.c -o /home/inhoinno/FEMU/build-femu/meson-private/tmpo9t0zhbm/output.obj -c -D_FILE_OFFSET_BITS=64 -O0 --print-search-dirs 
 
 Code:
  
@@ -309,7 +309,7 @@ Code:
 Cached compiler stdout:
  
 Cached compiler stderr:
- /home/inhoinno/FEMU/build-femu/meson-private/tmpf_w8roq4/testfile.c:4:12: error: #error "Header 'curses.h' could not be found"
+ /home/inhoinno/FEMU/build-femu/meson-private/tmprp4n890f/testfile.c:4:12: error: #error "Header 'curses.h' could not be found"
     4 |           #error "Header 'curses.h' could not be found"
       |            ^~~~~
 
@@ -330,7 +330,7 @@ Code:
 Cached compiler stdout:
  
 Cached compiler stderr:
- /home/inhoinno/FEMU/build-femu/meson-private/tmpqa2wwuz7/testfile.c:4:12: error: #error "Header 'curses.h' could not be found"
+ /home/inhoinno/FEMU/build-femu/meson-private/tmppaehftxk/testfile.c:4:12: error: #error "Header 'curses.h' could not be found"
     4 |           #error "Header 'curses.h' could not be found"
       |            ^~~~~
 
@@ -380,7 +380,7 @@ Code:
 Cached compiler stdout:
  
 Cached compiler stderr:
- /home/inhoinno/FEMU/build-femu/meson-private/tmpb04_k5nw/testfile.c:4:12: error: #error "Header 'brlapi.h' could not be found"
+ /home/inhoinno/FEMU/build-femu/meson-private/tmpg0rzz20p/testfile.c:4:12: error: #error "Header 'brlapi.h' could not be found"
     4 |           #error "Header 'brlapi.h' could not be found"
       |            ^~~~~
 
@@ -395,8 +395,8 @@ Trying a default sdl2-config fallback at sdl2-config
 sdl2-config found: NO
 Run-time dependency sdl2 found: NO (tried pkgconfig and config-tool)
 Running compile:
-Working directory:  /home/inhoinno/FEMU/build-femu/meson-private/tmpzhvthnd8
-Command line:  cc -m64 -mcx16 /home/inhoinno/FEMU/build-femu/meson-private/tmpzhvthnd8/testfile.c -o /home/inhoinno/FEMU/build-femu/meson-private/tmpzhvthnd8/output.exe -D_FILE_OFFSET_BITS=64 -O0 -Wl,--start-group -lrados -Wl,--end-group -Wl,--allow-shlib-undefined 
+Working directory:  /home/inhoinno/FEMU/build-femu/meson-private/tmpcavamnmw
+Command line:  cc -m64 -mcx16 /home/inhoinno/FEMU/build-femu/meson-private/tmpcavamnmw/testfile.c -o /home/inhoinno/FEMU/build-femu/meson-private/tmpcavamnmw/output.exe -D_FILE_OFFSET_BITS=64 -O0 -Wl,--start-group -lrados -Wl,--end-group -Wl,--allow-shlib-undefined 
 
 Code:
  int main(void) { return 0; }
@@ -423,7 +423,7 @@ Code:
 Cached compiler stdout:
  
 Cached compiler stderr:
- /home/inhoinno/FEMU/build-femu/meson-private/tmpq6snw6ht/testfile.c:4:12: error: #error "Header 'rbd/librbd.h' could not be found"
+ /home/inhoinno/FEMU/build-femu/meson-private/tmph_3b4q3s/testfile.c:4:12: error: #error "Header 'rbd/librbd.h' could not be found"
     4 |           #error "Header 'rbd/librbd.h' could not be found"
       |            ^~~~~
 
@@ -455,7 +455,7 @@ Code:
 Cached compiler stdout:
  
 Cached compiler stderr:
- /home/inhoinno/FEMU/build-femu/meson-private/tmps8z6qxfh/testfile.c:4:12: error: #error "Header 'bzlib.h' could not be found"
+ /home/inhoinno/FEMU/build-femu/meson-private/tmpmu0cxhl2/testfile.c:4:12: error: #error "Header 'bzlib.h' could not be found"
     4 |           #error "Header 'bzlib.h' could not be found"
       |            ^~~~~
 
@@ -475,7 +475,7 @@ Code:
 Cached compiler stdout:
  
 Cached compiler stderr:
- /home/inhoinno/FEMU/build-femu/meson-private/tmpg8r04zv6/testfile.c:4:12: error: #error "Header 'lzfse.h' could not be found"
+ /home/inhoinno/FEMU/build-femu/meson-private/tmpmr3ssprv/testfile.c:4:12: error: #error "Header 'lzfse.h' could not be found"
     4 |           #error "Header 'lzfse.h' could not be found"
       |            ^~~~~
 
@@ -550,7 +550,7 @@ Code:
 Cached compiler stdout:
  
 Cached compiler stderr:
- /home/inhoinno/FEMU/build-femu/meson-private/tmp_2djzvgn/testfile.c:4:12: error: #error "Header 'sasl/sasl.h' could not be found"
+ /home/inhoinno/FEMU/build-femu/meson-private/tmpus648a9a/testfile.c:4:12: error: #error "Header 'sasl/sasl.h' could not be found"
     4 |           #error "Header 'sasl/sasl.h' could not be found"
       |            ^~~~~
 
@@ -570,7 +570,7 @@ Code:
 Cached compiler stdout:
  
 Cached compiler stderr:
- /home/inhoinno/FEMU/build-femu/meson-private/tmp7ciacvpl/testfile.c:4:12: error: #error "Header 'security/pam_appl.h' could not be found"
+ /home/inhoinno/FEMU/build-femu/meson-private/tmpb6ipj8rv/testfile.c:4:12: error: #error "Header 'security/pam_appl.h' could not be found"
     4 |           #error "Header 'security/pam_appl.h' could not be found"
       |            ^~~~~
 
@@ -590,7 +590,7 @@ Code:
 Cached compiler stdout:
  
 Cached compiler stderr:
- /home/inhoinno/FEMU/build-femu/meson-private/tmpj2p_7a1m/testfile.c:4:12: error: #error "Header 'snappy-c.h' could not be found"
+ /home/inhoinno/FEMU/build-femu/meson-private/tmppqyd8uot/testfile.c:4:12: error: #error "Header 'snappy-c.h' could not be found"
     4 |           #error "Header 'snappy-c.h' could not be found"
       |            ^~~~~
 
@@ -610,7 +610,7 @@ Code:
 Cached compiler stdout:
  
 Cached compiler stderr:
- /home/inhoinno/FEMU/build-femu/meson-private/tmpg1b7zj_z/testfile.c:4:12: error: #error "Header 'lzo/lzo1x.h' could not be found"
+ /home/inhoinno/FEMU/build-femu/meson-private/tmptqf2_6df/testfile.c:4:12: error: #error "Header 'lzo/lzo1x.h' could not be found"
     4 |           #error "Header 'lzo/lzo1x.h' could not be found"
       |            ^~~~~
 
@@ -633,8 +633,8 @@ Cached compiler stderr:
  
 Has header "numa.h" : YES (cached)
 Running compile:
-Working directory:  /home/inhoinno/FEMU/build-femu/meson-private/tmpt4acgxbt
-Command line:  cc -m64 -mcx16 /home/inhoinno/FEMU/build-femu/meson-private/tmpt4acgxbt/testfile.c -o /home/inhoinno/FEMU/build-femu/meson-private/tmpt4acgxbt/output.exe -D_FILE_OFFSET_BITS=64 -O0 -Wl,--start-group -lnuma -Wl,--end-group -Wl,--allow-shlib-undefined 
+Working directory:  /home/inhoinno/FEMU/build-femu/meson-private/tmpxz5lq4fi
+Command line:  cc -m64 -mcx16 /home/inhoinno/FEMU/build-femu/meson-private/tmpxz5lq4fi/testfile.c -o /home/inhoinno/FEMU/build-femu/meson-private/tmpxz5lq4fi/output.exe -D_FILE_OFFSET_BITS=64 -O0 -Wl,--start-group -lnuma -Wl,--end-group -Wl,--allow-shlib-undefined 
 
 Code:
  int main(void) { return 0; }
@@ -773,13 +773,13 @@ Code:
 Cached compiler stdout:
  
 Cached compiler stderr:
- /home/inhoinno/FEMU/build-femu/meson-private/tmpkvj1hhor/testfile.c: In function 'main':
-/home/inhoinno/FEMU/build-femu/meson-private/tmpkvj1hhor/testfile.c:9:41: error: 'STATX_MNT_ID' undeclared (first use in this function); did you mean 'STATX_MTIME'?
+ /home/inhoinno/FEMU/build-femu/meson-private/tmph2p4t1gk/testfile.c: In function 'main':
+/home/inhoinno/FEMU/build-femu/meson-private/tmph2p4t1gk/testfile.c:9:41: error: 'STATX_MNT_ID' undeclared (first use in this function); did you mean 'STATX_MTIME'?
     9 |     statx(0, "", 0, STATX_BASIC_STATS | STATX_MNT_ID, &statxbuf);
       |                                         ^~~~~~~~~~~~
       |                                         STATX_MTIME
-/home/inhoinno/FEMU/build-femu/meson-private/tmpkvj1hhor/testfile.c:9:41: note: each undeclared identifier is reported only once for each function it appears in
-/home/inhoinno/FEMU/build-femu/meson-private/tmpkvj1hhor/testfile.c:10:21: error: 'struct statx' has no member named 'stx_mnt_id'; did you mean 'stx_uid'?
+/home/inhoinno/FEMU/build-femu/meson-private/tmph2p4t1gk/testfile.c:9:41: note: each undeclared identifier is reported only once for each function it appears in
+/home/inhoinno/FEMU/build-femu/meson-private/tmph2p4t1gk/testfile.c:10:21: error: 'struct statx' has no member named 'stx_mnt_id'; did you mean 'stx_uid'?
    10 |     return statxbuf.stx_mnt_id;
       |                     ^~~~~~~~~~
       |                     stx_uid
@@ -845,7 +845,7 @@ Code:
 Cached compiler stdout:
  
 Cached compiler stderr:
- /home/inhoinno/FEMU/build-femu/meson-private/tmprlzgtvlx/testfile.c:4:12: error: #error "Header 'valgrind/valgrind.h' could not be found"
+ /home/inhoinno/FEMU/build-femu/meson-private/tmps57npmju/testfile.c:4:12: error: #error "Header 'valgrind/valgrind.h' could not be found"
     4 |           #error "Header 'valgrind/valgrind.h' could not be found"
       |            ^~~~~
 
@@ -882,7 +882,7 @@ Code:
 Cached compiler stdout:
  
 Cached compiler stderr:
- /home/inhoinno/FEMU/build-femu/meson-private/tmpuitj3of8/testfile.c:4:12: error: #error "Header 'libdrm/drm.h' could not be found"
+ /home/inhoinno/FEMU/build-femu/meson-private/tmpt9eyxjlv/testfile.c:4:12: error: #error "Header 'libdrm/drm.h' could not be found"
     4 |           #error "Header 'libdrm/drm.h' could not be found"
       |            ^~~~~
 
@@ -919,7 +919,7 @@ Code:
 Cached compiler stdout:
  
 Cached compiler stderr:
- /home/inhoinno/FEMU/build-femu/meson-private/tmpx8920mkn/testfile.c:4:12: error: #error "Header 'sys/disk.h' could not be found"
+ /home/inhoinno/FEMU/build-femu/meson-private/tmpc5d3off4/testfile.c:4:12: error: #error "Header 'sys/disk.h' could not be found"
     4 |           #error "Header 'sys/disk.h' could not be found"
       |            ^~~~~
 
@@ -939,7 +939,7 @@ Code:
 Cached compiler stdout:
  
 Cached compiler stderr:
- /home/inhoinno/FEMU/build-femu/meson-private/tmpksw_t5tm/testfile.c:4:12: error: #error "Header 'sys/ioccom.h' could not be found"
+ /home/inhoinno/FEMU/build-femu/meson-private/tmpf7nym2d1/testfile.c:4:12: error: #error "Header 'sys/ioccom.h' could not be found"
     4 |           #error "Header 'sys/ioccom.h' could not be found"
       |            ^~~~~
 
@@ -959,7 +959,7 @@ Code:
 Cached compiler stdout:
  
 Cached compiler stderr:
- /home/inhoinno/FEMU/build-femu/meson-private/tmpmheaz4mk/testfile.c:4:12: error: #error "Header 'sys/kcov.h' could not be found"
+ /home/inhoinno/FEMU/build-femu/meson-private/tmpbyg7d333/testfile.c:4:12: error: #error "Header 'sys/kcov.h' could not be found"
     4 |           #error "Header 'sys/kcov.h' could not be found"
       |            ^~~~~
 
@@ -1145,7 +1145,7 @@ Code:
 Cached compiler stdout:
  
 Cached compiler stderr:
- /usr/bin/ld: /tmp/ccT9lIfO.o: in function `main':
+ /usr/bin/ld: /tmp/ccuSKrM3.o: in function `main':
 testfile.c:(.text+0x9): undefined reference to `_aligned_malloc'
 collect2: error: ld returned 1 exit status
 
@@ -1179,12 +1179,12 @@ Code:
 Cached compiler stdout:
  
 Cached compiler stderr:
- /home/inhoinno/FEMU/build-femu/meson-private/tmpiw4v2au0/testfile.c: In function 'main':
-/home/inhoinno/FEMU/build-femu/meson-private/tmpiw4v2au0/testfile.c:20:13: error: '__builtin__aligned_malloc' undeclared (first use in this function); did you mean '__builtin_aligned_alloc'?
+ /home/inhoinno/FEMU/build-femu/meson-private/tmplx3_ad9y/testfile.c: In function 'main':
+/home/inhoinno/FEMU/build-femu/meson-private/tmplx3_ad9y/testfile.c:20:13: error: '__builtin__aligned_malloc' undeclared (first use in this function); did you mean '__builtin_aligned_alloc'?
    20 |             __builtin__aligned_malloc;
       |             ^~~~~~~~~~~~~~~~~~~~~~~~~
       |             __builtin_aligned_alloc
-/home/inhoinno/FEMU/build-femu/meson-private/tmpiw4v2au0/testfile.c:20:13: note: each undeclared identifier is reported only once for each function it appears in
+/home/inhoinno/FEMU/build-femu/meson-private/tmplx3_ad9y/testfile.c:20:13: note: each undeclared identifier is reported only once for each function it appears in
 
 Checking for function "_aligned_malloc" : NO (cached)
 Using cached compile:
@@ -1314,7 +1314,7 @@ Code:
 Cached compiler stdout:
  
 Cached compiler stderr:
- /usr/bin/ld: /tmp/ccdX1cOT.o: in function `main':
+ /usr/bin/ld: /tmp/ccXShrX6.o: in function `main':
 testfile.c:(.text+0x9): undefined reference to `pthread_fchdir_np'
 collect2: error: ld returned 1 exit status
 
@@ -1348,12 +1348,12 @@ Code:
 Cached compiler stdout:
  
 Cached compiler stderr:
- /home/inhoinno/FEMU/build-femu/meson-private/tmpa6ngmrsy/testfile.c: In function 'main':
-/home/inhoinno/FEMU/build-femu/meson-private/tmpa6ngmrsy/testfile.c:20:13: error: '__builtin_pthread_fchdir_np' undeclared (first use in this function); did you mean '__builtin_thread_pointer'?
+ /home/inhoinno/FEMU/build-femu/meson-private/tmpn37f3vtn/testfile.c: In function 'main':
+/home/inhoinno/FEMU/build-femu/meson-private/tmpn37f3vtn/testfile.c:20:13: error: '__builtin_pthread_fchdir_np' undeclared (first use in this function); did you mean '__builtin_thread_pointer'?
    20 |             __builtin_pthread_fchdir_np;
       |             ^~~~~~~~~~~~~~~~~~~~~~~~~~~
       |             __builtin_thread_pointer
-/home/inhoinno/FEMU/build-femu/meson-private/tmpa6ngmrsy/testfile.c:20:13: note: each undeclared identifier is reported only once for each function it appears in
+/home/inhoinno/FEMU/build-femu/meson-private/tmpn37f3vtn/testfile.c:20:13: note: each undeclared identifier is reported only once for each function it appears in
 
 Checking for function "pthread_fchdir_np" : NO (cached)
 Using cached compile:
@@ -1892,7 +1892,7 @@ Code:
 Cached compiler stdout:
  
 Cached compiler stderr:
- /home/inhoinno/FEMU/build-femu/meson-private/tmpp03wrb_r/testfile.c:1:10: fatal error: sys/endian.h: No such file or directory
+ /home/inhoinno/FEMU/build-femu/meson-private/tmp2llqr0ug/testfile.c:1:10: fatal error: sys/endian.h: No such file or directory
     1 | #include <sys/endian.h>
       |          ^~~~~~~~~~~~~~
 compilation terminated.
@@ -1968,11 +1968,11 @@ Code:
 Cached compiler stdout:
  
 Cached compiler stderr:
- /home/inhoinno/FEMU/build-femu/meson-private/tmpdpln__bu/testfile.c: In function 'main':
-/home/inhoinno/FEMU/build-femu/meson-private/tmpdpln__bu/testfile.c:6:17: error: 'optreset' undeclared (first use in this function)
+ /home/inhoinno/FEMU/build-femu/meson-private/tmpn2d2n1zx/testfile.c: In function 'main':
+/home/inhoinno/FEMU/build-femu/meson-private/tmpn2d2n1zx/testfile.c:6:17: error: 'optreset' undeclared (first use in this function)
     6 |                 optreset;
       |                 ^~~~~~~~
-/home/inhoinno/FEMU/build-femu/meson-private/tmpdpln__bu/testfile.c:6:17: note: each undeclared identifier is reported only once for each function it appears in
+/home/inhoinno/FEMU/build-femu/meson-private/tmpn2d2n1zx/testfile.c:6:17: note: each undeclared identifier is reported only once for each function it appears in
 
 Header <getopt.h> has symbol "optreset" : NO (cached)
 Using cached compile:
@@ -1991,12 +1991,12 @@ Code:
 Cached compiler stdout:
  
 Cached compiler stderr:
- /home/inhoinno/FEMU/build-femu/meson-private/tmpktqvd0jv/testfile.c: In function 'main':
-/home/inhoinno/FEMU/build-femu/meson-private/tmpktqvd0jv/testfile.c:6:17: error: 'IPPROTO_MPTCP' undeclared (first use in this function); did you mean 'IPPROTO_MTP'?
+ /home/inhoinno/FEMU/build-femu/meson-private/tmpg87de2_o/testfile.c: In function 'main':
+/home/inhoinno/FEMU/build-femu/meson-private/tmpg87de2_o/testfile.c:6:17: error: 'IPPROTO_MPTCP' undeclared (first use in this function); did you mean 'IPPROTO_MTP'?
     6 |                 IPPROTO_MPTCP;
       |                 ^~~~~~~~~~~~~
       |                 IPPROTO_MTP
-/home/inhoinno/FEMU/build-femu/meson-private/tmpktqvd0jv/testfile.c:6:17: note: each undeclared identifier is reported only once for each function it appears in
+/home/inhoinno/FEMU/build-femu/meson-private/tmpg87de2_o/testfile.c:6:17: note: each undeclared identifier is reported only once for each function it appears in
 
 Header <netinet/in.h> has symbol "IPPROTO_MPTCP" : NO (cached)
 Using cached compile:
@@ -2012,8 +2012,8 @@ Code:
 Cached compiler stdout:
  
 Cached compiler stderr:
- /home/inhoinno/FEMU/build-femu/meson-private/tmpyky3c9j2/testfile.c: In function 'bar':
-/home/inhoinno/FEMU/build-femu/meson-private/tmpyky3c9j2/testfile.c:4:16: error: 'struct sigevent' has no member named 'sigev_notify_thread_id'
+ /home/inhoinno/FEMU/build-femu/meson-private/tmpx58bonrp/testfile.c: In function 'bar':
+/home/inhoinno/FEMU/build-femu/meson-private/tmpx58bonrp/testfile.c:4:16: error: 'struct sigevent' has no member named 'sigev_notify_thread_id'
     4 |             foo.sigev_notify_thread_id;
       |                ^
 
@@ -2125,10 +2125,10 @@ Code:
 Cached compiler stdout:
  
 Cached compiler stderr:
- /home/inhoinno/FEMU/build-femu/meson-private/tmpmxfavxub/testfile.c:9:16: error: conflicting types for 'madvise'
+ /home/inhoinno/FEMU/build-femu/meson-private/tmp0ox55v2u/testfile.c:9:16: error: conflicting types for 'madvise'
     9 |     extern int madvise(int);
       |                ^~~~~~~
-In file included from /home/inhoinno/FEMU/build-femu/meson-private/tmpmxfavxub/testfile.c:7:
+In file included from /home/inhoinno/FEMU/build-femu/meson-private/tmp0ox55v2u/testfile.c:7:
 /usr/include/x86_64-linux-gnu/sys/mman.h:94:12: note: previous declaration of 'madvise' was here
    94 | extern int madvise (void *__addr, size_t __len, int __advice) __THROW;
       |            ^~~~~~~
@@ -2248,20 +2248,20 @@ Code:
 Cached compiler stdout:
  
 Cached compiler stderr:
- /home/inhoinno/FEMU/build-femu/meson-private/tmpmpk10mew/testfile.c: In function 'f':
-/home/inhoinno/FEMU/build-femu/meson-private/tmpmpk10mew/testfile.c:8:48: warning: passing argument 1 of 'pthread_setname_np' makes integer from pointer without a cast [-Wint-conversion]
+ /home/inhoinno/FEMU/build-femu/meson-private/tmpdseppfv3/testfile.c: In function 'f':
+/home/inhoinno/FEMU/build-femu/meson-private/tmpdseppfv3/testfile.c:8:48: warning: passing argument 1 of 'pthread_setname_np' makes integer from pointer without a cast [-Wint-conversion]
     8 |   static void *f(void *p) { pthread_setname_np("QEMU"); return NULL; }
       |                                                ^~~~~~
       |                                                |
       |                                                char *
-In file included from /home/inhoinno/FEMU/build-femu/meson-private/tmpmpk10mew/testfile.c:6:
+In file included from /home/inhoinno/FEMU/build-femu/meson-private/tmpdseppfv3/testfile.c:6:
 /usr/include/pthread.h:427:42: note: expected 'pthread_t' {aka 'long unsigned int'} but argument is of type 'char *'
   427 | extern int pthread_setname_np (pthread_t __target_thread, const char *__name)
       |                                ~~~~~~~~~~^~~~~~~~~~~~~~~
-/home/inhoinno/FEMU/build-femu/meson-private/tmpmpk10mew/testfile.c:8:29: error: too few arguments to function 'pthread_setname_np'
+/home/inhoinno/FEMU/build-femu/meson-private/tmpdseppfv3/testfile.c:8:29: error: too few arguments to function 'pthread_setname_np'
     8 |   static void *f(void *p) { pthread_setname_np("QEMU"); return NULL; }
       |                             ^~~~~~~~~~~~~~~~~~
-In file included from /home/inhoinno/FEMU/build-femu/meson-private/tmpmpk10mew/testfile.c:6:
+In file included from /home/inhoinno/FEMU/build-femu/meson-private/tmpdseppfv3/testfile.c:6:
 /usr/include/pthread.h:427:12: note: declared here
   427 | extern int pthread_setname_np (pthread_t __target_thread, const char *__name)
       |            ^~~~~~~~~~~~~~~~~~
@@ -2281,8 +2281,8 @@ Code:
 Cached compiler stdout:
  
 Cached compiler stderr:
- /home/inhoinno/FEMU/build-femu/meson-private/tmpgc0iumki/testfile.c: In function 'main':
-/home/inhoinno/FEMU/build-femu/meson-private/tmpgc0iumki/testfile.c:8:27: warning: null argument where non-null required (argument 2) [-Wnonnull]
+ /home/inhoinno/FEMU/build-femu/meson-private/tmp0msxykx4/testfile.c: In function 'main':
+/home/inhoinno/FEMU/build-femu/meson-private/tmp0msxykx4/testfile.c:8:27: warning: null argument where non-null required (argument 2) [-Wnonnull]
     8 |   int main(void) { return signalfd(-1, NULL, SFD_CLOEXEC); }
       |                           ^~~~~~~~
 
@@ -2362,7 +2362,7 @@ Code:
 Cached compiler stdout:
  
 Cached compiler stderr:
- /home/inhoinno/FEMU/build-femu/meson-private/tmpfjtum9yj/testfile.c:4:14: fatal error: net/netmap.h: No such file or directory
+ /home/inhoinno/FEMU/build-femu/meson-private/tmph00x9mnv/testfile.c:4:14: fatal error: net/netmap.h: No such file or directory
     4 |     #include <net/netmap.h>
       |              ^~~~~~~~~~~~~~
 compilation terminated.
@@ -2451,7 +2451,7 @@ Code:
 Cached compiler stdout:
  
 Cached compiler stderr:
- /usr/bin/ld: /tmp/ccxrCdQF.o: in function `main':
+ /usr/bin/ld: /tmp/ccSlMQnz.o: in function `main':
 testfile.c:(.text+0x49): undefined reference to `__atomic_load_16'
 /usr/bin/ld: testfile.c:(.text+0x73): undefined reference to `__atomic_store_16'
 /usr/bin/ld: testfile.c:(.text+0x9a): undefined reference to `__atomic_compare_exchange_16'
@@ -2849,8 +2849,8 @@ Called `/usr/bin/pkg-config --modversion slirp` -> 1
 Run-time dependency slirp found: NO (tried pkgconfig)
 Configuring libslirp-version.h using configuration
 Running compile:
-Working directory:  /home/inhoinno/FEMU/build-femu/meson-private/tmpoooxebyl
-Command line:  cc -m64 -mcx16 /home/inhoinno/FEMU/build-femu/meson-private/tmpoooxebyl/testfile.c -o /home/inhoinno/FEMU/build-femu/meson-private/tmpoooxebyl/output.exe -D_FILE_OFFSET_BITS=64 -O0 -Wl,--start-group -lfdt -Wl,--end-group -Wl,--allow-shlib-undefined 
+Working directory:  /home/inhoinno/FEMU/build-femu/meson-private/tmpne66wfh5
+Command line:  cc -m64 -mcx16 /home/inhoinno/FEMU/build-femu/meson-private/tmpne66wfh5/testfile.c -o /home/inhoinno/FEMU/build-femu/meson-private/tmpne66wfh5/output.exe -D_FILE_OFFSET_BITS=64 -O0 -Wl,--start-group -lfdt -Wl,--end-group -Wl,--allow-shlib-undefined 
 
 Code:
  int main(void) { return 0; }
@@ -3286,8 +3286,8 @@ qemu 7.0.0
 
 Found ninja-1.10.0 at /usr/bin/ninja
 Running compile:
-Working directory:  /home/inhoinno/FEMU/build-femu/meson-private/tmp13q5izii
-Command line:  cc -m64 -mcx16 /home/inhoinno/FEMU/build-femu/meson-private/tmp13q5izii/testfile.c -o /home/inhoinno/FEMU/build-femu/meson-private/tmp13q5izii/output.obj -c -D_FILE_OFFSET_BITS=64 -O0 --print-search-dirs 
+Working directory:  /home/inhoinno/FEMU/build-femu/meson-private/tmpwzeara13
+Command line:  cc -m64 -mcx16 /home/inhoinno/FEMU/build-femu/meson-private/tmpwzeara13/testfile.c -o /home/inhoinno/FEMU/build-femu/meson-private/tmpwzeara13/output.obj -c -D_FILE_OFFSET_BITS=64 -O0 --print-search-dirs 
 
 Code:
  
@@ -3299,8 +3299,8 @@ libraries: =/usr/lib/gcc/x86_64-linux-gnu/9/:/usr/lib/gcc/x86_64-linux-gnu/9/../
 Compiler stderr:
  
 Running compile:
-Working directory:  /home/inhoinno/FEMU/build-femu/meson-private/tmp_7bmerb2
-Command line:  c++ -m64 -mcx16 /home/inhoinno/FEMU/build-femu/meson-private/tmp_7bmerb2/testfile.cpp -o /home/inhoinno/FEMU/build-femu/meson-private/tmp_7bmerb2/output.obj -c -D_FILE_OFFSET_BITS=64 -O0 -fpermissive --print-search-dirs 
+Working directory:  /home/inhoinno/FEMU/build-femu/meson-private/tmpwbehylej
+Command line:  c++ -m64 -mcx16 /home/inhoinno/FEMU/build-femu/meson-private/tmpwbehylej/testfile.cpp -o /home/inhoinno/FEMU/build-femu/meson-private/tmpwbehylej/output.obj -c -D_FILE_OFFSET_BITS=64 -O0 -fpermissive --print-search-dirs 
 
 Code:
  

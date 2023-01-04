@@ -71,8 +71,11 @@ static void nvme_process_sq_io(void *opaque, int index_poller)
         if (n->print_log) {
             femu_debug("%s,cid:%d\n", __func__, cmd.cid);
         }
-
+        //femu_err("PROFILING current time nvme_process_sq_io %lu\n",qemu_clock_get_ns(QEMU_CLOCK_REALTIME) );
+        //femu_err("PROFILING nvme_process_sq_io %lu\n", (req->expire_time -req->stime));
         status = nvme_io_cmd(n, &cmd, req);
+        //femu_err("PROFILING nvme_process_sq_io %lu\n", (req->expire_time -req->stime));
+
         if (1 && status == NVME_SUCCESS) {
             req->status = status;
             int rc = femu_ring_enqueue(n->to_ftl[index_poller], (void *)&req, 1);
@@ -129,7 +132,6 @@ static void nvme_process_cq_cpl(void *arg, int index_poller)
     uint64_t now;
     int processed = 0;
     int rc;
-
     if (BBSSD(n)) { //|| ZNSSD(n)
         rp = n->to_poller[index_poller];
     }
@@ -169,7 +171,6 @@ static void nvme_process_cq_cpl(void *arg, int index_poller)
         }
         n->should_isr[req->sq->sqid] = true;
     }
-
     if (processed == 0)
         return;
 
@@ -186,9 +187,67 @@ static void nvme_process_cq_cpl(void *arg, int index_poller)
         }
         break;
     }
+
 }
 
 static void *nvme_poller(void *arg)
+{
+    FemuCtrl *n = ((NvmePollerThreadArgument *)arg)->n;
+    int index = ((NvmePollerThreadArgument *)arg)->index;
+    int i=0;
+    switch (n->multipoller_enabled) {
+    case 1:
+        //if(n->wrr_enable)
+        while (1) {
+            if ((!n->dataplane_started)) {
+                usleep(1000);
+                continue;
+            }
+            i++;
+            NvmeSQueue *sq = n->sq[index];
+            NvmeCQueue *cq = n->cq[index];
+            if (sq && sq->is_active && cq && cq->is_active) {
+                nvme_process_sq_io(sq, index);
+            }
+            nvme_process_cq_cpl(n, index);
+        }
+        break;
+    case 0: 
+    /*
+        if(n->wrr_enable){
+            while(1){
+            if ((!n->dataplane_started)) {
+                usleep(1000);
+                continue;
+            }
+            index 
+            }
+        }
+    */
+    default:
+        while (1) {
+            if ((!n->dataplane_started)) {
+                usleep(1000);
+                continue;
+            }
+            i++;
+
+            for (int i = 1; i <= n->num_io_queues; i++) {
+                NvmeSQueue *sq = n->sq[i];
+                NvmeCQueue *cq = n->cq[i];
+                if (sq && sq->is_active && cq && cq->is_active) {
+                    nvme_process_sq_io(sq, index);
+                }
+            }
+            nvme_process_cq_cpl(n, index);
+        }
+        break;
+    }
+
+    return NULL;
+}
+/*
+static void *nvme_super_poller(void *arg)
 {
     FemuCtrl *n = ((NvmePollerThreadArgument *)arg)->n;
     int index = ((NvmePollerThreadArgument *)arg)->index;
@@ -231,7 +290,7 @@ static void *nvme_poller(void *arg)
 
     return NULL;
 }
-
+*/
 static int cmp_pri(pqueue_pri_t next, pqueue_pri_t curr)
 {
     return (next > curr);
@@ -297,6 +356,24 @@ void nvme_create_poller(FemuCtrl *n)
     n->poller = malloc(sizeof(QemuThread) * (n->num_poller + 1));
     NvmePollerThreadArgument *args = malloc(sizeof(NvmePollerThreadArgument) *
                                             (n->num_poller + 1));
+    /** 
+     *     #ifdef NVME_WRR_ABRITRITION
+     * 
+     *      n->poller = malloc(sizeof(QemuThread) * (1));
+            NvmePollerThreadArgument *args = malloc(sizeof(NvmePollerThreadArgument) *
+                                            (1));
+     * for(int j=0; j<= number of priority){
+            for (int i = 1; i <= some number of poller in same priority; i++) {
+                   args[i].n = n;
+                    args[i].index = i;
+                    qemu_thread_create(&n->poller[i], "nvme-poller", nvme_poller, &args[i],
+                            QEMU_THREAD_JOINABLE);
+                    femu_debug("nvme-poller [%d] created ...\n", i - 1);
+            }   
+        }
+    #endif
+    */ 
+
     for (int i = 1; i <= n->num_poller; i++) {
         args[i].n = n;
         args[i].index = i;

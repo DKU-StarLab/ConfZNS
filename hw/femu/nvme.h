@@ -1194,6 +1194,8 @@ typedef struct FemuCtrl {
     MemoryRegion    ctrl_mem;
     NvmeBar         bar;
 
+    bool            wrr_enable;
+
     /* Coperd: ZNS FIXME */
     struct zns      *zns;   // for ZNS Latency emualting, Inhoinno
     QemuUUID        uuid;
