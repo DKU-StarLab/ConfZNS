@@ -1,0 +1,166 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>D-Bus VMState &#8212; QEMU  documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Live Block Device Operations" href="live-block-operations.html" />
+    <link rel="prev" title="D-Bus" href="dbus.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="d-bus-vmstate">
+<h1>D-Bus VMState<a class="headerlink" href="#d-bus-vmstate" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>The QEMU dbus-vmstate object’s aim is to migrate helpers’ data running
+on a QEMU D-Bus bus. (refer to the <a class="reference internal" href="dbus.html"><span class="doc">D-Bus</span></a> document for
+some recommendations on D-Bus usage)</p>
+<p>Upon migration, QEMU will go through the queue of
+<code class="docutils literal notranslate"><span class="pre">org.qemu.VMState1</span></code> D-Bus name owners and query their <code class="docutils literal notranslate"><span class="pre">Id</span></code>. It
+must be unique among the helpers.</p>
+<p>It will then save arbitrary data of each Id to be transferred in the
+migration stream and restored/loaded at the corresponding destination
+helper.</p>
+<p>For now, the data amount to be transferred is arbitrarily limited to
+1Mb. The state must be saved quickly (a fraction of a second). (D-Bus
+imposes a time limit on reply anyway, and migration would fail if data
+isn’t given quickly enough.)</p>
+<p>dbus-vmstate object can be configured with the expected list of
+helpers by setting its <code class="docutils literal notranslate"><span class="pre">id-list</span></code> property, with a comma-separated
+<code class="docutils literal notranslate"><span class="pre">Id</span></code> list.</p>
+</div>
+<div class="section" id="interface">
+<h2>Interface<a class="headerlink" href="#interface" title="Permalink to this headline">¶</a></h2>
+<p>On object path <code class="docutils literal notranslate"><span class="pre">/org/qemu/VMState1</span></code>, the following
+<code class="docutils literal notranslate"><span class="pre">org.qemu.VMState1</span></code> interface should be implemented:</p>
+<div class="code xml highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">interface</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;org.qemu.VMState1&quot;</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="nb">property</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Id&quot;</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;s&quot;</span> <span class="n">access</span><span class="o">=</span><span class="s2">&quot;read&quot;</span><span class="o">/&gt;</span>
+  <span class="o">&lt;</span><span class="n">method</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Load&quot;</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">arg</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;ay&quot;</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;data&quot;</span> <span class="n">direction</span><span class="o">=</span><span class="s2">&quot;in&quot;</span><span class="o">/&gt;</span>
+  <span class="o">&lt;/</span><span class="n">method</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="n">method</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Save&quot;</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">arg</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;ay&quot;</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;data&quot;</span> <span class="n">direction</span><span class="o">=</span><span class="s2">&quot;out&quot;</span><span class="o">/&gt;</span>
+  <span class="o">&lt;/</span><span class="n">method</span><span class="o">&gt;</span>
+<span class="o">&lt;/</span><span class="n">interface</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<div class="section" id="id-property">
+<h3>“Id” property<a class="headerlink" href="#id-property" title="Permalink to this headline">¶</a></h3>
+<p>A string that identifies the helper uniquely. (maximum 256 bytes
+including terminating NUL byte)</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The helper ID namespace is a separate namespace. In particular, it is not
+related to QEMU “id” used in -object/-device objects.</p>
+</div>
+</div>
+<div class="section" id="load-in-u8-bytes-method">
+<h3>Load(in u8[] bytes) method<a class="headerlink" href="#load-in-u8-bytes-method" title="Permalink to this headline">¶</a></h3>
+<p>The method called on destination with the state to restore.</p>
+<p>The helper may be initially started in a waiting state (with
+an –incoming argument for example), and it may resume on success.</p>
+<p>An error may be returned to the caller.</p>
+</div>
+<div class="section" id="save-out-u8-bytes-method">
+<h3>Save(out u8[] bytes) method<a class="headerlink" href="#save-out-u8-bytes-method" title="Permalink to this headline">¶</a></h3>
+<p>The method called on the source to get the current state to be
+migrated. The helper should continue to run normally.</p>
+<p>An error may be returned to the caller.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">QEMU</a></h1>
+
+
+
+<p class="blurb">System Emulation Management and Interoperability Guide</p>
+
+
+
+
+
+
+<div id="editpage">
+  <ul>
+    <li><a href="https://gitlab.com/qemu-project/qemu/-/blob/master/docs/interop/dbus-vmstate.rst">Page source</a></li>
+  </ul>
+</div><h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="bitmaps.html">Dirty Bitmaps and Incremental Backup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dbus.html">D-Bus</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">D-Bus VMState</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#interface">Interface</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="live-block-operations.html">Live Block Device Operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pr-helper.html">Persistent reservation helper protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="qemu-ga.html">QEMU Guest Agent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="qemu-ga-ref.html">QEMU Guest Agent Protocol Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="qemu-qmp-ref.html">QEMU QMP Reference Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vhost-user.html">Vhost-user Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vhost-user-gpu.html">Vhost-user-gpu Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vhost-vdpa.html">Vhost-vdpa Protocol</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, The QEMU Project Developers.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

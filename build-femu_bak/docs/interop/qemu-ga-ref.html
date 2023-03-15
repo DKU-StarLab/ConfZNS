@@ -1,0 +1,1772 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>QEMU Guest Agent Protocol Reference &#8212; QEMU  documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="QEMU QMP Reference Manual" href="qemu-qmp-ref.html" />
+    <link rel="prev" title="QEMU Guest Agent" href="qemu-ga.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="qemu-guest-agent-protocol-reference">
+<h1>QEMU Guest Agent Protocol Reference<a class="headerlink" href="#qemu-guest-agent-protocol-reference" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="qapidoc-0">
+<h2>General note concerning the use of guest agent interfaces<a class="headerlink" href="#qapidoc-0" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="qapidoc-1">
+“unsupported” is a higher-level error than the errors that individual
+commands might document. The caller should always be prepared to receive
+QERR_UNSUPPORTED, even if the given command doesn’t specify it, or doesn’t
+document any failure mode at all.</div>
+</div>
+<div class="section" id="qapidoc-2">
+<h2>QEMU guest agent protocol commands and structs<a class="headerlink" href="#qapidoc-2" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="qapidoc-6">
+<h3><code class="docutils literal notranslate"><span class="pre">guest-sync-delimited</span></code> (Command)<a class="headerlink" href="#qapidoc-6" title="Permalink to this headline">¶</a></h3>
+<p>Echo back a unique integer value, and prepend to response a
+leading sentinel byte (0xFF) the client can check scan for.</p>
+<p>This is used by clients talking to the guest agent over the
+wire to ensure the stream is in sync and doesn’t contain stale
+data from previous client. It must be issued upon initial
+connection, and after any client-side timeouts (including
+timeouts on receiving a response to this command).</p>
+<p>After issuing this request, all guest agent responses should be
+ignored until the response containing the unique integer value
+the client passed in is returned. Receival of the 0xFF sentinel
+byte must be handled as an indication that the client’s
+lexer/tokenizer/parser state should be flushed/reset in
+preparation for reliably receiving the subsequent response. As
+an optimization, clients may opt to ignore all data until a
+sentinel value is receiving to avoid unnecessary processing of
+stale data.</p>
+<p>Similarly, clients should also precede this <em>request</em>
+with a 0xFF byte to make sure the guest agent flushes any
+partially read JSON data from a previous client connection.</p>
+<div class="section" id="qapidoc-3">
+<h4>Arguments<a class="headerlink" href="#qapidoc-3" title="Permalink to this headline">¶</a></h4>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">id</span></code>: <code class="docutils literal notranslate"><span class="pre">int</span></code></dt>
+<dd>randomly generated 64-bit integer</dd>
+</dl>
+</div>
+<div class="section" id="qapidoc-4">
+<h4>Returns<a class="headerlink" href="#qapidoc-4" title="Permalink to this headline">¶</a></h4>
+<p>The unique integer id passed in by the client</p>
+</div>
+<div class="section" id="qapidoc-5">
+<h4>Since<a class="headerlink" href="#qapidoc-5" title="Permalink to this headline">¶</a></h4>
+<p>1.1</p>
+</div>
+</div>
+<div class="section" id="qapidoc-10">
+<h3><code class="docutils literal notranslate"><span class="pre">guest-sync</span></code> (Command)<a class="headerlink" href="#qapidoc-10" title="Permalink to this headline">¶</a></h3>
+<p>Echo back a unique integer value</p>
+<p>This is used by clients talking to the guest agent over the
+wire to ensure the stream is in sync and doesn’t contain stale
+data from previous client. All guest agent responses should be
+ignored until the provided unique integer value is returned,
+and it is up to the client to handle stale whole or
+partially-delivered JSON text in such a way that this response
+can be obtained.</p>
+<p>In cases where a partial stale response was previously
+received by the client, this cannot always be done reliably.
+One particular scenario being if qemu-ga responses are fed
+character-by-character into a JSON parser. In these situations,
+using guest-sync-delimited may be optimal.</p>
+<p>For clients that fetch responses line by line and convert them
+to JSON objects, guest-sync should be sufficient, but note that
+in cases where the channel is dirty some attempts at parsing the
+response may result in a parser error.</p>
+<p>Such clients should also precede this command
+with a 0xFF byte to make sure the guest agent flushes any
+partially read JSON data from a previous session.</p>
+<div class="section" id="qapidoc-7">
+<h4>Arguments<a class="headerlink" href="#qapidoc-7" title="Permalink to this headline">¶</a></h4>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">id</span></code>: <code class="docutils literal notranslate"><span class="pre">int</span></code></dt>
+<dd>randomly generated 64-bit integer</dd>
+</dl>
+</div>
+<div class="section" id="qapidoc-8">
+<h4>Returns<a class="headerlink" href="#qapidoc-8" title="Permalink to this headline">¶</a></h4>
+<p>The unique integer id passed in by the client</p>
+</div>
+<div class="section" id="qapidoc-9">
+<h4>Since<a class="headerlink" href="#qapidoc-9" title="Permalink to this headline">¶</a></h4>
+<p>0.15.0</p>
+</div>
+</div>
+<div class="section" id="qapidoc-12">
+<h3><code class="docutils literal notranslate"><span class="pre">guest-ping</span></code> (Command)<a class="headerlink" href="#qapidoc-12" title="Permalink to this headline">¶</a></h3>
+<p>Ping the guest agent, a non-error return implies success</p>
+<div class="section" id="qapidoc-11">
+<h4>Since<a class="headerlink" href="#qapidoc-11" title="Permalink to this headline">¶</a></h4>
+<p>0.15.0</p>
+</div>
+</div>
+<div class="section" id="qapidoc-15">
+<h3><code class="docutils literal notranslate"><span class="pre">guest-get-time</span></code> (Command)<a class="headerlink" href="#qapidoc-15" title="Permalink to this headline">¶</a></h3>
+<p>Get the information about guest’s System Time relative to
+the Epoch of 1970-01-01 in UTC.</p>
+<div class="section" id="qapidoc-13">
+<h4>Returns<a class="headerlink" href="#qapidoc-13" title="Permalink to this headline">¶</a></h4>
+<p>Time in nanoseconds.</p>
+</div>
+<div class="section" id="qapidoc-14">
+<h4>Since<a class="headerlink" href="#qapidoc-14" title="Permalink to this headline">¶</a></h4>
+<p>1.5</p>
+</div>
+</div>
+<div class="section" id="qapidoc-19">
+<h3><code class="docutils literal notranslate"><span class="pre">guest-set-time</span></code> (Command)<a class="headerlink" href="#qapidoc-19" title="Permalink to this headline">¶</a></h3>
+<p>Set guest time.</p>
+<p>When a guest is paused or migrated to a file then loaded
+from that file, the guest OS has no idea that there
+was a big gap in the time. Depending on how long the
+gap was, NTP might not be able to resynchronize the
+guest.</p>
+<p>This command tries to set guest’s System Time to the
+given value, then sets the Hardware Clock (RTC) to the
+current System Time. This will make it easier for a guest
+to resynchronize without waiting for NTP. If no <code class="docutils literal notranslate"><span class="pre">time</span></code> is
+specified, then the time to set is read from RTC. However,
+this may not be supported on all platforms (i.e. Windows).
+If that’s the case users are advised to always pass a
+value.</p>
+<div class="section" id="qapidoc-16">
+<h4>Arguments<a class="headerlink" href="#qapidoc-16" title="Permalink to this headline">¶</a></h4>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">time</span></code>: <code class="docutils literal notranslate"><span class="pre">int</span></code> (optional)</dt>
+<dd>time of nanoseconds, relative to the Epoch
+of 1970-01-01 in UTC.</dd>
+</dl>
+</div>
+<div class="section" id="qapidoc-17">
+<h4>Returns<a class="headerlink" href="#qapidoc-17" title="Permalink to this headline">¶</a></h4>
+<p>Nothing on success.</p>
+</div>
+<div class="section" id="qapidoc-18">
+<h4>Since<a class="headerlink" href="#qapidoc-18" title="Permalink to this headline">¶</a></h4>
+<p>1.5</p>
+</div>
+</div>
+<div class="section" id="qapidoc-22">
+<h3><code class="docutils literal notranslate"><span class="pre">GuestAgentCommandInfo</span></code> (Object)<a class="headerlink" href="#qapidoc-22" title="Permalink to this headline">¶</a></h3>
+<p>Information about guest agent commands.</p>
+<div class="section" id="qapidoc-20">
+<h4>Members<a class="headerlink" href="#qapidoc-20" title="Permalink to this headline">¶</a></h4>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">name</span></code>: <code class="docutils literal notranslate"><span class="pre">string</span></code></dt>
+<dd>name of the command</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">enabled</span></code>: <code class="docutils literal notranslate"><span class="pre">boolean</span></code></dt>
+<dd>whether command is currently enabled by guest admin</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">success-response</span></code>: <code class="docutils literal notranslate"><span class="pre">boolean</span></code></dt>
+<dd>whether command returns a response on success
+(since 1.7)</dd>
+</dl>
+</div>
+<div class="section" id="qapidoc-21">
+<h4>Since<a class="headerlink" href="#qapidoc-21" title="Permalink to this headline">¶</a></h4>
+<p>1.1.0</p>
+</div>
+</div>
+<div class="section" id="qapidoc-25">
+<h3><code class="docutils literal notranslate"><span class="pre">GuestAgentInfo</span></code> (Object)<a class="headerlink" href="#qapidoc-25" title="Permalink to this headline">¶</a></h3>
+<p>Information about guest agent.</p>
+<div class="section" id="qapidoc-23">
+<h4>Members<a class="headerlink" href="#qapidoc-23" title="Permalink to this headline">¶</a></h4>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">version</span></code>: <code class="docutils literal notranslate"><span class="pre">string</span></code></dt>
+<dd>guest agent version</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">supported_commands</span></code>: <code class="docutils literal notranslate"><span class="pre">array</span> <span class="pre">of</span> <span class="pre">GuestAgentCommandInfo</span></code></dt>
+<dd>Information about guest agent commands</dd>
+</dl>
+</div>
+<div class="section" id="qapidoc-24">
+<h4>Since<a class="headerlink" href="#qapidoc-24" title="Permalink to this headline">¶</a></h4>
+<p>0.15.0</p>
+</div>
+</div>
+<div class="section" id="qapidoc-28">
+<h3><code class="docutils literal notranslate"><span class="pre">guest-info</span></code> (Command)<a class="headerlink" href="#qapidoc-28" title="Permalink to this headline">¶</a></h3>
+<p>Get some information about the guest agent.</p>
+<div class="section" id="qapidoc-26">
+<h4>Returns<a class="headerlink" href="#qapidoc-26" title="Permalink to this headline">¶</a></h4>
+<p><code class="docutils literal notranslate"><span class="pre">GuestAgentInfo</span></code></p>
+</div>
+<div class="section" id="qapidoc-27">
+<h4>Since<a class="headerlink" href="#qapidoc-27" title="Permalink to this headline">¶</a></h4>
+<p>0.15.0</p>
+</div>
+</div>
+<div class="section" id="qapidoc-32">
+<h3><code class="docutils literal notranslate"><span class="pre">guest-shutdown</span></code> (Command)<a class="headerlink" href="#qapidoc-32" title="Permalink to this headline">¶</a></h3>
+<p>Initiate guest-activated shutdown. Note: this is an asynchronous
+shutdown request, with no guarantee of successful shutdown.</p>
+<div class="section" id="qapidoc-29">
+<h4>Arguments<a class="headerlink" href="#qapidoc-29" title="Permalink to this headline">¶</a></h4>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">mode</span></code>: <code class="docutils literal notranslate"><span class="pre">string</span></code> (optional)</dt>
+<dd>“halt”, “powerdown” (default), or “reboot”</dd>
+</dl>
+</div>
+<div class="section" id="qapidoc-30">
+This command does NOT return a response on success. Success condition
+is indicated by the VM exiting with a zero exit status or, when
+running with –no-shutdown, by issuing the query-status QMP command
+to confirm the VM status is “shutdown”.</div>
+<div class="section" id="qapidoc-31">
+<h4>Since<a class="headerlink" href="#qapidoc-31" title="Permalink to this headline">¶</a></h4>
+<p>0.15.0</p>
+</div>
+</div>
+<div class="section" id="qapidoc-36">
+<h3><code class="docutils literal notranslate"><span class="pre">guest-file-open</span></code> (Command)<a class="headerlink" href="#qapidoc-36" title="Permalink to this headline">¶</a></h3>
+<p>Open a file in the guest and retrieve a file handle for it</p>
+<div class="section" id="qapidoc-33">
+<h4>Arguments<a class="headerlink" href="#qapidoc-33" title="Permalink to this headline">¶</a></h4>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">path</span></code>: <code class="docutils literal notranslate"><span class="pre">string</span></code></dt>
+<dd>Full path to the file in the guest to open.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">mode</span></code>: <code class="docutils literal notranslate"><span class="pre">string</span></code> (optional)</dt>
+<dd>open mode, as per fopen(), “r” is the default.</dd>
+</dl>
+</div>
+<div class="section" id="qapidoc-34">
+<h4>Returns<a class="headerlink" href="#qapidoc-34" title="Permalink to this headline">¶</a></h4>
+<p>Guest file handle on success.</p>
+</div>
+<div class="section" id="qapidoc-35">
+<h4>Since<a class="headerlink" href="#qapidoc-35" title="Permalink to this headline">¶</a></h4>
+<p>0.15.0</p>
+</div>
+</div>
+<div class="section" id="qapidoc-40">
+<h3><code class="docutils literal notranslate"><span class="pre">guest-file-close</span></code> (Command)<a class="headerlink" href="#qapidoc-40" title="Permalink to this headline">¶</a></h3>
+<p>Close an open file in the guest</p>
+<div class="section" id="qapidoc-37">
+<h4>Arguments<a class="headerlink" href="#qapidoc-37" title="Permalink to this headline">¶</a></h4>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">handle</span></code>: <code class="docutils literal notranslate"><span class="pre">int</span></code></dt>
+<dd>filehandle returned by guest-file-open</dd>
+</dl>
+</div>
+<div class="section" id="qapidoc-38">
+<h4>Returns<a class="headerlink" href="#qapidoc-38" title="Permalink to this headline">¶</a></h4>
+<p>Nothing on success.</p>
+</div>
+<div class="section" id="qapidoc-39">
+<h4>Since<a class="headerlink" href="#qapidoc-39" title="Permalink to this headline">¶</a></h4>
+<p>0.15.0</p>
+</div>
+</div>
+<div class="section" id="qapidoc-43">
+<h3><code class="docutils literal notranslate"><span class="pre">GuestFileRead</span></code> (Object)<a class="headerlink" href="#qapidoc-43" title="Permalink to this headline">¶</a></h3>
+<p>Result of guest agent file-read operation</p>
+<div class="section" id="qapidoc-41">
+<h4>Members<a class="headerlink" href="#qapidoc-41" title="Permalink to this headline">¶</a></h4>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">count</span></code>: <code class="docutils literal notranslate"><span class="pre">int</span></code></dt>
+<dd>number of bytes read (note: count is <em>before</em>
+base64-encoding is applied)</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">buf-b64</span></code>: <code class="docutils literal notranslate"><span class="pre">string</span></code></dt>
+<dd>base64-encoded bytes read</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">eof</span></code>: <code class="docutils literal notranslate"><span class="pre">boolean</span></code></dt>
+<dd>whether EOF was encountered during read operation.</dd>
+</dl>
+</div>
+<div class="section" id="qapidoc-42">
+<h4>Since<a class="headerlink" href="#qapidoc-42" title="Permalink to this headline">¶</a></h4>
+<p>0.15.0</p>
+</div>
+</div>
+<div class="section" id="qapidoc-47">
+<h3><code class="docutils literal notranslate"><span class="pre">guest-file-read</span></code> (Command)<a class="headerlink" href="#qapidoc-47" title="Permalink to this headline">¶</a></h3>
+<p>Read from an open file in the guest. Data will be base64-encoded.
+As this command is just for limited, ad-hoc debugging, such as log
+file access, the number of bytes to read is limited to 48 MB.</p>
+<div class="section" id="qapidoc-44">
+<h4>Arguments<a class="headerlink" href="#qapidoc-44" title="Permalink to this headline">¶</a></h4>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">handle</span></code>: <code class="docutils literal notranslate"><span class="pre">int</span></code></dt>
+<dd>filehandle returned by guest-file-open</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">count</span></code>: <code class="docutils literal notranslate"><span class="pre">int</span></code> (optional)</dt>
+<dd>maximum number of bytes to read (default is 4KB, maximum is 48MB)</dd>
+</dl>
+</div>
+<div class="section" id="qapidoc-45">
+<h4>Returns<a class="headerlink" href="#qapidoc-45" title="Permalink to this headline">¶</a></h4>
+<p><code class="docutils literal notranslate"><span class="pre">GuestFileRead</span></code> on success.</p>
+</div>
+<div class="section" id="qapidoc-46">
+<h4>Since<a class="headerlink" href="#qapidoc-46" title="Permalink to this headline">¶</a></h4>
+<p>0.15.0</p>
+</div>
+</div>
+<div class="section" id="qapidoc-50">
+<h3><code class="docutils literal notranslate"><span class="pre">GuestFileWrite</span></code> (Object)<a class="headerlink" href="#qapidoc-50" title="Permalink to this headline">¶</a></h3>
+<p>Result of guest agent file-write operation</p>
+<div class="section" id="qapidoc-48">
+<h4>Members<a class="headerlink" href="#qapidoc-48" title="Permalink to this headline">¶</a></h4>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">count</span></code>: <code class="docutils literal notranslate"><span class="pre">int</span></code></dt>
+<dd>number of bytes written (note: count is actual bytes
+written, after base64-decoding of provided buffer)</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">eof</span></code>: <code class="docutils literal notranslate"><span class="pre">boolean</span></code></dt>
+<dd>whether EOF was encountered during write operation.</dd>
+</dl>
+</div>
+<div class="section" id="qapidoc-49">
+<h4>Since<a class="headerlink" href="#qapidoc-49" title="Permalink to this headline">¶</a></h4>
+<p>0.15.0</p>
+</div>
+</div>
+<div class="section" id="qapidoc-54">
+<h3><code class="docutils literal notranslate"><span class="pre">guest-file-write</span></code> (Command)<a class="headerlink" href="#qapidoc-54" title="Permalink to this headline">¶</a></h3>
+<p>Write to an open file in the guest.</p>
+<div class="section" id="qapidoc-51">
+<h4>Arguments<a class="headerlink" href="#qapidoc-51" title="Permalink to this headline">¶</a></h4>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">handle</span></code>: <code class="docutils literal notranslate"><span class="pre">int</span></code></dt>
+<dd>filehandle returned by guest-file-open</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">buf-b64</span></code>: <code class="docutils literal notranslate"><span class="pre">string</span></code></dt>
+<dd>base64-encoded string representing data to be written</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">count</span></code>: <code class="docutils literal notranslate"><span class="pre">int</span></code> (optional)</dt>
+<dd>bytes to write (actual bytes, after base64-decode),
+default is all content in buf-b64 buffer after base64 decoding</dd>
+</dl>
+</div>
+<div class="section" id="qapidoc-52">
+<h4>Returns<a class="headerlink" href="#qapidoc-52" title="Permalink to this headline">¶</a></h4>
+<p><code class="docutils literal notranslate"><span class="pre">GuestFileWrite</span></code> on success.</p>
+</div>
+<div class="section" id="qapidoc-53">
+<h4>Since<a class="headerlink" href="#qapidoc-53" title="Permalink to this headline">¶</a></h4>
+<p>0.15.0</p>
+</div>
+</div>
+<div class="section" id="qapidoc-57">
+<h3><code class="docutils literal notranslate"><span class="pre">GuestFileSeek</span></code> (Object)<a class="headerlink" href="#qapidoc-57" title="Permalink to this headline">¶</a></h3>
+<p>Result of guest agent file-seek operation</p>
+<div class="section" id="qapidoc-55">
+<h4>Members<a class="headerlink" href="#qapidoc-55" title="Permalink to this headline">¶</a></h4>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">position</span></code>: <code class="docutils literal notranslate"><span class="pre">int</span></code></dt>
+<dd>current file position</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">eof</span></code>: <code class="docutils literal notranslate"><span class="pre">boolean</span></code></dt>
+<dd>whether EOF was encountered during file seek</dd>
+</dl>
+</div>
+<div class="section" id="qapidoc-56">
+<h4>Since<a class="headerlink" href="#qapidoc-56" title="Permalink to this headline">¶</a></h4>
+<p>0.15.0</p>
+</div>
+</div>
+<div class="section" id="qapidoc-60">
+<h3><code class="docutils literal notranslate"><span class="pre">QGASeek</span></code> (Enum)<a class="headerlink" href="#qapidoc-60" title="Permalink to this headline">¶</a></h3>
+<p>Symbolic names for use in <code class="docutils literal notranslate"><span class="pre">guest-file-seek</span></code></p>
+<div class="section" id="qapidoc-58">
+<h4>Values<a class="headerlink" href="#qapidoc-58" title="Permalink to this headline">¶</a></h4>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">set</span></code></dt>
+<dd>Set to the specified offset (same effect as ‘whence’:0)</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">cur</span></code></dt>
+<dd>Add offset to the current location (same effect as ‘whence’:1)</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">end</span></code></dt>
+<dd>Add offset to the end of the file (same effect as ‘whence’:2)</dd>
+</dl>
+</div>
+<div class="section" id="qapidoc-59">
+<h4>Since<a class="headerlink" href="#qapidoc-59" title="Permalink to this headline">¶</a></h4>
+<p>2.6</p>
+</div>
+</div>
+<div class="section" id="qapidoc-63">
+<h3><code class="docutils literal notranslate"><span class="pre">GuestFileWhence</span></code> (Alternate)<a class="headerlink" href="#qapidoc-63" title="Permalink to this headline">¶</a></h3>
+<p>Controls the meaning of offset to <code class="docutils literal notranslate"><span class="pre">guest-file-seek</span></code>.</p>
+<div class="section" id="qapidoc-61">
+<h4>Members<a class="headerlink" href="#qapidoc-61" title="Permalink to this headline">¶</a></h4>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">value</span></code>: <code class="docutils literal notranslate"><span class="pre">int</span></code></dt>
+<dd>Integral value (0 for set, 1 for cur, 2 for end), available
+for historical reasons, and might differ from the host’s or
+guest’s SEEK_* values (since: 0.15)</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">name</span></code>: <code class="docutils literal notranslate"><span class="pre">QGASeek</span></code></dt>
+<dd>Symbolic name, and preferred interface</dd>
+</dl>
+</div>
+<div class="section" id="qapidoc-62">
+<h4>Since<a class="headerlink" href="#qapidoc-62" title="Permalink to this headline">¶</a></h4>
+<p>2.6</p>
+</div>
+</div>
+<div class="section" id="qapidoc-67">
+<h3><code class="docutils literal notranslate"><span class="pre">guest-file-seek</span></code> (Command)<a class="headerlink" href="#qapidoc-67" title="Permalink to this headline">¶</a></h3>
+<p>Seek to a position in the file, as with fseek(), and return the
+current file position afterward. Also encapsulates ftell()’s
+functionality, with offset=0 and whence=1.</p>
+<div class="section" id="qapidoc-64">
+<h4>Arguments<a class="headerlink" href="#qapidoc-64" title="Permalink to this headline">¶</a></h4>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">handle</span></code>: <code class="docutils literal notranslate"><span class="pre">int</span></code></dt>
+<dd>filehandle returned by guest-file-open</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">offset</span></code>: <code class="docutils literal notranslate"><span class="pre">int</span></code></dt>
+<dd>bytes to skip over in the file stream</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">whence</span></code>: <code class="docutils literal notranslate"><span class="pre">GuestFileWhence</span></code></dt>
+<dd>Symbolic or numeric code for interpreting offset</dd>
+</dl>
+</div>
+<div class="section" id="qapidoc-65">
+<h4>Returns<a class="headerlink" href="#qapidoc-65" title="Permalink to this headline">¶</a></h4>
+<p><code class="docutils literal notranslate"><span class="pre">GuestFileSeek</span></code> on success.</p>
+</div>
+<div class="section" id="qapidoc-66">
+<h4>Since<a class="headerlink" href="#qapidoc-66" title="Permalink to this headline">¶</a></h4>
+<p>0.15.0</p>
+</div>
+</div>
+<div class="section" id="qapidoc-71">
+<h3><code class="docutils literal notranslate"><span class="pre">guest-file-flush</span></code> (Command)<a class="headerlink" href="#qapidoc-71" title="Permalink to this headline">¶</a></h3>
+<p>Write file changes bufferred in userspace to disk/kernel buffers</p>
+<div class="section" id="qapidoc-68">
+<h4>Arguments<a class="headerlink" href="#qapidoc-68" title="Permalink to this headline">¶</a></h4>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">handle</span></code>: <code class="docutils literal notranslate"><span class="pre">int</span></code></dt>
+<dd>filehandle returned by guest-file-open</dd>
+</dl>
+</div>
+<div class="section" id="qapidoc-69">
+<h4>Returns<a class="headerlink" href="#qapidoc-69" title="Permalink to this headline">¶</a></h4>
+<p>Nothing on success.</p>
+</div>
+<div class="section" id="qapidoc-70">
+<h4>Since<a class="headerlink" href="#qapidoc-70" title="Permalink to this headline">¶</a></h4>
+<p>0.15.0</p>
+</div>
+</div>
+<div class="section" id="qapidoc-74">
+<h3><code class="docutils literal notranslate"><span class="pre">GuestFsfreezeStatus</span></code> (Enum)<a class="headerlink" href="#qapidoc-74" title="Permalink to this headline">¶</a></h3>
+<p>An enumeration of filesystem freeze states</p>
+<div class="section" id="qapidoc-72">
+<h4>Values<a class="headerlink" href="#qapidoc-72" title="Permalink to this headline">¶</a></h4>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">thawed</span></code></dt>
+<dd>filesystems thawed/unfrozen</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">frozen</span></code></dt>
+<dd>all non-network guest filesystems frozen</dd>
+</dl>
+</div>
+<div class="section" id="qapidoc-73">
+<h4>Since<a class="headerlink" href="#qapidoc-73" title="Permalink to this headline">¶</a></h4>
+<p>0.15.0</p>
+</div>
+</div>
+<div class="section" id="qapidoc-78">
+<h3><code class="docutils literal notranslate"><span class="pre">guest-fsfreeze-status</span></code> (Command)<a class="headerlink" href="#qapidoc-78" title="Permalink to this headline">¶</a></h3>
+<p>Get guest fsfreeze state. error state indicates</p>
+<div class="section" id="qapidoc-75">
+<h4>Returns<a class="headerlink" href="#qapidoc-75" title="Permalink to this headline">¶</a></h4>
+<p>GuestFsfreezeStatus (“thawed”, “frozen”, etc., as defined below)</p>
+</div>
+<div class="section" id="qapidoc-76">
+<h4>Note<a class="headerlink" href="#qapidoc-76" title="Permalink to this headline">¶</a></h4>
+<p>This may fail to properly report the current state as a result of
+some other guest processes having issued an fs freeze/thaw.</p>
+</div>
+<div class="section" id="qapidoc-77">
+<h4>Since<a class="headerlink" href="#qapidoc-77" title="Permalink to this headline">¶</a></h4>
+<p>0.15.0</p>
+</div>
+</div>
+<div class="section" id="qapidoc-82">
+<h3><code class="docutils literal notranslate"><span class="pre">guest-fsfreeze-freeze</span></code> (Command)<a class="headerlink" href="#qapidoc-82" title="Permalink to this headline">¶</a></h3>
+<p>Sync and freeze all freezable, local guest filesystems. If this
+command succeeded, you may call <code class="docutils literal notranslate"><span class="pre">guest-fsfreeze-thaw</span></code> later to
+unfreeze.</p>
+<div class="section" id="qapidoc-79">
+<h4>Note<a class="headerlink" href="#qapidoc-79" title="Permalink to this headline">¶</a></h4>
+<p>On Windows, the command is implemented with the help of a
+Volume Shadow-copy Service DLL helper. The frozen state is limited
+for up to 10 seconds by VSS.</p>
+</div>
+<div class="section" id="qapidoc-80">
+<h4>Returns<a class="headerlink" href="#qapidoc-80" title="Permalink to this headline">¶</a></h4>
+<p>Number of file systems currently frozen. On error, all filesystems
+will be thawed. If no filesystems are frozen as a result of this call,
+then <code class="docutils literal notranslate"><span class="pre">guest-fsfreeze-status</span></code> will remain “thawed” and calling
+<code class="docutils literal notranslate"><span class="pre">guest-fsfreeze-thaw</span></code> is not necessary.</p>
+</div>
+<div class="section" id="qapidoc-81">
+<h4>Since<a class="headerlink" href="#qapidoc-81" title="Permalink to this headline">¶</a></h4>
+<p>0.15.0</p>
+</div>
+</div>
+<div class="section" id="qapidoc-86">
+<h3><code class="docutils literal notranslate"><span class="pre">guest-fsfreeze-freeze-list</span></code> (Command)<a class="headerlink" href="#qapidoc-86" title="Permalink to this headline">¶</a></h3>
+<p>Sync and freeze specified guest filesystems.
+See also <code class="docutils literal notranslate"><span class="pre">guest-fsfreeze-freeze</span></code>.</p>
+<div class="section" id="qapidoc-83">
+<h4>Arguments<a class="headerlink" href="#qapidoc-83" title="Permalink to this headline">¶</a></h4>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">mountpoints</span></code>: <code class="docutils literal notranslate"><span class="pre">array</span> <span class="pre">of</span> <span class="pre">string</span></code> (optional)</dt>
+<dd>an array of mountpoints of filesystems to be frozen.
+If omitted, every mounted filesystem is frozen.
+Invalid mount points are ignored.</dd>
+</dl>
+</div>
+<div class="section" id="qapidoc-84">
+<h4>Returns<a class="headerlink" href="#qapidoc-84" title="Permalink to this headline">¶</a></h4>
+<p>Number of file systems currently frozen. On error, all filesystems
+will be thawed.</p>
+</div>
+<div class="section" id="qapidoc-85">
+<h4>Since<a class="headerlink" href="#qapidoc-85" title="Permalink to this headline">¶</a></h4>
+<p>2.2</p>
+</div>
+</div>
+<div class="section" id="qapidoc-90">
+<h3><code class="docutils literal notranslate"><span class="pre">guest-fsfreeze-thaw</span></code> (Command)<a class="headerlink" href="#qapidoc-90" title="Permalink to this headline">¶</a></h3>
+<p>Unfreeze all frozen guest filesystems</p>
+<div class="section" id="qapidoc-87">
+<h4>Returns<a class="headerlink" href="#qapidoc-87" title="Permalink to this headline">¶</a></h4>
+<p>Number of file systems thawed by this call</p>
+</div>
+<div class="section" id="qapidoc-88">
+<h4>Note<a class="headerlink" href="#qapidoc-88" title="Permalink to this headline">¶</a></h4>
+<p>if return value does not match the previous call to
+guest-fsfreeze-freeze, this likely means some freezable
+filesystems were unfrozen before this call, and that the
+filesystem state may have changed before issuing this
+command.</p>
+</div>
+<div class="section" id="qapidoc-89">
+<h4>Since<a class="headerlink" href="#qapidoc-89" title="Permalink to this headline">¶</a></h4>
+<p>0.15.0</p>
+</div>
+</div>
+<div class="section" id="qapidoc-93">
+<h3><code class="docutils literal notranslate"><span class="pre">GuestFilesystemTrimResult</span></code> (Object)<a class="headerlink" href="#qapidoc-93" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="qapidoc-91">
+<h4>Members<a class="headerlink" href="#qapidoc-91" title="Permalink to this headline">¶</a></h4>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">path</span></code>: <code class="docutils literal notranslate"><span class="pre">string</span></code></dt>
+<dd>path that was trimmed</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">error</span></code>: <code class="docutils literal notranslate"><span class="pre">string</span></code> (optional)</dt>
+<dd>an error message when trim failed</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">trimmed</span></code>: <code class="docutils literal notranslate"><span class="pre">int</span></code> (optional)</dt>
+<dd>bytes trimmed for this path</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">minimum</span></code>: <code class="docutils literal notranslate"><span class="pre">int</span></code> (optional)</dt>
+<dd>reported effective minimum for this path</dd>
+</dl>
+</div>
+<div class="section" id="qapidoc-92">
+<h4>Since<a class="headerlink" href="#qapidoc-92" title="Permalink to this headline">¶</a></h4>
+<p>2.4</p>
+</div>
+</div>
+<div class="section" id="qapidoc-96">
+<h3><code class="docutils literal notranslate"><span class="pre">GuestFilesystemTrimResponse</span></code> (Object)<a class="headerlink" href="#qapidoc-96" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="qapidoc-94">
+<h4>Members<a class="headerlink" href="#qapidoc-94" title="Permalink to this headline">¶</a></h4>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">paths</span></code>: <code class="docutils literal notranslate"><span class="pre">array</span> <span class="pre">of</span> <span class="pre">GuestFilesystemTrimResult</span></code></dt>
+<dd>list of <code class="docutils literal notranslate"><span class="pre">GuestFilesystemTrimResult</span></code> per path that was trimmed</dd>
+</dl>
+</div>
+<div class="section" id="qapidoc-95">
+<h4>Since<a class="headerlink" href="#qapidoc-95" title="Permalink to this headline">¶</a></h4>
+<p>2.4</p>
+</div>
+</div>
+<div class="section" id="qapidoc-100">
+<h3><code class="docutils literal notranslate"><span class="pre">guest-fstrim</span></code> (Command)<a class="headerlink" href="#qapidoc-100" title="Permalink to this headline">¶</a></h3>
+<p>Discard (or “trim”) blocks which are not in use by the filesystem.</p>
+<div class="section" id="qapidoc-97">
+<h4>Arguments<a class="headerlink" href="#qapidoc-97" title="Permalink to this headline">¶</a></h4>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">minimum</span></code>: <code class="docutils literal notranslate"><span class="pre">int</span></code> (optional)</dt>
+<dd>Minimum contiguous free range to discard, in bytes. Free ranges
+smaller than this may be ignored (this is a hint and the guest
+may not respect it).  By increasing this value, the fstrim
+operation will complete more quickly for filesystems with badly
+fragmented free space, although not all blocks will be discarded.
+The default value is zero, meaning “discard every free block”.</dd>
+</dl>
+</div>
+<div class="section" id="qapidoc-98">
+<h4>Returns<a class="headerlink" href="#qapidoc-98" title="Permalink to this headline">¶</a></h4>
+<p>A <code class="docutils literal notranslate"><span class="pre">GuestFilesystemTrimResponse</span></code> which contains the
+status of all trimmed paths. (since 2.4)</p>
+</div>
+<div class="section" id="qapidoc-99">
+<h4>Since<a class="headerlink" href="#qapidoc-99" title="Permalink to this headline">¶</a></h4>
+<p>1.2</p>
+</div>
+</div>
+<div class="section" id="qapidoc-103">
+<h3><code class="docutils literal notranslate"><span class="pre">guest-suspend-disk</span></code> (Command)<a class="headerlink" href="#qapidoc-103" title="Permalink to this headline">¶</a></h3>
+<p>Suspend guest to disk.</p>
+<p>This command attempts to suspend the guest using three strategies, in this
+order:</p>
+<ul class="simple">
+<li>systemd hibernate</li>
+<li>pm-utils (via pm-hibernate)</li>
+<li>manual write into sysfs</li>
+</ul>
+<p>This command does NOT return a response on success. There is a high chance
+the command succeeded if the VM exits with a zero exit status or, when
+running with –no-shutdown, by issuing the query-status QMP command to
+to confirm the VM status is “shutdown”. However, the VM could also exit
+(or set its status to “shutdown”) due to other reasons.</p>
+<p>The following errors may be returned:</p>
+<ul class="simple">
+<li>If suspend to disk is not supported, Unsupported</li>
+</ul>
+<div class="section" id="qapidoc-101">
+<h4>Notes<a class="headerlink" href="#qapidoc-101" title="Permalink to this headline">¶</a></h4>
+<p>It’s strongly recommended to issue the guest-sync command before
+sending commands when the guest resumes</p>
+</div>
+<div class="section" id="qapidoc-102">
+<h4>Since<a class="headerlink" href="#qapidoc-102" title="Permalink to this headline">¶</a></h4>
+<p>1.1</p>
+</div>
+</div>
+<div class="section" id="qapidoc-106">
+<h3><code class="docutils literal notranslate"><span class="pre">guest-suspend-ram</span></code> (Command)<a class="headerlink" href="#qapidoc-106" title="Permalink to this headline">¶</a></h3>
+<p>Suspend guest to ram.</p>
+<p>This command attempts to suspend the guest using three strategies, in this
+order:</p>
+<ul class="simple">
+<li>systemd suspend</li>
+<li>pm-utils (via pm-suspend)</li>
+<li>manual write into sysfs</li>
+</ul>
+<p>IMPORTANT: guest-suspend-ram requires working wakeup support in
+QEMU. You should check QMP command query-current-machine returns
+wakeup-suspend-support: true before issuing this command. Failure in
+doing so can result in a suspended guest that QEMU will not be able to
+awaken, forcing the user to power cycle the guest to bring it back.</p>
+<p>This command does NOT return a response on success. There are two options
+to check for success:</p>
+<ol class="arabic simple">
+<li>Wait for the SUSPEND QMP event from QEMU</li>
+<li>Issue the query-status QMP command to confirm the VM status is
+“suspended”</li>
+</ol>
+<p>The following errors may be returned:</p>
+<ul class="simple">
+<li>If suspend to ram is not supported, Unsupported</li>
+</ul>
+<div class="section" id="qapidoc-104">
+<h4>Notes<a class="headerlink" href="#qapidoc-104" title="Permalink to this headline">¶</a></h4>
+<p>It’s strongly recommended to issue the guest-sync command before
+sending commands when the guest resumes</p>
+</div>
+<div class="section" id="qapidoc-105">
+<h4>Since<a class="headerlink" href="#qapidoc-105" title="Permalink to this headline">¶</a></h4>
+<p>1.1</p>
+</div>
+</div>
+<div class="section" id="qapidoc-109">
+<h3><code class="docutils literal notranslate"><span class="pre">guest-suspend-hybrid</span></code> (Command)<a class="headerlink" href="#qapidoc-109" title="Permalink to this headline">¶</a></h3>
+<p>Save guest state to disk and suspend to ram.</p>
+<p>This command attempts to suspend the guest by executing, in this order:</p>
+<ul class="simple">
+<li>systemd hybrid-sleep</li>
+<li>pm-utils (via pm-suspend-hybrid)</li>
+</ul>
+<p>IMPORTANT: guest-suspend-hybrid requires working wakeup support in
+QEMU. You should check QMP command query-current-machine returns
+wakeup-suspend-support: true before issuing this command. Failure in
+doing so can result in a suspended guest that QEMU will not be able to
+awaken, forcing the user to power cycle the guest to bring it back.</p>
+<p>This command does NOT return a response on success. There are two options
+to check for success:</p>
+<ol class="arabic simple">
+<li>Wait for the SUSPEND QMP event from QEMU</li>
+<li>Issue the query-status QMP command to confirm the VM status is
+“suspended”</li>
+</ol>
+<p>The following errors may be returned:</p>
+<ul class="simple">
+<li>If hybrid suspend is not supported, Unsupported</li>
+</ul>
+<div class="section" id="qapidoc-107">
+<h4>Notes<a class="headerlink" href="#qapidoc-107" title="Permalink to this headline">¶</a></h4>
+<p>It’s strongly recommended to issue the guest-sync command before
+sending commands when the guest resumes</p>
+</div>
+<div class="section" id="qapidoc-108">
+<h4>Since<a class="headerlink" href="#qapidoc-108" title="Permalink to this headline">¶</a></h4>
+<p>1.1</p>
+</div>
+</div>
+<div class="section" id="qapidoc-112">
+<h3><code class="docutils literal notranslate"><span class="pre">GuestIpAddressType</span></code> (Enum)<a class="headerlink" href="#qapidoc-112" title="Permalink to this headline">¶</a></h3>
+<p>An enumeration of supported IP address types</p>
+<div class="section" id="qapidoc-110">
+<h4>Values<a class="headerlink" href="#qapidoc-110" title="Permalink to this headline">¶</a></h4>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">ipv4</span></code></dt>
+<dd>IP version 4</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">ipv6</span></code></dt>
+<dd>IP version 6</dd>
+</dl>
+</div>
+<div class="section" id="qapidoc-111">
+<h4>Since<a class="headerlink" href="#qapidoc-111" title="Permalink to this headline">¶</a></h4>
+<p>1.1</p>
+</div>
+</div>
+<div class="section" id="qapidoc-115">
+<h3><code class="docutils literal notranslate"><span class="pre">GuestIpAddress</span></code> (Object)<a class="headerlink" href="#qapidoc-115" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="qapidoc-113">
+<h4>Members<a class="headerlink" href="#qapidoc-113" title="Permalink to this headline">¶</a></h4>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">ip-address</span></code>: <code class="docutils literal notranslate"><span class="pre">string</span></code></dt>
+<dd>IP address</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">ip-address-type</span></code>: <code class="docutils literal notranslate"><span class="pre">GuestIpAddressType</span></code></dt>
+<dd>Type of <code class="docutils literal notranslate"><span class="pre">ip-address</span></code> (e.g. ipv4, ipv6)</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">prefix</span></code>: <code class="docutils literal notranslate"><span class="pre">int</span></code></dt>
+<dd>Network prefix length of <code class="docutils literal notranslate"><span class="pre">ip-address</span></code></dd>
+</dl>
+</div>
+<div class="section" id="qapidoc-114">
+<h4>Since<a class="headerlink" href="#qapidoc-114" title="Permalink to this headline">¶</a></h4>
+<p>1.1</p>
+</div>
+</div>
+<div class="section" id="qapidoc-118">
+<h3><code class="docutils literal notranslate"><span class="pre">GuestNetworkInterfaceStat</span></code> (Object)<a class="headerlink" href="#qapidoc-118" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="qapidoc-116">
+<h4>Members<a class="headerlink" href="#qapidoc-116" title="Permalink to this headline">¶</a></h4>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">rx-bytes</span></code>: <code class="docutils literal notranslate"><span class="pre">int</span></code></dt>
+<dd>total bytes received</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">rx-packets</span></code>: <code class="docutils literal notranslate"><span class="pre">int</span></code></dt>
+<dd>total packets received</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">rx-errs</span></code>: <code class="docutils literal notranslate"><span class="pre">int</span></code></dt>
+<dd>bad packets received</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">rx-dropped</span></code>: <code class="docutils literal notranslate"><span class="pre">int</span></code></dt>
+<dd>receiver dropped packets</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">tx-bytes</span></code>: <code class="docutils literal notranslate"><span class="pre">int</span></code></dt>
+<dd>total bytes transmitted</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">tx-packets</span></code>: <code class="docutils literal notranslate"><span class="pre">int</span></code></dt>
+<dd>total packets transmitted</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">tx-errs</span></code>: <code class="docutils literal notranslate"><span class="pre">int</span></code></dt>
+<dd>packet transmit problems</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">tx-dropped</span></code>: <code class="docutils literal notranslate"><span class="pre">int</span></code></dt>
+<dd>dropped packets transmitted</dd>
+</dl>
+</div>
+<div class="section" id="qapidoc-117">
+<h4>Since<a class="headerlink" href="#qapidoc-117" title="Permalink to this headline">¶</a></h4>
+<p>2.11</p>
+</div>
+</div>
+<div class="section" id="qapidoc-121">
+<h3><code class="docutils literal notranslate"><span class="pre">GuestNetworkInterface</span></code> (Object)<a class="headerlink" href="#qapidoc-121" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="qapidoc-119">
+<h4>Members<a class="headerlink" href="#qapidoc-119" title="Permalink to this headline">¶</a></h4>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">name</span></code>: <code class="docutils literal notranslate"><span class="pre">string</span></code></dt>
+<dd>The name of interface for which info are being delivered</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">hardware-address</span></code>: <code class="docutils literal notranslate"><span class="pre">string</span></code> (optional)</dt>
+<dd>Hardware address of <code class="docutils literal notranslate"><span class="pre">name</span></code></dd>
+<dt><code class="docutils literal notranslate"><span class="pre">ip-addresses</span></code>: <code class="docutils literal notranslate"><span class="pre">array</span> <span class="pre">of</span> <span class="pre">GuestIpAddress</span></code> (optional)</dt>
+<dd>List of addresses assigned to <code class="docutils literal notranslate"><span class="pre">name</span></code></dd>
+<dt><code class="docutils literal notranslate"><span class="pre">statistics</span></code>: <code class="docutils literal notranslate"><span class="pre">GuestNetworkInterfaceStat</span></code> (optional)</dt>
+<dd>various statistic counters related to <code class="docutils literal notranslate"><span class="pre">name</span></code>
+(since 2.11)</dd>
+</dl>
+</div>
+<div class="section" id="qapidoc-120">
+<h4>Since<a class="headerlink" href="#qapidoc-120" title="Permalink to this headline">¶</a></h4>
+<p>1.1</p>
+</div>
+</div>
+<div class="section" id="qapidoc-124">
+<h3><code class="docutils literal notranslate"><span class="pre">guest-network-get-interfaces</span></code> (Command)<a class="headerlink" href="#qapidoc-124" title="Permalink to this headline">¶</a></h3>
+<p>Get list of guest IP addresses, MAC addresses
+and netmasks.</p>
+<div class="section" id="qapidoc-122">
+<h4>Returns<a class="headerlink" href="#qapidoc-122" title="Permalink to this headline">¶</a></h4>
+<p>List of GuestNetworkInfo on success.</p>
+</div>
+<div class="section" id="qapidoc-123">
+<h4>Since<a class="headerlink" href="#qapidoc-123" title="Permalink to this headline">¶</a></h4>
+<p>1.1</p>
+</div>
+</div>
+<div class="section" id="qapidoc-127">
+<h3><code class="docutils literal notranslate"><span class="pre">GuestLogicalProcessor</span></code> (Object)<a class="headerlink" href="#qapidoc-127" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="qapidoc-125">
+<h4>Members<a class="headerlink" href="#qapidoc-125" title="Permalink to this headline">¶</a></h4>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">logical-id</span></code>: <code class="docutils literal notranslate"><span class="pre">int</span></code></dt>
+<dd>Arbitrary guest-specific unique identifier of the VCPU.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">online</span></code>: <code class="docutils literal notranslate"><span class="pre">boolean</span></code></dt>
+<dd>Whether the VCPU is enabled.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">can-offline</span></code>: <code class="docutils literal notranslate"><span class="pre">boolean</span></code> (optional)</dt>
+<dd>Whether offlining the VCPU is possible. This member
+is always filled in by the guest agent when the structure is
+returned, and always ignored on input (hence it can be omitted
+then).</dd>
+</dl>
+</div>
+<div class="section" id="qapidoc-126">
+<h4>Since<a class="headerlink" href="#qapidoc-126" title="Permalink to this headline">¶</a></h4>
+<p>1.5</p>
+</div>
+</div>
+<div class="section" id="qapidoc-130">
+<h3><code class="docutils literal notranslate"><span class="pre">guest-get-vcpus</span></code> (Command)<a class="headerlink" href="#qapidoc-130" title="Permalink to this headline">¶</a></h3>
+<p>Retrieve the list of the guest’s logical processors.</p>
+<p>This is a read-only operation.</p>
+<div class="section" id="qapidoc-128">
+<h4>Returns<a class="headerlink" href="#qapidoc-128" title="Permalink to this headline">¶</a></h4>
+<p>The list of all VCPUs the guest knows about. Each VCPU is put on the
+list exactly once, but their order is unspecified.</p>
+</div>
+<div class="section" id="qapidoc-129">
+<h4>Since<a class="headerlink" href="#qapidoc-129" title="Permalink to this headline">¶</a></h4>
+<p>1.5</p>
+</div>
+</div>
+<div class="section" id="qapidoc-134">
+<h3><code class="docutils literal notranslate"><span class="pre">guest-set-vcpus</span></code> (Command)<a class="headerlink" href="#qapidoc-134" title="Permalink to this headline">¶</a></h3>
+<p>Attempt to reconfigure (currently: enable/disable) logical processors inside
+the guest.</p>
+<p>The input list is processed node by node in order. In each node <code class="docutils literal notranslate"><span class="pre">logical-id</span></code>
+is used to look up the guest VCPU, for which <code class="docutils literal notranslate"><span class="pre">online</span></code> specifies the requested
+state. The set of distinct <code class="docutils literal notranslate"><span class="pre">logical-id</span></code>’s is only required to be a subset of
+the guest-supported identifiers. There’s no restriction on list length or on
+repeating the same <code class="docutils literal notranslate"><span class="pre">logical-id</span></code> (with possibly different <code class="docutils literal notranslate"><span class="pre">online</span></code> field).
+Preferably the input list should describe a modified subset of
+<code class="docutils literal notranslate"><span class="pre">guest-get-vcpus</span></code>’ return value.</p>
+<div class="section" id="qapidoc-131">
+<h4>Arguments<a class="headerlink" href="#qapidoc-131" title="Permalink to this headline">¶</a></h4>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">vcpus</span></code>: <code class="docutils literal notranslate"><span class="pre">array</span> <span class="pre">of</span> <span class="pre">GuestLogicalProcessor</span></code></dt>
+<dd>Not documented</dd>
+</dl>
+</div>
+<div class="section" id="qapidoc-132">
+<h4>Returns<a class="headerlink" href="#qapidoc-132" title="Permalink to this headline">¶</a></h4>
+<p>The length of the initial sublist that has been successfully
+processed. The guest agent maximizes this value. Possible cases:</p>
+<ul class="simple">
+<li>0:
+if the <code class="docutils literal notranslate"><span class="pre">vcpus</span></code> list was empty on input. Guest state
+has not been changed. Otherwise,</li>
+<li>Error:
+processing the first node of <code class="docutils literal notranslate"><span class="pre">vcpus</span></code> failed for the
+reason returned. Guest state has not been changed.
+Otherwise,</li>
+<li>&lt; length(<code class="docutils literal notranslate"><span class="pre">vcpus</span></code>):
+more than zero initial nodes have been processed,
+but not the entire <code class="docutils literal notranslate"><span class="pre">vcpus</span></code> list. Guest state has
+changed accordingly. To retrieve the error
+(assuming it persists), repeat the call with the
+successfully processed initial sublist removed.
+Otherwise,</li>
+<li>length(<code class="docutils literal notranslate"><span class="pre">vcpus</span></code>):
+call successful.</li>
+</ul>
+</div>
+<div class="section" id="qapidoc-133">
+<h4>Since<a class="headerlink" href="#qapidoc-133" title="Permalink to this headline">¶</a></h4>
+<p>1.5</p>
+</div>
+</div>
+<div class="section" id="qapidoc-137">
+<h3><code class="docutils literal notranslate"><span class="pre">GuestDiskBusType</span></code> (Enum)<a class="headerlink" href="#qapidoc-137" title="Permalink to this headline">¶</a></h3>
+<p>An enumeration of bus type of disks</p>
+<div class="section" id="qapidoc-135">
+<h4>Values<a class="headerlink" href="#qapidoc-135" title="Permalink to this headline">¶</a></h4>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">ide</span></code></dt>
+<dd>IDE disks</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">fdc</span></code></dt>
+<dd>floppy disks</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">scsi</span></code></dt>
+<dd>SCSI disks</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">virtio</span></code></dt>
+<dd>virtio disks</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">xen</span></code></dt>
+<dd>Xen disks</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">usb</span></code></dt>
+<dd>USB disks</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">uml</span></code></dt>
+<dd>UML disks</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">sata</span></code></dt>
+<dd>SATA disks</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">sd</span></code></dt>
+<dd>SD cards</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">unknown</span></code></dt>
+<dd>Unknown bus type</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">ieee1394</span></code></dt>
+<dd>Win IEEE 1394 bus type</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">ssa</span></code></dt>
+<dd>Win SSA bus type</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">fibre</span></code></dt>
+<dd>Win fiber channel bus type</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">raid</span></code></dt>
+<dd>Win RAID bus type</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">iscsi</span></code></dt>
+<dd>Win iScsi bus type</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">sas</span></code></dt>
+<dd>Win serial-attaches SCSI bus type</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">mmc</span></code></dt>
+<dd>Win multimedia card (MMC) bus type</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">virtual</span></code></dt>
+<dd>Win virtual bus type</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">file-backed-virtual</span></code></dt>
+<dd>Win file-backed bus type</dd>
+</dl>
+</div>
+<div class="section" id="qapidoc-136">
+<h4>Since<a class="headerlink" href="#qapidoc-136" title="Permalink to this headline">¶</a></h4>
+<p>2.2; ‘Unknown’ and all entries below since 2.4</p>
+</div>
+</div>
+<div class="section" id="qapidoc-140">
+<h3><code class="docutils literal notranslate"><span class="pre">GuestPCIAddress</span></code> (Object)<a class="headerlink" href="#qapidoc-140" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="qapidoc-138">
+<h4>Members<a class="headerlink" href="#qapidoc-138" title="Permalink to this headline">¶</a></h4>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">domain</span></code>: <code class="docutils literal notranslate"><span class="pre">int</span></code></dt>
+<dd>domain id</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">bus</span></code>: <code class="docutils literal notranslate"><span class="pre">int</span></code></dt>
+<dd>bus id</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">slot</span></code>: <code class="docutils literal notranslate"><span class="pre">int</span></code></dt>
+<dd>slot id</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">function</span></code>: <code class="docutils literal notranslate"><span class="pre">int</span></code></dt>
+<dd>function id</dd>
+</dl>
+</div>
+<div class="section" id="qapidoc-139">
+<h4>Since<a class="headerlink" href="#qapidoc-139" title="Permalink to this headline">¶</a></h4>
+<p>2.2</p>
+</div>
+</div>
+<div class="section" id="qapidoc-143">
+<h3><code class="docutils literal notranslate"><span class="pre">GuestDiskAddress</span></code> (Object)<a class="headerlink" href="#qapidoc-143" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="qapidoc-141">
+<h4>Members<a class="headerlink" href="#qapidoc-141" title="Permalink to this headline">¶</a></h4>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">pci-controller</span></code>: <code class="docutils literal notranslate"><span class="pre">GuestPCIAddress</span></code></dt>
+<dd>controller’s PCI address (fields are set to -1 if invalid)</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">bus-type</span></code>: <code class="docutils literal notranslate"><span class="pre">GuestDiskBusType</span></code></dt>
+<dd>bus type</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">bus</span></code>: <code class="docutils literal notranslate"><span class="pre">int</span></code></dt>
+<dd>bus id</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">target</span></code>: <code class="docutils literal notranslate"><span class="pre">int</span></code></dt>
+<dd>target id</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">unit</span></code>: <code class="docutils literal notranslate"><span class="pre">int</span></code></dt>
+<dd>unit id</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">serial</span></code>: <code class="docutils literal notranslate"><span class="pre">string</span></code> (optional)</dt>
+<dd>serial number (since: 3.1)</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">dev</span></code>: <code class="docutils literal notranslate"><span class="pre">string</span></code> (optional)</dt>
+<dd>device node (POSIX) or device UNC (Windows) (since: 3.1)</dd>
+</dl>
+</div>
+<div class="section" id="qapidoc-142">
+<h4>Since<a class="headerlink" href="#qapidoc-142" title="Permalink to this headline">¶</a></h4>
+<p>2.2</p>
+</div>
+</div>
+<div class="section" id="qapidoc-146">
+<h3><code class="docutils literal notranslate"><span class="pre">GuestDiskInfo</span></code> (Object)<a class="headerlink" href="#qapidoc-146" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="qapidoc-144">
+<h4>Members<a class="headerlink" href="#qapidoc-144" title="Permalink to this headline">¶</a></h4>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">name</span></code>: <code class="docutils literal notranslate"><span class="pre">string</span></code></dt>
+<dd>device node (Linux) or device UNC (Windows)</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">partition</span></code>: <code class="docutils literal notranslate"><span class="pre">boolean</span></code></dt>
+<dd>whether this is a partition or disk</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">dependencies</span></code>: <code class="docutils literal notranslate"><span class="pre">array</span> <span class="pre">of</span> <span class="pre">string</span></code> (optional)</dt>
+<dd>list of device dependencies; e.g. for LVs of the LVM this will
+hold the list of PVs, for LUKS encrypted volume this will
+contain the disk where the volume is placed.     (Linux)</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">address</span></code>: <code class="docutils literal notranslate"><span class="pre">GuestDiskAddress</span></code> (optional)</dt>
+<dd>disk address information (only for non-virtual devices)</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">alias</span></code>: <code class="docutils literal notranslate"><span class="pre">string</span></code> (optional)</dt>
+<dd>optional alias assigned to the disk, on Linux this is a name assigned
+by device mapper</dd>
+</dl>
+</div>
+<div class="section" id="qapidoc-145">
+Since 5.2</div>
+</div>
+<div class="section" id="qapidoc-149">
+<h3><code class="docutils literal notranslate"><span class="pre">guest-get-disks</span></code> (Command)<a class="headerlink" href="#qapidoc-149" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="qapidoc-147">
+<h4>Returns<a class="headerlink" href="#qapidoc-147" title="Permalink to this headline">¶</a></h4>
+<p>The list of disks in the guest. For Windows these are only the
+physical disks. On Linux these are all root block devices of
+non-zero size including e.g. removable devices, loop devices,
+NBD, etc.</p>
+</div>
+<div class="section" id="qapidoc-148">
+<h4>Since<a class="headerlink" href="#qapidoc-148" title="Permalink to this headline">¶</a></h4>
+<p>5.2</p>
+</div>
+</div>
+<div class="section" id="qapidoc-152">
+<h3><code class="docutils literal notranslate"><span class="pre">GuestFilesystemInfo</span></code> (Object)<a class="headerlink" href="#qapidoc-152" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="qapidoc-150">
+<h4>Members<a class="headerlink" href="#qapidoc-150" title="Permalink to this headline">¶</a></h4>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">name</span></code>: <code class="docutils literal notranslate"><span class="pre">string</span></code></dt>
+<dd>disk name</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">mountpoint</span></code>: <code class="docutils literal notranslate"><span class="pre">string</span></code></dt>
+<dd>mount point path</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">type</span></code>: <code class="docutils literal notranslate"><span class="pre">string</span></code></dt>
+<dd>file system type string</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">used-bytes</span></code>: <code class="docutils literal notranslate"><span class="pre">int</span></code> (optional)</dt>
+<dd>file system used bytes (since 3.0)</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">total-bytes</span></code>: <code class="docutils literal notranslate"><span class="pre">int</span></code> (optional)</dt>
+<dd>non-root file system total bytes (since 3.0)</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">disk</span></code>: <code class="docutils literal notranslate"><span class="pre">array</span> <span class="pre">of</span> <span class="pre">GuestDiskAddress</span></code></dt>
+<dd>an array of disk hardware information that the volume lies on,
+which may be empty if the disk type is not supported</dd>
+</dl>
+</div>
+<div class="section" id="qapidoc-151">
+<h4>Since<a class="headerlink" href="#qapidoc-151" title="Permalink to this headline">¶</a></h4>
+<p>2.2</p>
+</div>
+</div>
+<div class="section" id="qapidoc-155">
+<h3><code class="docutils literal notranslate"><span class="pre">guest-get-fsinfo</span></code> (Command)<a class="headerlink" href="#qapidoc-155" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="qapidoc-153">
+<h4>Returns<a class="headerlink" href="#qapidoc-153" title="Permalink to this headline">¶</a></h4>
+<p>The list of filesystems information mounted in the guest.
+The returned mountpoints may be specified to
+<code class="docutils literal notranslate"><span class="pre">guest-fsfreeze-freeze-list</span></code>.
+Network filesystems (such as CIFS and NFS) are not listed.</p>
+</div>
+<div class="section" id="qapidoc-154">
+<h4>Since<a class="headerlink" href="#qapidoc-154" title="Permalink to this headline">¶</a></h4>
+<p>2.2</p>
+</div>
+</div>
+<div class="section" id="qapidoc-160">
+<h3><code class="docutils literal notranslate"><span class="pre">guest-set-user-password</span></code> (Command)<a class="headerlink" href="#qapidoc-160" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="qapidoc-156">
+<h4>Arguments<a class="headerlink" href="#qapidoc-156" title="Permalink to this headline">¶</a></h4>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">username</span></code>: <code class="docutils literal notranslate"><span class="pre">string</span></code></dt>
+<dd>the user account whose password to change</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">password</span></code>: <code class="docutils literal notranslate"><span class="pre">string</span></code></dt>
+<dd>the new password entry string, base64 encoded</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">crypted</span></code>: <code class="docutils literal notranslate"><span class="pre">boolean</span></code></dt>
+<dd>true if password is already crypt()d, false if raw</dd>
+</dl>
+</div>
+<div class="section" id="qapidoc-157">
+<p>If the <code class="docutils literal notranslate"><span class="pre">crypted</span></code> flag is true, it is the caller’s responsibility
+to ensure the correct crypt() encryption scheme is used. This
+command does not attempt to interpret or report on the encryption
+scheme. Refer to the documentation of the guest operating system
+in question to determine what is supported.</p>
+<p>Not all guest operating systems will support use of the
+<code class="docutils literal notranslate"><span class="pre">crypted</span></code> flag, as they may require the clear-text password</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">password</span></code> parameter must always be base64 encoded before
+transmission, even if already crypt()d, to ensure it is 8-bit
+safe when passed as JSON.</p>
+</div>
+<div class="section" id="qapidoc-158">
+<h4>Returns<a class="headerlink" href="#qapidoc-158" title="Permalink to this headline">¶</a></h4>
+<p>Nothing on success.</p>
+</div>
+<div class="section" id="qapidoc-159">
+<h4>Since<a class="headerlink" href="#qapidoc-159" title="Permalink to this headline">¶</a></h4>
+<p>2.3</p>
+</div>
+</div>
+<div class="section" id="qapidoc-163">
+<h3><code class="docutils literal notranslate"><span class="pre">GuestMemoryBlock</span></code> (Object)<a class="headerlink" href="#qapidoc-163" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="qapidoc-161">
+<h4>Members<a class="headerlink" href="#qapidoc-161" title="Permalink to this headline">¶</a></h4>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">phys-index</span></code>: <code class="docutils literal notranslate"><span class="pre">int</span></code></dt>
+<dd>Arbitrary guest-specific unique identifier of the MEMORY BLOCK.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">online</span></code>: <code class="docutils literal notranslate"><span class="pre">boolean</span></code></dt>
+<dd>Whether the MEMORY BLOCK is enabled in guest.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">can-offline</span></code>: <code class="docutils literal notranslate"><span class="pre">boolean</span></code> (optional)</dt>
+<dd>Whether offlining the MEMORY BLOCK is possible.
+This member is always filled in by the guest agent when the
+structure is returned, and always ignored on input (hence it
+can be omitted then).</dd>
+</dl>
+</div>
+<div class="section" id="qapidoc-162">
+<h4>Since<a class="headerlink" href="#qapidoc-162" title="Permalink to this headline">¶</a></h4>
+<p>2.3</p>
+</div>
+</div>
+<div class="section" id="qapidoc-166">
+<h3><code class="docutils literal notranslate"><span class="pre">guest-get-memory-blocks</span></code> (Command)<a class="headerlink" href="#qapidoc-166" title="Permalink to this headline">¶</a></h3>
+<p>Retrieve the list of the guest’s memory blocks.</p>
+<p>This is a read-only operation.</p>
+<div class="section" id="qapidoc-164">
+<h4>Returns<a class="headerlink" href="#qapidoc-164" title="Permalink to this headline">¶</a></h4>
+<p>The list of all memory blocks the guest knows about.
+Each memory block is put on the list exactly once, but their order
+is unspecified.</p>
+</div>
+<div class="section" id="qapidoc-165">
+<h4>Since<a class="headerlink" href="#qapidoc-165" title="Permalink to this headline">¶</a></h4>
+<p>2.3</p>
+</div>
+</div>
+<div class="section" id="qapidoc-169">
+<h3><code class="docutils literal notranslate"><span class="pre">GuestMemoryBlockResponseType</span></code> (Enum)<a class="headerlink" href="#qapidoc-169" title="Permalink to this headline">¶</a></h3>
+<p>An enumeration of memory block operation result.</p>
+<div class="section" id="qapidoc-167">
+<h4>Values<a class="headerlink" href="#qapidoc-167" title="Permalink to this headline">¶</a></h4>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">success</span></code></dt>
+<dd>the operation of online/offline memory block is successful.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">not-found</span></code></dt>
+<dd>can’t find the corresponding memoryXXX directory in sysfs.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">operation-not-supported</span></code></dt>
+<dd>for some old kernels, it does not support
+online or offline memory block.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">operation-failed</span></code></dt>
+<dd>the operation of online/offline memory block fails,
+because of some errors happen.</dd>
+</dl>
+</div>
+<div class="section" id="qapidoc-168">
+<h4>Since<a class="headerlink" href="#qapidoc-168" title="Permalink to this headline">¶</a></h4>
+<p>2.3</p>
+</div>
+</div>
+<div class="section" id="qapidoc-172">
+<h3><code class="docutils literal notranslate"><span class="pre">GuestMemoryBlockResponse</span></code> (Object)<a class="headerlink" href="#qapidoc-172" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="qapidoc-170">
+<h4>Members<a class="headerlink" href="#qapidoc-170" title="Permalink to this headline">¶</a></h4>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">phys-index</span></code>: <code class="docutils literal notranslate"><span class="pre">int</span></code></dt>
+<dd>same with the ‘phys-index’ member of <code class="docutils literal notranslate"><span class="pre">GuestMemoryBlock</span></code>.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">response</span></code>: <code class="docutils literal notranslate"><span class="pre">GuestMemoryBlockResponseType</span></code></dt>
+<dd>the result of memory block operation.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">error-code</span></code>: <code class="docutils literal notranslate"><span class="pre">int</span></code> (optional)</dt>
+<dd>the error number.
+When memory block operation fails, we assign the value of
+‘errno’ to this member, it indicates what goes wrong.
+When the operation succeeds, it will be omitted.</dd>
+</dl>
+</div>
+<div class="section" id="qapidoc-171">
+<h4>Since<a class="headerlink" href="#qapidoc-171" title="Permalink to this headline">¶</a></h4>
+<p>2.3</p>
+</div>
+</div>
+<div class="section" id="qapidoc-176">
+<h3><code class="docutils literal notranslate"><span class="pre">guest-set-memory-blocks</span></code> (Command)<a class="headerlink" href="#qapidoc-176" title="Permalink to this headline">¶</a></h3>
+<p>Attempt to reconfigure (currently: enable/disable) state of memory blocks
+inside the guest.</p>
+<p>The input list is processed node by node in order. In each node <code class="docutils literal notranslate"><span class="pre">phys-index</span></code>
+is used to look up the guest MEMORY BLOCK, for which <code class="docutils literal notranslate"><span class="pre">online</span></code> specifies the
+requested state. The set of distinct <code class="docutils literal notranslate"><span class="pre">phys-index</span></code>’s is only required to be a
+subset of the guest-supported identifiers. There’s no restriction on list
+length or on repeating the same <code class="docutils literal notranslate"><span class="pre">phys-index</span></code> (with possibly different <code class="docutils literal notranslate"><span class="pre">online</span></code>
+field).
+Preferably the input list should describe a modified subset of
+<code class="docutils literal notranslate"><span class="pre">guest-get-memory-blocks</span></code>’ return value.</p>
+<div class="section" id="qapidoc-173">
+<h4>Arguments<a class="headerlink" href="#qapidoc-173" title="Permalink to this headline">¶</a></h4>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">mem-blks</span></code>: <code class="docutils literal notranslate"><span class="pre">array</span> <span class="pre">of</span> <span class="pre">GuestMemoryBlock</span></code></dt>
+<dd>Not documented</dd>
+</dl>
+</div>
+<div class="section" id="qapidoc-174">
+<h4>Returns<a class="headerlink" href="#qapidoc-174" title="Permalink to this headline">¶</a></h4>
+<p>The operation results, it is a list of <code class="docutils literal notranslate"><span class="pre">GuestMemoryBlockResponse</span></code>,
+which is corresponding to the input list.</p>
+<p>Note: it will return NULL if the <code class="docutils literal notranslate"><span class="pre">mem-blks</span></code> list was empty on input,
+or there is an error, and in this case, guest state will not be
+changed.</p>
+</div>
+<div class="section" id="qapidoc-175">
+<h4>Since<a class="headerlink" href="#qapidoc-175" title="Permalink to this headline">¶</a></h4>
+<p>2.3</p>
+</div>
+</div>
+<div class="section" id="qapidoc-179">
+<h3><code class="docutils literal notranslate"><span class="pre">GuestMemoryBlockInfo</span></code> (Object)<a class="headerlink" href="#qapidoc-179" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="qapidoc-177">
+<h4>Members<a class="headerlink" href="#qapidoc-177" title="Permalink to this headline">¶</a></h4>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">size</span></code>: <code class="docutils literal notranslate"><span class="pre">int</span></code></dt>
+<dd>the size (in bytes) of the guest memory blocks,
+which are the minimal units of memory block online/offline
+operations (also called Logical Memory Hotplug).</dd>
+</dl>
+</div>
+<div class="section" id="qapidoc-178">
+<h4>Since<a class="headerlink" href="#qapidoc-178" title="Permalink to this headline">¶</a></h4>
+<p>2.3</p>
+</div>
+</div>
+<div class="section" id="qapidoc-182">
+<h3><code class="docutils literal notranslate"><span class="pre">guest-get-memory-block-info</span></code> (Command)<a class="headerlink" href="#qapidoc-182" title="Permalink to this headline">¶</a></h3>
+<p>Get information relating to guest memory blocks.</p>
+<div class="section" id="qapidoc-180">
+<h4>Returns<a class="headerlink" href="#qapidoc-180" title="Permalink to this headline">¶</a></h4>
+<p><code class="docutils literal notranslate"><span class="pre">GuestMemoryBlockInfo</span></code></p>
+</div>
+<div class="section" id="qapidoc-181">
+<h4>Since<a class="headerlink" href="#qapidoc-181" title="Permalink to this headline">¶</a></h4>
+<p>2.3</p>
+</div>
+</div>
+<div class="section" id="qapidoc-185">
+<h3><code class="docutils literal notranslate"><span class="pre">GuestExecStatus</span></code> (Object)<a class="headerlink" href="#qapidoc-185" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="qapidoc-183">
+<h4>Members<a class="headerlink" href="#qapidoc-183" title="Permalink to this headline">¶</a></h4>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">exited</span></code>: <code class="docutils literal notranslate"><span class="pre">boolean</span></code></dt>
+<dd>true if process has already terminated.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">exitcode</span></code>: <code class="docutils literal notranslate"><span class="pre">int</span></code> (optional)</dt>
+<dd>process exit code if it was normally terminated.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">signal</span></code>: <code class="docutils literal notranslate"><span class="pre">int</span></code> (optional)</dt>
+<dd>signal number (linux) or unhandled exception code
+(windows) if the process was abnormally terminated.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">out-data</span></code>: <code class="docutils literal notranslate"><span class="pre">string</span></code> (optional)</dt>
+<dd>base64-encoded stdout of the process</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">err-data</span></code>: <code class="docutils literal notranslate"><span class="pre">string</span></code> (optional)</dt>
+<dd>base64-encoded stderr of the process
+Note: <code class="docutils literal notranslate"><span class="pre">out-data</span></code> and <code class="docutils literal notranslate"><span class="pre">err-data</span></code> are present only
+if ‘capture-output’ was specified for ‘guest-exec’</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">out-truncated</span></code>: <code class="docutils literal notranslate"><span class="pre">boolean</span></code> (optional)</dt>
+<dd>true if stdout was not fully captured
+due to size limitation.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">err-truncated</span></code>: <code class="docutils literal notranslate"><span class="pre">boolean</span></code> (optional)</dt>
+<dd>true if stderr was not fully captured
+due to size limitation.</dd>
+</dl>
+</div>
+<div class="section" id="qapidoc-184">
+<h4>Since<a class="headerlink" href="#qapidoc-184" title="Permalink to this headline">¶</a></h4>
+<p>2.5</p>
+</div>
+</div>
+<div class="section" id="qapidoc-189">
+<h3><code class="docutils literal notranslate"><span class="pre">guest-exec-status</span></code> (Command)<a class="headerlink" href="#qapidoc-189" title="Permalink to this headline">¶</a></h3>
+<p>Check status of process associated with PID retrieved via guest-exec.
+Reap the process and associated metadata if it has exited.</p>
+<div class="section" id="qapidoc-186">
+<h4>Arguments<a class="headerlink" href="#qapidoc-186" title="Permalink to this headline">¶</a></h4>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">pid</span></code>: <code class="docutils literal notranslate"><span class="pre">int</span></code></dt>
+<dd>pid returned from guest-exec</dd>
+</dl>
+</div>
+<div class="section" id="qapidoc-187">
+<h4>Returns<a class="headerlink" href="#qapidoc-187" title="Permalink to this headline">¶</a></h4>
+<p>GuestExecStatus on success.</p>
+</div>
+<div class="section" id="qapidoc-188">
+<h4>Since<a class="headerlink" href="#qapidoc-188" title="Permalink to this headline">¶</a></h4>
+<p>2.5</p>
+</div>
+</div>
+<div class="section" id="qapidoc-192">
+<h3><code class="docutils literal notranslate"><span class="pre">GuestExec</span></code> (Object)<a class="headerlink" href="#qapidoc-192" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="qapidoc-190">
+<h4>Members<a class="headerlink" href="#qapidoc-190" title="Permalink to this headline">¶</a></h4>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">pid</span></code>: <code class="docutils literal notranslate"><span class="pre">int</span></code></dt>
+<dd>pid of child process in guest OS</dd>
+</dl>
+</div>
+<div class="section" id="qapidoc-191">
+<h4>Since<a class="headerlink" href="#qapidoc-191" title="Permalink to this headline">¶</a></h4>
+<p>2.5</p>
+</div>
+</div>
+<div class="section" id="qapidoc-196">
+<h3><code class="docutils literal notranslate"><span class="pre">guest-exec</span></code> (Command)<a class="headerlink" href="#qapidoc-196" title="Permalink to this headline">¶</a></h3>
+<p>Execute a command in the guest</p>
+<div class="section" id="qapidoc-193">
+<h4>Arguments<a class="headerlink" href="#qapidoc-193" title="Permalink to this headline">¶</a></h4>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">path</span></code>: <code class="docutils literal notranslate"><span class="pre">string</span></code></dt>
+<dd>path or executable name to execute</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">arg</span></code>: <code class="docutils literal notranslate"><span class="pre">array</span> <span class="pre">of</span> <span class="pre">string</span></code> (optional)</dt>
+<dd>argument list to pass to executable</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">env</span></code>: <code class="docutils literal notranslate"><span class="pre">array</span> <span class="pre">of</span> <span class="pre">string</span></code> (optional)</dt>
+<dd>environment variables to pass to executable</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">input-data</span></code>: <code class="docutils literal notranslate"><span class="pre">string</span></code> (optional)</dt>
+<dd>data to be passed to process stdin (base64 encoded)</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">capture-output</span></code>: <code class="docutils literal notranslate"><span class="pre">boolean</span></code> (optional)</dt>
+<dd>bool flag to enable capture of
+stdout/stderr of running process. defaults to false.</dd>
+</dl>
+</div>
+<div class="section" id="qapidoc-194">
+<h4>Returns<a class="headerlink" href="#qapidoc-194" title="Permalink to this headline">¶</a></h4>
+<p>PID on success.</p>
+</div>
+<div class="section" id="qapidoc-195">
+<h4>Since<a class="headerlink" href="#qapidoc-195" title="Permalink to this headline">¶</a></h4>
+<p>2.5</p>
+</div>
+</div>
+<div class="section" id="qapidoc-199">
+<h3><code class="docutils literal notranslate"><span class="pre">GuestHostName</span></code> (Object)<a class="headerlink" href="#qapidoc-199" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="qapidoc-197">
+<h4>Members<a class="headerlink" href="#qapidoc-197" title="Permalink to this headline">¶</a></h4>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">host-name</span></code>: <code class="docutils literal notranslate"><span class="pre">string</span></code></dt>
+<dd>Fully qualified domain name of the guest OS</dd>
+</dl>
+</div>
+<div class="section" id="qapidoc-198">
+<h4>Since<a class="headerlink" href="#qapidoc-198" title="Permalink to this headline">¶</a></h4>
+<p>2.10</p>
+</div>
+</div>
+<div class="section" id="qapidoc-202">
+<h3><code class="docutils literal notranslate"><span class="pre">guest-get-host-name</span></code> (Command)<a class="headerlink" href="#qapidoc-202" title="Permalink to this headline">¶</a></h3>
+<p>Return a name for the machine.</p>
+<p>The returned name is not necessarily a fully-qualified domain name, or even
+present in DNS or some other name service at all. It need not even be unique
+on your local network or site, but usually it is.</p>
+<div class="section" id="qapidoc-200">
+<h4>Returns<a class="headerlink" href="#qapidoc-200" title="Permalink to this headline">¶</a></h4>
+<p>the host name of the machine on success</p>
+</div>
+<div class="section" id="qapidoc-201">
+<h4>Since<a class="headerlink" href="#qapidoc-201" title="Permalink to this headline">¶</a></h4>
+<p>2.10</p>
+</div>
+</div>
+<div class="section" id="qapidoc-205">
+<h3><code class="docutils literal notranslate"><span class="pre">GuestUser</span></code> (Object)<a class="headerlink" href="#qapidoc-205" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="qapidoc-203">
+<h4>Members<a class="headerlink" href="#qapidoc-203" title="Permalink to this headline">¶</a></h4>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">user</span></code>: <code class="docutils literal notranslate"><span class="pre">string</span></code></dt>
+<dd>Username</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">domain</span></code>: <code class="docutils literal notranslate"><span class="pre">string</span></code> (optional)</dt>
+<dd>Logon domain (windows only)</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">login-time</span></code>: <code class="docutils literal notranslate"><span class="pre">number</span></code></dt>
+<dd>Time of login of this user on the computer. If multiple
+instances of the user are logged in, the earliest login time is
+reported. The value is in fractional seconds since epoch time.</dd>
+</dl>
+</div>
+<div class="section" id="qapidoc-204">
+<h4>Since<a class="headerlink" href="#qapidoc-204" title="Permalink to this headline">¶</a></h4>
+<p>2.10</p>
+</div>
+</div>
+<div class="section" id="qapidoc-208">
+<h3><code class="docutils literal notranslate"><span class="pre">guest-get-users</span></code> (Command)<a class="headerlink" href="#qapidoc-208" title="Permalink to this headline">¶</a></h3>
+<p>Retrieves a list of currently active users on the VM.</p>
+<div class="section" id="qapidoc-206">
+<h4>Returns<a class="headerlink" href="#qapidoc-206" title="Permalink to this headline">¶</a></h4>
+<p>A unique list of users.</p>
+</div>
+<div class="section" id="qapidoc-207">
+<h4>Since<a class="headerlink" href="#qapidoc-207" title="Permalink to this headline">¶</a></h4>
+<p>2.10</p>
+</div>
+</div>
+<div class="section" id="qapidoc-211">
+<h3><code class="docutils literal notranslate"><span class="pre">GuestTimezone</span></code> (Object)<a class="headerlink" href="#qapidoc-211" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="qapidoc-209">
+<h4>Members<a class="headerlink" href="#qapidoc-209" title="Permalink to this headline">¶</a></h4>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">zone</span></code>: <code class="docutils literal notranslate"><span class="pre">string</span></code> (optional)</dt>
+<dd>Timezone name. These values may differ depending on guest/OS and
+should only be used for informational purposes.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">offset</span></code>: <code class="docutils literal notranslate"><span class="pre">int</span></code></dt>
+<dd>Offset to UTC in seconds, negative numbers for time zones west of
+GMT, positive numbers for east</dd>
+</dl>
+</div>
+<div class="section" id="qapidoc-210">
+<h4>Since<a class="headerlink" href="#qapidoc-210" title="Permalink to this headline">¶</a></h4>
+<p>2.10</p>
+</div>
+</div>
+<div class="section" id="qapidoc-214">
+<h3><code class="docutils literal notranslate"><span class="pre">guest-get-timezone</span></code> (Command)<a class="headerlink" href="#qapidoc-214" title="Permalink to this headline">¶</a></h3>
+<p>Retrieves the timezone information from the guest.</p>
+<div class="section" id="qapidoc-212">
+<h4>Returns<a class="headerlink" href="#qapidoc-212" title="Permalink to this headline">¶</a></h4>
+<p>A GuestTimezone dictionary.</p>
+</div>
+<div class="section" id="qapidoc-213">
+<h4>Since<a class="headerlink" href="#qapidoc-213" title="Permalink to this headline">¶</a></h4>
+<p>2.10</p>
+</div>
+</div>
+<div class="section" id="qapidoc-218">
+<h3><code class="docutils literal notranslate"><span class="pre">GuestOSInfo</span></code> (Object)<a class="headerlink" href="#qapidoc-218" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="qapidoc-215">
+<h4>Members<a class="headerlink" href="#qapidoc-215" title="Permalink to this headline">¶</a></h4>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">kernel-release</span></code>: <code class="docutils literal notranslate"><span class="pre">string</span></code> (optional)</dt>
+<dd><ul class="first last simple">
+<li>POSIX: release field returned by uname(2)</li>
+<li>Windows: build number of the OS</li>
+</ul>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">kernel-version</span></code>: <code class="docutils literal notranslate"><span class="pre">string</span></code> (optional)</dt>
+<dd><ul class="first last simple">
+<li>POSIX: version field returned by uname(2)</li>
+<li>Windows: version number of the OS</li>
+</ul>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">machine</span></code>: <code class="docutils literal notranslate"><span class="pre">string</span></code> (optional)</dt>
+<dd><ul class="first last simple">
+<li>POSIX: machine field returned by uname(2)</li>
+<li>Windows: one of x86, x86_64, arm, ia64</li>
+</ul>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">id</span></code>: <code class="docutils literal notranslate"><span class="pre">string</span></code> (optional)</dt>
+<dd><ul class="first last simple">
+<li>POSIX: as defined by os-release(5)</li>
+<li>Windows: contains string “mswindows”</li>
+</ul>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">name</span></code>: <code class="docutils literal notranslate"><span class="pre">string</span></code> (optional)</dt>
+<dd><ul class="first last simple">
+<li>POSIX: as defined by os-release(5)</li>
+<li>Windows: contains string “Microsoft Windows”</li>
+</ul>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">pretty-name</span></code>: <code class="docutils literal notranslate"><span class="pre">string</span></code> (optional)</dt>
+<dd><ul class="first last simple">
+<li>POSIX: as defined by os-release(5)</li>
+<li>Windows: product name, e.g. “Microsoft Windows 10 Enterprise”</li>
+</ul>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">version</span></code>: <code class="docutils literal notranslate"><span class="pre">string</span></code> (optional)</dt>
+<dd><ul class="first last simple">
+<li>POSIX: as defined by os-release(5)</li>
+<li>Windows: long version string, e.g. “Microsoft Windows Server 2008”</li>
+</ul>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">version-id</span></code>: <code class="docutils literal notranslate"><span class="pre">string</span></code> (optional)</dt>
+<dd><ul class="first last simple">
+<li>POSIX: as defined by os-release(5)</li>
+<li>Windows: short version identifier, e.g. “7” or “20012r2”</li>
+</ul>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">variant</span></code>: <code class="docutils literal notranslate"><span class="pre">string</span></code> (optional)</dt>
+<dd><ul class="first last simple">
+<li>POSIX: as defined by os-release(5)</li>
+<li>Windows: contains string “server” or “client”</li>
+</ul>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">variant-id</span></code>: <code class="docutils literal notranslate"><span class="pre">string</span></code> (optional)</dt>
+<dd><ul class="first last simple">
+<li>POSIX: as defined by os-release(5)</li>
+<li>Windows: contains string “server” or “client”</li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="section" id="qapidoc-216">
+<h4>Notes<a class="headerlink" href="#qapidoc-216" title="Permalink to this headline">¶</a></h4>
+<p>On POSIX systems the fields <code class="docutils literal notranslate"><span class="pre">id</span></code>, <code class="docutils literal notranslate"><span class="pre">name</span></code>, <code class="docutils literal notranslate"><span class="pre">pretty-name</span></code>, <code class="docutils literal notranslate"><span class="pre">version</span></code>, <code class="docutils literal notranslate"><span class="pre">version-id</span></code>,
+<code class="docutils literal notranslate"><span class="pre">variant</span></code> and <code class="docutils literal notranslate"><span class="pre">variant-id</span></code> follow the definition specified in os-release(5).
+Refer to the manual page for exact description of the fields. Their values
+are taken from the os-release file. If the file is not present in the system,
+or the values are not present in the file, the fields are not included.</p>
+<p>On Windows the values are filled from information gathered from the system.</p>
+</div>
+<div class="section" id="qapidoc-217">
+<h4>Since<a class="headerlink" href="#qapidoc-217" title="Permalink to this headline">¶</a></h4>
+<p>2.10</p>
+</div>
+</div>
+<div class="section" id="qapidoc-221">
+<h3><code class="docutils literal notranslate"><span class="pre">guest-get-osinfo</span></code> (Command)<a class="headerlink" href="#qapidoc-221" title="Permalink to this headline">¶</a></h3>
+<p>Retrieve guest operating system information</p>
+<div class="section" id="qapidoc-219">
+<h4>Returns<a class="headerlink" href="#qapidoc-219" title="Permalink to this headline">¶</a></h4>
+<p><code class="docutils literal notranslate"><span class="pre">GuestOSInfo</span></code></p>
+</div>
+<div class="section" id="qapidoc-220">
+<h4>Since<a class="headerlink" href="#qapidoc-220" title="Permalink to this headline">¶</a></h4>
+<p>2.10</p>
+</div>
+</div>
+<div class="section" id="qapidoc-223">
+<h3><code class="docutils literal notranslate"><span class="pre">GuestDeviceType</span></code> (Enum)<a class="headerlink" href="#qapidoc-223" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="qapidoc-222">
+<h4>Values<a class="headerlink" href="#qapidoc-222" title="Permalink to this headline">¶</a></h4>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">pci</span></code></dt>
+<dd>Not documented</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="qapidoc-226">
+<h3><code class="docutils literal notranslate"><span class="pre">GuestDeviceIdPCI</span></code> (Object)<a class="headerlink" href="#qapidoc-226" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="qapidoc-224">
+<h4>Members<a class="headerlink" href="#qapidoc-224" title="Permalink to this headline">¶</a></h4>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">vendor-id</span></code>: <code class="docutils literal notranslate"><span class="pre">int</span></code></dt>
+<dd>vendor ID</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">device-id</span></code>: <code class="docutils literal notranslate"><span class="pre">int</span></code></dt>
+<dd>device ID</dd>
+</dl>
+</div>
+<div class="section" id="qapidoc-225">
+<h4>Since<a class="headerlink" href="#qapidoc-225" title="Permalink to this headline">¶</a></h4>
+<p>5.2</p>
+</div>
+</div>
+<div class="section" id="qapidoc-229">
+<h3><code class="docutils literal notranslate"><span class="pre">GuestDeviceId</span></code> (Object)<a class="headerlink" href="#qapidoc-229" title="Permalink to this headline">¶</a></h3>
+<p>Id of the device
+- <code class="docutils literal notranslate"><span class="pre">pci</span></code>: PCI ID, since: 5.2</p>
+<div class="section" id="qapidoc-227">
+<h4>Members<a class="headerlink" href="#qapidoc-227" title="Permalink to this headline">¶</a></h4>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">type</span></code>: <code class="docutils literal notranslate"><span class="pre">GuestDeviceType</span></code></dt>
+<dd>Not documented</dd>
+<dt>The members of <code class="docutils literal notranslate"><span class="pre">GuestDeviceIdPCI</span></code> when <code class="docutils literal notranslate"><span class="pre">type</span></code> is <code class="docutils literal notranslate"><span class="pre">&quot;pci&quot;</span></code></dl>
+</div>
+<div class="section" id="qapidoc-228">
+<h4>Since<a class="headerlink" href="#qapidoc-228" title="Permalink to this headline">¶</a></h4>
+<p>5.2</p>
+</div>
+</div>
+<div class="section" id="qapidoc-232">
+<h3><code class="docutils literal notranslate"><span class="pre">GuestDeviceInfo</span></code> (Object)<a class="headerlink" href="#qapidoc-232" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="qapidoc-230">
+<h4>Members<a class="headerlink" href="#qapidoc-230" title="Permalink to this headline">¶</a></h4>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">driver-name</span></code>: <code class="docutils literal notranslate"><span class="pre">string</span></code></dt>
+<dd>name of the associated driver</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">driver-date</span></code>: <code class="docutils literal notranslate"><span class="pre">int</span></code> (optional)</dt>
+<dd>driver release date, in nanoseconds since the epoch</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">driver-version</span></code>: <code class="docutils literal notranslate"><span class="pre">string</span></code> (optional)</dt>
+<dd>driver version</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">id</span></code>: <code class="docutils literal notranslate"><span class="pre">GuestDeviceId</span></code> (optional)</dt>
+<dd>device ID</dd>
+</dl>
+</div>
+<div class="section" id="qapidoc-231">
+<h4>Since<a class="headerlink" href="#qapidoc-231" title="Permalink to this headline">¶</a></h4>
+<p>5.2</p>
+</div>
+</div>
+<div class="section" id="qapidoc-235">
+<h3><code class="docutils literal notranslate"><span class="pre">guest-get-devices</span></code> (Command)<a class="headerlink" href="#qapidoc-235" title="Permalink to this headline">¶</a></h3>
+<p>Retrieve information about device drivers in Windows guest</p>
+<div class="section" id="qapidoc-233">
+<h4>Returns<a class="headerlink" href="#qapidoc-233" title="Permalink to this headline">¶</a></h4>
+<p><code class="docutils literal notranslate"><span class="pre">GuestDeviceInfo</span></code></p>
+</div>
+<div class="section" id="qapidoc-234">
+<h4>Since<a class="headerlink" href="#qapidoc-234" title="Permalink to this headline">¶</a></h4>
+<p>5.2</p>
+</div>
+</div>
+<div class="section" id="qapidoc-239">
+<h3><code class="docutils literal notranslate"><span class="pre">GuestAuthorizedKeys</span></code> (Object)<a class="headerlink" href="#qapidoc-239" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="qapidoc-236">
+<h4>Members<a class="headerlink" href="#qapidoc-236" title="Permalink to this headline">¶</a></h4>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">keys</span></code>: <code class="docutils literal notranslate"><span class="pre">array</span> <span class="pre">of</span> <span class="pre">string</span></code></dt>
+<dd>public keys (in OpenSSH/sshd(8) authorized_keys format)</dd>
+</dl>
+</div>
+<div class="section" id="qapidoc-237">
+<h4>Since<a class="headerlink" href="#qapidoc-237" title="Permalink to this headline">¶</a></h4>
+<p>5.2</p>
+</div>
+<div class="section" id="qapidoc-238">
+<h4>If<a class="headerlink" href="#qapidoc-238" title="Permalink to this headline">¶</a></h4>
+<code class="docutils literal notranslate"><span class="pre">defined(CONFIG_POSIX)</span></code></div>
+</div>
+<div class="section" id="qapidoc-245">
+<h3><code class="docutils literal notranslate"><span class="pre">guest-ssh-get-authorized-keys</span></code> (Command)<a class="headerlink" href="#qapidoc-245" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="qapidoc-240">
+<h4>Arguments<a class="headerlink" href="#qapidoc-240" title="Permalink to this headline">¶</a></h4>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">username</span></code>: <code class="docutils literal notranslate"><span class="pre">string</span></code></dt>
+<dd>the user account to add the authorized keys</dd>
+</dl>
+</div>
+<div class="section" id="qapidoc-241">
+Return the public keys from user .ssh/authorized_keys on Unix systems (not
+implemented for other systems).</div>
+<div class="section" id="qapidoc-242">
+<h4>Returns<a class="headerlink" href="#qapidoc-242" title="Permalink to this headline">¶</a></h4>
+<p><code class="docutils literal notranslate"><span class="pre">GuestAuthorizedKeys</span></code></p>
+</div>
+<div class="section" id="qapidoc-243">
+<h4>Since<a class="headerlink" href="#qapidoc-243" title="Permalink to this headline">¶</a></h4>
+<p>5.2</p>
+</div>
+<div class="section" id="qapidoc-244">
+<h4>If<a class="headerlink" href="#qapidoc-244" title="Permalink to this headline">¶</a></h4>
+<code class="docutils literal notranslate"><span class="pre">defined(CONFIG_POSIX)</span></code></div>
+</div>
+<div class="section" id="qapidoc-251">
+<h3><code class="docutils literal notranslate"><span class="pre">guest-ssh-add-authorized-keys</span></code> (Command)<a class="headerlink" href="#qapidoc-251" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="qapidoc-246">
+<h4>Arguments<a class="headerlink" href="#qapidoc-246" title="Permalink to this headline">¶</a></h4>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">username</span></code>: <code class="docutils literal notranslate"><span class="pre">string</span></code></dt>
+<dd>the user account to add the authorized keys</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">keys</span></code>: <code class="docutils literal notranslate"><span class="pre">array</span> <span class="pre">of</span> <span class="pre">string</span></code></dt>
+<dd>the public keys to add (in OpenSSH/sshd(8) authorized_keys format)</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">reset</span></code>: <code class="docutils literal notranslate"><span class="pre">boolean</span></code> (optional)</dt>
+<dd>ignore the existing content, set it with the given keys only</dd>
+</dl>
+</div>
+<div class="section" id="qapidoc-247">
+Append public keys to user .ssh/authorized_keys on Unix systems (not
+implemented for other systems).</div>
+<div class="section" id="qapidoc-248">
+<h4>Returns<a class="headerlink" href="#qapidoc-248" title="Permalink to this headline">¶</a></h4>
+<p>Nothing on success.</p>
+</div>
+<div class="section" id="qapidoc-249">
+<h4>Since<a class="headerlink" href="#qapidoc-249" title="Permalink to this headline">¶</a></h4>
+<p>5.2</p>
+</div>
+<div class="section" id="qapidoc-250">
+<h4>If<a class="headerlink" href="#qapidoc-250" title="Permalink to this headline">¶</a></h4>
+<code class="docutils literal notranslate"><span class="pre">defined(CONFIG_POSIX)</span></code></div>
+</div>
+<div class="section" id="qapidoc-257">
+<h3><code class="docutils literal notranslate"><span class="pre">guest-ssh-remove-authorized-keys</span></code> (Command)<a class="headerlink" href="#qapidoc-257" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="qapidoc-252">
+<h4>Arguments<a class="headerlink" href="#qapidoc-252" title="Permalink to this headline">¶</a></h4>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">username</span></code>: <code class="docutils literal notranslate"><span class="pre">string</span></code></dt>
+<dd>the user account to remove the authorized keys</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">keys</span></code>: <code class="docutils literal notranslate"><span class="pre">array</span> <span class="pre">of</span> <span class="pre">string</span></code></dt>
+<dd>the public keys to remove (in OpenSSH/sshd(8) authorized_keys format)</dd>
+</dl>
+</div>
+<div class="section" id="qapidoc-253">
+Remove public keys from the user .ssh/authorized_keys on Unix systems (not
+implemented for other systems). It’s not an error if the key is already
+missing.</div>
+<div class="section" id="qapidoc-254">
+<h4>Returns<a class="headerlink" href="#qapidoc-254" title="Permalink to this headline">¶</a></h4>
+<p>Nothing on success.</p>
+</div>
+<div class="section" id="qapidoc-255">
+<h4>Since<a class="headerlink" href="#qapidoc-255" title="Permalink to this headline">¶</a></h4>
+<p>5.2</p>
+</div>
+<div class="section" id="qapidoc-256">
+<h4>If<a class="headerlink" href="#qapidoc-256" title="Permalink to this headline">¶</a></h4>
+<code class="docutils literal notranslate"><span class="pre">defined(CONFIG_POSIX)</span></code></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">QEMU</a></h1>
+
+
+
+<p class="blurb">System Emulation Management and Interoperability Guide</p>
+
+
+
+
+
+
+<div id="editpage">
+  <ul>
+    <li><a href="https://gitlab.com/qemu-project/qemu/-/blob/master/docs/interop/qemu-ga-ref.rst">Page source</a></li>
+  </ul>
+</div><h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="bitmaps.html">Dirty Bitmaps and Incremental Backup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dbus.html">D-Bus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dbus-vmstate.html">D-Bus VMState</a></li>
+<li class="toctree-l1"><a class="reference internal" href="live-block-operations.html">Live Block Device Operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pr-helper.html">Persistent reservation helper protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="qemu-ga.html">QEMU Guest Agent</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">QEMU Guest Agent Protocol Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#qapidoc-0">General note concerning the use of guest agent interfaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#qapidoc-2">QEMU guest agent protocol commands and structs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="qemu-qmp-ref.html">QEMU QMP Reference Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vhost-user.html">Vhost-user Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vhost-user-gpu.html">Vhost-user-gpu Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vhost-vdpa.html">Vhost-vdpa Protocol</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, The QEMU Project Developers.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,149 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Managed start up options &#8212; QEMU  documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Virtual CPU hotplug" href="cpu-hotplug.html" />
+    <link rel="prev" title="GDB usage" href="gdb.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="managed-start-up-options">
+<h1>Managed start up options<a class="headerlink" href="#managed-start-up-options" title="Permalink to this headline">¶</a></h1>
+<p>In system mode emulation, it’s possible to create a VM in a paused
+state using the <code class="docutils literal notranslate"><span class="pre">-S</span></code> command line option. In this state the machine
+is completely initialized according to command line options and ready
+to execute VM code but VCPU threads are not executing any code. The VM
+state in this paused state depends on the way QEMU was started. It
+could be in:</p>
+<ul class="simple">
+<li>initial state (after reset/power on state)</li>
+<li>with direct kernel loading, the initial state could be amended to execute
+code loaded by QEMU in the VM’s RAM and with incoming migration</li>
+<li>with incoming migration, initial state will be amended with the migrated
+machine state after migration completes</li>
+</ul>
+<p>This paused state is typically used by users to query machine state and/or
+additionally configure the machine (by hotplugging devices) in runtime before
+allowing VM code to run.</p>
+<p>However, at the <code class="docutils literal notranslate"><span class="pre">-S</span></code> pause point, it’s impossible to configure options
+that affect initial VM creation (like: <code class="docutils literal notranslate"><span class="pre">-smp</span></code>/<code class="docutils literal notranslate"><span class="pre">-m</span></code>/<code class="docutils literal notranslate"><span class="pre">-numa</span></code> …) or
+cold plug devices. The experimental <code class="docutils literal notranslate"><span class="pre">--preconfig</span></code> command line option
+allows pausing QEMU before the initial VM creation, in a “preconfig” state,
+where additional queries and configuration can be performed via QMP
+before moving on to the resulting configuration startup. In the
+preconfig state, QEMU only allows a limited set of commands over the
+QMP monitor, where the commands do not depend on an initialized
+machine, including but not limited to:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">qmp_capabilities</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">query-qmp-schema</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">query-commands</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">query-status</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">x-exit-preconfig</span></code></li>
+</ul>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">QEMU</a></h1>
+
+
+
+<p class="blurb">System Emulation Users Guide</p>
+
+
+
+
+
+
+<div id="editpage">
+  <ul>
+    <li><a href="https://gitlab.com/qemu-project/qemu/-/blob/master/docs/system/managed-startup.rst">Page source</a></li>
+  </ul>
+</div><h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="invocation.html">Invocation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="keys.html">Keys in the graphical frontends</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mux-chardev.html">Keys in the character backend multiplexer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="monitor.html">QEMU Monitor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="images.html">Disk Images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="net.html">Network emulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="virtio-net-failover.html">QEMU virtio-net standby (net_failover)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usb.html">USB emulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ivshmem.html">Inter-VM Shared Memory device</a></li>
+<li class="toctree-l1"><a class="reference internal" href="linuxboot.html">Direct Linux Boot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vnc-security.html">VNC security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tls.html">TLS setup for network services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gdb.html">GDB usage</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Managed start up options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cpu-hotplug.html">Virtual CPU hotplug</a></li>
+<li class="toctree-l1"><a class="reference internal" href="virtio-pmem.html">virtio pmem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pr-manager.html">Persistent reservation managers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="targets.html">QEMU System Emulator Targets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deprecated.html">Deprecated features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deprecated.html#recently-removed-features">Recently removed features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="build-platforms.html">Supported build platforms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, The QEMU Project Developers.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

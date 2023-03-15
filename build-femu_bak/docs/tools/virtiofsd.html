@@ -1,0 +1,386 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>QEMU virtio-fs shared file system daemon &#8212; QEMU  documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="QEMU 9p virtfs proxy filesystem helper" href="virtfs-proxy-helper.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="qemu-virtio-fs-shared-file-system-daemon">
+<h1>QEMU virtio-fs shared file system daemon<a class="headerlink" href="#qemu-virtio-fs-shared-file-system-daemon" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="synopsis">
+<h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
+<p><strong>virtiofsd</strong> [<em>OPTIONS</em>]</p>
+</div>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p>Share a host directory tree with a guest through a virtio-fs device.  This
+program is a vhost-user backend that implements the virtio-fs device.  Each
+virtio-fs device instance requires its own virtiofsd process.</p>
+<p>This program is designed to work with QEMU’s <code class="docutils literal notranslate"><span class="pre">--device</span> <span class="pre">vhost-user-fs-pci</span></code>
+but should work with any virtual machine monitor (VMM) that supports
+vhost-user.  See the Examples section below.</p>
+<p>This program must be run as the root user.  The program drops privileges where
+possible during startup although it must be able to create and access files
+with any uid/gid:</p>
+<ul class="simple">
+<li>The ability to invoke syscalls is limited using seccomp(2).</li>
+<li>Linux capabilities(7) are dropped.</li>
+</ul>
+<p>In “namespace” sandbox mode the program switches into a new file system
+namespace and invokes pivot_root(2) to make the shared directory tree its root.
+A new pid and net namespace is also created to isolate the process.</p>
+<p>In “chroot” sandbox mode the program invokes chroot(2) to make the shared
+directory tree its root. This mode is intended for container environments where
+the container runtime has already set up the namespaces and the program does
+not have permission to create namespaces itself.</p>
+<p>Both sandbox modes prevent “file system escapes” due to symlinks and other file
+system objects that might lead to files outside the shared directory.</p>
+</div>
+<div class="section" id="options">
+<h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
+<dl class="option">
+<dt id="cmdoption-virtiofsd-h">
+<code class="descname">-h</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--help</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-virtiofsd-h" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print help.</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-virtiofsd-v">
+<code class="descname">-V</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--version</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-virtiofsd-v" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print version.</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-virtiofsd-d">
+<code class="descname">-d</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-virtiofsd-d" title="Permalink to this definition">¶</a></dt>
+<dd><p>Enable debug output.</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-virtiofsd-syslog">
+<code class="descname">--syslog</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-virtiofsd-syslog" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print log messages to syslog instead of stderr.</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-virtiofsd-o">
+<code class="descname">-o</code><code class="descclassname"> OPTION</code><a class="headerlink" href="#cmdoption-virtiofsd-o" title="Permalink to this definition">¶</a></dt>
+<dd><ul class="simple">
+<li>debug -
+Enable debug output.</li>
+<li>flock|no_flock -
+Enable/disable flock.  The default is <code class="docutils literal notranslate"><span class="pre">no_flock</span></code>.</li>
+<li>modcaps=CAPLIST
+Modify the list of capabilities allowed; CAPLIST is a colon separated
+list of capabilities, each preceded by either + or -, e.g.
+‘’+sys_admin:-chown’‘.</li>
+<li>log_level=LEVEL -
+Print only log messages matching LEVEL or more severe.  LEVEL is one of
+<code class="docutils literal notranslate"><span class="pre">err</span></code>, <code class="docutils literal notranslate"><span class="pre">warn</span></code>, <code class="docutils literal notranslate"><span class="pre">info</span></code>, or <code class="docutils literal notranslate"><span class="pre">debug</span></code>.  The default is <code class="docutils literal notranslate"><span class="pre">info</span></code>.</li>
+<li>posix_lock|no_posix_lock -
+Enable/disable remote POSIX locks.  The default is <code class="docutils literal notranslate"><span class="pre">no_posix_lock</span></code>.</li>
+<li>readdirplus|no_readdirplus -
+Enable/disable readdirplus.  The default is <code class="docutils literal notranslate"><span class="pre">readdirplus</span></code>.</li>
+<li>sandbox=namespace|chroot -
+Sandbox mode:
+- namespace: Create mount, pid, and net namespaces and pivot_root(2) into
+the shared directory.
+- chroot: chroot(2) into shared directory (use in containers).
+The default is “namespace”.</li>
+<li>source=PATH -
+Share host directory tree located at PATH.  This option is required.</li>
+<li>timeout=TIMEOUT -
+I/O timeout in seconds.  The default depends on cache= option.</li>
+<li>writeback|no_writeback -
+Enable/disable writeback cache. The cache allows the FUSE client to buffer
+and merge write requests.  The default is <code class="docutils literal notranslate"><span class="pre">no_writeback</span></code>.</li>
+<li>xattr|no_xattr -
+Enable/disable extended attributes (xattr) on files and directories.  The
+default is <code class="docutils literal notranslate"><span class="pre">no_xattr</span></code>.</li>
+</ul>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-virtiofsd-socket-path">
+<code class="descname">--socket-path</code><code class="descclassname">=PATH</code><a class="headerlink" href="#cmdoption-virtiofsd-socket-path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Listen on vhost-user UNIX domain socket at PATH.</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-virtiofsd-socket-group">
+<code class="descname">--socket-group</code><code class="descclassname">=GROUP</code><a class="headerlink" href="#cmdoption-virtiofsd-socket-group" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the vhost-user UNIX domain socket gid to GROUP.</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-virtiofsd-fd">
+<code class="descname">--fd</code><code class="descclassname">=FDNUM</code><a class="headerlink" href="#cmdoption-virtiofsd-fd" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accept connections from vhost-user UNIX domain socket file descriptor FDNUM.
+The file descriptor must already be listening for connections.</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-virtiofsd-thread-pool-size">
+<code class="descname">--thread-pool-size</code><code class="descclassname">=NUM</code><a class="headerlink" href="#cmdoption-virtiofsd-thread-pool-size" title="Permalink to this definition">¶</a></dt>
+<dd><p>Restrict the number of worker threads per request queue to NUM.  The default
+is 64.</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-virtiofsd-cache">
+<code class="descname">--cache</code><code class="descclassname">=none|auto|always</code><a class="headerlink" href="#cmdoption-virtiofsd-cache" title="Permalink to this definition">¶</a></dt>
+<dd><p>Select the desired trade-off between coherency and performance.  <code class="docutils literal notranslate"><span class="pre">none</span></code>
+forbids the FUSE client from caching to achieve best coherency at the cost of
+performance.  <code class="docutils literal notranslate"><span class="pre">auto</span></code> acts similar to NFS with a 1 second metadata cache
+timeout.  <code class="docutils literal notranslate"><span class="pre">always</span></code> sets a long cache lifetime at the expense of coherency.
+The default is <code class="docutils literal notranslate"><span class="pre">auto</span></code>.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="xattr-mapping">
+<h2>xattr-mapping<a class="headerlink" href="#xattr-mapping" title="Permalink to this headline">¶</a></h2>
+<p>By default the name of xattr’s used by the client are passed through to the server
+file system.  This can be a problem where either those xattr names are used
+by something on the server (e.g. selinux client/server confusion) or if the
+virtiofsd is running in a container with restricted privileges where it cannot
+access some attributes.</p>
+<p>A mapping of xattr names can be made using -o xattrmap=mapping where the <code class="docutils literal notranslate"><span class="pre">mapping</span></code>
+string consists of a series of rules.</p>
+<p>The first matching rule terminates the mapping.
+The set of rules must include a terminating rule to match any remaining attributes
+at the end.</p>
+<p>Each rule consists of a number of fields separated with a separator that is the
+first non-white space character in the rule.  This separator must then be used
+for the whole rule.
+White space may be added before and after each rule.</p>
+<p>Using ‘:’ as the separator a rule is of the form:</p>
+<p><code class="docutils literal notranslate"><span class="pre">:type:scope:key:prepend:</span></code></p>
+<p><strong>scope</strong> is:</p>
+<ul class="simple">
+<li><dl class="first docutils">
+<dt>‘client’ - match ‘key’ against a xattr name from the client for</dt>
+<dd>setxattr/getxattr/removexattr</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>‘server’ - match ‘prepend’ against a xattr name from the server</dt>
+<dd>for listxattr</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>‘all’ - can be used to make a single rule where both the server</dt>
+<dd>and client matches are triggered.</dd>
+</dl>
+</li>
+</ul>
+<p><strong>type</strong> is one of:</p>
+<ul class="simple">
+<li>‘prefix’ - is designed to prepend and strip a prefix;  the modified
+attributes then being passed on to the client/server.</li>
+<li>‘ok’ - Causes the rule set to be terminated when a match is found
+while allowing matching xattr’s through unchanged.
+It is intended both as a way of explicitly terminating
+the list of rules, and to allow some xattr’s to skip following rules.</li>
+<li>‘bad’ - If a client tries to use a name matching ‘key’ it’s
+denied using EPERM; when the server passes an attribute
+name matching ‘prepend’ it’s hidden.  In many ways it’s use is very like
+‘ok’ as either an explicit terminator or for special handling of certain
+patterns.</li>
+</ul>
+<p><strong>key</strong> is a string tested as a prefix on an attribute name originating
+on the client.  It maybe empty in which case a ‘client’ rule
+will always match on client names.</p>
+<p><strong>prepend</strong> is a string tested as a prefix on an attribute name originating
+on the server, and used as a new prefix.  It may be empty
+in which case a ‘server’ rule will always match on all names from
+the server.</p>
+<p>e.g.:</p>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">:prefix:client:trusted.:user.virtiofs.:</span></code></p>
+<p>will match ‘trusted.’ attributes in client calls and prefix them before
+passing them to the server.</p>
+<p><code class="docutils literal notranslate"><span class="pre">:prefix:server::user.virtiofs.:</span></code></p>
+<p>will strip ‘user.virtiofs.’ from all server replies.</p>
+<p><code class="docutils literal notranslate"><span class="pre">:prefix:all:trusted.:user.virtiofs.:</span></code></p>
+<p>combines the previous two cases into a single rule.</p>
+<p><code class="docutils literal notranslate"><span class="pre">:ok:client:user.::</span></code></p>
+<p>will allow get/set xattr for ‘user.’ xattr’s and ignore
+following rules.</p>
+<p><code class="docutils literal notranslate"><span class="pre">:ok:server::security.:</span></code></p>
+<p>will pass ‘securty.’ xattr’s in listxattr from the server
+and ignore following rules.</p>
+<p><code class="docutils literal notranslate"><span class="pre">:ok:all:::</span></code></p>
+<p>will terminate the rule search passing any remaining attributes
+in both directions.</p>
+<p><code class="docutils literal notranslate"><span class="pre">:bad:server::security.:</span></code></p>
+<p>would hide ‘security.’ xattr’s in listxattr from the server.</p>
+</div></blockquote>
+<p>A simpler ‘map’ type provides a shorter syntax for the common case:</p>
+<p><code class="docutils literal notranslate"><span class="pre">:map:key:prepend:</span></code></p>
+<p>The ‘map’ type adds a number of separate rules to add <strong>prepend</strong> as a prefix
+to the matched <strong>key</strong> (or all attributes if <strong>key</strong> is empty).
+There may be at most one ‘map’ rule and it must be the last rule in the set.</p>
+</div>
+<div class="section" id="xattr-mapping-examples">
+<h2>xattr-mapping Examples<a class="headerlink" href="#xattr-mapping-examples" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>Prefix all attributes with ‘user.virtiofs.’</li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">o</span> <span class="n">xattrmap</span><span class="o">=</span><span class="s2">&quot;:prefix:all::user.virtiofs.::bad:all:::&quot;</span>
+</pre></div>
+</div>
+<p>This uses two rules, using : as the field separator;
+the first rule prefixes and strips ‘user.virtiofs.’,
+the second rule hides any non-prefixed attributes that
+the host set.</p>
+<p>This is equivalent to the ‘map’ rule:</p>
+<p>::
+-o xattrmap=”:map::user.virtiofs.:”</p>
+<ol class="arabic simple" start="2">
+<li>Prefix ‘trusted.’ attributes, allow others through</li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;/prefix/all/trusted./user.virtiofs./</span>
+ <span class="o">/</span><span class="n">bad</span><span class="o">/</span><span class="n">server</span><span class="o">//</span><span class="n">trusted</span><span class="o">./</span>
+ <span class="o">/</span><span class="n">bad</span><span class="o">/</span><span class="n">client</span><span class="o">/</span><span class="n">user</span><span class="o">.</span><span class="n">virtiofs</span><span class="o">.//</span>
+ <span class="o">/</span><span class="n">ok</span><span class="o">/</span><span class="nb">all</span><span class="o">///</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+<p>Here there are four rules, using / as the field
+separator, and also demonstrating that new lines can
+be included between rules.
+The first rule is the prefixing of ‘trusted.’ and
+stripping of ‘user.virtiofs.’.
+The second rule hides unprefixed ‘trusted.’ attributes
+on the host.
+The third rule stops a guest from explicitly setting
+the ‘user.virtiofs.’ path directly.
+Finally, the fourth rule lets all remaining attributes
+through.</p>
+<p>This is equivalent to the ‘map’ rule:</p>
+<p>::
+-o xattrmap=”/map/trusted./user.virtiofs./”</p>
+<ol class="arabic simple" start="3">
+<li>Hide ‘security.’ attributes, and allow everything else</li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;/bad/all/security./security./</span>
+ <span class="o">/</span><span class="n">ok</span><span class="o">/</span><span class="nb">all</span><span class="o">///</span><span class="s1">&#39;</span>
+</pre></div>
+</div>
+<p>The first rule combines what could be separate client and server
+rules into a single ‘all’ rule, matching ‘security.’ in either
+client arguments or lists returned from the host.  This stops
+the client seeing any ‘security.’ attributes on the server and
+stops it setting any.</p>
+</div>
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<p>Export <code class="docutils literal notranslate"><span class="pre">/var/lib/fs/vm001/</span></code> on vhost-user UNIX domain socket
+<code class="docutils literal notranslate"><span class="pre">/var/run/vm001-vhost-fs.sock</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">host</span><span class="c1"># virtiofsd --socket-path=/var/run/vm001-vhost-fs.sock -o source=/var/lib/fs/vm001</span>
+<span class="n">host</span><span class="c1"># qemu-system-x86_64 \</span>
+    <span class="o">-</span><span class="n">chardev</span> <span class="n">socket</span><span class="p">,</span><span class="nb">id</span><span class="o">=</span><span class="n">char0</span><span class="p">,</span><span class="n">path</span><span class="o">=/</span><span class="n">var</span><span class="o">/</span><span class="n">run</span><span class="o">/</span><span class="n">vm001</span><span class="o">-</span><span class="n">vhost</span><span class="o">-</span><span class="n">fs</span><span class="o">.</span><span class="n">sock</span> \
+    <span class="o">-</span><span class="n">device</span> <span class="n">vhost</span><span class="o">-</span><span class="n">user</span><span class="o">-</span><span class="n">fs</span><span class="o">-</span><span class="n">pci</span><span class="p">,</span><span class="n">chardev</span><span class="o">=</span><span class="n">char0</span><span class="p">,</span><span class="n">tag</span><span class="o">=</span><span class="n">myfs</span> \
+    <span class="o">-</span><span class="nb">object</span> <span class="n">memory</span><span class="o">-</span><span class="n">backend</span><span class="o">-</span><span class="n">memfd</span><span class="p">,</span><span class="nb">id</span><span class="o">=</span><span class="n">mem</span><span class="p">,</span><span class="n">size</span><span class="o">=</span><span class="mi">4</span><span class="n">G</span><span class="p">,</span><span class="n">share</span><span class="o">=</span><span class="n">on</span> \
+    <span class="o">-</span><span class="n">numa</span> <span class="n">node</span><span class="p">,</span><span class="n">memdev</span><span class="o">=</span><span class="n">mem</span> \
+    <span class="o">...</span>
+<span class="n">guest</span><span class="c1"># mount -t virtiofs myfs /mnt</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">QEMU</a></h1>
+
+
+
+<p class="blurb">Tools Guide</p>
+
+
+
+
+
+
+<div id="editpage">
+  <ul>
+    <li><a href="https://gitlab.com/qemu-project/qemu/-/blob/master/docs/tools/virtiofsd.rst">Page source</a></li>
+  </ul>
+</div><h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="qemu-img.html">QEMU disk image utility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="qemu-nbd.html">QEMU Disk Network Block Device Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="qemu-pr-helper.html">QEMU persistent reservation helper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="qemu-trace-stap.html">QEMU SystemTap trace tool</a></li>
+<li class="toctree-l1"><a class="reference internal" href="virtfs-proxy-helper.html">QEMU 9p virtfs proxy filesystem helper</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">QEMU virtio-fs shared file system daemon</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#synopsis">Synopsis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#description">Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#options">Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#xattr-mapping">xattr-mapping</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#xattr-mapping-examples">xattr-mapping Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#examples">Examples</a></li>
+</ul>
+</li>
+</ul>
+
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, The QEMU Project Developers.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

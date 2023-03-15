@@ -1,0 +1,284 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>QEMU Guest Agent &#8212; QEMU  documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="QEMU Guest Agent Protocol Reference" href="qemu-ga-ref.html" />
+    <link rel="prev" title="Persistent reservation helper protocol" href="pr-helper.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="qemu-guest-agent">
+<h1>QEMU Guest Agent<a class="headerlink" href="#qemu-guest-agent" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="synopsis">
+<h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
+<p><strong>qemu-ga</strong> [<em>OPTIONS</em>]</p>
+</div>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p>The QEMU Guest Agent is a daemon intended to be run within virtual
+machines. It allows the hypervisor host to perform various operations
+in the guest, such as:</p>
+<ul class="simple">
+<li>get information from the guest</li>
+<li>set the guest’s system time</li>
+<li>read/write a file</li>
+<li>sync and freeze the filesystems</li>
+<li>suspend the guest</li>
+<li>reconfigure guest local processors</li>
+<li>set user’s password</li>
+<li>…</li>
+</ul>
+<p>qemu-ga will read a system configuration file on startup (located at
+<code class="docutils literal notranslate"><span class="pre">/etc/qemu</span></code><code class="docutils literal notranslate"><span class="pre">/qemu-ga.conf</span></code> by default), then parse remaining
+configuration options on the command line. For the same key, the last
+option wins, but the lists accumulate (see below for configuration
+file format).</p>
+</div>
+<div class="section" id="options">
+<h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
+<dl class="option">
+<dt id="cmdoption-qemu-ga-m">
+<code class="descname">-m</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--method</code><code class="descclassname">=METHOD</code><a class="headerlink" href="#cmdoption-qemu-ga-m" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transport method: one of <code class="docutils literal notranslate"><span class="pre">unix-listen</span></code>, <code class="docutils literal notranslate"><span class="pre">virtio-serial</span></code>, or
+<code class="docutils literal notranslate"><span class="pre">isa-serial</span></code>, or <code class="docutils literal notranslate"><span class="pre">vsock-listen</span></code> (<code class="docutils literal notranslate"><span class="pre">virtio-serial</span></code> is the default).</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-qemu-ga-p">
+<code class="descname">-p</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--path</code><code class="descclassname">=PATH</code><a class="headerlink" href="#cmdoption-qemu-ga-p" title="Permalink to this definition">¶</a></dt>
+<dd><p>Device/socket path (the default for virtio-serial is
+<code class="docutils literal notranslate"><span class="pre">/dev/virtio-ports/org.qemu.guest_agent.0</span></code>,
+the default for isa-serial is <code class="docutils literal notranslate"><span class="pre">/dev/ttyS0</span></code>). Socket addresses for
+vsock-listen are written as <code class="docutils literal notranslate"><span class="pre">&lt;cid&gt;:&lt;port&gt;</span></code>.</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-qemu-ga-l">
+<code class="descname">-l</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--logfile</code><code class="descclassname">=PATH</code><a class="headerlink" href="#cmdoption-qemu-ga-l" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set log file path (default is stderr).</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-qemu-ga-f">
+<code class="descname">-f</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--pidfile</code><code class="descclassname">=PATH</code><a class="headerlink" href="#cmdoption-qemu-ga-f" title="Permalink to this definition">¶</a></dt>
+<dd><p>Specify pid file (default is <code class="docutils literal notranslate"><span class="pre">/var/run/qemu-ga.pid</span></code>).</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-qemu-ga-fsfreeze-hook">
+<code class="descname">-F</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--fsfreeze-hook</code><code class="descclassname">=PATH</code><a class="headerlink" href="#cmdoption-qemu-ga-fsfreeze-hook" title="Permalink to this definition">¶</a></dt>
+<dd><p>Enable fsfreeze hook. Accepts an optional argument that specifies
+script to run on freeze/thaw. Script will be called with
+‘freeze’/’thaw’ arguments accordingly (default is
+<code class="docutils literal notranslate"><span class="pre">/etc/qemu</span></code><code class="docutils literal notranslate"><span class="pre">/fsfreeze-hook</span></code>). If using -F with an argument, do
+not follow -F with a space (for example:
+<code class="docutils literal notranslate"><span class="pre">-F/var/run/fsfreezehook.sh</span></code>).</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-qemu-ga-t">
+<code class="descname">-t</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--statedir</code><code class="descclassname">=PATH</code><a class="headerlink" href="#cmdoption-qemu-ga-t" title="Permalink to this definition">¶</a></dt>
+<dd><p>Specify the directory to store state information (absolute paths only,
+default is <code class="docutils literal notranslate"><span class="pre">/var/run</span></code>).</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-qemu-ga-v">
+<code class="descname">-v</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--verbose</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-qemu-ga-v" title="Permalink to this definition">¶</a></dt>
+<dd><p>Log extra debugging information.</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-qemu-ga-version">
+<code class="descname">-V</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--version</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-qemu-ga-version" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print version information and exit.</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-qemu-ga-d">
+<code class="descname">-d</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--daemon</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-qemu-ga-d" title="Permalink to this definition">¶</a></dt>
+<dd><p>Daemonize after startup (detach from terminal).</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-qemu-ga-b">
+<code class="descname">-b</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--blacklist</code><code class="descclassname">=LIST</code><a class="headerlink" href="#cmdoption-qemu-ga-b" title="Permalink to this definition">¶</a></dt>
+<dd><p>Comma-separated list of RPCs to disable (no spaces, <code class="docutils literal notranslate"><span class="pre">?</span></code> to list
+available RPCs).</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-qemu-ga-dump-conf">
+<code class="descname">-D</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--dump-conf</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-qemu-ga-dump-conf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dump the configuration in a format compatible with <code class="docutils literal notranslate"><span class="pre">qemu-ga.conf</span></code>
+and exit.</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-qemu-ga-h">
+<code class="descname">-h</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--help</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-qemu-ga-h" title="Permalink to this definition">¶</a></dt>
+<dd><p>Display this help and exit.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="files">
+<h2>Files<a class="headerlink" href="#files" title="Permalink to this headline">¶</a></h2>
+<p>The syntax of the <code class="docutils literal notranslate"><span class="pre">qemu-ga.conf</span></code> configuration file follows the
+Desktop Entry Specification, here is a quick summary: it consists of
+groups of key-value pairs, interspersed with comments.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># qemu-ga configuration sample</span>
+<span class="p">[</span><span class="n">general</span><span class="p">]</span>
+<span class="n">daemonize</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">pidfile</span> <span class="o">=</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">run</span><span class="o">/</span><span class="n">qemu</span><span class="o">-</span><span class="n">ga</span><span class="o">.</span><span class="n">pid</span>
+<span class="n">verbose</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">method</span> <span class="o">=</span> <span class="n">virtio</span><span class="o">-</span><span class="n">serial</span>
+<span class="n">path</span> <span class="o">=</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">virtio</span><span class="o">-</span><span class="n">ports</span><span class="o">/</span><span class="n">org</span><span class="o">.</span><span class="n">qemu</span><span class="o">.</span><span class="n">guest_agent</span><span class="o">.</span><span class="mi">0</span>
+<span class="n">statedir</span> <span class="o">=</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">run</span>
+</pre></div>
+</div>
+<p>The list of keys follows the command line options:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="54%" />
+<col width="46%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Key</th>
+<th class="head">Key type</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>daemon</td>
+<td>boolean</td>
+</tr>
+<tr class="row-odd"><td>method</td>
+<td>string</td>
+</tr>
+<tr class="row-even"><td>path</td>
+<td>string</td>
+</tr>
+<tr class="row-odd"><td>logfile</td>
+<td>string</td>
+</tr>
+<tr class="row-even"><td>pidfile</td>
+<td>string</td>
+</tr>
+<tr class="row-odd"><td>fsfreeze-hook</td>
+<td>string</td>
+</tr>
+<tr class="row-even"><td>statedir</td>
+<td>string</td>
+</tr>
+<tr class="row-odd"><td>verbose</td>
+<td>boolean</td>
+</tr>
+<tr class="row-even"><td>blacklist</td>
+<td>string list</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="see-also">
+<h2>See also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h2>
+<p><em class="manpage">qemu(1)</em></p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">QEMU</a></h1>
+
+
+
+<p class="blurb">System Emulation Management and Interoperability Guide</p>
+
+
+
+
+
+
+<div id="editpage">
+  <ul>
+    <li><a href="https://gitlab.com/qemu-project/qemu/-/blob/master/docs/interop/qemu-ga.rst">Page source</a></li>
+  </ul>
+</div><h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="bitmaps.html">Dirty Bitmaps and Incremental Backup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dbus.html">D-Bus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dbus-vmstate.html">D-Bus VMState</a></li>
+<li class="toctree-l1"><a class="reference internal" href="live-block-operations.html">Live Block Device Operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pr-helper.html">Persistent reservation helper protocol</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">QEMU Guest Agent</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#synopsis">Synopsis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#description">Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#options">Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#files">Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#see-also">See also</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="qemu-ga-ref.html">QEMU Guest Agent Protocol Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="qemu-qmp-ref.html">QEMU QMP Reference Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vhost-user.html">Vhost-user Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vhost-user-gpu.html">Vhost-user-gpu Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vhost-vdpa.html">Vhost-vdpa Protocol</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, The QEMU Project Developers.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

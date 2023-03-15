@@ -1,0 +1,195 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>APEI tables generating and CPER record &#8212; QEMU  documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="QEMU TPM Device" href="tpm.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="apei-tables-generating-and-cper-record">
+<h1>APEI tables generating and CPER record<a class="headerlink" href="#apei-tables-generating-and-cper-record" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="design-details">
+<h2>Design Details<a class="headerlink" href="#design-details" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>       <span class="n">etc</span><span class="o">/</span><span class="n">acpi</span><span class="o">/</span><span class="n">tables</span>                           <span class="n">etc</span><span class="o">/</span><span class="n">hardware_errors</span>
+    <span class="o">====================</span>                   <span class="o">===============================</span>
+<span class="o">+</span> <span class="o">+--------------------------+</span>            <span class="o">+----------------------------+</span>
+<span class="o">|</span> <span class="o">|</span> <span class="n">HEST</span>                     <span class="o">|</span> <span class="o">+---------&gt;|</span>    <span class="n">error_block_address1</span>    <span class="o">|------+</span>
+<span class="o">|</span> <span class="o">+--------------------------+</span> <span class="o">|</span>          <span class="o">+----------------------------+</span>      <span class="o">|</span>
+<span class="o">|</span> <span class="o">|</span> <span class="n">GHES1</span>                    <span class="o">|</span> <span class="o">|</span> <span class="o">+-------&gt;|</span>    <span class="n">error_block_address2</span>    <span class="o">|------+-+</span>
+<span class="o">|</span> <span class="o">+--------------------------+</span> <span class="o">|</span> <span class="o">|</span>        <span class="o">+----------------------------+</span>      <span class="o">|</span> <span class="o">|</span>
+<span class="o">|</span> <span class="o">|</span> <span class="o">.................</span>        <span class="o">|</span> <span class="o">|</span> <span class="o">|</span>        <span class="o">|</span>      <span class="o">..............</span>        <span class="o">|</span>      <span class="o">|</span> <span class="o">|</span>
+<span class="o">|</span> <span class="o">|</span> <span class="n">error_status_address</span><span class="o">-----+-+</span> <span class="o">|</span>        <span class="o">-----------------------------+</span>      <span class="o">|</span> <span class="o">|</span>
+<span class="o">|</span> <span class="o">|</span> <span class="o">.................</span>        <span class="o">|</span>   <span class="o">|</span>   <span class="o">+---&gt;|</span>    <span class="n">error_block_addressN</span>    <span class="o">|------+-+---+</span>
+<span class="o">|</span> <span class="o">|</span> <span class="n">read_ack_register</span><span class="o">--------+-+</span> <span class="o">|</span>   <span class="o">|</span>    <span class="o">+----------------------------+</span>      <span class="o">|</span> <span class="o">|</span>   <span class="o">|</span>
+<span class="o">|</span> <span class="o">|</span> <span class="n">read_ack_preserve</span>        <span class="o">|</span> <span class="o">+-+---+---&gt;|</span>     <span class="n">read_ack_register1</span>     <span class="o">|</span>      <span class="o">|</span> <span class="o">|</span>   <span class="o">|</span>
+<span class="o">|</span> <span class="o">|</span> <span class="n">read_ack_write</span>           <span class="o">|</span>   <span class="o">|</span>   <span class="o">|</span>    <span class="o">+----------------------------+</span>      <span class="o">|</span> <span class="o">|</span>   <span class="o">|</span>
+<span class="o">+</span> <span class="o">+--------------------------+</span>   <span class="o">|</span> <span class="o">+-+---&gt;|</span>     <span class="n">read_ack_register2</span>     <span class="o">|</span>      <span class="o">|</span> <span class="o">|</span>   <span class="o">|</span>
+<span class="o">|</span> <span class="o">|</span> <span class="n">GHES2</span>                    <span class="o">|</span>   <span class="o">|</span> <span class="o">|</span> <span class="o">|</span>    <span class="o">+----------------------------+</span>      <span class="o">|</span> <span class="o">|</span>   <span class="o">|</span>
+<span class="o">+</span> <span class="o">+--------------------------+</span>   <span class="o">|</span> <span class="o">|</span> <span class="o">|</span>    <span class="o">|</span>       <span class="o">.............</span>        <span class="o">|</span>      <span class="o">|</span> <span class="o">|</span>   <span class="o">|</span>
+<span class="o">|</span> <span class="o">|</span> <span class="o">.................</span>        <span class="o">|</span>   <span class="o">|</span> <span class="o">|</span> <span class="o">|</span>    <span class="o">+----------------------------+</span>      <span class="o">|</span> <span class="o">|</span>   <span class="o">|</span>
+<span class="o">|</span> <span class="o">|</span> <span class="n">error_status_address</span><span class="o">-----+---+</span> <span class="o">|</span> <span class="o">|</span> <span class="o">+-&gt;|</span>     <span class="n">read_ack_registerN</span>     <span class="o">|</span>      <span class="o">|</span> <span class="o">|</span>   <span class="o">|</span>
+<span class="o">|</span> <span class="o">|</span> <span class="o">.................</span>        <span class="o">|</span>     <span class="o">|</span> <span class="o">|</span> <span class="o">|</span>  <span class="o">+----------------------------+</span>      <span class="o">|</span> <span class="o">|</span>   <span class="o">|</span>
+<span class="o">|</span> <span class="o">|</span> <span class="n">read_ack_register</span><span class="o">--------+-----+</span> <span class="o">|</span> <span class="o">|</span>  <span class="o">|</span><span class="n">Generic</span> <span class="n">Error</span> <span class="n">Status</span> <span class="n">Block</span> <span class="mi">1</span><span class="o">|&lt;-----+</span> <span class="o">|</span>   <span class="o">|</span>
+<span class="o">|</span> <span class="o">|</span> <span class="n">read_ack_preserve</span>        <span class="o">|</span>       <span class="o">|</span> <span class="o">|</span>  <span class="o">|-+------------------------+-+</span>        <span class="o">|</span>   <span class="o">|</span>
+<span class="o">|</span> <span class="o">|</span> <span class="n">read_ack_write</span>           <span class="o">|</span>       <span class="o">|</span> <span class="o">|</span>  <span class="o">|</span> <span class="o">|</span>          <span class="n">CPER</span>          <span class="o">|</span> <span class="o">|</span>        <span class="o">|</span>   <span class="o">|</span>
+<span class="o">+</span> <span class="o">+--------------------------|</span>       <span class="o">|</span> <span class="o">|</span>  <span class="o">|</span> <span class="o">|</span>          <span class="n">CPER</span>          <span class="o">|</span> <span class="o">|</span>        <span class="o">|</span>   <span class="o">|</span>
+<span class="o">|</span> <span class="o">|</span> <span class="o">...............</span>          <span class="o">|</span>       <span class="o">|</span> <span class="o">|</span>  <span class="o">|</span> <span class="o">|</span>          <span class="o">....</span>          <span class="o">|</span> <span class="o">|</span>        <span class="o">|</span>   <span class="o">|</span>
+<span class="o">+</span> <span class="o">+--------------------------+</span>       <span class="o">|</span> <span class="o">|</span>  <span class="o">|</span> <span class="o">|</span>          <span class="n">CPER</span>          <span class="o">|</span> <span class="o">|</span>        <span class="o">|</span>   <span class="o">|</span>
+<span class="o">|</span> <span class="o">|</span> <span class="n">GHESN</span>                    <span class="o">|</span>       <span class="o">|</span> <span class="o">|</span>  <span class="o">|-+------------------------+-|</span>        <span class="o">|</span>   <span class="o">|</span>
+<span class="o">+</span> <span class="o">+--------------------------+</span>       <span class="o">|</span> <span class="o">|</span>  <span class="o">|</span><span class="n">Generic</span> <span class="n">Error</span> <span class="n">Status</span> <span class="n">Block</span> <span class="mi">2</span><span class="o">|&lt;-------+</span>   <span class="o">|</span>
+<span class="o">|</span> <span class="o">|</span> <span class="o">.................</span>        <span class="o">|</span>       <span class="o">|</span> <span class="o">|</span>  <span class="o">|-+------------------------+-+</span>            <span class="o">|</span>
+<span class="o">|</span> <span class="o">|</span> <span class="n">error_status_address</span><span class="o">-----+-------+</span> <span class="o">|</span>  <span class="o">|</span> <span class="o">|</span>           <span class="n">CPER</span>         <span class="o">|</span> <span class="o">|</span>            <span class="o">|</span>
+<span class="o">|</span> <span class="o">|</span> <span class="o">.................</span>        <span class="o">|</span>         <span class="o">|</span>  <span class="o">|</span> <span class="o">|</span>           <span class="n">CPER</span>         <span class="o">|</span> <span class="o">|</span>            <span class="o">|</span>
+<span class="o">|</span> <span class="o">|</span> <span class="n">read_ack_register</span><span class="o">--------+---------+</span>  <span class="o">|</span> <span class="o">|</span>           <span class="o">....</span>         <span class="o">|</span> <span class="o">|</span>            <span class="o">|</span>
+<span class="o">|</span> <span class="o">|</span> <span class="n">read_ack_preserve</span>        <span class="o">|</span>            <span class="o">|</span> <span class="o">|</span>           <span class="n">CPER</span>         <span class="o">|</span> <span class="o">|</span>            <span class="o">|</span>
+<span class="o">|</span> <span class="o">|</span> <span class="n">read_ack_write</span>           <span class="o">|</span>            <span class="o">+-+------------------------+-+</span>            <span class="o">|</span>
+<span class="o">+</span> <span class="o">+--------------------------+</span>            <span class="o">|</span>         <span class="o">..........</span>         <span class="o">|</span>            <span class="o">|</span>
+                                          <span class="o">|----------------------------+</span>            <span class="o">|</span>
+                                          <span class="o">|</span><span class="n">Generic</span> <span class="n">Error</span> <span class="n">Status</span> <span class="n">Block</span> <span class="n">N</span> <span class="o">|&lt;----------+</span>
+                                          <span class="o">|-+-------------------------+-+</span>
+                                          <span class="o">|</span> <span class="o">|</span>          <span class="n">CPER</span>           <span class="o">|</span> <span class="o">|</span>
+                                          <span class="o">|</span> <span class="o">|</span>          <span class="n">CPER</span>           <span class="o">|</span> <span class="o">|</span>
+                                          <span class="o">|</span> <span class="o">|</span>          <span class="o">....</span>           <span class="o">|</span> <span class="o">|</span>
+                                          <span class="o">|</span> <span class="o">|</span>          <span class="n">CPER</span>           <span class="o">|</span> <span class="o">|</span>
+                                          <span class="o">+-+-------------------------+-+</span>
+</pre></div>
+</div>
+<ol class="arabic simple">
+<li>QEMU generates the ACPI HEST table. This table goes in the current
+“etc/acpi/tables” fw_cfg blob. Each error source has different
+notification types.</li>
+<li>A new fw_cfg blob called “etc/hardware_errors” is introduced. QEMU
+also needs to populate this blob. The “etc/hardware_errors” fw_cfg blob
+contains an address registers table and an Error Status Data Block table.</li>
+<li>The address registers table contains N Error Block Address entries
+and N Read Ack Register entries. The size for each entry is 8-byte.
+The Error Status Data Block table contains N Error Status Data Block
+entries. The size for each entry is 4096(0x1000) bytes. The total size
+for the “etc/hardware_errors” fw_cfg blob is (N * 8 * 2 + N * 4096) bytes.
+N is the number of the kinds of hardware error sources.</li>
+<li>QEMU generates the ACPI linker/loader script for the firmware. The
+firmware pre-allocates memory for “etc/acpi/tables”, “etc/hardware_errors”
+and copies blob contents there.</li>
+<li>QEMU generates N ADD_POINTER commands, which patch addresses in the
+“error_status_address” fields of the HEST table with a pointer to the
+corresponding “address registers” in the “etc/hardware_errors” blob.</li>
+<li>QEMU generates N ADD_POINTER commands, which patch addresses in the
+“read_ack_register” fields of the HEST table with a pointer to the
+corresponding “read_ack_register” within the “etc/hardware_errors” blob.</li>
+<li>QEMU generates N ADD_POINTER commands for the firmware, which patch
+addresses in the “error_block_address” fields with a pointer to the
+respective “Error Status Data Block” in the “etc/hardware_errors” blob.</li>
+<li>QEMU defines a third and write-only fw_cfg blob which is called
+“etc/hardware_errors_addr”. Through that blob, the firmware can send back
+the guest-side allocation addresses to QEMU. The “etc/hardware_errors_addr”
+blob contains a 8-byte entry. QEMU generates a single WRITE_POINTER command
+for the firmware. The firmware will write back the start address of
+“etc/hardware_errors” blob to the fw_cfg file “etc/hardware_errors_addr”.</li>
+<li>When QEMU gets a SIGBUS from the kernel, QEMU writes CPER into corresponding
+“Error Status Data Block”, guest memory, and then injects platform specific
+interrupt (in case of arm/virt machine it’s Synchronous External Abort) as a
+notification which is necessary for notifying the guest.</li>
+<li>This notification (in virtual hardware) will be handled by the guest
+kernel, on receiving notification, guest APEI driver could read the CPER error
+and take appropriate action.</li>
+<li>kvm_arch_on_sigbus_vcpu() uses source_id as index in “etc/hardware_errors” to
+find out “Error Status Data Block” entry corresponding to error source. So supported
+source_id values should be assigned here and not be changed afterwards to make sure
+that guest will write error into expected “Error Status Data Block” even if guest was
+migrated to a newer QEMU.</li>
+</ol>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">QEMU</a></h1>
+
+
+
+<p class="blurb">System Emulation Guest Hardware Specifications</p>
+
+
+
+
+
+
+<div id="editpage">
+  <ul>
+    <li><a href="https://gitlab.com/qemu-project/qemu/-/blob/master/docs/specs/acpi_hest_ghes.rst">Page source</a></li>
+  </ul>
+</div><h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="ppc-xive.html">POWER9 XIVE interrupt controller</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ppc-spapr-xive.html">XIVE for sPAPR (pseries machines)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ppc-spapr-numa.html">NUMA mechanics for sPAPR (pseries machines)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ppc-spapr-numa.html#how-the-pseries-linux-guest-calculates-numa-distances">How the pseries Linux guest calculates NUMA distances</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ppc-spapr-numa.html#pseries-numa-mechanics">pseries NUMA mechanics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ppc-spapr-numa.html#legacy-5-1-and-older-pseries-numa-mechanics">Legacy (5.1 and older) pseries NUMA mechanics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="acpi_hw_reduced_hotplug.html">QEMU and ACPI BIOS Generic Event Device interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tpm.html">QEMU TPM Device</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">APEI tables generating and CPER record</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#design-details">Design Details</a></li>
+</ul>
+</li>
+</ul>
+
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, The QEMU Project Developers.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

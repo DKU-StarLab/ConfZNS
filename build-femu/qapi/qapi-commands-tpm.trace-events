@@ -1,0 +1,8 @@
+# AUTOMATICALLY GENERATED, DO NOT MODIFY
+
+qmp_enter_query_tpm_models(const char *json) "%s"
+qmp_exit_query_tpm_models(const char *result, bool succeeded) "%s %d"
+qmp_enter_query_tpm_types(const char *json) "%s"
+qmp_exit_query_tpm_types(const char *result, bool succeeded) "%s %d"
+qmp_enter_query_tpm(const char *json) "%s"
+qmp_exit_query_tpm(const char *result, bool succeeded) "%s %d"

@@ -1,0 +1,57 @@
+[options]
+docdir = /usr/local/share/doc
+qemu_firmwarepath = /usr/local/share/qemu-firmware
+qemu_suffix = qemu
+optimization = 2
+debug = true
+werror = true
+strip = true
+b_pie = true
+b_staticpic = true
+b_coverage = false
+malloc = system
+malloc_trim = auto
+sparse = auto
+kvm = enabled
+hax = auto
+whpx = auto
+hvf = auto
+xen = disabled
+xen_pci_passthrough = disabled
+tcg = enabled
+cocoa = auto
+mpath = auto
+sdl = auto
+sdl_image = auto
+vnc = enabled
+vnc_sasl = auto
+vnc_jpeg = auto
+vnc_png = auto
+gettext = true
+xkbcommon = auto
+u2f = auto
+virtiofsd = auto
+capstone = auto
+slirp = auto
+fdt = auto
+iconv = auto
+curses = auto
+libudev = auto
+docs = auto
+sphinx_build = 
+install_blobs = true
+vhost_user_blk_server = auto
+prefix = /usr/local
+bindir = /usr/local/bin
+datadir = /usr/local/share
+includedir = /usr/local/include
+libdir = /usr/local/lib
+libexecdir = /usr/local/libexec
+localedir = /usr/local/share/locale
+localstatedir = /usr/local/var
+mandir = /usr/local/share/man
+sysconfdir = /usr/local/etc
+
+[properties]
+native_file = ['config-meson.cross']
+

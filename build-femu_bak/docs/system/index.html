@@ -1,0 +1,443 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>QEMU System Emulation User’s Guide &#8212; QEMU  documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Quick Start" href="quickstart.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="qemu-system-emulation-user-s-guide">
+<h1>QEMU System Emulation User’s Guide<a class="headerlink" href="#qemu-system-emulation-user-s-guide" title="Permalink to this headline">¶</a></h1>
+<p>This manual is the overall guide for users using QEMU
+for full system emulation (as opposed to user-mode emulation).
+This includes working with hypervisors such as KVM, Xen, Hax
+or Hypervisor.Framework.</p>
+<p>Contents:</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="invocation.html">Invocation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="invocation.html#hxtool-0">Standard options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="invocation.html#hxtool-1">Block device options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="invocation.html#hxtool-2">USB options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="invocation.html#hxtool-3">Display options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="invocation.html#hxtool-4">i386 target only</a></li>
+<li class="toctree-l2"><a class="reference internal" href="invocation.html#hxtool-5">Network options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="invocation.html#hxtool-6">Character device options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="invocation.html#hxtool-7">TPM device options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="invocation.html#hxtool-8">Linux/Multiboot boot specific</a></li>
+<li class="toctree-l2"><a class="reference internal" href="invocation.html#hxtool-9">Debug/Expert options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="invocation.html#hxtool-10">Generic object creation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="invocation.html#device-url-syntax">Device URL Syntax</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="keys.html">Keys in the graphical frontends</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mux-chardev.html">Keys in the character backend multiplexer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="monitor.html">QEMU Monitor</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="monitor.html#commands">Commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="monitor.html#integer-expressions">Integer expressions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="images.html">Disk Images</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="images.html#quick-start-for-disk-image-creation">Quick start for disk image creation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="images.html#snapshot-mode">Snapshot mode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="images.html#vm-snapshots">VM snapshots</a></li>
+<li class="toctree-l2"><a class="reference internal" href="images.html#disk-image-file-formats">Disk image file formats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="images.html#read-only-formats">Read-only formats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="images.html#using-host-drives">Using host drives</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="images.html#linux">Linux</a></li>
+<li class="toctree-l3"><a class="reference internal" href="images.html#windows">Windows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="images.html#mac-os-x">Mac OS X</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="images.html#virtual-fat-disk-images">Virtual FAT disk images</a></li>
+<li class="toctree-l2"><a class="reference internal" href="images.html#nbd-access">NBD access</a></li>
+<li class="toctree-l2"><a class="reference internal" href="images.html#sheepdog-disk-images">Sheepdog disk images</a></li>
+<li class="toctree-l2"><a class="reference internal" href="images.html#iscsi-luns">iSCSI LUNs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="images.html#glusterfs-disk-images">GlusterFS disk images</a></li>
+<li class="toctree-l2"><a class="reference internal" href="images.html#secure-shell-ssh-disk-images">Secure Shell (ssh) disk images</a></li>
+<li class="toctree-l2"><a class="reference internal" href="images.html#nvme-disk-images">NVMe disk images</a></li>
+<li class="toctree-l2"><a class="reference internal" href="images.html#disk-image-file-locking">Disk image file locking</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="net.html">Network emulation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="net.html#using-tap-network-interfaces">Using TAP network interfaces</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="net.html#linux-host">Linux host</a></li>
+<li class="toctree-l3"><a class="reference internal" href="net.html#windows-host">Windows host</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="net.html#using-the-user-mode-network-stack">Using the user mode network stack</a></li>
+<li class="toctree-l2"><a class="reference internal" href="net.html#hubs">Hubs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="net.html#connecting-emulated-networks-between-qemu-instances">Connecting emulated networks between QEMU instances</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="virtio-net-failover.html">QEMU virtio-net standby (net_failover)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="virtio-net-failover.html#restrictions">Restrictions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="virtio-net-failover.html#usecase">Usecase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="virtio-net-failover.html#usage">Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="virtio-net-failover.html#hotplug">Hotplug</a></li>
+<li class="toctree-l2"><a class="reference internal" href="virtio-net-failover.html#migration">Migration</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="usb.html">USB emulation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="usb.html#connecting-usb-devices">Connecting USB devices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usb.html#using-host-usb-devices-on-a-linux-host">Using host USB devices on a Linux host</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ivshmem.html">Inter-VM Shared Memory device</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ivshmem.html#migration-with-ivshmem">Migration with ivshmem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ivshmem.html#ivshmem-and-hugepages">ivshmem and hugepages</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="linuxboot.html">Direct Linux Boot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vnc-security.html">VNC security</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="vnc-security.html#without-passwords">Without passwords</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vnc-security.html#with-passwords">With passwords</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vnc-security.html#with-x509-certificates">With x509 certificates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vnc-security.html#with-x509-certificates-and-client-verification">With x509 certificates and client verification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vnc-security.html#with-x509-certificates-client-verification-and-passwords">With x509 certificates, client verification and passwords</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vnc-security.html#with-sasl-authentication">With SASL authentication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vnc-security.html#with-x509-certificates-and-sasl-authentication">With x509 certificates and SASL authentication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vnc-security.html#configuring-sasl-mechanisms">Configuring SASL mechanisms</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tls.html">TLS setup for network services</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tls.html#setup-the-certificate-authority">Setup the Certificate Authority</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tls.html#issuing-server-certificates">Issuing server certificates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tls.html#issuing-client-certificates">Issuing client certificates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tls.html#tls-x509-credential-configuration">TLS x509 credential configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tls.html#tls-pre-shared-keys-psk">TLS Pre-Shared Keys (PSK)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="gdb.html">GDB usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="managed-startup.html">Managed start up options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cpu-hotplug.html">Virtual CPU hotplug</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cpu-hotplug.html#vcpu-hotplug">vCPU hotplug</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cpu-hotplug.html#vcpu-hot-unplug">vCPU hot-unplug</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="virtio-pmem.html">virtio pmem</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="virtio-pmem.html#usecase">Usecase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="virtio-pmem.html#how-does-virtio-pmem-compare-to-the-nvdimm-emulation">How does virtio-pmem compare to the nvdimm emulation?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="virtio-pmem.html#virtio-pmem-usage">virtio pmem usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="virtio-pmem.html#hotplug">Hotplug</a></li>
+<li class="toctree-l2"><a class="reference internal" href="virtio-pmem.html#guest-data-persistence">Guest Data Persistence</a></li>
+<li class="toctree-l2"><a class="reference internal" href="virtio-pmem.html#limitations">Limitations</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pr-manager.html">Persistent reservation managers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pr-manager.html#defining-a-persistent-reservation-manager">Defining a persistent reservation manager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pr-manager.html#multipath-devices-and-persistent-reservations">Multipath devices and persistent reservations</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="targets.html">QEMU System Emulator Targets</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="target-i386.html">x86 System emulator</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="target-i386.html#board-specific-documentation">Board-specific documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="target-i386.html#recommendations-for-kvm-cpu-model-configuration-on-x86-hosts">Recommendations for KVM CPU model configuration on x86 hosts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="target-i386.html#syntax-for-configuring-cpu-models">Syntax for configuring CPU models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="target-i386.html#os-requirements">OS requirements</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="target-ppc.html">PowerPC System emulator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="target-sparc.html">Sparc32 System emulator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="target-sparc64.html">Sparc64 System emulator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="target-mips.html">MIPS System emulator</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="target-mips.html#supported-cpu-model-configurations-on-mips-hosts">Supported CPU model configurations on MIPS hosts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="target-mips.html#nanomips-system-emulator">nanoMIPS System emulator</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="target-arm.html">Arm System emulator</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="target-arm.html#choosing-a-board-model">Choosing a board model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="target-arm.html#board-specific-documentation">Board-specific documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="target-arm.html#arm-cpu-features">Arm CPU features</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="target-m68k.html">ColdFire System emulator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="target-xtensa.html">Xtensa System emulator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="target-s390x.html">s390x System emulator</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="target-s390x.html#device-support">Device support</a></li>
+<li class="toctree-l3"><a class="reference internal" href="target-s390x.html#architectural-features">Architectural features</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="target-rx.html">RX System emulator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="target-avr.html">AVR System emulator</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="security.html">Security</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="security.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html#security-requirements">Security Requirements</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="security.html#virtualization-use-case">Virtualization Use Case</a></li>
+<li class="toctree-l3"><a class="reference internal" href="security.html#non-virtualization-use-case">Non-virtualization Use Case</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="security.html#architecture">Architecture</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="security.html#guest-isolation">Guest Isolation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="security.html#principle-of-least-privilege">Principle of Least Privilege</a></li>
+<li class="toctree-l3"><a class="reference internal" href="security.html#isolation-mechanisms">Isolation mechanisms</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="security.html#sensitive-configurations">Sensitive configurations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="security.html#monitor-console-qmp-and-hmp">Monitor console (QMP and HMP)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="deprecated.html">Deprecated features</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="deprecated.html#system-emulator-command-line-arguments">System emulator command line arguments</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="deprecated.html#usbdevice-since-2-10-0"><code class="docutils literal notranslate"><span class="pre">-usbdevice</span></code> (since 2.10.0)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deprecated.html#drive-file-json-driver-file-since-3-0"><code class="docutils literal notranslate"><span class="pre">-drive</span> <span class="pre">file=json:{...{'driver':'file'}}</span></code> (since 3.0)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deprecated.html#vnc-acl-since-4-0-0"><code class="docutils literal notranslate"><span class="pre">-vnc</span> <span class="pre">acl</span></code> (since 4.0.0)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deprecated.html#qemu-audio-environment-variables-and-audio-help-since-4-0"><code class="docutils literal notranslate"><span class="pre">QEMU_AUDIO_</span></code> environment variables and <code class="docutils literal notranslate"><span class="pre">-audio-help</span></code> (since 4.0)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deprecated.html#creating-sound-card-devices-and-vnc-without-audiodev-property-since-4-2">Creating sound card devices and vnc without <code class="docutils literal notranslate"><span class="pre">audiodev=</span></code> property (since 4.2)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deprecated.html#creating-sound-card-devices-using-soundhw-since-5-1">Creating sound card devices using <code class="docutils literal notranslate"><span class="pre">-soundhw</span></code> (since 5.1)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deprecated.html#mon-control-readline-pretty-on-off-since-4-1"><code class="docutils literal notranslate"><span class="pre">-mon</span> <span class="pre">...,control=readline,pretty=on|off</span></code> (since 4.1)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deprecated.html#realtime-since-4-1"><code class="docutils literal notranslate"><span class="pre">-realtime</span></code> (since 4.1)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deprecated.html#risc-v-bios-since-5-1">RISC-V <code class="docutils literal notranslate"><span class="pre">-bios</span></code> (since 5.1)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deprecated.html#tb-size-option-since-5-0"><code class="docutils literal notranslate"><span class="pre">-tb-size</span></code> option (since 5.0)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deprecated.html#show-cursor-option-since-5-0"><code class="docutils literal notranslate"><span class="pre">-show-cursor</span></code> option (since 5.0)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deprecated.html#configuring-floppies-with-global"><code class="docutils literal notranslate"><span class="pre">Configuring</span> <span class="pre">floppies</span> <span class="pre">with</span> <span class="pre">``-global</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="deprecated.html#drive-with-bogus-interface-type"><code class="docutils literal notranslate"><span class="pre">-drive</span></code> with bogus interface type</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="deprecated.html#qemu-machine-protocol-qmp-commands">QEMU Machine Protocol (QMP) commands</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="deprecated.html#change-since-2-5-0"><code class="docutils literal notranslate"><span class="pre">change</span></code> (since 2.5.0)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deprecated.html#blockdev-open-tray-blockdev-close-tray-argument-device-since-2-8-0"><code class="docutils literal notranslate"><span class="pre">blockdev-open-tray</span></code>, <code class="docutils literal notranslate"><span class="pre">blockdev-close-tray</span></code> argument <code class="docutils literal notranslate"><span class="pre">device</span></code> (since 2.8.0)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deprecated.html#eject-argument-device-since-2-8-0"><code class="docutils literal notranslate"><span class="pre">eject</span></code> argument <code class="docutils literal notranslate"><span class="pre">device</span></code> (since 2.8.0)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deprecated.html#blockdev-change-medium-argument-device-since-2-8-0"><code class="docutils literal notranslate"><span class="pre">blockdev-change-medium</span></code> argument <code class="docutils literal notranslate"><span class="pre">device</span></code> (since 2.8.0)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deprecated.html#block-set-io-throttle-argument-device-since-2-8-0"><code class="docutils literal notranslate"><span class="pre">block_set_io_throttle</span></code> argument <code class="docutils literal notranslate"><span class="pre">device</span></code> (since 2.8.0)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deprecated.html#migrate-set-downtime-and-migrate-set-speed-since-2-8-0"><code class="docutils literal notranslate"><span class="pre">migrate_set_downtime</span></code> and <code class="docutils literal notranslate"><span class="pre">migrate_set_speed</span></code> (since 2.8.0)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deprecated.html#query-named-block-nodes-result-encryption-key-missing-since-2-10-0"><code class="docutils literal notranslate"><span class="pre">query-named-block-nodes</span></code> result <code class="docutils literal notranslate"><span class="pre">encryption_key_missing</span></code> (since 2.10.0)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deprecated.html#query-block-result-inserted-encryption-key-missing-since-2-10-0"><code class="docutils literal notranslate"><span class="pre">query-block</span></code> result <code class="docutils literal notranslate"><span class="pre">inserted.encryption_key_missing</span></code> (since 2.10.0)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deprecated.html#blockdev-add-empty-string-argument-backing-since-2-10-0"><code class="docutils literal notranslate"><span class="pre">blockdev-add</span></code> empty string argument <code class="docutils literal notranslate"><span class="pre">backing</span></code> (since 2.10.0)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deprecated.html#migrate-set-cache-size-and-query-migrate-cache-size-since-2-11-0"><code class="docutils literal notranslate"><span class="pre">migrate-set-cache-size</span></code> and <code class="docutils literal notranslate"><span class="pre">query-migrate-cache-size</span></code> (since 2.11.0)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deprecated.html#block-commit-arguments-base-and-top-since-3-1-0"><code class="docutils literal notranslate"><span class="pre">block-commit</span></code> arguments <code class="docutils literal notranslate"><span class="pre">base</span></code> and <code class="docutils literal notranslate"><span class="pre">top</span></code> (since 3.1.0)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deprecated.html#object-add-option-props-since-5-0"><code class="docutils literal notranslate"><span class="pre">object-add</span></code> option <code class="docutils literal notranslate"><span class="pre">props</span></code> (since 5.0)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deprecated.html#query-named-block-nodes-and-query-block-result-dirty-bitmaps-i-status-since-4-0"><code class="docutils literal notranslate"><span class="pre">query-named-block-nodes</span></code> and <code class="docutils literal notranslate"><span class="pre">query-block</span></code> result dirty-bitmaps[i].status (since 4.0)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deprecated.html#query-block-result-field-dirty-bitmaps-since-4-2"><code class="docutils literal notranslate"><span class="pre">query-block</span></code> result field <code class="docutils literal notranslate"><span class="pre">dirty-bitmaps</span></code> (Since 4.2)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deprecated.html#query-cpus-since-2-12-0"><code class="docutils literal notranslate"><span class="pre">query-cpus</span></code> (since 2.12.0)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deprecated.html#query-cpus-fast-arch-output-member-since-3-0-0"><code class="docutils literal notranslate"><span class="pre">query-cpus-fast</span></code> <code class="docutils literal notranslate"><span class="pre">arch</span></code> output member (since 3.0.0)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deprecated.html#query-events-since-4-0"><code class="docutils literal notranslate"><span class="pre">query-events</span></code> (since 4.0)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deprecated.html#chardev-client-socket-with-wait-option-since-4-0">chardev client socket with <code class="docutils literal notranslate"><span class="pre">wait</span></code> option (since 4.0)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deprecated.html#nbd-server-add-and-nbd-server-remove-since-5-2"><code class="docutils literal notranslate"><span class="pre">nbd-server-add</span></code> and <code class="docutils literal notranslate"><span class="pre">nbd-server-remove</span></code> (since 5.2)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="deprecated.html#human-monitor-protocol-hmp-commands">Human Monitor Protocol (HMP) commands</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="deprecated.html#acl-show-acl-reset-acl-policy-acl-add-acl-remove-since-4-0-0"><code class="docutils literal notranslate"><span class="pre">acl_show</span></code>, <code class="docutils literal notranslate"><span class="pre">acl_reset</span></code>, <code class="docutils literal notranslate"><span class="pre">acl_policy</span></code>, <code class="docutils literal notranslate"><span class="pre">acl_add</span></code>, <code class="docutils literal notranslate"><span class="pre">acl_remove</span></code> (since 4.0.0)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="deprecated.html#system-emulator-cpus">System emulator CPUS</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="deprecated.html#moxie-cpu-since-5-2-0"><code class="docutils literal notranslate"><span class="pre">moxie</span></code> CPU (since 5.2.0)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deprecated.html#compat-property-of-server-class-power-cpus-since-5-0"><code class="docutils literal notranslate"><span class="pre">compat</span></code> property of server class POWER CPUs (since 5.0)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deprecated.html#lm32-cpus-since-5-2-0"><code class="docutils literal notranslate"><span class="pre">lm32</span></code> CPUs (since 5.2.0)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deprecated.html#unicore32-cpus-since-5-2-0"><code class="docutils literal notranslate"><span class="pre">unicore32</span></code> CPUs (since 5.2.0)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deprecated.html#icelake-client-cpu-model-since-5-2-0"><code class="docutils literal notranslate"><span class="pre">Icelake-Client</span></code> CPU Model (since 5.2.0)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deprecated.html#mips-i7200-cpu-model-since-5-2">MIPS <code class="docutils literal notranslate"><span class="pre">I7200</span></code> CPU Model (since 5.2)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="deprecated.html#system-emulator-devices">System emulator devices</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="deprecated.html#ide-drive-since-4-2"><code class="docutils literal notranslate"><span class="pre">ide-drive</span></code> (since 4.2)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deprecated.html#scsi-disk-since-4-2"><code class="docutils literal notranslate"><span class="pre">scsi-disk</span></code> (since 4.2)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="deprecated.html#system-emulator-machines">System emulator machines</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="deprecated.html#mips-fulong2e-machine-since-5-1">mips <code class="docutils literal notranslate"><span class="pre">fulong2e</span></code> machine (since 5.1)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deprecated.html#pc-1-0-pc-1-1-pc-1-2-and-pc-1-3-since-5-0"><code class="docutils literal notranslate"><span class="pre">pc-1.0</span></code>, <code class="docutils literal notranslate"><span class="pre">pc-1.1</span></code>, <code class="docutils literal notranslate"><span class="pre">pc-1.2</span></code> and <code class="docutils literal notranslate"><span class="pre">pc-1.3</span></code> (since 5.0)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deprecated.html#raspberry-pi-raspi2-and-raspi3-machines-since-5-2">Raspberry Pi <code class="docutils literal notranslate"><span class="pre">raspi2</span></code> and <code class="docutils literal notranslate"><span class="pre">raspi3</span></code> machines (since 5.2)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="deprecated.html#device-options">Device options</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="deprecated.html#emulated-device-options">Emulated device options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deprecated.html#block-device-options">Block device options</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="deprecated.html#linux-user-mode-cpus">linux-user mode CPUs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="deprecated.html#tilegx-cpus-since-5-1-0"><code class="docutils literal notranslate"><span class="pre">tilegx</span></code> CPUs (since 5.1.0)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deprecated.html#ppc64abi32-cpus-since-5-2-0"><code class="docutils literal notranslate"><span class="pre">ppc64abi32</span></code> CPUs (since 5.2.0)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deprecated.html#mips-i7200-cpu-since-5-2">MIPS <code class="docutils literal notranslate"><span class="pre">I7200</span></code> CPU (since 5.2)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="deprecated.html#related-binaries">Related binaries</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="deprecated.html#qemu-img-amend-to-adjust-backing-file-since-5-1">qemu-img amend to adjust backing file (since 5.1)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deprecated.html#qemu-img-backing-file-without-format-since-5-1">qemu-img backing file without format (since 5.1)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="deprecated.html#backwards-compatibility">Backwards compatibility</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="deprecated.html#runnability-guarantee-of-cpu-models-since-4-1-0">Runnability guarantee of CPU models (since 4.1.0)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="deprecated.html#guest-emulator-isas">Guest Emulator ISAs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="deprecated.html#nanomips-isa">nanoMIPS ISA</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="deprecated.html#recently-removed-features">Recently removed features</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="deprecated.html#id1">System emulator command line arguments</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="deprecated.html#net-name-name-removed-in-5-1"><code class="docutils literal notranslate"><span class="pre">-net</span> <span class="pre">...,name=</span></code><em>name</em> (removed in 5.1)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deprecated.html#no-kvm-removed-in-5-2"><code class="docutils literal notranslate"><span class="pre">-no-kvm</span></code> (removed in 5.2)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="deprecated.html#id2">QEMU Machine Protocol (QMP) commands</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="deprecated.html#block-dirty-bitmap-add-autoload-parameter-since-4-2-0"><code class="docutils literal notranslate"><span class="pre">block-dirty-bitmap-add</span></code> “autoload” parameter (since 4.2.0)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deprecated.html#cpu-add-removed-in-5-2"><code class="docutils literal notranslate"><span class="pre">cpu-add</span></code> (removed in 5.2)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="deprecated.html#id3">Human Monitor Protocol (HMP) commands</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="deprecated.html#the-hub-id-parameter-of-hostfwd-add-hostfwd-remove-removed-in-5-0">The <code class="docutils literal notranslate"><span class="pre">hub_id</span></code> parameter of <code class="docutils literal notranslate"><span class="pre">hostfwd_add</span></code> / <code class="docutils literal notranslate"><span class="pre">hostfwd_remove</span></code> (removed in 5.0)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deprecated.html#id4"><code class="docutils literal notranslate"><span class="pre">cpu-add</span></code> (removed in 5.2)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="deprecated.html#id5">Guest Emulator ISAs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="deprecated.html#risc-v-isa-privilege-specification-version-1-09-1-removed-in-5-1">RISC-V ISA privilege specification version 1.09.1 (removed in 5.1)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="deprecated.html#id6">System emulator CPUS</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="deprecated.html#kvm-guest-support-on-32-bit-arm-hosts-removed-in-5-2">KVM guest support on 32-bit Arm hosts (removed in 5.2)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deprecated.html#risc-v-isa-specific-cpus-removed-in-5-1">RISC-V ISA Specific CPUs (removed in 5.1)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deprecated.html#risc-v-no-mmu-cpus-removed-in-5-1">RISC-V no MMU CPUs (removed in 5.1)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="deprecated.html#id7">System emulator machines</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="deprecated.html#spike-v1-9-1-and-spike-v1-10-removed-in-5-1"><code class="docutils literal notranslate"><span class="pre">spike_v1.9.1</span></code> and <code class="docutils literal notranslate"><span class="pre">spike_v1.10</span></code> (removed in 5.1)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deprecated.html#mips-r4k-platform-removed-in-5-2">mips <code class="docutils literal notranslate"><span class="pre">r4k</span></code> platform (removed in 5.2)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="deprecated.html#id8">Related binaries</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="deprecated.html#qemu-nbd-partition-removed-in-5-0"><code class="docutils literal notranslate"><span class="pre">qemu-nbd</span> <span class="pre">--partition</span></code> (removed in 5.0)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deprecated.html#qemu-img-convert-n-o-removed-in-5-1"><code class="docutils literal notranslate"><span class="pre">qemu-img</span> <span class="pre">convert</span> <span class="pre">-n</span> <span class="pre">-o</span></code> (removed in 5.1)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deprecated.html#qemu-img-create-b-bad-file-size-removed-in-5-1"><code class="docutils literal notranslate"><span class="pre">qemu-img</span> <span class="pre">create</span> <span class="pre">-b</span> <span class="pre">bad</span> <span class="pre">file</span> <span class="pre">$size</span></code> (removed in 5.1)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="deprecated.html#command-line-options">Command line options</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="deprecated.html#smp-invalid-topologies-removed-5-2"><code class="docutils literal notranslate"><span class="pre">-smp</span></code> (invalid topologies) (removed 5.2)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deprecated.html#numa-node-without-memory-specified-removed-5-2"><code class="docutils literal notranslate"><span class="pre">-numa</span></code> node (without memory specified) (removed 5.2)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deprecated.html#numa-node-mem-size-removed-in-5-1"><code class="docutils literal notranslate"><span class="pre">-numa</span> <span class="pre">node,mem=</span></code><em>size</em> (removed in 5.1)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deprecated.html#mem-path-fallback-to-ram-removed-in-5-0"><code class="docutils literal notranslate"><span class="pre">-mem-path</span></code> fallback to RAM (removed in 5.0)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deprecated.html#id9"><code class="docutils literal notranslate"><span class="pre">-smp</span></code> (invalid topologies) (removed 5.2)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deprecated.html#machine-enforce-config-section-on-off-removed-5-2"><code class="docutils literal notranslate"><span class="pre">-machine</span> <span class="pre">enforce-config-section=on|off</span></code> (removed 5.2)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="deprecated.html#block-devices">Block devices</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="deprecated.html#vxhs-backend-removed-in-5-1">VXHS backend (removed in 5.1)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="build-platforms.html">Supported build platforms</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="build-platforms.html#linux-os">Linux OS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="build-platforms.html#windows">Windows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="build-platforms.html#macos">macOS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="build-platforms.html#freebsd">FreeBSD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="build-platforms.html#netbsd">NetBSD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="build-platforms.html#openbsd">OpenBSD</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="#">QEMU</a></h1>
+
+
+
+<p class="blurb">System Emulation Users Guide</p>
+
+
+
+
+
+
+<div id="editpage">
+  <ul>
+    <li><a href="https://gitlab.com/qemu-project/qemu/-/blob/master/docs/system/index.rst">Page source</a></li>
+  </ul>
+</div><h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="invocation.html">Invocation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="keys.html">Keys in the graphical frontends</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mux-chardev.html">Keys in the character backend multiplexer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="monitor.html">QEMU Monitor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="images.html">Disk Images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="net.html">Network emulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="virtio-net-failover.html">QEMU virtio-net standby (net_failover)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usb.html">USB emulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ivshmem.html">Inter-VM Shared Memory device</a></li>
+<li class="toctree-l1"><a class="reference internal" href="linuxboot.html">Direct Linux Boot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vnc-security.html">VNC security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tls.html">TLS setup for network services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gdb.html">GDB usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="managed-startup.html">Managed start up options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cpu-hotplug.html">Virtual CPU hotplug</a></li>
+<li class="toctree-l1"><a class="reference internal" href="virtio-pmem.html">virtio pmem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pr-manager.html">Persistent reservation managers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="targets.html">QEMU System Emulator Targets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deprecated.html">Deprecated features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deprecated.html#recently-removed-features">Recently removed features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="build-platforms.html">Supported build platforms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, The QEMU Project Developers.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

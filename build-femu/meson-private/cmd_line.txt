@@ -1,0 +1,38 @@
+[options]
+audio_drv_list = default
+default_devices = true
+docdir = /usr/local/share/doc
+iasl = 
+qemu_firmwarepath = /usr/local/share/qemu-firmware
+qemu_suffix = qemu
+smbd = 
+sphinx_build = 
+trace_file = trace
+optimization = 2
+debug = true
+werror = true
+b_pie = true
+b_coverage = false
+b_lto = false
+cfi = false
+tcg = enabled
+xen = disabled
+capstone = auto
+fdt = auto
+slirp = auto
+kvm = enabled
+prefix = /usr/local
+bindir = /usr/local/bin
+datadir = /usr/local/share
+includedir = /usr/local/include
+libdir = /usr/local/lib
+libexecdir = /usr/local/libexec
+localedir = /usr/local/share/locale
+localstatedir = /usr/local/var
+mandir = /usr/local/share/man
+sysconfdir = /usr/local/etc
+backend = ninja
+
+[properties]
+native_file = ['/home/inhoinno/FEMU/build-femu/config-meson.cross']
+

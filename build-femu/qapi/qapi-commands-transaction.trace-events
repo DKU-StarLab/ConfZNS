@@ -1,0 +1,4 @@
+# AUTOMATICALLY GENERATED, DO NOT MODIFY
+
+qmp_enter_transaction(const char *json) "%s"
+qmp_exit_transaction(const char *result, bool succeeded) "%s %d"

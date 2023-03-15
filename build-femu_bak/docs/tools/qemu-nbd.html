@@ -1,0 +1,432 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>QEMU Disk Network Block Device Server &#8212; QEMU  documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="QEMU persistent reservation helper" href="qemu-pr-helper.html" />
+    <link rel="prev" title="QEMU disk image utility" href="qemu-img.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="qemu-disk-network-block-device-server">
+<h1>QEMU Disk Network Block Device Server<a class="headerlink" href="#qemu-disk-network-block-device-server" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="synopsis">
+<h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
+<p><strong>qemu-nbd</strong> [<em>OPTION</em>]… <em>filename</em></p>
+<p><strong>qemu-nbd</strong> -L [<em>OPTION</em>]…</p>
+<p><strong>qemu-nbd</strong> -d <em>dev</em></p>
+</div>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p>Export a QEMU disk image using the NBD protocol.</p>
+<p>Other uses:</p>
+<ul class="simple">
+<li>Bind a /dev/nbdX block device to a QEMU server (on Linux).</li>
+<li>As a client to query exports of a remote NBD server.</li>
+</ul>
+</div>
+<div class="section" id="options">
+<h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
+<p><em>filename</em> is a disk image filename, or a set of block
+driver options if <code class="docutils literal notranslate"><span class="pre">--image-opts</span></code> is specified.</p>
+<p><em>dev</em> is an NBD device.</p>
+<dl class="option">
+<dt id="cmdoption-qemu-nbd-object">
+<code class="descname">--object</code><code class="descclassname"> type,id=ID,...props...</code><a class="headerlink" href="#cmdoption-qemu-nbd-object" title="Permalink to this definition">¶</a></dt>
+<dd><p>Define a new instance of the <em>type</em> object class identified by <em>ID</em>.
+See the <em class="manpage">qemu(1)</em> manual page for full details of the properties
+supported. The common object types that it makes sense to define are the
+<code class="docutils literal notranslate"><span class="pre">secret</span></code> object, which is used to supply passwords and/or encryption
+keys, and the <code class="docutils literal notranslate"><span class="pre">tls-creds</span></code> object, which is used to supply TLS
+credentials for the qemu-nbd server or client.</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-qemu-nbd-p">
+<code class="descname">-p</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--port</code><code class="descclassname">=PORT</code><a class="headerlink" href="#cmdoption-qemu-nbd-p" title="Permalink to this definition">¶</a></dt>
+<dd><p>TCP port to listen on as a server, or connect to as a client
+(default <code class="docutils literal notranslate"><span class="pre">10809</span></code>).</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-qemu-nbd-o">
+<code class="descname">-o</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--offset</code><code class="descclassname">=OFFSET</code><a class="headerlink" href="#cmdoption-qemu-nbd-o" title="Permalink to this definition">¶</a></dt>
+<dd><p>The offset into the image.</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-qemu-nbd-b">
+<code class="descname">-b</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--bind</code><code class="descclassname">=IFACE</code><a class="headerlink" href="#cmdoption-qemu-nbd-b" title="Permalink to this definition">¶</a></dt>
+<dd><p>The interface to bind to as a server, or connect to as a client
+(default <code class="docutils literal notranslate"><span class="pre">0.0.0.0</span></code>).</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-qemu-nbd-k">
+<code class="descname">-k</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--socket</code><code class="descclassname">=PATH</code><a class="headerlink" href="#cmdoption-qemu-nbd-k" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use a unix socket with path <em>PATH</em>.</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-qemu-nbd-image-opts">
+<code class="descname">--image-opts</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-qemu-nbd-image-opts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Treat <em>filename</em> as a set of image options, instead of a plain
+filename. If this flag is specified, the <code class="docutils literal notranslate"><span class="pre">-f</span></code> flag should
+not be used, instead the <code class="xref std std-option docutils literal notranslate"><span class="pre">format=</span></code> option should be set.</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-qemu-nbd-f">
+<code class="descname">-f</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--format</code><code class="descclassname">=FMT</code><a class="headerlink" href="#cmdoption-qemu-nbd-f" title="Permalink to this definition">¶</a></dt>
+<dd><p>Force the use of the block driver for format <em>FMT</em> instead of
+auto-detecting.</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-qemu-nbd-r">
+<code class="descname">-r</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--read-only</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-qemu-nbd-r" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export the disk as read-only.</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-qemu-nbd-a">
+<code class="descname">-A</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--allocation-depth</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-qemu-nbd-a" title="Permalink to this definition">¶</a></dt>
+<dd><p>Expose allocation depth information via the
+<code class="docutils literal notranslate"><span class="pre">qemu:allocation-depth</span></code> metadata context accessible through
+NBD_OPT_SET_META_CONTEXT.</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-qemu-nbd-bitmap">
+<code class="descname">-B</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--bitmap</code><code class="descclassname">=NAME</code><a class="headerlink" href="#cmdoption-qemu-nbd-bitmap" title="Permalink to this definition">¶</a></dt>
+<dd><p>If <em>filename</em> has a qcow2 persistent bitmap <em>NAME</em>, expose
+that bitmap via the <code class="docutils literal notranslate"><span class="pre">qemu:dirty-bitmap:NAME</span></code> metadata context
+accessible through NBD_OPT_SET_META_CONTEXT.</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-qemu-nbd-s">
+<code class="descname">-s</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--snapshot</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-qemu-nbd-s" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use <em>filename</em> as an external snapshot, create a temporary
+file with <code class="docutils literal notranslate"><span class="pre">backing_file=</span></code><em>filename</em>, redirect the write to
+the temporary one.</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-qemu-nbd-l">
+<code class="descname">-l</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--load-snapshot</code><code class="descclassname">=SNAPSHOT_PARAM</code><a class="headerlink" href="#cmdoption-qemu-nbd-l" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load an internal snapshot inside <em>filename</em> and export it
+as an read-only device, SNAPSHOT_PARAM format is
+<code class="docutils literal notranslate"><span class="pre">snapshot.id=[ID],snapshot.name=[NAME]</span></code> or <code class="docutils literal notranslate"><span class="pre">[ID_OR_NAME]</span></code></p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-qemu-nbd-cache">
+<code class="descname">--cache</code><code class="descclassname">=CACHE</code><a class="headerlink" href="#cmdoption-qemu-nbd-cache" title="Permalink to this definition">¶</a></dt>
+<dd><p>The cache mode to be used with the file.  See the documentation of
+the emulator’s <code class="docutils literal notranslate"><span class="pre">-drive</span> <span class="pre">cache=...</span></code> option for allowed values.</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-qemu-nbd-n">
+<code class="descname">-n</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--nocache</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-qemu-nbd-n" title="Permalink to this definition">¶</a></dt>
+<dd><p>Equivalent to <code class="xref std std-option docutils literal notranslate"><span class="pre">--cache=none</span></code>.</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-qemu-nbd-aio">
+<code class="descname">--aio</code><code class="descclassname">=AIO</code><a class="headerlink" href="#cmdoption-qemu-nbd-aio" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the asynchronous I/O mode between <code class="docutils literal notranslate"><span class="pre">threads</span></code> (the default),
+<code class="docutils literal notranslate"><span class="pre">native</span></code> (Linux only), and <code class="docutils literal notranslate"><span class="pre">io_uring</span></code> (Linux 5.1+).</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-qemu-nbd-discard">
+<code class="descname">--discard</code><code class="descclassname">=DISCARD</code><a class="headerlink" href="#cmdoption-qemu-nbd-discard" title="Permalink to this definition">¶</a></dt>
+<dd><p>Control whether <code class="docutils literal notranslate"><span class="pre">discard</span></code> (also known as <code class="docutils literal notranslate"><span class="pre">trim</span></code> or <code class="docutils literal notranslate"><span class="pre">unmap</span></code>)
+requests are ignored or passed to the filesystem. <em>DISCARD</em> is one of
+<code class="docutils literal notranslate"><span class="pre">ignore</span></code> (or <code class="docutils literal notranslate"><span class="pre">off</span></code>), <code class="docutils literal notranslate"><span class="pre">unmap</span></code> (or <code class="docutils literal notranslate"><span class="pre">on</span></code>).  The default is
+<code class="docutils literal notranslate"><span class="pre">ignore</span></code>.</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-qemu-nbd-detect-zeroes">
+<code class="descname">--detect-zeroes</code><code class="descclassname">=DETECT_ZEROES</code><a class="headerlink" href="#cmdoption-qemu-nbd-detect-zeroes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Control the automatic conversion of plain zero writes by the OS to
+driver-specific optimized zero write commands.  <em>DETECT_ZEROES</em> is one of
+<code class="docutils literal notranslate"><span class="pre">off</span></code>, <code class="docutils literal notranslate"><span class="pre">on</span></code>, or <code class="docutils literal notranslate"><span class="pre">unmap</span></code>.  <code class="docutils literal notranslate"><span class="pre">unmap</span></code>
+converts a zero write to an unmap operation and can only be used if
+<em>DISCARD</em> is set to <code class="docutils literal notranslate"><span class="pre">unmap</span></code>.  The default is <code class="docutils literal notranslate"><span class="pre">off</span></code>.</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-qemu-nbd-c">
+<code class="descname">-c</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--connect</code><code class="descclassname">=DEV</code><a class="headerlink" href="#cmdoption-qemu-nbd-c" title="Permalink to this definition">¶</a></dt>
+<dd><p>Connect <em>filename</em> to NBD device <em>DEV</em> (Linux only).</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-qemu-nbd-d">
+<code class="descname">-d</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--disconnect</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-qemu-nbd-d" title="Permalink to this definition">¶</a></dt>
+<dd><p>Disconnect the device <em>DEV</em> (Linux only).</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-qemu-nbd-e">
+<code class="descname">-e</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--shared</code><code class="descclassname">=NUM</code><a class="headerlink" href="#cmdoption-qemu-nbd-e" title="Permalink to this definition">¶</a></dt>
+<dd><p>Allow up to <em>NUM</em> clients to share the device (default
+<code class="docutils literal notranslate"><span class="pre">1</span></code>). Safe for readers, but for now, consistency is not
+guaranteed between multiple writers.</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-qemu-nbd-t">
+<code class="descname">-t</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--persistent</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-qemu-nbd-t" title="Permalink to this definition">¶</a></dt>
+<dd><p>Don’t exit on the last connection.</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-qemu-nbd-x">
+<code class="descname">-x</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--export-name</code><code class="descclassname">=NAME</code><a class="headerlink" href="#cmdoption-qemu-nbd-x" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the NBD volume export name (default of a zero-length string).</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-qemu-nbd-description">
+<code class="descname">-D</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--description</code><code class="descclassname">=DESCRIPTION</code><a class="headerlink" href="#cmdoption-qemu-nbd-description" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the NBD volume export description, as a human-readable
+string.</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-qemu-nbd-list">
+<code class="descname">-L</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--list</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-qemu-nbd-list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Connect as a client and list all details about the exports exposed by
+a remote NBD server.  This enables list mode, and is incompatible
+with options that change behavior related to a specific export (such as
+<a class="reference internal" href="#cmdoption-qemu-nbd-x"><code class="xref std std-option docutils literal notranslate"><span class="pre">--export-name</span></code></a>, <a class="reference internal" href="#cmdoption-qemu-nbd-o"><code class="xref std std-option docutils literal notranslate"><span class="pre">--offset</span></code></a>, …).</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-qemu-nbd-tls-creds">
+<code class="descname">--tls-creds</code><code class="descclassname">=ID</code><a class="headerlink" href="#cmdoption-qemu-nbd-tls-creds" title="Permalink to this definition">¶</a></dt>
+<dd><p>Enable mandatory TLS encryption for the server by setting the ID
+of the TLS credentials object previously created with the –object
+option; or provide the credentials needed for connecting as a client
+in list mode.</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-qemu-nbd-fork">
+<code class="descname">--fork</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-qemu-nbd-fork" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fork off the server process and exit the parent once the server is running.</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-qemu-nbd-pid-file">
+<code class="descname">--pid-file</code><code class="descclassname">=PATH</code><a class="headerlink" href="#cmdoption-qemu-nbd-pid-file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Store the server’s process ID in the given file.</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-qemu-nbd-tls-authz">
+<code class="descname">--tls-authz</code><code class="descclassname">=ID</code><a class="headerlink" href="#cmdoption-qemu-nbd-tls-authz" title="Permalink to this definition">¶</a></dt>
+<dd><p>Specify the ID of a qauthz object previously created with the
+<a class="reference internal" href="#cmdoption-qemu-nbd-object"><code class="xref std std-option docutils literal notranslate"><span class="pre">--object</span></code></a> option. This will be used to authorize connecting users
+against their x509 distinguished name.</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-qemu-nbd-v">
+<code class="descname">-v</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--verbose</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-qemu-nbd-v" title="Permalink to this definition">¶</a></dt>
+<dd><p>Display extra debugging information.</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-qemu-nbd-h">
+<code class="descname">-h</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--help</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-qemu-nbd-h" title="Permalink to this definition">¶</a></dt>
+<dd><p>Display this help and exit.</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-qemu-nbd-version">
+<code class="descname">-V</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--version</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-qemu-nbd-version" title="Permalink to this definition">¶</a></dt>
+<dd><p>Display version information and exit.</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-qemu-nbd-trace">
+<code class="descname">-T</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--trace</code><code class="descclassname"> [[enable=]PATTERN][,events=FILE][,file=FILE]</code><a class="headerlink" href="#cmdoption-qemu-nbd-trace" title="Permalink to this definition">¶</a></dt>
+<dd><p>Specify tracing options.</p>
+<p><code class="docutils literal notranslate"><span class="pre">[enable=]PATTERN</span></code></p>
+<blockquote>
+<div><p>Immediately enable events matching <em>PATTERN</em>
+(either event name or a globbing pattern).  This option is only
+available if QEMU has been compiled with the <code class="docutils literal notranslate"><span class="pre">simple</span></code>, <code class="docutils literal notranslate"><span class="pre">log</span></code>
+or <code class="docutils literal notranslate"><span class="pre">ftrace</span></code> tracing backend.  To specify multiple events or patterns,
+specify the <code class="xref std std-option docutils literal notranslate"><span class="pre">-trace</span></code> option multiple times.</p>
+<p>Use <code class="xref std std-option docutils literal notranslate"><span class="pre">-trace</span> <span class="pre">help</span></code> to print a list of names of trace points.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">events=FILE</span></code></p>
+<blockquote>
+<div>Immediately enable events listed in <em>FILE</em>.
+The file must contain one event name (as listed in the <code class="docutils literal notranslate"><span class="pre">trace-events-all</span></code>
+file) per line; globbing patterns are accepted too.  This option is only
+available if QEMU has been compiled with the <code class="docutils literal notranslate"><span class="pre">simple</span></code>, <code class="docutils literal notranslate"><span class="pre">log</span></code> or
+<code class="docutils literal notranslate"><span class="pre">ftrace</span></code> tracing backend.</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">file=FILE</span></code></p>
+<blockquote>
+<div>Log output traces to <em>FILE</em>.
+This option is only available if QEMU has been compiled with
+the <code class="docutils literal notranslate"><span class="pre">simple</span></code> tracing backend.</div></blockquote>
+</dd></dl>
+
+</div>
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<p>Start a server listening on port 10809 that exposes only the
+guest-visible contents of a qcow2 file, with no TLS encryption, and
+with the default export name (an empty string). The command is
+one-shot, and will block until the first successful client
+disconnects:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">qemu</span><span class="o">-</span><span class="n">nbd</span> <span class="o">-</span><span class="n">f</span> <span class="n">qcow2</span> <span class="n">file</span><span class="o">.</span><span class="n">qcow2</span>
+</pre></div>
+</div>
+<p>Start a long-running server listening with encryption on port 10810,
+and whitelist clients with a specific X.509 certificate to connect to
+a 1 megabyte subset of a raw file, using the export name ‘subset’:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">qemu</span><span class="o">-</span><span class="n">nbd</span> \
+  <span class="o">--</span><span class="nb">object</span> <span class="n">tls</span><span class="o">-</span><span class="n">creds</span><span class="o">-</span><span class="n">x509</span><span class="p">,</span><span class="nb">id</span><span class="o">=</span><span class="n">tls0</span><span class="p">,</span><span class="n">endpoint</span><span class="o">=</span><span class="n">server</span><span class="p">,</span><span class="nb">dir</span><span class="o">=/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">qemutls</span> \
+  <span class="o">--</span><span class="nb">object</span> <span class="s1">&#39;authz-simple,id=auth0,identity=CN=laptop.example.com,,</span><span class="se">\</span>
+<span class="s1">            O=Example Org,,L=London,,ST=London,,C=GB&#39;</span> \
+  <span class="o">--</span><span class="n">tls</span><span class="o">-</span><span class="n">creds</span> <span class="n">tls0</span> <span class="o">--</span><span class="n">tls</span><span class="o">-</span><span class="n">authz</span> <span class="n">auth0</span> \
+  <span class="o">-</span><span class="n">t</span> <span class="o">-</span><span class="n">x</span> <span class="n">subset</span> <span class="o">-</span><span class="n">p</span> <span class="mi">10810</span> \
+  <span class="o">--</span><span class="n">image</span><span class="o">-</span><span class="n">opts</span> <span class="n">driver</span><span class="o">=</span><span class="n">raw</span><span class="p">,</span><span class="n">offset</span><span class="o">=</span><span class="mi">1</span><span class="n">M</span><span class="p">,</span><span class="n">size</span><span class="o">=</span><span class="mi">1</span><span class="n">M</span><span class="p">,</span><span class="n">file</span><span class="o">.</span><span class="n">driver</span><span class="o">=</span><span class="n">file</span><span class="p">,</span><span class="n">file</span><span class="o">.</span><span class="n">filename</span><span class="o">=</span><span class="n">file</span><span class="o">.</span><span class="n">raw</span>
+</pre></div>
+</div>
+<p>Serve a read-only copy of a guest image over a Unix socket with as
+many as 5 simultaneous readers, with a persistent process forked as a
+daemon:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">qemu</span><span class="o">-</span><span class="n">nbd</span> <span class="o">--</span><span class="n">fork</span> <span class="o">--</span><span class="n">persistent</span> <span class="o">--</span><span class="n">shared</span><span class="o">=</span><span class="mi">5</span> <span class="o">--</span><span class="n">socket</span><span class="o">=/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">sock</span> \
+  <span class="o">--</span><span class="n">read</span><span class="o">-</span><span class="n">only</span> <span class="o">--</span><span class="nb">format</span><span class="o">=</span><span class="n">qcow2</span> <span class="n">file</span><span class="o">.</span><span class="n">qcow2</span>
+</pre></div>
+</div>
+<p>Expose the guest-visible contents of a qcow2 file via a block device
+/dev/nbd0 (and possibly creating /dev/nbd0p1 and friends for
+partitions found within), then disconnect the device when done.
+Access to bind qemu-nbd to an /dev/nbd device generally requires root
+privileges, and may also require the execution of <code class="docutils literal notranslate"><span class="pre">modprobe</span> <span class="pre">nbd</span></code>
+to enable the kernel NBD client module.  <em>CAUTION</em>: Do not use
+this method to mount filesystems from an untrusted guest image - a
+malicious guest may have prepared the image to attempt to trigger
+kernel bugs in partition probing or file system mounting.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">qemu</span><span class="o">-</span><span class="n">nbd</span> <span class="o">-</span><span class="n">c</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">nbd0</span> <span class="o">-</span><span class="n">f</span> <span class="n">qcow2</span> <span class="n">file</span><span class="o">.</span><span class="n">qcow2</span>
+<span class="n">qemu</span><span class="o">-</span><span class="n">nbd</span> <span class="o">-</span><span class="n">d</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">nbd0</span>
+</pre></div>
+</div>
+<p>Query a remote server to see details about what export(s) it is
+serving on port 10809, and authenticating via PSK:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">qemu</span><span class="o">-</span><span class="n">nbd</span> \
+  <span class="o">--</span><span class="nb">object</span> <span class="n">tls</span><span class="o">-</span><span class="n">creds</span><span class="o">-</span><span class="n">psk</span><span class="p">,</span><span class="nb">id</span><span class="o">=</span><span class="n">tls0</span><span class="p">,</span><span class="nb">dir</span><span class="o">=/</span><span class="n">tmp</span><span class="o">/</span><span class="n">keys</span><span class="p">,</span><span class="n">username</span><span class="o">=</span><span class="n">eblake</span><span class="p">,</span><span class="n">endpoint</span><span class="o">=</span><span class="n">client</span> \
+  <span class="o">--</span><span class="n">tls</span><span class="o">-</span><span class="n">creds</span> <span class="n">tls0</span> <span class="o">-</span><span class="n">L</span> <span class="o">-</span><span class="n">b</span> <span class="n">remote</span><span class="o">.</span><span class="n">example</span><span class="o">.</span><span class="n">com</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="see-also">
+<h2>See also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h2>
+<p><em class="manpage">qemu(1)</em>, <em class="manpage">qemu-img(1)</em></p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">QEMU</a></h1>
+
+
+
+<p class="blurb">Tools Guide</p>
+
+
+
+
+
+
+<div id="editpage">
+  <ul>
+    <li><a href="https://gitlab.com/qemu-project/qemu/-/blob/master/docs/tools/qemu-nbd.rst">Page source</a></li>
+  </ul>
+</div><h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="qemu-img.html">QEMU disk image utility</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">QEMU Disk Network Block Device Server</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#synopsis">Synopsis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#description">Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#options">Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#examples">Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#see-also">See also</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="qemu-pr-helper.html">QEMU persistent reservation helper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="qemu-trace-stap.html">QEMU SystemTap trace tool</a></li>
+<li class="toctree-l1"><a class="reference internal" href="virtfs-proxy-helper.html">QEMU 9p virtfs proxy filesystem helper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="virtiofsd.html">QEMU virtio-fs shared file system daemon</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, The QEMU Project Developers.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

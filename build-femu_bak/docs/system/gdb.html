@@ -1,0 +1,208 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>GDB usage &#8212; QEMU  documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Managed start up options" href="managed-startup.html" />
+    <link rel="prev" title="TLS setup for network services" href="tls.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="gdb-usage">
+<span id="id1"></span><h1>GDB usage<a class="headerlink" href="#gdb-usage" title="Permalink to this headline">¶</a></h1>
+<p>QEMU supports working with gdb via gdb’s remote-connection facility
+(the “gdbstub”). This allows you to debug guest code in the same
+way that you might with a low-level debug facility like JTAG
+on real hardware. You can stop and start the virtual machine,
+examine state like registers and memory, and set breakpoints and
+watchpoints.</p>
+<p>In order to use gdb, launch QEMU with the <code class="docutils literal notranslate"><span class="pre">-s</span></code> and <code class="docutils literal notranslate"><span class="pre">-S</span></code> options.
+The <code class="docutils literal notranslate"><span class="pre">-s</span></code> option will make QEMU listen for an incoming connection
+from gdb on TCP port 1234, and <code class="docutils literal notranslate"><span class="pre">-S</span></code> will make QEMU not start the
+guest until you tell it to from gdb. (If you want to specify which
+TCP port to use or to use something other than TCP for the gdbstub
+connection, use the <code class="docutils literal notranslate"><span class="pre">-gdb</span> <span class="pre">dev</span></code> option instead of <code class="docutils literal notranslate"><span class="pre">-s</span></code>.)</p>
+<pre class="literal-block">
+qemu-system-x86_64 -s -S -kernel bzImage -hda rootdisk.img -append &quot;root=/dev/hda&quot;
+</pre>
+<p>QEMU will launch but will silently wait for gdb to connect.</p>
+<p>Then launch gdb on the ‘vmlinux’ executable:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">gdb</span> <span class="n">vmlinux</span>
+</pre></div>
+</div>
+<p>In gdb, connect to QEMU:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="n">target</span> <span class="n">remote</span> <span class="n">localhost</span><span class="p">:</span><span class="mi">1234</span>
+</pre></div>
+</div>
+<p>Then you can use gdb normally. For example, type ‘c’ to launch the
+kernel:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="n">c</span>
+</pre></div>
+</div>
+<p>Here are some useful tips in order to use gdb on system code:</p>
+<ol class="arabic simple">
+<li>Use <code class="docutils literal notranslate"><span class="pre">info</span> <span class="pre">reg</span></code> to display all the CPU registers.</li>
+<li>Use <code class="docutils literal notranslate"><span class="pre">x/10i</span> <span class="pre">$eip</span></code> to display the code at the PC position.</li>
+<li>Use <code class="docutils literal notranslate"><span class="pre">set</span> <span class="pre">architecture</span> <span class="pre">i8086</span></code> to dump 16 bit code. Then use
+<code class="docutils literal notranslate"><span class="pre">x/10i</span> <span class="pre">$cs*16+$eip</span></code> to dump the code at the PC position.</li>
+</ol>
+<p>Advanced debugging options:</p>
+<p>The default single stepping behavior is step with the IRQs and timer
+service routines off. It is set this way because when gdb executes a
+single step it expects to advance beyond the current instruction. With
+the IRQs and timer service routines on, a single step might jump into
+the one of the interrupt or exception vectors instead of executing the
+current instruction. This means you may hit the same breakpoint a number
+of times before executing the instruction gdb wants to have executed.
+Because there are rare circumstances where you want to single step into
+an interrupt vector the behavior can be controlled from GDB. There are
+three commands you can query and set the single step behavior:</p>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">maintenance</span> <span class="pre">packet</span> <span class="pre">qqemu.sstepbits</span></code></dt>
+<dd><p class="first">This will display the MASK bits used to control the single stepping
+IE:</p>
+<div class="last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="n">maintenance</span> <span class="n">packet</span> <span class="n">qqemu</span><span class="o">.</span><span class="n">sstepbits</span>
+<span class="n">sending</span><span class="p">:</span> <span class="s2">&quot;qqemu.sstepbits&quot;</span>
+<span class="n">received</span><span class="p">:</span> <span class="s2">&quot;ENABLE=1,NOIRQ=2,NOTIMER=4&quot;</span>
+</pre></div>
+</div>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">maintenance</span> <span class="pre">packet</span> <span class="pre">qqemu.sstep</span></code></dt>
+<dd><p class="first">This will display the current value of the mask used when single
+stepping IE:</p>
+<div class="last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="n">maintenance</span> <span class="n">packet</span> <span class="n">qqemu</span><span class="o">.</span><span class="n">sstep</span>
+<span class="n">sending</span><span class="p">:</span> <span class="s2">&quot;qqemu.sstep&quot;</span>
+<span class="n">received</span><span class="p">:</span> <span class="s2">&quot;0x7&quot;</span>
+</pre></div>
+</div>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">maintenance</span> <span class="pre">packet</span> <span class="pre">Qqemu.sstep=HEX_VALUE</span></code></dt>
+<dd><p class="first">This will change the single step mask, so if wanted to enable IRQs on
+the single step, but not timers, you would use:</p>
+<div class="last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="n">maintenance</span> <span class="n">packet</span> <span class="n">Qqemu</span><span class="o">.</span><span class="n">sstep</span><span class="o">=</span><span class="mh">0x5</span>
+<span class="n">sending</span><span class="p">:</span> <span class="s2">&quot;qemu.sstep=0x5&quot;</span>
+<span class="n">received</span><span class="p">:</span> <span class="s2">&quot;OK&quot;</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<p>Another feature that QEMU gdbstub provides is to toggle the memory GDB
+works with, by default GDB will show the current process memory respecting
+the virtual address translation.</p>
+<p>If you want to examine/change the physical memory you can set the gdbstub
+to work with the physical memory rather with the virtual one.</p>
+<p>The memory mode can be checked by sending the following command:</p>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">maintenance</span> <span class="pre">packet</span> <span class="pre">qqemu.PhyMemMode</span></code></dt>
+<dd>This will return either 0 or 1, 1 indicates you are currently in the
+physical memory mode.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">maintenance</span> <span class="pre">packet</span> <span class="pre">Qqemu.PhyMemMode:1</span></code></dt>
+<dd>This will change the memory mode to physical memory.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">maintenance</span> <span class="pre">packet</span> <span class="pre">Qqemu.PhyMemMode:0</span></code></dt>
+<dd>This will change it back to normal memory mode.</dd>
+</dl>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">QEMU</a></h1>
+
+
+
+<p class="blurb">System Emulation Users Guide</p>
+
+
+
+
+
+
+<div id="editpage">
+  <ul>
+    <li><a href="https://gitlab.com/qemu-project/qemu/-/blob/master/docs/system/gdb.rst">Page source</a></li>
+  </ul>
+</div><h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="invocation.html">Invocation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="keys.html">Keys in the graphical frontends</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mux-chardev.html">Keys in the character backend multiplexer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="monitor.html">QEMU Monitor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="images.html">Disk Images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="net.html">Network emulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="virtio-net-failover.html">QEMU virtio-net standby (net_failover)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usb.html">USB emulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ivshmem.html">Inter-VM Shared Memory device</a></li>
+<li class="toctree-l1"><a class="reference internal" href="linuxboot.html">Direct Linux Boot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vnc-security.html">VNC security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tls.html">TLS setup for network services</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">GDB usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="managed-startup.html">Managed start up options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cpu-hotplug.html">Virtual CPU hotplug</a></li>
+<li class="toctree-l1"><a class="reference internal" href="virtio-pmem.html">virtio pmem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pr-manager.html">Persistent reservation managers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="targets.html">QEMU System Emulator Targets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deprecated.html">Deprecated features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deprecated.html#recently-removed-features">Recently removed features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="build-platforms.html">Supported build platforms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, The QEMU Project Developers.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

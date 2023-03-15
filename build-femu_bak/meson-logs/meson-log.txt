@@ -1,0 +1,1198 @@
+Build started at 2022-05-13T23:11:10.883985
+Main binary: /home/inhoinno/anaconda3/bin/python3
+Build Options: -Ddocdir=/usr/local/share/doc -Dqemu_firmwarepath=/usr/local/share/qemu-firmware -Dqemu_suffix=qemu -Doptimization=2 -Ddebug=true -Dwerror=true -Dstrip=true -Db_pie=true -Db_staticpic=true -Db_coverage=false -Dmalloc=system -Dmalloc_trim=auto -Dsparse=auto -Dkvm=enabled -Dhax=auto -Dwhpx=auto -Dhvf=auto -Dxen=disabled -Dxen_pci_passthrough=disabled -Dtcg=enabled -Dcocoa=auto -Dmpath=auto -Dsdl=auto -Dsdl_image=auto -Dvnc=enabled -Dvnc_sasl=auto -Dvnc_jpeg=auto -Dvnc_png=auto -Dgettext=true -Dxkbcommon=auto -Du2f=auto -Dvirtiofsd=auto -Dcapstone=auto -Dslirp=auto -Dfdt=auto -Diconv=auto -Dcurses=auto -Dlibudev=auto -Ddocs=auto -Dsphinx_build= -Dinstall_blobs=true -Dvhost_user_blk_server=auto -Dprefix=/usr/local -Dbindir=/usr/local/bin -Ddatadir=/usr/local/share -Dincludedir=/usr/local/include -Dlibdir=/usr/local/lib -Dlibexecdir=/usr/local/libexec -Dlocaledir=/usr/local/share/locale -Dlocalstatedir=/usr/local/var -Dmandir=/usr/local/share/man -Dsysconfdir=/usr/local/etc '--native-file config-meson.cross'
+Python system: Linux
+The Meson build system
+Version: 0.55.3
+Source dir: /home/inhoinno/FEMU
+Build dir: /home/inhoinno/FEMU/build-femu
+Build type: native build
+Running command: /usr/bin/head /home/inhoinno/FEMU/VERSION
+--- stdout ---
+5.2.0
+
+--- stderr ---
+
+
+None of 'PKG_CONFIG_PATH' are defined in the environment, not changing global flags.
+None of 'PKG_CONFIG_PATH' are defined in the environment, not changing global flags.
+Project name: qemu
+Project version: 5.2.0
+None of 'CFLAGS' are defined in the environment, not changing global flags.
+None of 'LDFLAGS' are defined in the environment, not changing global flags.
+None of 'CPPFLAGS' are defined in the environment, not changing global flags.
+None of 'CC_LD' are defined in the environment, not changing global flags.
+Sanity testing C compiler: cc
+Is cross compiler: False.
+None of 'CC_LD' are defined in the environment, not changing global flags.
+Sanity check compiler command line: cc /home/inhoinno/FEMU/build-femu/meson-private/sanitycheckc.c -o /home/inhoinno/FEMU/build-femu/meson-private/sanitycheckc.exe -pipe -D_FILE_OFFSET_BITS=64
+Sanity check compile stdout:
+
+-----
+Sanity check compile stderr:
+
+-----
+Running test binary command: /home/inhoinno/FEMU/build-femu/meson-private/sanitycheckc.exe
+C compiler for the build machine: cc (gcc 7.5.0 "cc (Ubuntu 7.5.0-3ubuntu1~18.04) 7.5.0")
+C linker for the build machine: cc ld.bfd 2.30
+None of 'CFLAGS' are defined in the environment, not changing global flags.
+None of 'LDFLAGS' are defined in the environment, not changing global flags.
+None of 'CPPFLAGS' are defined in the environment, not changing global flags.
+None of 'CC_LD' are defined in the environment, not changing global flags.
+Sanity testing C compiler: cc
+Is cross compiler: False.
+None of 'CC_LD' are defined in the environment, not changing global flags.
+Sanity check compiler command line: cc /home/inhoinno/FEMU/build-femu/meson-private/sanitycheckc.c -o /home/inhoinno/FEMU/build-femu/meson-private/sanitycheckc.exe -pipe -D_FILE_OFFSET_BITS=64
+Sanity check compile stdout:
+
+-----
+Sanity check compile stderr:
+
+-----
+Running test binary command: /home/inhoinno/FEMU/build-femu/meson-private/sanitycheckc.exe
+C compiler for the host machine: cc (gcc 7.5.0 "cc (Ubuntu 7.5.0-3ubuntu1~18.04) 7.5.0")
+C linker for the host machine: cc ld.bfd 2.30
+Build machine cpu family: x86_64
+Build machine cpu: x86_64
+Host machine cpu family: x86_64
+Host machine cpu: x86_64
+Target machine cpu family: x86_64
+Target machine cpu: x86_64
+../meson.build:10: WARNING: Module unstable-keyval has no backwards or forwards compatibility and might not exist in future releases.
+Program sh found: YES
+Program python3 found: YES (/home/inhoinno/anaconda3/bin/python3)
+None of 'CXXFLAGS' are defined in the environment, not changing global flags.
+None of 'LDFLAGS' are defined in the environment, not changing global flags.
+None of 'CPPFLAGS' are defined in the environment, not changing global flags.
+None of 'CXX_LD' are defined in the environment, not changing global flags.
+Sanity testing C++ compiler: c++
+Is cross compiler: False.
+None of 'CXX_LD' are defined in the environment, not changing global flags.
+Sanity check compiler command line: c++ /home/inhoinno/FEMU/build-femu/meson-private/sanitycheckcpp.cc -o /home/inhoinno/FEMU/build-femu/meson-private/sanitycheckcpp.exe -pipe -D_FILE_OFFSET_BITS=64
+Sanity check compile stdout:
+
+-----
+Sanity check compile stderr:
+
+-----
+Running test binary command: /home/inhoinno/FEMU/build-femu/meson-private/sanitycheckcpp.exe
+C++ compiler for the host machine: c++ (gcc 7.5.0 "c++ (Ubuntu 7.5.0-3ubuntu1~18.04) 7.5.0")
+C++ linker for the host machine: c++ ld.bfd 2.30
+Program cgcc found: NO
+None of 'CC_LD' are defined in the environment, not changing global flags.
+Running compile:
+Working directory:  /home/inhoinno/FEMU/build-femu/meson-private/tmpvp3318v1
+Command line:  cc /home/inhoinno/FEMU/build-femu/meson-private/tmpvp3318v1/testfile.c -o /home/inhoinno/FEMU/build-femu/meson-private/tmpvp3318v1/output.exe -pipe -D_FILE_OFFSET_BITS=64 -O0 -Wl,--start-group -lm -Wl,--end-group -Wl,--allow-shlib-undefined 
+
+Code:
+ int main(void) { return 0; }
+
+Compiler stdout:
+ 
+Compiler stderr:
+ 
+Library m found: YES
+None of 'CC_LD' are defined in the environment, not changing global flags.
+Running compile:
+Working directory:  /home/inhoinno/FEMU/build-femu/meson-private/tmppjguh7xp
+Command line:  cc /home/inhoinno/FEMU/build-femu/meson-private/tmppjguh7xp/testfile.c -o /home/inhoinno/FEMU/build-femu/meson-private/tmppjguh7xp/output.exe -pipe -D_FILE_OFFSET_BITS=64 -O0 -Wl,--start-group -lutil -Wl,--end-group -Wl,--allow-shlib-undefined 
+
+Code:
+ int main(void) { return 0; }
+
+Compiler stdout:
+ 
+Compiler stderr:
+ 
+Library util found: YES
+Run-time dependency appleframeworks found: NO (tried framework)
+Pkg-config binary for MachineChoice.HOST is not cached.
+Pkg-config binary for MachineChoice.HOST specified from cross file, native file, or env var as ['pkg-config']
+Found pkg-config: /usr/bin/pkg-config (0.29.1)
+Determining dependency 'pixman-1' with pkg-config executable '/usr/bin/pkg-config'
+PKG_CONFIG_PATH: 
+Called `/usr/bin/pkg-config --modversion pixman-1` -> 0
+0.34.0
+PKG_CONFIG_PATH: 
+Called `/usr/bin/pkg-config --cflags pixman-1` -> 0
+-I/usr/include/pixman-1
+PKG_CONFIG_PATH: 
+Called `/usr/bin/pkg-config pixman-1 --libs` -> 0
+-L/usr/lib/x86_64-linux-gnu -lpixman-1
+PKG_CONFIG_PATH: 
+Called `/usr/bin/pkg-config pixman-1 --libs` -> 0
+-lpixman-1
+None of 'PKG_CONFIG_PATH' are defined in the environment, not changing global flags.
+None of 'CXX_LD' are defined in the environment, not changing global flags.
+Running compile:
+Working directory:  /home/inhoinno/FEMU/build-femu/meson-private/tmpu0z_6amq
+Command line:  c++ /home/inhoinno/FEMU/build-femu/meson-private/tmpu0z_6amq/testfile.cpp -o /home/inhoinno/FEMU/build-femu/meson-private/tmpu0z_6amq/output.exe -pipe -D_FILE_OFFSET_BITS=64 -O0 -fpermissive 
+
+Code:
+ #include<stdio.h>
+        
+        int main(void) {
+            printf("%ld\n", (long)(sizeof(void *)));
+            return 0;
+        };
+Compiler stdout:
+ 
+Compiler stderr:
+ 
+Program stdout:
+
+8
+
+Program stderr:
+
+
+Running compile:
+Working directory:  /home/inhoinno/FEMU/build-femu/meson-private/tmp4tgv2ype
+Command line:  c++ /home/inhoinno/FEMU/build-femu/meson-private/tmp4tgv2ype/testfile.cpp -o /home/inhoinno/FEMU/build-femu/meson-private/tmp4tgv2ype/output.obj -pipe -c -D_FILE_OFFSET_BITS=64 -O0 -fpermissive --print-search-dirs 
+
+Code:
+ 
+Compiler stdout:
+ install: /usr/lib/gcc/x86_64-linux-gnu/7/
+programs: =/usr/lib/gcc/x86_64-linux-gnu/7/:/usr/lib/gcc/x86_64-linux-gnu/7/:/usr/lib/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/7/:/usr/lib/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/7/../../../../x86_64-linux-gnu/bin/x86_64-linux-gnu/7/:/usr/lib/gcc/x86_64-linux-gnu/7/../../../../x86_64-linux-gnu/bin/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/7/../../../../x86_64-linux-gnu/bin/
+libraries: =/usr/lib/gcc/x86_64-linux-gnu/7/:/usr/lib/gcc/x86_64-linux-gnu/7/../../../../x86_64-linux-gnu/lib/x86_64-linux-gnu/7/:/usr/lib/gcc/x86_64-linux-gnu/7/../../../../x86_64-linux-gnu/lib/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/7/../../../../x86_64-linux-gnu/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/7/:/usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/7/../../../../lib/:/lib/x86_64-linux-gnu/7/:/lib/x86_64-linux-gnu/:/lib/../lib/:/usr/lib/x86_64-linux-gnu/7/:/usr/lib/x86_64-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/7/../../../../x86_64-linux-gnu/lib/:/usr/lib/gcc/x86_64-linux-gnu/7/../../../:/lib/:/usr/lib/
+
+Compiler stderr:
+ 
+Run-time dependency pixman-1 found: YES 0.34.0
+None of 'CC_LD' are defined in the environment, not changing global flags.
+Running compile:
+Working directory:  /home/inhoinno/FEMU/build-femu/meson-private/tmpofcrr9op
+Command line:  cc /home/inhoinno/FEMU/build-femu/meson-private/tmpofcrr9op/testfile.c -o /home/inhoinno/FEMU/build-femu/meson-private/tmpofcrr9op/output.exe -pipe -D_FILE_OFFSET_BITS=64 -O0 -Wl,--start-group -laio -Wl,--end-group -Wl,--allow-shlib-undefined 
+
+Code:
+ int main(void) { return 0; }
+
+Compiler stdout:
+ 
+Compiler stderr:
+ 
+Library aio found: YES
+Pkg-config binary for MachineChoice.HOST is cached.
+Determining dependency 'zlib' with pkg-config executable '/usr/bin/pkg-config'
+PKG_CONFIG_PATH: 
+Called `/usr/bin/pkg-config --modversion zlib` -> 0
+1.2.11
+PKG_CONFIG_PATH: 
+Called `/usr/bin/pkg-config --cflags zlib` -> 0
+
+PKG_CONFIG_PATH: 
+Called `/usr/bin/pkg-config zlib --libs` -> 0
+-L/usr/lib/x86_64-linux-gnu -lz
+PKG_CONFIG_PATH: 
+Called `/usr/bin/pkg-config zlib --libs` -> 0
+-lz
+None of 'PKG_CONFIG_PATH' are defined in the environment, not changing global flags.
+Run-time dependency zlib found: YES 1.2.11
+Pkg-config binary for MachineChoice.HOST is cached.
+Determining dependency 'xkbcommon' with pkg-config executable '/usr/bin/pkg-config'
+PKG_CONFIG_PATH: 
+Called `/usr/bin/pkg-config --modversion xkbcommon` -> 1
+
+Run-time dependency xkbcommon found: NO (tried pkgconfig)
+None of 'CC_LD' are defined in the environment, not changing global flags.
+Running compile:
+Working directory:  /home/inhoinno/FEMU/build-femu/meson-private/tmp_ketvkpv
+Command line:  cc /home/inhoinno/FEMU/build-femu/meson-private/tmp_ketvkpv/testfile.c -o /home/inhoinno/FEMU/build-femu/meson-private/tmp_ketvkpv/output.exe -pipe -D_FILE_OFFSET_BITS=64 -O0 -Wl,--start-group -lrt -Wl,--end-group -Wl,--allow-shlib-undefined 
+
+Code:
+ int main(void) { return 0; }
+
+Compiler stdout:
+ 
+Compiler stderr:
+ 
+Library rt found: YES
+Pkg-config binary for MachineChoice.HOST is cached.
+Determining dependency 'libudev' with pkg-config executable '/usr/bin/pkg-config'
+PKG_CONFIG_PATH: 
+Called `/usr/bin/pkg-config --modversion libudev` -> 1
+
+CMake binary for MachineChoice.HOST is not cached
+None of 'CMAKE' are defined in the environment, not changing global flags.
+CMake binary missing from cross or native file, or env var undefined.
+Trying a default CMake fallback at cmake
+Found CMake: /usr/bin/cmake (3.10.2)
+None of 'CMAKE_PREFIX_PATH' are defined in the environment, not changing global flags.
+Extracting basic cmake information
+Try CMake generator: auto
+None of 'CXXFLAGS' are defined in the environment, not changing global flags.
+None of 'LDFLAGS' are defined in the environment, not changing global flags.
+None of 'CPPFLAGS' are defined in the environment, not changing global flags.
+None of 'CXX_LD' are defined in the environment, not changing global flags.
+None of 'FC' are defined in the environment, not changing global flags.
+Failed to find a fortran compiler for CMake. This might cause CMake to fail.
+Called `/usr/bin/cmake --trace --trace-expand --no-warn-unused-cli .` in /home/inhoinno/FEMU/build-femu/meson-private/cmake_libudev -> 0
+  -- Module search paths:    ['/', '/opt', '/usr', '/usr/local']
+  -- CMake root:             /usr/share/cmake-3.10
+  -- CMake architectures:    ['x86_64-linux-gnu']
+  -- CMake lib search paths: ['lib', 'lib32', 'lib64', 'libx32', 'share', 'lib/x86_64-linux-gnu']
+Preliminary CMake check failed. Aborting.
+Run-time dependency libudev found: NO (tried pkgconfig and cmake)
+None of 'CC_LD' are defined in the environment, not changing global flags.
+Running compile:
+Working directory:  /home/inhoinno/FEMU/build-femu/meson-private/tmphkd5pa0i
+Command line:  cc /home/inhoinno/FEMU/build-femu/meson-private/tmphkd5pa0i/testfile.c -o /home/inhoinno/FEMU/build-femu/meson-private/tmphkd5pa0i/output.exe -pipe -D_FILE_OFFSET_BITS=64 -O0 
+
+Code:
+ #include<stdio.h>
+        
+        int main(void) {
+            printf("%ld\n", (long)(sizeof(void *)));
+            return 0;
+        };
+Compiler stdout:
+ 
+Compiler stderr:
+ 
+Program stdout:
+
+8
+
+Program stderr:
+
+
+Running compile:
+Working directory:  /home/inhoinno/FEMU/build-femu/meson-private/tmp92aef4fa
+Command line:  cc /home/inhoinno/FEMU/build-femu/meson-private/tmp92aef4fa/testfile.c -o /home/inhoinno/FEMU/build-femu/meson-private/tmp92aef4fa/output.obj -pipe -c -D_FILE_OFFSET_BITS=64 -O0 --print-search-dirs 
+
+Code:
+ 
+Compiler stdout:
+ install: /usr/lib/gcc/x86_64-linux-gnu/7/
+programs: =/usr/lib/gcc/x86_64-linux-gnu/7/:/usr/lib/gcc/x86_64-linux-gnu/7/:/usr/lib/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/7/:/usr/lib/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/7/../../../../x86_64-linux-gnu/bin/x86_64-linux-gnu/7/:/usr/lib/gcc/x86_64-linux-gnu/7/../../../../x86_64-linux-gnu/bin/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/7/../../../../x86_64-linux-gnu/bin/
+libraries: =/usr/lib/gcc/x86_64-linux-gnu/7/:/usr/lib/gcc/x86_64-linux-gnu/7/../../../../x86_64-linux-gnu/lib/x86_64-linux-gnu/7/:/usr/lib/gcc/x86_64-linux-gnu/7/../../../../x86_64-linux-gnu/lib/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/7/../../../../x86_64-linux-gnu/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/7/:/usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/7/../../../../lib/:/lib/x86_64-linux-gnu/7/:/lib/x86_64-linux-gnu/:/lib/../lib/:/usr/lib/x86_64-linux-gnu/7/:/usr/lib/x86_64-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/7/../../../../x86_64-linux-gnu/lib/:/usr/lib/gcc/x86_64-linux-gnu/7/../../../:/lib/:/usr/lib/
+
+Compiler stderr:
+ 
+Library mpathpersist found: NO
+Pkg-config binary for MachineChoice.HOST is cached.
+Determining dependency 'ncursesw' with pkg-config executable '/usr/bin/pkg-config'
+PKG_CONFIG_PATH: 
+Called `/usr/bin/pkg-config --modversion ncursesw` -> 0
+6.1.20180127
+PKG_CONFIG_PATH: 
+Called `/usr/bin/pkg-config --cflags ncursesw` -> 0
+-D_GNU_SOURCE -D_DEFAULT_SOURCE -I/usr/include/ncursesw
+PKG_CONFIG_PATH: 
+Called `/usr/bin/pkg-config ncursesw --libs` -> 0
+-L/usr/lib/x86_64-linux-gnu -lncursesw -ltinfo
+PKG_CONFIG_PATH: 
+Called `/usr/bin/pkg-config ncursesw --libs` -> 0
+-lncursesw -ltinfo
+None of 'PKG_CONFIG_PATH' are defined in the environment, not changing global flags.
+Run-time dependency ncursesw found: YES 6.1.20180127
+None of 'CC_LD' are defined in the environment, not changing global flags.
+Running compile:
+Working directory:  /home/inhoinno/FEMU/build-femu/meson-private/tmp3wq66vt4
+Command line:  cc -I/usr/include/ncursesw /home/inhoinno/FEMU/build-femu/meson-private/tmp3wq66vt4/testfile.c -o /home/inhoinno/FEMU/build-femu/meson-private/tmp3wq66vt4/output.exe -pipe -D_GNU_SOURCE -D_DEFAULT_SOURCE -D_FILE_OFFSET_BITS=64 -O0 -std=gnu99 -Wl,--start-group /usr/lib/x86_64-linux-gnu/libncursesw.so /usr/lib/x86_64-linux-gnu/libtinfo.so -Wl,--end-group 
+
+Code:
+ 
+    #include <locale.h>
+    #include <curses.h>
+    #include <wchar.h>
+    int main(void) {
+      wchar_t wch = L'w';
+      setlocale(LC_ALL, "");
+      resize_term(0, 0);
+      addwstr(L"wide chars\n");
+      addnwstr(&wch, 1);
+      add_wch(WACS_DEGREE);
+      return 0;
+    }
+Compiler stdout:
+ 
+Compiler stderr:
+ 
+None of 'CC_LD' are defined in the environment, not changing global flags.
+Running compile:
+Working directory:  /home/inhoinno/FEMU/build-femu/meson-private/tmp4bn1xth4
+Command line:  cc -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include /home/inhoinno/FEMU/build-femu/meson-private/tmp4bn1xth4/testfile.c -o /home/inhoinno/FEMU/build-femu/meson-private/tmp4bn1xth4/output.exe -pipe -D_FILE_OFFSET_BITS=64 -O0 -std=gnu99 -pthread -Wl,--start-group -lgthread-2.0 -lglib-2.0 -liconv -Wl,--end-group 
+
+Code:
+ 
+        #include <iconv.h>
+        int main(void) {
+          iconv_t conv = iconv_open("WCHAR_T", "UCS-2");
+          return conv != (iconv_t) -1;
+        }
+Compiler stdout:
+ 
+Compiler stderr:
+ /usr/bin/ld: cannot find -liconv
+collect2: error: ld returned 1 exit status
+
+None of 'CC_LD' are defined in the environment, not changing global flags.
+Running compile:
+Working directory:  /home/inhoinno/FEMU/build-femu/meson-private/tmp6121yjc4
+Command line:  cc -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include /home/inhoinno/FEMU/build-femu/meson-private/tmp6121yjc4/testfile.c -o /home/inhoinno/FEMU/build-femu/meson-private/tmp6121yjc4/output.exe -pipe -D_FILE_OFFSET_BITS=64 -O0 -std=gnu99 -pthread -Wl,--start-group -lgthread-2.0 -lglib-2.0 -Wl,--end-group 
+
+Code:
+ 
+        #include <iconv.h>
+        int main(void) {
+          iconv_t conv = iconv_open("WCHAR_T", "UCS-2");
+          return conv != (iconv_t) -1;
+        }
+Compiler stdout:
+ 
+Compiler stderr:
+ 
+Pkg-config binary for MachineChoice.HOST is cached.
+Determining dependency 'sdl2' with pkg-config executable '/usr/bin/pkg-config'
+PKG_CONFIG_PATH: 
+Called `/usr/bin/pkg-config --modversion sdl2` -> 1
+
+sdl2-config binary missing from cross or native file, or env var undefined.
+Trying a default sdl2-config fallback at sdl2-config
+sdl2-config found: NO
+Run-time dependency sdl2 found: NO (tried pkgconfig and config-tool)
+Pkg-config binary for MachineChoice.HOST is cached.
+Determining dependency 'libpng' with pkg-config executable '/usr/bin/pkg-config'
+PKG_CONFIG_PATH: 
+Called `/usr/bin/pkg-config --modversion libpng` -> 1
+
+Run-time dependency libpng found: NO (tried pkgconfig)
+Pkg-config binary for MachineChoice.HOST is cached.
+Determining dependency 'libjpeg' with pkg-config executable '/usr/bin/pkg-config'
+PKG_CONFIG_PATH: 
+Called `/usr/bin/pkg-config --modversion libjpeg` -> 1
+
+Run-time dependency libjpeg found: NO (tried pkgconfig)
+Running compile:
+Working directory:  /home/inhoinno/FEMU/build-femu/meson-private/tmpv00gvqoe
+Command line:  cc /home/inhoinno/FEMU/build-femu/meson-private/tmpv00gvqoe/testfile.c -pipe -E -P -D_FILE_OFFSET_BITS=64 -P -O0 -std=gnu99 
+
+Code:
+ 
+        #ifdef __has_include
+         #if !__has_include("sasl/sasl.h")
+          #error "Header 'sasl/sasl.h' could not be found"
+         #endif
+        #else
+         #include <sasl/sasl.h>
+        #endif
+Compiler stdout:
+ 
+Compiler stderr:
+ /home/inhoinno/FEMU/build-femu/meson-private/tmpv00gvqoe/testfile.c:4:12: error: #error "Header 'sasl/sasl.h' could not be found"
+           #error "Header 'sasl/sasl.h' could not be found"
+            ^~~~~
+
+Has header "sasl/sasl.h" : NO 
+Pkg-config binary for MachineChoice.HOST is cached.
+Determining dependency 'u2f-emu' with pkg-config executable '/usr/bin/pkg-config'
+PKG_CONFIG_PATH: 
+Called `/usr/bin/pkg-config --modversion u2f-emu` -> 1
+
+Run-time dependency u2f-emu found: NO (tried pkgconfig)
+Pkg-config binary for MachineChoice.HOST is cached.
+Determining dependency 'libkeyutils' with pkg-config executable '/usr/bin/pkg-config'
+PKG_CONFIG_PATH: 
+Called `/usr/bin/pkg-config --modversion libkeyutils` -> 1
+
+Run-time dependency libkeyutils found: NO (tried pkgconfig)
+None of 'CC_LD' are defined in the environment, not changing global flags.
+Running compile:
+Working directory:  /home/inhoinno/FEMU/build-femu/meson-private/tmpd5hd9pcy
+Command line:  cc /home/inhoinno/FEMU/build-femu/meson-private/tmpd5hd9pcy/testfile.c -o /home/inhoinno/FEMU/build-femu/meson-private/tmpd5hd9pcy/output.exe -pipe -D_FILE_OFFSET_BITS=64 -O0 -std=gnu99 
+
+Code:
+ 
+        #define gettid meson_disable_define_of_gettid
+        
+        #include <limits.h>
+        #undef gettid
+        
+        #ifdef __cplusplus
+        extern "C"
+        #endif
+        char gettid (void);
+        
+        #if defined __stub_gettid || defined __stub___gettid
+        fail fail fail this function is not going to work
+        #endif
+        
+        int main(void) {
+          return gettid ();
+        }
+Compiler stdout:
+ 
+Compiler stderr:
+ /tmp/ccDnhAG4.o: In function `main':
+testfile.c:(.text+0x5): undefined reference to `gettid'
+collect2: error: ld returned 1 exit status
+
+None of 'CC_LD' are defined in the environment, not changing global flags.
+Running compile:
+Working directory:  /home/inhoinno/FEMU/build-femu/meson-private/tmpkhuho0dt
+Command line:  cc /home/inhoinno/FEMU/build-femu/meson-private/tmpkhuho0dt/testfile.c -o /home/inhoinno/FEMU/build-femu/meson-private/tmpkhuho0dt/output.exe -pipe -D_FILE_OFFSET_BITS=64 -O0 -std=gnu99 
+
+Code:
+ 
+        int main(void) {
+
+        /* With some toolchains (MSYS2/mingw for example) the compiler
+         * provides various builtins which are not really implemented and
+         * fall back to the stdlib where they aren't provided and fail at
+         * build/link time. In case the user provides a header, including
+         * the header didn't lead to the function being defined, and the
+         * function we are checking isn't a builtin itself we assume the
+         * builtin is not functional and we just error out. */
+        #if !1 && !defined(gettid) && !0
+            #error "No definition for __builtin_gettid found in the prefix"
+        #endif
+
+        #ifdef __has_builtin
+            #if !__has_builtin(__builtin_gettid)
+                #error "__builtin_gettid not found"
+            #endif
+        #elif ! defined(gettid)
+            __builtin_gettid;
+        #endif
+        return 0;
+        }
+Compiler stdout:
+ 
+Compiler stderr:
+ /home/inhoinno/FEMU/build-femu/meson-private/tmpkhuho0dt/testfile.c: In function 'main':
+/home/inhoinno/FEMU/build-femu/meson-private/tmpkhuho0dt/testfile.c:20:13: error: '__builtin_gettid' undeclared (first use in this function); did you mean '__builtin_gettext'?
+             __builtin_gettid;
+             ^~~~~~~~~~~~~~~~
+             __builtin_gettext
+/home/inhoinno/FEMU/build-femu/meson-private/tmpkhuho0dt/testfile.c:20:13: note: each undeclared identifier is reported only once for each function it appears in
+
+Checking for function "gettid" : NO 
+None of 'CC_LD' are defined in the environment, not changing global flags.
+Running compile:
+Working directory:  /home/inhoinno/FEMU/build-femu/meson-private/tmpx3uhic3o
+Command line:  cc /home/inhoinno/FEMU/build-femu/meson-private/tmpx3uhic3o/testfile.c -o /home/inhoinno/FEMU/build-femu/meson-private/tmpx3uhic3o/output.exe -pipe -D_FILE_OFFSET_BITS=64 -O0 -std=gnu99 
+
+Code:
+ #include <malloc.h>
+                int main(void) { malloc_trim(0); return 0; }
+Compiler stdout:
+ 
+Compiler stderr:
+ 
+None of 'CC_LD' are defined in the environment, not changing global flags.
+Running compile:
+Working directory:  /home/inhoinno/FEMU/build-femu/meson-private/tmpz51hrvj7
+Command line:  cc /home/inhoinno/FEMU/build-femu/meson-private/tmpz51hrvj7/testfile.c -o /home/inhoinno/FEMU/build-femu/meson-private/tmpz51hrvj7/output.exe -pipe -D_FILE_OFFSET_BITS=64 -O0 -std=gnu99 
+
+Code:
+ 
+  #ifndef _GNU_SOURCE
+  #define _GNU_SOURCE
+  #endif
+  #include <sys/stat.h>
+  int main(void) {
+    struct statx statxbuf;
+    statx(0, "", 0, STATX_BASIC_STATS, &statxbuf);
+    return 0;
+  }
+Compiler stdout:
+ 
+Compiler stderr:
+ /home/inhoinno/FEMU/build-femu/meson-private/tmpz51hrvj7/testfile.c: In function 'main':
+/home/inhoinno/FEMU/build-femu/meson-private/tmpz51hrvj7/testfile.c:7:18: error: storage size of 'statxbuf' isn't known
+     struct statx statxbuf;
+                  ^~~~~~~~
+/home/inhoinno/FEMU/build-femu/meson-private/tmpz51hrvj7/testfile.c:8:5: warning: implicit declaration of function 'statx'; did you mean 'stat'? [-Wimplicit-function-declaration]
+     statx(0, "", 0, STATX_BASIC_STATS, &statxbuf);
+     ^~~~~
+     stat
+/home/inhoinno/FEMU/build-femu/meson-private/tmpz51hrvj7/testfile.c:8:21: error: 'STATX_BASIC_STATS' undeclared (first use in this function)
+     statx(0, "", 0, STATX_BASIC_STATS, &statxbuf);
+                     ^~~~~~~~~~~~~~~~~
+/home/inhoinno/FEMU/build-femu/meson-private/tmpz51hrvj7/testfile.c:8:21: note: each undeclared identifier is reported only once for each function it appears in
+
+Running compile:
+Working directory:  /home/inhoinno/FEMU/build-femu/meson-private/tmpphj0shcp
+Command line:  cc /home/inhoinno/FEMU/build-femu/meson-private/tmpphj0shcp/testfile.c -pipe -E -P -D_FILE_OFFSET_BITS=64 -P -O0 -std=gnu99 
+
+Code:
+ 
+        #ifdef __has_include
+         #if !__has_include("sys/ioccom.h")
+          #error "Header 'sys/ioccom.h' could not be found"
+         #endif
+        #else
+         #include <sys/ioccom.h>
+        #endif
+Compiler stdout:
+ 
+Compiler stderr:
+ /home/inhoinno/FEMU/build-femu/meson-private/tmpphj0shcp/testfile.c:4:12: error: #error "Header 'sys/ioccom.h' could not be found"
+           #error "Header 'sys/ioccom.h' could not be found"
+            ^~~~~
+
+Has header "sys/ioccom.h" : NO 
+Program scripts/minikconf.py found: YES
+Configuring x86_64-softmmu-config-target.h using configuration
+Configuring x86_64-softmmu-config-devices.mak with command
+Running command: /home/inhoinno/anaconda3/bin/python3 /home/inhoinno/FEMU/scripts/minikconf.py --defconfig x86_64-softmmu-config-devices.mak /home/inhoinno/FEMU/build-femu/meson-private/x86_64-softmmu-config-devices.mak.d /home/inhoinno/FEMU/default-configs/devices/x86_64-softmmu.mak /home/inhoinno/FEMU/Kconfig CONFIG_KVM=y CONFIG_TPM=y CONFIG_IVSHMEM=y CONFIG_VHOST_USER=y CONFIG_VHOST_VDPA=y CONFIG_VHOST_KERNEL=y CONFIG_LINUX=y
+--- stdout ---
+CONFIG_AC97=y
+CONFIG_ACPI=y
+CONFIG_ACPI_CPU_HOTPLUG=y
+CONFIG_ACPI_HMAT=y
+CONFIG_ACPI_HW_REDUCED=y
+CONFIG_ACPI_MEMORY_HOTPLUG=y
+CONFIG_ACPI_NVDIMM=y
+CONFIG_ACPI_PCI=y
+CONFIG_ACPI_SMBUS=y
+CONFIG_ACPI_VMGENID=y
+CONFIG_ACPI_X86=y
+CONFIG_ACPI_X86_ICH=y
+CONFIG_ADLIB=y
+CONFIG_AHCI=y
+CONFIG_AHCI_ICH9=y
+CONFIG_AMD_IOMMU=y
+CONFIG_APIC=y
+CONFIG_APM=y
+CONFIG_APPLESMC=y
+CONFIG_ATI_VGA=y
+CONFIG_BITBANG_I2C=y
+CONFIG_BOCHS_DISPLAY=y
+CONFIG_CAN_BUS=y
+CONFIG_CAN_CTUCANFD=y
+CONFIG_CAN_CTUCANFD_PCI=y
+CONFIG_CAN_PCI=y
+CONFIG_CAN_SJA1000=y
+CONFIG_CS4231A=y
+CONFIG_DDC=y
+CONFIG_DIMM=y
+CONFIG_E1000E_PCI_EXPRESS=y
+CONFIG_E1000_PCI=y
+CONFIG_EDID=y
+CONFIG_EDU=y
+CONFIG_EEPRO100_PCI=y
+CONFIG_ES1370=y
+CONFIG_ESP=y
+CONFIG_ESP_PCI=y
+CONFIG_FDC=y
+CONFIG_FEMU_PCI=y
+CONFIG_FW_CFG_DMA=y
+CONFIG_GENERIC_LOADER=y
+CONFIG_GUS=y
+CONFIG_HDA=y
+CONFIG_HPET=y
+CONFIG_HYPERV=y
+CONFIG_HYPERV_TESTDEV=y
+CONFIG_I2C=y
+CONFIG_I440FX=y
+CONFIG_I8254=y
+CONFIG_I8257=y
+CONFIG_I8259=y
+CONFIG_I82801B11=y
+CONFIG_IDE_CORE=y
+CONFIG_IDE_ISA=y
+CONFIG_IDE_PCI=y
+CONFIG_IDE_PIIX=y
+CONFIG_IDE_QDEV=y
+CONFIG_IMX_USBPHY=y
+CONFIG_IOAPIC=y
+CONFIG_IOH3420=y
+CONFIG_IPACK=y
+CONFIG_IPMI=y
+CONFIG_IPMI_EXTERN=y
+CONFIG_IPMI_LOCAL=y
+CONFIG_IPMI_SSIF=y
+CONFIG_ISAPC=y
+CONFIG_ISA_BUS=y
+CONFIG_ISA_DEBUG=y
+CONFIG_ISA_IPMI_BT=y
+CONFIG_ISA_IPMI_KCS=y
+CONFIG_ISA_TESTDEV=y
+CONFIG_IVSHMEM_DEVICE=y
+CONFIG_LPC_ICH9=y
+CONFIG_LSI_SCSI_PCI=y
+CONFIG_MC146818RTC=y
+CONFIG_MEGASAS_SCSI_PCI=y
+CONFIG_MEM_DEVICE=y
+CONFIG_MICROVM=y
+CONFIG_MPTSAS_SCSI_PCI=y
+CONFIG_MSI_NONBROKEN=y
+CONFIG_NE2000_COMMON=y
+CONFIG_NE2000_ISA=y
+CONFIG_NE2000_PCI=y
+CONFIG_NMC93XX_EEPROM=y
+CONFIG_NVDIMM=y
+CONFIG_NVME_PCI=y
+CONFIG_PAM=y
+CONFIG_PARALLEL=y
+CONFIG_PC=y
+CONFIG_PCI=y
+CONFIG_PCIE_PORT=y
+CONFIG_PCI_DEVICES=y
+CONFIG_PCI_EXPRESS=y
+CONFIG_PCI_EXPRESS_GENERIC_BRIDGE=y
+CONFIG_PCI_EXPRESS_Q35=y
+CONFIG_PCI_I440FX=y
+CONFIG_PCI_IPMI_BT=y
+CONFIG_PCI_IPMI_KCS=y
+CONFIG_PCI_TESTDEV=y
+CONFIG_PCKBD=y
+CONFIG_PCNET_COMMON=y
+CONFIG_PCNET_PCI=y
+CONFIG_PCSPK=y
+CONFIG_PC_ACPI=y
+CONFIG_PC_PCI=y
+CONFIG_PFLASH_CFI01=y
+CONFIG_PIIX3=y
+CONFIG_PS2=y
+CONFIG_PVPANIC=y
+CONFIG_PXB=y
+CONFIG_Q35=y
+CONFIG_ROCKER=y
+CONFIG_RTL8139_PCI=y
+CONFIG_SB16=y
+CONFIG_SCSI=y
+CONFIG_SD=y
+CONFIG_SDHCI=y
+CONFIG_SDHCI_PCI=y
+CONFIG_SERIAL=y
+CONFIG_SERIAL_ISA=y
+CONFIG_SERIAL_PCI=y
+CONFIG_SERIAL_PCI_MULTI=y
+CONFIG_SEV=y
+CONFIG_SGA=y
+CONFIG_SMBIOS=y
+CONFIG_SMBUS=y
+CONFIG_SMBUS_EEPROM=y
+CONFIG_TEST_DEVICES=y
+CONFIG_TPM_BACKEND=y
+CONFIG_TPM_CRB=y
+CONFIG_TPM_EMULATOR=y
+CONFIG_TPM_PASSTHROUGH=y
+CONFIG_TPM_TIS=y
+CONFIG_TPM_TIS_ISA=y
+CONFIG_TULIP=y
+CONFIG_USB=y
+CONFIG_USB_AUDIO=y
+CONFIG_USB_EHCI=y
+CONFIG_USB_EHCI_PCI=y
+CONFIG_USB_NETWORK=y
+CONFIG_USB_OHCI=y
+CONFIG_USB_OHCI_PCI=y
+CONFIG_USB_SERIAL=y
+CONFIG_USB_SMARTCARD=y
+CONFIG_USB_STORAGE_BOT=y
+CONFIG_USB_STORAGE_MTP=y
+CONFIG_USB_STORAGE_UAS=y
+CONFIG_USB_TABLET_WACOM=y
+CONFIG_USB_U2F=y
+CONFIG_USB_UHCI=y
+CONFIG_USB_XHCI=y
+CONFIG_USB_XHCI_NEC=y
+CONFIG_USB_XHCI_PCI=y
+CONFIG_USB_XHCI_SYSBUS=y
+CONFIG_VFIO=y
+CONFIG_VFIO_IGD=y
+CONFIG_VFIO_PCI=y
+CONFIG_VGA=y
+CONFIG_VGA_CIRRUS=y
+CONFIG_VGA_ISA=y
+CONFIG_VGA_PCI=y
+CONFIG_VHOST=y
+CONFIG_VHOST_USER_BLK=y
+CONFIG_VHOST_USER_GPU=y
+CONFIG_VHOST_USER_INPUT=y
+CONFIG_VHOST_USER_SCSI=y
+CONFIG_VHOST_USER_VGA=y
+CONFIG_VIRTIO=y
+CONFIG_VIRTIO_BALLOON=y
+CONFIG_VIRTIO_BLK=y
+CONFIG_VIRTIO_CRYPTO=y
+CONFIG_VIRTIO_GPU=y
+CONFIG_VIRTIO_INPUT=y
+CONFIG_VIRTIO_INPUT_HOST=y
+CONFIG_VIRTIO_IOMMU=y
+CONFIG_VIRTIO_MEM=y
+CONFIG_VIRTIO_MEM_SUPPORTED=y
+CONFIG_VIRTIO_MMIO=y
+CONFIG_VIRTIO_NET=y
+CONFIG_VIRTIO_PCI=y
+CONFIG_VIRTIO_PMEM=y
+CONFIG_VIRTIO_PMEM_SUPPORTED=y
+CONFIG_VIRTIO_RNG=y
+CONFIG_VIRTIO_SCSI=y
+CONFIG_VIRTIO_SERIAL=y
+CONFIG_VIRTIO_VGA=y
+CONFIG_VMBUS=y
+CONFIG_VMMOUSE=y
+CONFIG_VMPORT=y
+CONFIG_VMWARE_VGA=y
+CONFIG_VMW_PVSCSI_SCSI_PCI=y
+CONFIG_VMXNET3_PCI=y
+CONFIG_VTD=y
+CONFIG_WDT_IB6300ESB=y
+CONFIG_WDT_IB700=y
+CONFIG_X86_IOMMU=y
+CONFIG_XIO3130=y
+
+--- stderr ---
+
+
+Reading depfile: /home/inhoinno/FEMU/build-femu/meson-private/x86_64-softmmu-config-devices.mak.d
+Configuring x86_64-softmmu-config-devices.h using configuration
+Pkg-config binary for MachineChoice.HOST is cached.
+Determining dependency 'capstone' with pkg-config executable '/usr/bin/pkg-config'
+PKG_CONFIG_PATH: 
+Called `/usr/bin/pkg-config --modversion capstone` -> 0
+3.0.4
+PKG_CONFIG_PATH: 
+Called `/usr/bin/pkg-config --cflags capstone` -> 0
+-I/usr/include/capstone
+PKG_CONFIG_PATH: 
+Called `/usr/bin/pkg-config capstone --libs` -> 0
+-L/usr/lib/x86_64-linux-gnu -lcapstone
+PKG_CONFIG_PATH: 
+Called `/usr/bin/pkg-config capstone --libs` -> 0
+-lcapstone
+None of 'PKG_CONFIG_PATH' are defined in the environment, not changing global flags.
+Dependency capstone found: NO found 3.0.4 but need: '>=4.0'
+Run-time dependency capstone found: NO (tried pkgconfig)
+Configuring capstone-defs.h using configuration
+Pkg-config binary for MachineChoice.HOST is cached.
+Determining dependency 'slirp' with pkg-config executable '/usr/bin/pkg-config'
+PKG_CONFIG_PATH: 
+Called `/usr/bin/pkg-config --modversion slirp` -> 1
+
+Run-time dependency slirp found: NO (tried pkgconfig)
+Configuring libslirp-version.h using configuration
+Library fdt found: YES
+None of 'CC_LD' are defined in the environment, not changing global flags.
+Running compile:
+Working directory:  /home/inhoinno/FEMU/build-femu/meson-private/tmpia7hoavj
+Command line:  cc /home/inhoinno/FEMU/build-femu/meson-private/tmpia7hoavj/testfile.c -o /home/inhoinno/FEMU/build-femu/meson-private/tmpia7hoavj/output.exe -pipe -D_FILE_OFFSET_BITS=64 -O0 -std=gnu99 -Wl,--start-group /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/libfdt.so -Wl,--end-group 
+
+Code:
+ 
+       #include <libfdt.h>
+       #include <libfdt_env.h>
+       int main(void) { fdt_check_full(NULL, 0); return 0; }
+Compiler stdout:
+ 
+Compiler stderr:
+ /home/inhoinno/FEMU/build-femu/meson-private/tmpia7hoavj/testfile.c: In function 'main':
+/home/inhoinno/FEMU/build-femu/meson-private/tmpia7hoavj/testfile.c:4:25: warning: implicit declaration of function 'fdt_check_full'; did you mean 'fdt_check_header'? [-Wimplicit-function-declaration]
+        int main(void) { fdt_check_full(NULL, 0); return 0; }
+                         ^~~~~~~~~~~~~~
+                         fdt_check_header
+/tmp/cc1EMuOi.o: In function `main':
+testfile.c:(.text+0x14): undefined reference to `fdt_check_full'
+collect2: error: ld returned 1 exit status
+
+Configuring config-host.h using configuration
+Program scripts/hxtool found: YES
+Program scripts/shaderinclude.pl found: YES
+Program scripts/qapi-gen.py found: YES
+Program scripts/qemu-version.sh found: YES
+Run-time dependency threads found: YES
+Program keycodemapdb/tools/keymap-gen found: YES
+Program scripts/decodetree.py found: YES
+Program ../scripts/modules/module_block.py found: YES
+Program ../scripts/block-coroutine-wrapper.py found: YES
+Program nm found: YES
+Program scripts/undefsym.py found: YES
+Program scripts/feature_to_c.sh found: YES
+Program bzip2 found: YES
+Configuring 50-edk2-i386-secure.json using configuration
+Configuring 50-edk2-x86_64-secure.json using configuration
+Configuring 60-edk2-aarch64.json using configuration
+Configuring 60-edk2-arm.json using configuration
+Configuring 60-edk2-i386.json using configuration
+Configuring 60-edk2-x86_64.json using configuration
+Program qemu-keymap found: NO
+Program sphinx-build found: YES
+Running command: /bin/mkdir -p /home/inhoinno/FEMU/build-femu/meson-private/temp/sphinx
+--- stdout ---
+
+--- stderr ---
+
+
+Running command: /usr/bin/touch /home/inhoinno/FEMU/build-femu/meson-private/temp/sphinx/index.rst
+--- stdout ---
+
+--- stderr ---
+
+
+Running command: /home/inhoinno/anaconda3/bin/sphinx-build -W -c /home/inhoinno/FEMU/docs -b html /home/inhoinno/FEMU/build-femu/meson-private/temp/sphinx /home/inhoinno/FEMU/build-femu/meson-private/temp/sphinx/out
+--- stdout ---
+Running Sphinx v1.7.4
+making output directory...
+loading pickled environment... not yet created
+building [mo]: targets for 0 po files that are out of date
+building [html]: targets for 1 source files that are out of date
+updating environment: 1 added, 0 changed, 0 removed
+reading sources... [100%] index
+
+looking for now-outdated files... none found
+pickling environment... done
+checking consistency... done
+preparing documents... done
+writing output... [100%] index
+
+generating indices... genindex
+writing additional pages... search
+copying static files... done
+copying extra files... done
+dumping search index in English (code: en) ... done
+dumping object inventory... done
+build succeeded.
+
+The HTML pages are in ../build-femu/meson-private/temp/sphinx/out.
+
+--- stderr ---
+
+
+Configuring index.html using configuration
+Program python3 found: YES (/home/inhoinno/anaconda3/bin/python3)
+Adding test "check-block-qdict"
+Adding test "check-qdict"
+Adding test "check-qnum"
+Adding test "check-qstring"
+Adding test "check-qlist"
+Adding test "check-qnull"
+Adding test "check-qobject"
+Adding test "check-qjson"
+Adding test "check-qlit"
+Adding test "test-qobject-output-visitor"
+Adding test "test-clone-visitor"
+Adding test "test-qobject-input-visitor"
+Adding test "test-string-input-visitor"
+Adding test "test-string-output-visitor"
+Adding test "test-qmp-event"
+Adding test "test-opts-visitor"
+Adding test "test-visitor-serialization"
+Adding test "test-bitmap"
+Adding test "test-x86-cpuid"
+Adding test "test-cutils"
+Adding test "test-shift128"
+Adding test "test-mul64"
+Adding test "test-int128"
+Adding test "rcutorture"
+Adding test "test-rcu-list"
+Adding test "test-rcu-simpleq"
+Adding test "test-rcu-tailq"
+Adding test "test-rcu-slist"
+Adding test "test-qdist"
+Adding test "test-qht"
+Adding test "test-bitops"
+Adding test "test-bitcnt"
+Adding test "test-qgraph"
+Adding test "check-qom-interface"
+Adding test "check-qom-proplist"
+Adding test "test-qemu-opts"
+Adding test "test-keyval"
+Adding test "test-logging"
+Adding test "test-uuid"
+Adding test "ptimer-test"
+Adding test "test-qapi-util"
+Adding test "test-coroutine"
+Adding test "test-aio"
+Adding test "test-aio-multithread"
+Adding test "test-throttle"
+Adding test "test-thread-pool"
+Adding test "test-hbitmap"
+Adding test "test-bdrv-drain"
+Adding test "test-bdrv-graph-mod"
+Adding test "test-blockjob"
+Adding test "test-blockjob-txn"
+Adding test "test-block-backend"
+Adding test "test-block-iothread"
+Adding test "test-write-threshold"
+Adding test "test-crypto-hash"
+Adding test "test-crypto-hmac"
+Adding test "test-crypto-cipher"
+Adding test "test-crypto-secret"
+Adding test "test-authz-simple"
+Adding test "test-authz-list"
+Adding test "test-authz-listfile"
+Adding test "test-io-task"
+Adding test "test-io-channel-socket"
+Adding test "test-io-channel-file"
+Adding test "test-io-channel-command"
+Adding test "test-io-channel-buffer"
+Adding test "test-crypto-ivgen"
+Adding test "test-crypto-afsplit"
+Adding test "test-crypto-block"
+Adding test "test-crypto-xts"
+Adding test "test-image-locking"
+Adding test "test-replication"
+Adding test "test-fdmon-epoll"
+Adding test "test-iov"
+Adding test "test-qmp-cmds"
+Adding test "test-xbzrle"
+Adding test "test-timed-average"
+Adding test "test-util-sockets"
+Adding test "test-base64"
+Adding test "test-bufferiszero"
+Adding test "test-vmstate"
+Adding test "test-util-filemonitor"
+Adding test "test-char"
+Adding test "test-qdev-global-props"
+Adding test "test-qga"
+Adding benchmark "benchmark-crypto-hash"
+Adding benchmark "benchmark-crypto-hmac"
+Adding benchmark "benchmark-crypto-cipher"
+Adding test "decodetree"
+Adding test "fp-test-float-to-float"
+Adding test "fp-test-int-to-float"
+Adding test "fp-test-uint-to-float"
+Adding test "fp-test-float-to-int"
+Adding test "fp-test-float-to-uint"
+Adding test "fp-test-round-to-integer"
+Adding test "fp-test-eq_signaling"
+Adding test "fp-test-le"
+Adding test "fp-test-le_quiet"
+Adding test "fp-test-lt_quiet"
+Adding test "fp-test-add"
+Adding test "fp-test-sub"
+Adding test "fp-test-mul"
+Adding test "fp-test-div"
+Adding test "fp-test-rem"
+Adding test "fp-test-sqrt"
+Adding test "fp-test-mulAdd"
+Adding test "QAPI schema regression tests"
+Program diff found: YES
+Adding test "QAPI rST doc"
+Program dbus-daemon found: YES
+Adding test "qtest-x86_64/pxe-test"
+Adding test "qtest-x86_64/test-netfilter"
+Adding test "qtest-x86_64/test-filter-mirror"
+Adding test "qtest-x86_64/ahci-test"
+Adding test "qtest-x86_64/endianness-test"
+Adding test "qtest-x86_64/boot-serial-test"
+Adding test "qtest-x86_64/test-filter-redirector"
+Adding test "qtest-x86_64/ipmi-kcs-test"
+Adding test "qtest-x86_64/ipmi-bt-test"
+Adding test "qtest-x86_64/wdt_ib700-test"
+Adding test "qtest-x86_64/pvpanic-test"
+Adding test "qtest-x86_64/intel-hda-test"
+Adding test "qtest-x86_64/i82801b11-test"
+Adding test "qtest-x86_64/ioh3420-test"
+Adding test "qtest-x86_64/usb-hcd-uhci-test"
+Adding test "qtest-x86_64/usb-hcd-ehci-test"
+Adding test "qtest-x86_64/usb-hcd-xhci-test"
+Adding test "qtest-x86_64/tpm-crb-test"
+Adding test "qtest-x86_64/tpm-crb-swtpm-test"
+Adding test "qtest-x86_64/tpm-tis-test"
+Adding test "qtest-x86_64/tpm-tis-swtpm-test"
+Adding test "qtest-x86_64/rtl8139-test"
+Adding test "qtest-x86_64/display-vga-test"
+Adding test "qtest-x86_64/ivshmem-test"
+Adding test "qtest-x86_64/fdc-test"
+Adding test "qtest-x86_64/ide-test"
+Adding test "qtest-x86_64/hd-geo-test"
+Adding test "qtest-x86_64/boot-order-test"
+Adding test "qtest-x86_64/bios-tables-test"
+Adding test "qtest-x86_64/rtc-test"
+Adding test "qtest-x86_64/i440fx-test"
+Adding test "qtest-x86_64/fuzz-test"
+Adding test "qtest-x86_64/fw_cfg-test"
+Adding test "qtest-x86_64/device-plug-test"
+Adding test "qtest-x86_64/drive_del-test"
+Adding test "qtest-x86_64/tco-test"
+Adding test "qtest-x86_64/cpu-plug-test"
+Adding test "qtest-x86_64/q35-test"
+Adding test "qtest-x86_64/vmgenid-test"
+Adding test "qtest-x86_64/migration-test"
+Adding test "qtest-x86_64/test-x86-cpuid-compat"
+Adding test "qtest-x86_64/numa-test"
+Adding test "qtest-x86_64/cdrom-test"
+Adding test "qtest-x86_64/device-introspect-test"
+Adding test "qtest-x86_64/machine-none-test"
+Adding test "qtest-x86_64/qmp-test"
+Adding test "qtest-x86_64/qmp-cmd-test"
+Adding test "qtest-x86_64/qom-test"
+Adding test "qtest-x86_64/test-hmp"
+Adding test "qtest-x86_64/qos-test"
+Program initrd-stress.sh found: YES
+Build targets in project: 432
+
+qemu 5.2.0
+
+                   Install prefix: /usr/local
+                   BIOS directory: share/qemu
+                    firmware path: /usr/local/share/qemu-firmware
+                 binary directory: bin
+                library directory: lib
+                 module directory: lib/qemu
+                libexec directory: libexec
+                include directory: include
+                 config directory: /usr/local/etc
+            local state directory: /usr/local/var
+                 Manual directory: share/man
+                    Doc directory: /usr/local/share/doc
+                  Build directory: /home/inhoinno/FEMU/build-femu
+                      Source path: /home/inhoinno/FEMU
+                       GIT binary: git
+                   GIT submodules: ui/keycodemapdb tests/fp/berkeley-testfloat-3 tests/fp/berkeley-softfloat-3
+                       C compiler: cc
+                  Host C compiler: cc
+                     C++ compiler: c++
+                          ARFLAGS: rv
+                           CFLAGS: -O2 -g
+                         CXXFLAGS: -O2 -g
+                      QEMU_CFLAGS: -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=2 -m64 -mcx16 -D_GNU_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -Wstrict-prototypes -Wredundant-decls -Wundef -Wwrite-strings -Wmissing-prototypes -fno-strict-aliasing -fno-common -fwrapv  -Wold-style-declaration -Wold-style-definition -Wtype-limits -Wformat-security -Wformat-y2k -Winit-self -Wignored-qualifiers -Wempty-body -Wnested-externs -Wendif-labels -Wexpansion-to-defined -Wno-missing-include-dirs -Wno-shift-negative-value -Wno-psabi -fstack-protector-strong
+                     QEMU_LDFLAGS: -Wl,--warn-common -Wl,-z,relro -Wl,-z,now -m64  -fstack-protector-strong
+                             make: make
+                           python: /home/inhoinno/anaconda3/bin/python3 (version: 3.6)
+                     sphinx-build: YES
+                      genisoimage: /usr/bin/genisoimage
+                    slirp support: internal
+                             smbd: "/usr/sbin/smbd"
+                   module support: NO
+                         host CPU: x86_64
+                  host endianness: little
+                      target list: x86_64-softmmu
+                    gprof enabled: NO
+                   sparse enabled: NO
+                   strip binaries: YES
+                         profiler: NO
+                     static build: NO
+                      SDL support: NO
+                SDL image support: NO
+                      GTK support: NO
+                   GTK GL support: NO
+                           pixman: YES
+                      VTE support: NO
+                     TLS priority: "NORMAL"
+                   GNUTLS support: NO
+                        libgcrypt: NO
+                           nettle: NO
+                         libtasn1: NO
+                              PAM: NO
+                    iconv support: YES
+                   curses support: YES
+                    virgl support: NO
+                     curl support: YES
+                  mingw32 support: NO
+                    Audio drivers: oss
+             Block whitelist (rw): 
+             Block whitelist (ro): 
+                   VirtFS support: NO
+            build virtiofs daemon: NO
+                Multipath support: NO
+                      VNC support: YES
+                 VNC SASL support: NO
+                 VNC JPEG support: NO
+                  VNC PNG support: NO
+                      xen support: NO
+                   brlapi support: NO
+                    Documentation: YES
+                              PIE: YES
+                      vde support: NO
+                   netmap support: NO
+                Linux AIO support: YES
+           Linux io_uring support: NO
+               ATTR/XATTR support: YES
+                    Install blobs: YES
+                      KVM support: YES
+                      HAX support: NO
+                      HVF support: NO
+                     WHPX support: NO
+                      TCG support: YES
+                TCG debug enabled: NO
+                  TCG interpreter: NO
+              malloc trim support: YES
+                     RDMA support: NO
+                   PVRDMA support: NO
+                      fdt support: internal
+                       membarrier: NO
+                   preadv support: YES
+                        fdatasync: YES
+                          madvise: YES
+                    posix_madvise: YES
+                   posix_memalign: YES
+                libcap-ng support: NO
+             vhost-kernel support: YES
+                vhost-net support: YES
+             vhost-crypto support: YES
+               vhost-scsi support: YES
+              vhost-vsock support: YES
+               vhost-user support: YES
+    vhost-user-blk server support: YES
+            vhost-user-fs support: YES
+               vhost-vdpa support: YES
+                   Trace backends: log
+                    spice support: NO
+                      rbd support: NO
+                   xfsctl support: NO
+                smartcard support: NO
+                      U2F support: NO
+                           libusb: NO
+                    usb net redir: NO
+                   OpenGL support: NO
+                   OpenGL dmabufs: NO
+                 libiscsi support: NO
+                   libnfs support: NO
+                build guest agent: YES
+                  seccomp support: NO
+                coroutine backend: ucontext
+                   coroutine pool: YES
+                debug stack usage: NO
+                  mutex debugging: NO
+                     crypto afalg: NO
+                GlusterFS support: NO
+                             gcov: NO
+                      TPM support: YES
+                   libssh support: NO
+                    QOM debugging: YES
+             Live block migration: YES
+                      lzo support: NO
+                   snappy support: YES
+                    bzip2 support: YES
+                    lzfse support: NO
+                     zstd support: YES
+                NUMA host support: YES
+                          libxml2: NO
+                 memory allocator: system
+                avx2 optimization: YES
+             avx512f optimization: NO
+              replication support: YES
+                    bochs support: YES
+                    cloop support: YES
+                      dmg support: YES
+                  qcow v1 support: YES
+                      vdi support: YES
+                    vvfat support: YES
+                      qed support: YES
+                parallels support: YES
+                 sheepdog support: NO
+                         capstone: internal
+                  libpmem support: NO
+                libdaxctl support: NO
+                          libudev: NO
+                  default devices: YES
+                   plugin support: NO
+                  fuzzing support: NO
+                              gdb: /usr/bin/gdb
+                 thread sanitizer: NO
+                         rng-none: NO
+                    Linux keyring: YES
+
+Found ninja-1.8.2 at /usr/bin/ninja
+Running compile:
+Working directory:  /home/inhoinno/FEMU/build-femu/meson-private/tmpmxrmbt9h
+Command line:  cc /home/inhoinno/FEMU/build-femu/meson-private/tmpmxrmbt9h/testfile.c -o /home/inhoinno/FEMU/build-femu/meson-private/tmpmxrmbt9h/output.obj -pipe -c -D_FILE_OFFSET_BITS=64 -O0 --print-search-dirs 
+
+Code:
+ 
+Compiler stdout:
+ install: /usr/lib/gcc/x86_64-linux-gnu/7/
+programs: =/usr/lib/gcc/x86_64-linux-gnu/7/:/usr/lib/gcc/x86_64-linux-gnu/7/:/usr/lib/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/7/:/usr/lib/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/7/../../../../x86_64-linux-gnu/bin/x86_64-linux-gnu/7/:/usr/lib/gcc/x86_64-linux-gnu/7/../../../../x86_64-linux-gnu/bin/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/7/../../../../x86_64-linux-gnu/bin/
+libraries: =/usr/lib/gcc/x86_64-linux-gnu/7/:/usr/lib/gcc/x86_64-linux-gnu/7/../../../../x86_64-linux-gnu/lib/x86_64-linux-gnu/7/:/usr/lib/gcc/x86_64-linux-gnu/7/../../../../x86_64-linux-gnu/lib/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/7/../../../../x86_64-linux-gnu/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/7/:/usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/7/../../../../lib/:/lib/x86_64-linux-gnu/7/:/lib/x86_64-linux-gnu/:/lib/../lib/:/usr/lib/x86_64-linux-gnu/7/:/usr/lib/x86_64-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/7/../../../../x86_64-linux-gnu/lib/:/usr/lib/gcc/x86_64-linux-gnu/7/../../../:/lib/:/usr/lib/
+
+Compiler stderr:
+ 
+Command line for building ['libcommon.fa'] is long, using a response file

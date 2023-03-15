@@ -1,0 +1,311 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>QEMU Developer’s Guide &#8212; QEMU  documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="The QEMU build system architecture" href="build-system.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="qemu-developer-s-guide">
+<h1>QEMU Developer’s Guide<a class="headerlink" href="#qemu-developer-s-guide" title="Permalink to this headline">¶</a></h1>
+<p>This manual documents various parts of the internals of QEMU.
+You only need to read it if you are interested in reading or
+modifying QEMU’s source code.</p>
+<p>Contents:</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="build-system.html">The QEMU build system architecture</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="build-system.html#stage-1-configure">Stage 1: configure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="build-system.html#stage-2-meson">Stage 2: Meson</a></li>
+<li class="toctree-l2"><a class="reference internal" href="build-system.html#stage-3-makefiles">Stage 3: makefiles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="build-system.html#important-files-for-the-build-system">Important files for the build system</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="kconfig.html">QEMU and Kconfig</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="kconfig.html#the-kconfig-language">The Kconfig language</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kconfig.html#guidelines-for-writing-kconfig-files">Guidelines for writing Kconfig files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kconfig.html#writing-and-modifying-default-configurations">Writing and modifying default configurations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kconfig.html#kconfig-host"><code class="docutils literal notranslate"><span class="pre">Kconfig.host</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="loads-stores.html">Load and Store APIs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="loads-stores.html#ld-p-and-st-p"><code class="docutils literal notranslate"><span class="pre">ld*_p</span> <span class="pre">and</span> <span class="pre">st*_p</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="loads-stores.html#cpu-ld-st-mmuidx-ra"><code class="docutils literal notranslate"><span class="pre">cpu_{ld,st}*_mmuidx_ra</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="loads-stores.html#cpu-ld-st-data-ra"><code class="docutils literal notranslate"><span class="pre">cpu_{ld,st}*_data_ra</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="loads-stores.html#cpu-ld-st-data"><code class="docutils literal notranslate"><span class="pre">cpu_{ld,st}*_data</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="loads-stores.html#cpu-ld-code"><code class="docutils literal notranslate"><span class="pre">cpu_ld*_code</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="loads-stores.html#translator-ld"><code class="docutils literal notranslate"><span class="pre">translator_ld*</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="loads-stores.html#helper-ld-st-mmu"><code class="docutils literal notranslate"><span class="pre">helper_*_{ld,st}*_mmu</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="loads-stores.html#address-space"><code class="docutils literal notranslate"><span class="pre">address_space_*</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="loads-stores.html#address-space-write-rom"><code class="docutils literal notranslate"><span class="pre">address_space_write_rom</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="loads-stores.html#ld-st-phys"><code class="docutils literal notranslate"><span class="pre">{ld,st}*_phys</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="loads-stores.html#cpu-physical-memory"><code class="docutils literal notranslate"><span class="pre">cpu_physical_memory_*</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="loads-stores.html#cpu-memory-rw-debug"><code class="docutils literal notranslate"><span class="pre">cpu_memory_rw_debug</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="loads-stores.html#dma-memory"><code class="docutils literal notranslate"><span class="pre">dma_memory_*</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="loads-stores.html#pci-dma-and-ld-st-pci-dma"><code class="docutils literal notranslate"><span class="pre">pci_dma_*</span></code> and <code class="docutils literal notranslate"><span class="pre">{ld,st}*_pci_dma</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="memory.html">The memory API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="memory.html#types-of-regions">Types of regions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="memory.html#migration">Migration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="memory.html#region-names">Region names</a></li>
+<li class="toctree-l2"><a class="reference internal" href="memory.html#region-lifecycle">Region lifecycle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="memory.html#overlapping-regions-and-priority">Overlapping regions and priority</a></li>
+<li class="toctree-l2"><a class="reference internal" href="memory.html#visibility">Visibility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="memory.html#example-memory-map">Example memory map</a></li>
+<li class="toctree-l2"><a class="reference internal" href="memory.html#mmio-operations">MMIO Operations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="memory.html#api-reference">API Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="migration.html">Migration</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="migration.html#transports">Transports</a></li>
+<li class="toctree-l2"><a class="reference internal" href="migration.html#debugging">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="migration.html#common-infrastructure">Common infrastructure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="migration.html#saving-the-state-of-one-device">Saving the state of one device</a></li>
+<li class="toctree-l2"><a class="reference internal" href="migration.html#stream-structure">Stream structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="migration.html#postcopy">Postcopy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="migration.html#firmware">Firmware</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="atomics.html">Atomic operations in QEMU</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="atomics.html#compiler-memory-barrier">Compiler memory barrier</a></li>
+<li class="toctree-l2"><a class="reference internal" href="atomics.html#sequentially-consistent-atomic-access">Sequentially consistent atomic access</a></li>
+<li class="toctree-l2"><a class="reference internal" href="atomics.html#weak-atomic-access-and-manual-memory-barriers">Weak atomic access and manual memory barriers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="atomics.html#comparison-with-linux-kernel-primitives">Comparison with Linux kernel primitives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="atomics.html#sources">Sources</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="stable-process.html">QEMU and the stable process</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="stable-process.html#qemu-stable-releases">QEMU stable releases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stable-process.html#what-should-go-into-a-stable-release">What should go into a stable release?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stable-process.html#how-to-get-a-patch-into-qemu-stable">How to get a patch into QEMU stable</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stable-process.html#stable-release-process">Stable release process</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">Testing in QEMU</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="testing.html#testing-with-make-check">Testing with “make check”</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testing.html#qemu-iotests">QEMU iotests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testing.html#docker-based-tests">Docker based tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testing.html#thread-sanitizer">Thread Sanitizer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testing.html#vm-testing">VM testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testing.html#image-fuzzer-testing">Image fuzzer testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testing.html#acceptance-tests-using-the-avocado-framework">Acceptance tests using the Avocado Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testing.html#testing-with-make-check-tcg">Testing with “make check-tcg”</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="qtest.html">QTest Device Emulation Testing Framework</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="qtest.html#qtest-protocol">QTest Protocol</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qtest.html#libqtest-api-reference">libqtest API reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="fuzzing.html">Fuzzing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="fuzzing.html#basics">Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fuzzing.html#building-the-fuzzers">Building the fuzzers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fuzzing.html#useful-libfuzzer-flags">Useful libFuzzer flags</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fuzzing.html#generating-coverage-reports">Generating Coverage Reports</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fuzzing.html#adding-a-new-fuzzer">Adding a new fuzzer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fuzzing.html#the-generic-fuzzer">The Generic Fuzzer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fuzzing.html#implementation-details-fuzzer-lifecycle">Implementation Details / Fuzzer Lifecycle</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="decodetree.html">Decodetree Specification</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="decodetree.html#fields">Fields</a></li>
+<li class="toctree-l2"><a class="reference internal" href="decodetree.html#argument-sets">Argument Sets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="decodetree.html#formats">Formats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="decodetree.html#patterns">Patterns</a></li>
+<li class="toctree-l2"><a class="reference internal" href="decodetree.html#pattern-groups">Pattern Groups</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="secure-coding-practices.html">Secure Coding Practices</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="secure-coding-practices.html#reporting-security-bugs">Reporting Security Bugs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="secure-coding-practices.html#general-secure-c-coding-practices">General Secure C Coding Practices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="secure-coding-practices.html#input-validation">Input Validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="secure-coding-practices.html#unexpected-device-accesses">Unexpected Device Accesses</a></li>
+<li class="toctree-l2"><a class="reference internal" href="secure-coding-practices.html#live-migration">Live Migration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="secure-coding-practices.html#guest-memory-access-races">Guest Memory Access Races</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tcg.html">Translator Internals</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tcg.html#cpu-state-optimisations">CPU state optimisations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tcg.html#direct-block-chaining">Direct block chaining</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tcg.html#self-modifying-code-and-translated-code-invalidation">Self-modifying code and translated code invalidation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tcg.html#exception-support">Exception support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tcg.html#mmu-emulation">MMU emulation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tcg-icount.html">TCG Instruction Counting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tcg-icount.html#core-concepts">Core Concepts</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="multi-thread-tcg.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="multi-thread-tcg.html#vcpu-scheduling">vCPU Scheduling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="multi-thread-tcg.html#shared-data-structures">Shared Data Structures</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="multi-thread-tcg.html#main-run-loop">Main Run Loop</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multi-thread-tcg.html#global-tcg-state">Global TCG State</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multi-thread-tcg.html#translation-blocks">Translation Blocks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multi-thread-tcg.html#memory-maps-and-tlbs">Memory maps and TLBs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multi-thread-tcg.html#emulated-hardware-state">Emulated hardware state</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="multi-thread-tcg.html#memory-consistency">Memory Consistency</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="multi-thread-tcg.html#memory-barriers">Memory Barriers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multi-thread-tcg.html#memory-control-and-maintenance">Memory Control and Maintenance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multi-thread-tcg.html#synchronisation-primitives">Synchronisation Primitives</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tcg-plugins.html">QEMU TCG Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tcg-plugins.html#api-stability">API Stability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tcg-plugins.html#usage">Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tcg-plugins.html#plugin-life-cycle">Plugin Life cycle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tcg-plugins.html#internals">Internals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tcg-plugins.html#example-plugins">Example Plugins</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="bitops.html">Bitwise operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reset.html">Reset in QEMU: the Resettable interface</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="reset.html#triggering-reset">Triggering reset</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reset.html#multi-phase-mechanism">Multi-phase mechanism</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reset.html#handling-reset-in-a-resettable-object">Handling reset in a resettable object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reset.html#base-class-handling-of-reset">Base class handling of reset</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="s390-dasd-ipl.html">Booting from real channel-attached devices on s390x</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="s390-dasd-ipl.html#s390-hardware-ipl">s390 hardware IPL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="s390-dasd-ipl.html#how-this-all-pertains-to-qemu-and-the-kernel">How this all pertains to QEMU (and the kernel)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="s390-dasd-ipl.html#what-qemu-does">What QEMU does</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="clocks.html">Modelling a clock tree in QEMU</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="clocks.html#what-are-clocks">What are clocks?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="clocks.html#the-clock-state">The clock state</a></li>
+<li class="toctree-l2"><a class="reference internal" href="clocks.html#adding-a-new-clock">Adding a new clock</a></li>
+<li class="toctree-l2"><a class="reference internal" href="clocks.html#retrieving-clocks-from-a-device">Retrieving clocks from a device</a></li>
+<li class="toctree-l2"><a class="reference internal" href="clocks.html#connecting-two-clocks-together">Connecting two clocks together</a></li>
+<li class="toctree-l2"><a class="reference internal" href="clocks.html#unconnected-input-clocks">Unconnected input clocks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="clocks.html#fetching-clock-frequency-period">Fetching clock frequency/period</a></li>
+<li class="toctree-l2"><a class="reference internal" href="clocks.html#changing-a-clock-period">Changing a clock period</a></li>
+<li class="toctree-l2"><a class="reference internal" href="clocks.html#aliasing-clocks">Aliasing clocks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="clocks.html#migration">Migration</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="qom.html">The QEMU Object Model (QOM)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="qom.html#class-initialization">Class Initialization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qom.html#interfaces">Interfaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qom.html#methods">Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qom.html#standard-type-declaration-and-definition-macros">Standard type declaration and definition macros</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="block-coroutine-wrapper.html">block-coroutine-wrapper</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="block-coroutine-wrapper.html#usage">Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="block-coroutine-wrapper.html#links">Links</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="#">QEMU</a></h1>
+
+
+
+<p class="blurb">Developers Guide</p>
+
+
+
+
+
+
+<div id="editpage">
+  <ul>
+    <li><a href="https://gitlab.com/qemu-project/qemu/-/blob/master/docs/devel/index.rst">Page source</a></li>
+  </ul>
+</div><h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="build-system.html">The QEMU build system architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="kconfig.html">QEMU and Kconfig</a></li>
+<li class="toctree-l1"><a class="reference internal" href="loads-stores.html">Load and Store APIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="memory.html">The memory API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="migration.html">Migration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="atomics.html">Atomic operations in QEMU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stable-process.html">QEMU and the stable process</a></li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">Testing in QEMU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="qtest.html">QTest Device Emulation Testing Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fuzzing.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="decodetree.html">Decodetree Specification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="secure-coding-practices.html">Secure Coding Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tcg.html">Translator Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tcg-icount.html">TCG Instruction Counting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="multi-thread-tcg.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="multi-thread-tcg.html#vcpu-scheduling">vCPU Scheduling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="multi-thread-tcg.html#shared-data-structures">Shared Data Structures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="multi-thread-tcg.html#memory-consistency">Memory Consistency</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tcg-plugins.html">QEMU TCG Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bitops.html">Bitwise operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reset.html">Reset in QEMU: the Resettable interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="s390-dasd-ipl.html">Booting from real channel-attached devices on s390x</a></li>
+<li class="toctree-l1"><a class="reference internal" href="clocks.html">Modelling a clock tree in QEMU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="qom.html">The QEMU Object Model (QOM)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="block-coroutine-wrapper.html">block-coroutine-wrapper</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, The QEMU Project Developers.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

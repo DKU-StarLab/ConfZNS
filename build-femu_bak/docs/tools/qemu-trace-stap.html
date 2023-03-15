@@ -1,0 +1,201 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>QEMU SystemTap trace tool &#8212; QEMU  documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="QEMU 9p virtfs proxy filesystem helper" href="virtfs-proxy-helper.html" />
+    <link rel="prev" title="QEMU persistent reservation helper" href="qemu-pr-helper.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="qemu-systemtap-trace-tool">
+<h1>QEMU SystemTap trace tool<a class="headerlink" href="#qemu-systemtap-trace-tool" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="synopsis">
+<h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
+<p><strong>qemu-trace-stap</strong> [<em>GLOBAL-OPTIONS</em>] <em>COMMAND</em> [<em>COMMAND-OPTIONS</em>] <em>ARGS</em>…</p>
+</div>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">qemu-trace-stap</span></code> program facilitates tracing of the execution
+of QEMU emulators using SystemTap.</p>
+<p>It is required to have the SystemTap runtime environment installed to use
+this program, since it is a wrapper around execution of the <code class="docutils literal notranslate"><span class="pre">stap</span></code>
+program.</p>
+</div>
+<div class="section" id="options">
+<h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
+<p>The following global options may be used regardless of which command
+is executed:</p>
+<dl class="option">
+<dt id="cmdoption-qemu-trace-stap-verbose">
+<code class="descname">--verbose</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">-v</code><code class="descclassname"></code><a class="headerlink" href="#cmdoption-qemu-trace-stap-verbose" title="Permalink to this definition">¶</a></dt>
+<dd><p>Display verbose information about command execution.</p>
+</dd></dl>
+
+<p>The following commands are valid:</p>
+<dl class="option">
+<dt id="cmdoption-qemu-trace-stap-arg-list">
+<code class="descname">list</code><code class="descclassname"> BINARY PATTERN...</code><a class="headerlink" href="#cmdoption-qemu-trace-stap-arg-list" title="Permalink to this definition">¶</a></dt>
+<dd><p>List all the probe names provided by <em>BINARY</em> that match
+<em>PATTERN</em>.</p>
+<p>If <em>BINARY</em> is not an absolute path, it will be located by searching
+the directories listed in the <code class="docutils literal notranslate"><span class="pre">$PATH</span></code> environment variable.</p>
+<p><em>PATTERN</em> is a plain string that is used to filter the results of
+this command. It may optionally contain a <code class="docutils literal notranslate"><span class="pre">*</span></code> wildcard to facilitate
+matching multiple probes without listing each one explicitly. Multiple
+<em>PATTERN</em> arguments may be given, causing listing of probes that match
+any of the listed names. If no <em>PATTERN</em> is given, the all possible
+probes will be listed.</p>
+<p>For example, to list all probes available in the <code class="docutils literal notranslate"><span class="pre">qemu-system-x86_64</span></code>
+binary:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ qemu-trace-stap list qemu-system-x86_64
+</pre></div>
+</div>
+<p>To filter the list to only cover probes related to QEMU’s cryptographic
+subsystem, in a binary outside <code class="docutils literal notranslate"><span class="pre">$PATH</span></code></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ qemu-trace-stap list /opt/qemu/4.0.0/bin/qemu-system-x86_64 &#39;qcrypto*&#39;
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-qemu-trace-stap-arg-run">
+<code class="descname">run</code><code class="descclassname"> OPTIONS BINARY PATTERN...</code><a class="headerlink" href="#cmdoption-qemu-trace-stap-arg-run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run a trace session, printing formatted output any time a process that is
+executing <em>BINARY</em> triggers a probe matching <em>PATTERN</em>.</p>
+<p>If <em>BINARY</em> is not an absolute path, it will be located by searching
+the directories listed in the <code class="docutils literal notranslate"><span class="pre">$PATH</span></code> environment variable.</p>
+<p><em>PATTERN</em> is a plain string that matches a probe name shown by the
+<em>LIST</em> command. It may optionally contain a <code class="docutils literal notranslate"><span class="pre">*</span></code> wildcard to
+facilitate matching multiple probes without listing each one explicitly.
+Multiple <em>PATTERN</em> arguments may be given, causing all matching probes
+to be monitored. At least one <em>PATTERN</em> is required, since stap is not
+capable of tracing all known QEMU probes concurrently without overflowing
+its trace buffer.</p>
+<p>Invocation of this command does not need to be synchronized with
+invocation of the QEMU process(es). It will match probes on all
+existing running processes and all future launched processes,
+unless told to only monitor a specific process.</p>
+<p>Valid command specific options are:</p>
+<dl class="option">
+<dt id="cmdoption-qemu-trace-stap-run-pid">
+<code class="descname">--pid</code><code class="descclassname">=PID</code><code class="descclassname">, </code><code class="descname">-p</code><code class="descclassname"> PID</code><a class="headerlink" href="#cmdoption-qemu-trace-stap-run-pid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Restrict the tracing session so that it only triggers for the process
+identified by <em>PID</em>.</p>
+</dd></dl>
+
+<p>For example, to monitor all processes executing <code class="docutils literal notranslate"><span class="pre">qemu-system-x86_64</span></code>
+as found on <code class="docutils literal notranslate"><span class="pre">$PATH</span></code>, displaying all I/O related probes:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ qemu-trace-stap run qemu-system-x86_64 &#39;qio*&#39;
+</pre></div>
+</div>
+<p>To monitor only the QEMU process with PID 1732</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ qemu-trace-stap run --pid=1732 qemu-system-x86_64 &#39;qio*&#39;
+</pre></div>
+</div>
+<p>To monitor QEMU processes running an alternative binary outside of
+<code class="docutils literal notranslate"><span class="pre">$PATH</span></code>, displaying verbose information about setup of the
+tracing environment:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ qemu-trace-stap -v run /opt/qemu/4.0.0/qemu-system-x86_64 &#39;qio*&#39;
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="see-also">
+<h2>See also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h2>
+<p><em class="manpage">qemu(1)</em>, <em class="manpage">stap(1)</em></p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">QEMU</a></h1>
+
+
+
+<p class="blurb">Tools Guide</p>
+
+
+
+
+
+
+<div id="editpage">
+  <ul>
+    <li><a href="https://gitlab.com/qemu-project/qemu/-/blob/master/docs/tools/qemu-trace-stap.rst">Page source</a></li>
+  </ul>
+</div><h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="qemu-img.html">QEMU disk image utility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="qemu-nbd.html">QEMU Disk Network Block Device Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="qemu-pr-helper.html">QEMU persistent reservation helper</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">QEMU SystemTap trace tool</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#synopsis">Synopsis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#description">Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#options">Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#see-also">See also</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="virtfs-proxy-helper.html">QEMU 9p virtfs proxy filesystem helper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="virtiofsd.html">QEMU virtio-fs shared file system daemon</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, The QEMU Project Developers.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

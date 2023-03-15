@@ -1,0 +1,166 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>QEMU and ACPI BIOS Generic Event Device interface &#8212; QEMU  documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="QEMU TPM Device" href="tpm.html" />
+    <link rel="prev" title="NUMA mechanics for sPAPR (pseries machines)" href="ppc-spapr-numa.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="qemu-and-acpi-bios-generic-event-device-interface">
+<h1>QEMU and ACPI BIOS Generic Event Device interface<a class="headerlink" href="#qemu-and-acpi-bios-generic-event-device-interface" title="Permalink to this headline">¶</a></h1>
+<p>The ACPI <em>Generic Event Device</em> (GED) is a HW reduced platform
+specific device introduced in ACPI v6.1 that handles all platform
+events, including the hotplug ones. GED is modelled as a device
+in the namespace with a _HID defined to be ACPI0013. This document
+describes the interface between QEMU and the ACPI BIOS.</p>
+<p>GED allows HW reduced platforms to handle interrupts in ACPI ASL
+statements. It follows a very similar approach to the _EVT method
+from GPIO events. All interrupts are listed in  _CRS and the handler
+is written in _EVT method. However, the QEMU implementation uses a
+single interrupt for the GED device, relying on an IO memory region
+to communicate the type of device affected by the interrupt. This way,
+we can support up to 32 events with a unique interrupt.</p>
+<p><strong>Here is an example,</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Device</span> <span class="p">(</span>\<span class="n">_SB</span><span class="o">.</span><span class="n">GED</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">Name</span> <span class="p">(</span><span class="n">_HID</span><span class="p">,</span> <span class="s2">&quot;ACPI0013&quot;</span><span class="p">)</span>
+    <span class="n">Name</span> <span class="p">(</span><span class="n">_UID</span><span class="p">,</span> <span class="n">Zero</span><span class="p">)</span>
+    <span class="n">Name</span> <span class="p">(</span><span class="n">_CRS</span><span class="p">,</span> <span class="n">ResourceTemplate</span> <span class="p">()</span>
+    <span class="p">{</span>
+        <span class="n">Interrupt</span> <span class="p">(</span><span class="n">ResourceConsumer</span><span class="p">,</span> <span class="n">Edge</span><span class="p">,</span> <span class="n">ActiveHigh</span><span class="p">,</span> <span class="n">Exclusive</span><span class="p">,</span> <span class="p">,,</span> <span class="p">)</span>
+        <span class="p">{</span>
+            <span class="mh">0x00000029</span><span class="p">,</span>
+        <span class="p">}</span>
+    <span class="p">})</span>
+    <span class="n">OperationRegion</span> <span class="p">(</span><span class="n">EREG</span><span class="p">,</span> <span class="n">SystemMemory</span><span class="p">,</span> <span class="mh">0x09080000</span><span class="p">,</span> <span class="mh">0x04</span><span class="p">)</span>
+    <span class="n">Field</span> <span class="p">(</span><span class="n">EREG</span><span class="p">,</span> <span class="n">DWordAcc</span><span class="p">,</span> <span class="n">NoLock</span><span class="p">,</span> <span class="n">WriteAsZeros</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">ESEL</span><span class="p">,</span>   <span class="mi">32</span>
+    <span class="p">}</span>
+    <span class="n">Method</span> <span class="p">(</span><span class="n">_EVT</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">Serialized</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">Local0</span> <span class="o">=</span> <span class="n">ESEL</span> <span class="o">//</span> <span class="n">ESEL</span> <span class="o">=</span> <span class="n">IO</span> <span class="n">memory</span> <span class="n">region</span> <span class="n">which</span> <span class="n">specifies</span> <span class="n">the</span>
+                      <span class="o">//</span> <span class="n">device</span> <span class="nb">type</span><span class="o">.</span>
+        <span class="n">If</span> <span class="p">(((</span><span class="n">Local0</span> <span class="o">&amp;</span> <span class="n">One</span><span class="p">)</span> <span class="o">==</span> <span class="n">One</span><span class="p">))</span>
+        <span class="p">{</span>
+            <span class="n">MethodEvent1</span><span class="p">()</span>
+        <span class="p">}</span>
+        <span class="n">If</span> <span class="p">((</span><span class="n">Local0</span> <span class="o">&amp;</span> <span class="mh">0x2</span><span class="p">)</span> <span class="o">==</span> <span class="mh">0x2</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">MethodEvent2</span><span class="p">()</span>
+        <span class="p">}</span>
+        <span class="o">...</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="section" id="ged-io-interface-4-byte-access">
+<h2>GED IO interface (4 byte access)<a class="headerlink" href="#ged-io-interface-4-byte-access" title="Permalink to this headline">¶</a></h2>
+<p><strong>read access:</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="mh">0x0</span><span class="o">-</span><span class="mh">0x3</span><span class="p">]</span> <span class="n">Event</span> <span class="n">selector</span> <span class="n">bit</span> <span class="n">field</span> <span class="p">(</span><span class="mi">32</span> <span class="n">bit</span><span class="p">)</span> <span class="nb">set</span> <span class="n">by</span> <span class="n">QEMU</span><span class="o">.</span>
+
+ <span class="n">bits</span><span class="p">:</span>
+    <span class="mi">0</span><span class="p">:</span> <span class="n">Memory</span> <span class="n">hotplug</span> <span class="n">event</span>
+    <span class="mi">1</span><span class="p">:</span> <span class="n">System</span> <span class="n">power</span> <span class="n">down</span> <span class="n">event</span>
+    <span class="mi">2</span><span class="p">:</span> <span class="n">NVDIMM</span> <span class="n">hotplug</span> <span class="n">event</span>
+ <span class="mi">3</span><span class="o">-</span><span class="mi">31</span><span class="p">:</span> <span class="n">Reserved</span>
+</pre></div>
+</div>
+<p><strong>write_access:</strong></p>
+<p>Nothing is expected to be written into GED IO memory</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">QEMU</a></h1>
+
+
+
+<p class="blurb">System Emulation Guest Hardware Specifications</p>
+
+
+
+
+
+
+<div id="editpage">
+  <ul>
+    <li><a href="https://gitlab.com/qemu-project/qemu/-/blob/master/docs/specs/acpi_hw_reduced_hotplug.rst">Page source</a></li>
+  </ul>
+</div><h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="ppc-xive.html">POWER9 XIVE interrupt controller</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ppc-spapr-xive.html">XIVE for sPAPR (pseries machines)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ppc-spapr-numa.html">NUMA mechanics for sPAPR (pseries machines)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ppc-spapr-numa.html#how-the-pseries-linux-guest-calculates-numa-distances">How the pseries Linux guest calculates NUMA distances</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ppc-spapr-numa.html#pseries-numa-mechanics">pseries NUMA mechanics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ppc-spapr-numa.html#legacy-5-1-and-older-pseries-numa-mechanics">Legacy (5.1 and older) pseries NUMA mechanics</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">QEMU and ACPI BIOS Generic Event Device interface</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#ged-io-interface-4-byte-access">GED IO interface (4 byte access)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tpm.html">QEMU TPM Device</a></li>
+<li class="toctree-l1"><a class="reference internal" href="acpi_hest_ghes.html">APEI tables generating and CPER record</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, The QEMU Project Developers.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

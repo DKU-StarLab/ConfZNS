@@ -1,0 +1,10 @@
+# AUTOMATICALLY GENERATED, DO NOT MODIFY
+
+qmp_enter_query_replay(const char *json) "%s"
+qmp_exit_query_replay(const char *result, bool succeeded) "%s %d"
+qmp_enter_replay_break(const char *json) "%s"
+qmp_exit_replay_break(const char *result, bool succeeded) "%s %d"
+qmp_enter_replay_delete_break(const char *json) "%s"
+qmp_exit_replay_delete_break(const char *result, bool succeeded) "%s %d"
+qmp_enter_replay_seek(const char *json) "%s"
+qmp_exit_replay_seek(const char *result, bool succeeded) "%s %d"

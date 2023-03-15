@@ -1,0 +1,6 @@
+# AUTOMATICALLY GENERATED, DO NOT MODIFY
+
+qmp_enter_device_list_properties(const char *json) "%s"
+qmp_exit_device_list_properties(const char *result, bool succeeded) "%s %d"
+qmp_enter_device_del(const char *json) "%s"
+qmp_exit_device_del(const char *result, bool succeeded) "%s %d"

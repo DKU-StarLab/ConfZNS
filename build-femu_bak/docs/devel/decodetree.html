@@ -1,0 +1,352 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Decodetree Specification &#8212; QEMU  documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Secure Coding Practices" href="secure-coding-practices.html" />
+    <link rel="prev" title="Fuzzing" href="fuzzing.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="decodetree-specification">
+<h1>Decodetree Specification<a class="headerlink" href="#decodetree-specification" title="Permalink to this headline">¶</a></h1>
+<p>A <em>decodetree</em> is built from instruction <em>patterns</em>.  A pattern may
+represent a single architectural instruction or a group of same, depending
+on what is convenient for further processing.</p>
+<p>Each pattern has both <em>fixedbits</em> and <em>fixedmask</em>, the combination of which
+describes the condition under which the pattern is matched:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">insn</span> <span class="o">&amp;</span> <span class="n">fixedmask</span><span class="p">)</span> <span class="o">==</span> <span class="n">fixedbits</span>
+</pre></div>
+</div>
+<p>Each pattern may have <em>fields</em>, which are extracted from the insn and
+passed along to the translator.  Examples of such are registers,
+immediates, and sub-opcodes.</p>
+<p>In support of patterns, one may declare <em>fields</em>, <em>argument sets</em>, and
+<em>formats</em>, each of which may be re-used to simplify further definitions.</p>
+<div class="section" id="fields">
+<h2>Fields<a class="headerlink" href="#fields" title="Permalink to this headline">¶</a></h2>
+<p>Syntax:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>field_def     := &#39;%&#39; identifier ( unnamed_field )* ( !function=identifier )?
+unnamed_field := number &#39;:&#39; ( &#39;s&#39; ) number
+</pre></div>
+</div>
+<p>For <em>unnamed_field</em>, the first number is the least-significant bit position
+of the field and the second number is the length of the field.  If the ‘s’ is
+present, the field is considered signed.  If multiple <code class="docutils literal notranslate"><span class="pre">unnamed_fields</span></code> are
+present, they are concatenated.  In this way one can define disjoint fields.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">!function</span></code> is specified, the concatenated result is passed through the
+named function, taking and returning an integral value.</p>
+<p>One may use <code class="docutils literal notranslate"><span class="pre">!function</span></code> with zero <code class="docutils literal notranslate"><span class="pre">unnamed_fields</span></code>.  This case is called
+a <em>parameter</em>, and the named function is only passed the <code class="docutils literal notranslate"><span class="pre">DisasContext</span></code>
+and returns an integral value extracted from there.</p>
+<p>A field with no <code class="docutils literal notranslate"><span class="pre">unnamed_fields</span></code> and no <code class="docutils literal notranslate"><span class="pre">!function</span></code> is in error.</p>
+<p>FIXME: the fields of the structure into which this result will be stored
+is restricted to <code class="docutils literal notranslate"><span class="pre">int</span></code>.  Which means that we cannot expand 64-bit items.</p>
+<p>Field examples:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="38%" />
+<col width="63%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Input</th>
+<th class="head">Generated code</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>%disp   0:s16</td>
+<td>sextract(i, 0, 16)</td>
+</tr>
+<tr class="row-odd"><td>%imm9   16:6 10:3</td>
+<td>extract(i, 16, 6) &lt;&lt; 3 | extract(i, 10, 3)</td>
+</tr>
+<tr class="row-even"><td>%disp12 0:s1 1:1 2:10</td>
+<td><dl class="first last docutils">
+<dt>sextract(i, 0, 1) &lt;&lt; 11 |</dt>
+<dd>extract(i, 1, 1) &lt;&lt; 10 |
+extract(i, 2, 10)</dd>
+</dl>
+</td>
+</tr>
+<tr class="row-odd"><td><dl class="first last docutils">
+<dt>%shimm8 5:s8 13:1</dt>
+<dd>!function=expand_shimm8</dd>
+</dl>
+</td>
+<td><dl class="first last docutils">
+<dt>expand_shimm8(sextract(i, 5, 8) &lt;&lt; 1 |</dt>
+<dd>extract(i, 13, 1))</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="argument-sets">
+<h2>Argument Sets<a class="headerlink" href="#argument-sets" title="Permalink to this headline">¶</a></h2>
+<p>Syntax:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>args_def    := &#39;&amp;&#39; identifier ( args_elt )+ ( !extern )?
+args_elt    := identifier
+</pre></div>
+</div>
+<p>Each <em>args_elt</em> defines an argument within the argument set.
+Each argument set will be rendered as a C structure “arg_$name”
+with each of the fields being one of the member arguments.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">!extern</span></code> is specified, the backing structure is assumed
+to have been already declared, typically via a second decoder.</p>
+<p>Argument sets are useful when one wants to define helper functions
+for the translator functions that can perform operations on a common
+set of arguments.  This can ensure, for instance, that the <code class="docutils literal notranslate"><span class="pre">AND</span></code>
+pattern and the <code class="docutils literal notranslate"><span class="pre">OR</span></code> pattern put their operands into the same named
+structure, so that a common <code class="docutils literal notranslate"><span class="pre">gen_logic_insn</span></code> may be able to handle
+the operations common between the two.</p>
+<p>Argument set examples:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&amp;</span><span class="n">reg3</span>       <span class="n">ra</span> <span class="n">rb</span> <span class="n">rc</span>
+<span class="o">&amp;</span><span class="n">loadstore</span>  <span class="n">reg</span> <span class="n">base</span> <span class="n">offset</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="formats">
+<h2>Formats<a class="headerlink" href="#formats" title="Permalink to this headline">¶</a></h2>
+<p>Syntax:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>fmt_def      := &#39;@&#39; identifier ( fmt_elt )+
+fmt_elt      := fixedbit_elt | field_elt | field_ref | args_ref
+fixedbit_elt := [01.-]+
+field_elt    := identifier &#39;:&#39; &#39;s&#39;? number
+field_ref    := &#39;%&#39; identifier | identifier &#39;=&#39; &#39;%&#39; identifier
+args_ref     := &#39;&amp;&#39; identifier
+</pre></div>
+</div>
+<p>Defining a format is a handy way to avoid replicating groups of fields
+across many instruction patterns.</p>
+<p>A <em>fixedbit_elt</em> describes a contiguous sequence of bits that must
+be 1, 0, or don’t care.  The difference between ‘.’ and ‘-‘
+is that ‘.’ means that the bit will be covered with a field or a
+final 0 or 1 from the pattern, and ‘-‘ means that the bit is really
+ignored by the cpu and will not be specified.</p>
+<p>A <em>field_elt</em> describes a simple field only given a width; the position of
+the field is implied by its position with respect to other <em>fixedbit_elt</em>
+and <em>field_elt</em>.</p>
+<p>If any <em>fixedbit_elt</em> or <em>field_elt</em> appear, then all bits must be defined.
+Padding with a <em>fixedbit_elt</em> of all ‘.’ is an easy way to accomplish that.</p>
+<p>A <em>field_ref</em> incorporates a field by reference.  This is the only way to
+add a complex field to a format.  A field may be renamed in the process
+via assignment to another identifier.  This is intended to allow the
+same argument set be used with disjoint named fields.</p>
+<p>A single <em>args_ref</em> may specify an argument set to use for the format.
+The set of fields in the format must be a subset of the arguments in
+the argument set.  If an argument set is not specified, one will be
+inferred from the set of fields.</p>
+<p>It is recommended, but not required, that all <em>field_ref</em> and <em>args_ref</em>
+appear at the end of the line, not interleaving with <em>fixedbit_elf</em> or
+<em>field_elt</em>.</p>
+<p>Format examples:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@opr</span>    <span class="o">......</span> <span class="n">ra</span><span class="p">:</span><span class="mi">5</span> <span class="n">rb</span><span class="p">:</span><span class="mi">5</span> <span class="o">...</span> <span class="mi">0</span> <span class="o">.......</span> <span class="n">rc</span><span class="p">:</span><span class="mi">5</span>
+<span class="nd">@opi</span>    <span class="o">......</span> <span class="n">ra</span><span class="p">:</span><span class="mi">5</span> <span class="n">lit</span><span class="p">:</span><span class="mi">8</span>    <span class="mi">1</span> <span class="o">.......</span> <span class="n">rc</span><span class="p">:</span><span class="mi">5</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="patterns">
+<h2>Patterns<a class="headerlink" href="#patterns" title="Permalink to this headline">¶</a></h2>
+<p>Syntax:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pat_def</span>      <span class="p">:</span><span class="o">=</span> <span class="n">identifier</span> <span class="p">(</span> <span class="n">pat_elt</span> <span class="p">)</span><span class="o">+</span>
+<span class="n">pat_elt</span>      <span class="p">:</span><span class="o">=</span> <span class="n">fixedbit_elt</span> <span class="o">|</span> <span class="n">field_elt</span> <span class="o">|</span> <span class="n">field_ref</span> <span class="o">|</span> <span class="n">args_ref</span> <span class="o">|</span> <span class="n">fmt_ref</span> <span class="o">|</span> <span class="n">const_elt</span>
+<span class="n">fmt_ref</span>      <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;@&#39;</span> <span class="n">identifier</span>
+<span class="n">const_elt</span>    <span class="p">:</span><span class="o">=</span> <span class="n">identifier</span> <span class="s1">&#39;=&#39;</span> <span class="n">number</span>
+</pre></div>
+</div>
+<p>The <em>fixedbit_elt</em> and <em>field_elt</em> specifiers are unchanged from formats.
+A pattern that does not specify a named format will have one inferred
+from a referenced argument set (if present) and the set of fields.</p>
+<p>A <em>const_elt</em> allows a argument to be set to a constant value.  This may
+come in handy when fields overlap between patterns and one has to
+include the values in the <em>fixedbit_elt</em> instead.</p>
+<p>The decoder will call a translator function for each pattern matched.</p>
+<p>Pattern examples:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">addl_r</span>   <span class="mi">010000</span> <span class="o">.....</span> <span class="o">.....</span> <span class="o">....</span> <span class="mi">0000000</span> <span class="o">.....</span> <span class="nd">@opr</span>
+<span class="n">addl_i</span>   <span class="mi">010000</span> <span class="o">.....</span> <span class="o">.....</span> <span class="o">....</span> <span class="mi">0000000</span> <span class="o">.....</span> <span class="nd">@opi</span>
+</pre></div>
+</div>
+<p>which will, in part, invoke:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">trans_addl_r</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">arg_opr</span><span class="p">,</span> <span class="n">insn</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>and:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">trans_addl_i</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">arg_opi</span><span class="p">,</span> <span class="n">insn</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="pattern-groups">
+<h2>Pattern Groups<a class="headerlink" href="#pattern-groups" title="Permalink to this headline">¶</a></h2>
+<p>Syntax:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">group</span>            <span class="p">:</span><span class="o">=</span> <span class="n">overlap_group</span> <span class="o">|</span> <span class="n">no_overlap_group</span>
+<span class="n">overlap_group</span>    <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;{&#39;</span> <span class="p">(</span> <span class="n">pat_def</span> <span class="o">|</span> <span class="n">group</span> <span class="p">)</span><span class="o">+</span> <span class="s1">&#39;}&#39;</span>
+<span class="n">no_overlap_group</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;[&#39;</span> <span class="p">(</span> <span class="n">pat_def</span> <span class="o">|</span> <span class="n">group</span> <span class="p">)</span><span class="o">+</span> <span class="s1">&#39;]&#39;</span>
+</pre></div>
+</div>
+<p>A <em>group</em> begins with a lone open-brace or open-bracket, with all
+subsequent lines indented two spaces, and ending with a lone
+close-brace or close-bracket.  Groups may be nested, increasing the
+required indentation of the lines within the nested group to two
+spaces per nesting level.</p>
+<p>Patterns within overlap groups are allowed to overlap.  Conflicts are
+resolved by selecting the patterns in order.  If all of the fixedbits
+for a pattern match, its translate function will be called.  If the
+translate function returns false, then subsequent patterns within the
+group will be matched.</p>
+<p>Patterns within no-overlap groups are not allowed to overlap, just
+the same as ungrouped patterns.  Thus no-overlap groups are intended
+to be nested inside overlap groups.</p>
+<p>The following example from PA-RISC shows specialization of the <em>or</em>
+instruction:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="p">{</span>
+    <span class="n">nop</span>   <span class="mi">000010</span> <span class="o">-----</span> <span class="o">-----</span> <span class="mi">0000</span> <span class="mi">001001</span> <span class="mi">0</span> <span class="mi">00000</span>
+    <span class="n">copy</span>  <span class="mi">000010</span> <span class="mi">00000</span> <span class="n">r1</span><span class="p">:</span><span class="mi">5</span>  <span class="mi">0000</span> <span class="mi">001001</span> <span class="mi">0</span> <span class="n">rt</span><span class="p">:</span><span class="mi">5</span>
+  <span class="p">}</span>
+  <span class="ow">or</span>      <span class="mi">000010</span> <span class="n">rt2</span><span class="p">:</span><span class="mi">5</span> <span class="n">r1</span><span class="p">:</span><span class="mi">5</span>  <span class="n">cf</span><span class="p">:</span><span class="mi">4</span> <span class="mi">001001</span> <span class="mi">0</span> <span class="n">rt</span><span class="p">:</span><span class="mi">5</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>When the <em>cf</em> field is zero, the instruction has no side effects,
+and may be specialized.  When the <em>rt</em> field is zero, the output
+is discarded and so the instruction has no effect.  When the <em>rt2</em>
+field is zero, the operation is <code class="docutils literal notranslate"><span class="pre">reg[r1]</span> <span class="pre">|</span> <span class="pre">0</span></code> and so encodes
+the canonical register copy operation.</p>
+<p>The output from the generator might look like:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">switch</span> <span class="p">(</span><span class="n">insn</span> <span class="o">&amp;</span> <span class="mh">0xfc000fe0</span><span class="p">)</span> <span class="p">{</span>
+<span class="n">case</span> <span class="mh">0x08000240</span><span class="p">:</span>
+  <span class="o">/*</span> <span class="mf">000010.</span><span class="o">.</span> <span class="o">........</span> <span class="o">....</span><span class="mi">0010</span> <span class="mf">010.</span><span class="o">....</span> <span class="o">*/</span>
+  <span class="k">if</span> <span class="p">((</span><span class="n">insn</span> <span class="o">&amp;</span> <span class="mh">0x0000f000</span><span class="p">)</span> <span class="o">==</span> <span class="mh">0x00000000</span><span class="p">)</span> <span class="p">{</span>
+      <span class="o">/*</span> <span class="mf">000010.</span><span class="o">.</span> <span class="o">........</span> <span class="mi">00000010</span> <span class="mf">010.</span><span class="o">....</span> <span class="o">*/</span>
+      <span class="k">if</span> <span class="p">((</span><span class="n">insn</span> <span class="o">&amp;</span> <span class="mh">0x0000001f</span><span class="p">)</span> <span class="o">==</span> <span class="mh">0x00000000</span><span class="p">)</span> <span class="p">{</span>
+          <span class="o">/*</span> <span class="mf">000010.</span><span class="o">.</span> <span class="o">........</span> <span class="mi">00000010</span> <span class="mi">01000000</span> <span class="o">*/</span>
+          <span class="n">extract_decode_Fmt_0</span><span class="p">(</span><span class="o">&amp;</span><span class="n">u</span><span class="o">.</span><span class="n">f_decode0</span><span class="p">,</span> <span class="n">insn</span><span class="p">);</span>
+          <span class="k">if</span> <span class="p">(</span><span class="n">trans_nop</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">u</span><span class="o">.</span><span class="n">f_decode0</span><span class="p">))</span> <span class="k">return</span> <span class="n">true</span><span class="p">;</span>
+      <span class="p">}</span>
+      <span class="k">if</span> <span class="p">((</span><span class="n">insn</span> <span class="o">&amp;</span> <span class="mh">0x03e00000</span><span class="p">)</span> <span class="o">==</span> <span class="mh">0x00000000</span><span class="p">)</span> <span class="p">{</span>
+          <span class="o">/*</span> <span class="mi">00001000</span> <span class="mf">000.</span><span class="o">....</span> <span class="mi">00000010</span> <span class="mf">010.</span><span class="o">....</span> <span class="o">*/</span>
+          <span class="n">extract_decode_Fmt_1</span><span class="p">(</span><span class="o">&amp;</span><span class="n">u</span><span class="o">.</span><span class="n">f_decode1</span><span class="p">,</span> <span class="n">insn</span><span class="p">);</span>
+          <span class="k">if</span> <span class="p">(</span><span class="n">trans_copy</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">u</span><span class="o">.</span><span class="n">f_decode1</span><span class="p">))</span> <span class="k">return</span> <span class="n">true</span><span class="p">;</span>
+      <span class="p">}</span>
+  <span class="p">}</span>
+  <span class="n">extract_decode_Fmt_2</span><span class="p">(</span><span class="o">&amp;</span><span class="n">u</span><span class="o">.</span><span class="n">f_decode2</span><span class="p">,</span> <span class="n">insn</span><span class="p">);</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">trans_or</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">u</span><span class="o">.</span><span class="n">f_decode2</span><span class="p">))</span> <span class="k">return</span> <span class="n">true</span><span class="p">;</span>
+  <span class="k">return</span> <span class="n">false</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">QEMU</a></h1>
+
+
+
+<p class="blurb">Developers Guide</p>
+
+
+
+
+
+
+<div id="editpage">
+  <ul>
+    <li><a href="https://gitlab.com/qemu-project/qemu/-/blob/master/docs/devel/decodetree.rst">Page source</a></li>
+  </ul>
+</div><h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="build-system.html">The QEMU build system architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="kconfig.html">QEMU and Kconfig</a></li>
+<li class="toctree-l1"><a class="reference internal" href="loads-stores.html">Load and Store APIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="memory.html">The memory API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="migration.html">Migration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="atomics.html">Atomic operations in QEMU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stable-process.html">QEMU and the stable process</a></li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">Testing in QEMU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="qtest.html">QTest Device Emulation Testing Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fuzzing.html">Fuzzing</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Decodetree Specification</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#fields">Fields</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#argument-sets">Argument Sets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#formats">Formats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#patterns">Patterns</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pattern-groups">Pattern Groups</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="secure-coding-practices.html">Secure Coding Practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tcg.html">Translator Internals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tcg-icount.html">TCG Instruction Counting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="multi-thread-tcg.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="multi-thread-tcg.html#vcpu-scheduling">vCPU Scheduling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="multi-thread-tcg.html#shared-data-structures">Shared Data Structures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="multi-thread-tcg.html#memory-consistency">Memory Consistency</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tcg-plugins.html">QEMU TCG Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bitops.html">Bitwise operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reset.html">Reset in QEMU: the Resettable interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="s390-dasd-ipl.html">Booting from real channel-attached devices on s390x</a></li>
+<li class="toctree-l1"><a class="reference internal" href="clocks.html">Modelling a clock tree in QEMU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="qom.html">The QEMU Object Model (QOM)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="block-coroutine-wrapper.html">block-coroutine-wrapper</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, The QEMU Project Developers.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>
