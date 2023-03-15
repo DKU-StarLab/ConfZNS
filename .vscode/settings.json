@@ -1,0 +1,16 @@
+{
+    "files.associations": {
+        "*.inc": "cpp",
+        "*.tcc": "cpp",
+        "thread": "cpp",
+        "*.list": "cpp",
+        "*.idef": "c",
+        "*.def": "c",
+        "*.code": "c",
+        "msi.h": "c",
+        "dram.h": "c",
+        "osdep.h": "c",
+        "zns.h": "c",
+        "optional": "c"
+    }
+}
