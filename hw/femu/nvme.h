@@ -37,7 +37,7 @@
  */
 #define ADVANCE_PER_CH_ENDTIME 1
 #define SK_HYNIX_VALIDATION 0
-#define MK_ZONE_CONVENTIONAL 3
+#define MK_ZONE_CONVENTIONAL 5
 #define NVME_PRIORITY_SCHED_MODE 1      //future feature for ConfZNS
 
 #define PCIe_TIME_SIMULATION 1
@@ -308,15 +308,51 @@ enum NvmePsdt {
     NVME_PSDT_SGL_MPTR_SGL        = 0x2,
 };
 
+typedef struct nvme_zone_info_entry {
+	uint8_t		zone_condition_rsvd : 4;
+	uint8_t		rsvd0 : 4;
+	uint8_t		rsvd1 : 4;
+	uint8_t		zone_condition : 4;
+	uint8_t		rsvd8[6];
+	uint64_t		zone_capacity;
+	uint64_t		zone_start_lba;
+	uint64_t		write_pointer;
+	uint64_t		cnt_read;
+	uint64_t		cnt_write;
+	uint32_t		cnt_reset;
+	uint8_t		rsvd56[12];
+}nvme_zone_info_entry;
+
+typedef struct nvme_passthru_cmd {
+	uint8_t	opcode;
+	uint8_t	flags;
+	uint16_t	rsvd1;
+	uint32_t	nsid;
+	uint32_t	cdw2;
+	uint32_t	cdw3;
+	uint64_t	metadata;
+	uint64_t	addr;
+	uint32_t	metadata_len;
+	uint32_t	data_len;
+	uint32_t	cdw10;
+	uint32_t	cdw11;
+	uint32_t	cdw12;
+	uint32_t	cdw13;
+	uint32_t	cdw14;
+	uint32_t	cdw15;
+	uint32_t	timeout_ms;
+	uint32_t	result;
+}nvme_passthru_cmd;
+
 typedef struct NvmeCmd {
-    uint16_t    opcode : 8;
-    uint16_t    fuse   : 2;
-    uint16_t    res1   : 4;
-    uint16_t    psdt   : 2;
-    uint16_t    cid;
-    uint32_t    nsid;
-    uint64_t    res2;
-    uint64_t    mptr;
+    uint16_t    opcode : 8; //	uint8_t	opcode;//	uint8_t	flags;
+    uint16_t    fuse   : 2; //	uint16_t	rsvd1;
+    uint16_t    res1   : 4; //	uint32_t	nsid;
+    uint16_t    psdt   : 2; //	uint32_t	nsid;
+    uint16_t    cid;        //	uint32_t	cdw2;
+    uint32_t    nsid;       //	uint32_t	cdw2;	uint32_t	cdw3;
+    uint64_t    res2;       //	uint32_t	cdw3;	uint64_t	metadata;
+    uint64_t    mptr;       //	uint64_t	metadata; 	uint64_t	addr;
     NvmeCmdDptr dptr;
     uint32_t    cdw10;
     uint32_t    cdw11;
@@ -325,6 +361,8 @@ typedef struct NvmeCmd {
     uint32_t    cdw14;
     uint32_t    cdw15;
 } NvmeCmd;
+
+
 
 #define NVME_CMD_FLAGS_FUSE(flags) (flags & 0x3)
 #define NVME_CMD_FLAGS_PSDT(flags) ((flags >> 6) & 0x3)
@@ -346,6 +384,7 @@ enum NvmeAdminCommands {
     NVME_ADM_CMD_SECURITY_SEND  = 0x81,
     NVME_ADM_CMD_SECURITY_RECV  = 0x82,
     NVME_ADM_CMD_SET_DB_MEMORY  = 0x7c,
+    NVME_ADM_CMD_CONF_DEBUG     = 0xec,
     NVME_ADM_CMD_FEMU_DEBUG     = 0xee,
     NVME_ADM_CMD_FEMU_FLIP      = 0xef,
 };

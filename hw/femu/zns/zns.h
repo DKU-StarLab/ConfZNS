@@ -3,6 +3,9 @@
 
 #include "../nvme.h"
 
+#define _64KB   (64 * KiB)
+#define _16KB   (16 * KiB)
+#define _4KB    (4 * KiB)
 enum {
     NAND_READ =  0,
     NAND_WRITE = 1,
@@ -10,7 +13,7 @@ enum {
 
  /* FIXME: */
     NAND_READ_LATENCY  = 65000,//NAND_READ_LATENCY  = 65000/6,  //65us /4plane TLC_tREAD(65us : 16K page time)   =16.25
-    NAND_PROG_LATENCY  = 450000/12,//450us TLC_tProg(450us: 4plane(/4),3D(/3) time)  =37.5
+    NAND_PROG_LATENCY  = 450000,//450us TLC_tProg(450us: 4plane(/4),3D(/3) time)  =37.5
     NAND_ERASE_LATENCY = SLC_BLOCK_ERASE_LATENCY_NS,//2000000
     NAND_CHNL_PAGE_TRANSFER_LATENCY = 25000, // =2.5? 1200MT = 9600MB/s = 390ns per 4K 
     //NAND_CHNL_PAGE_TRANSFER_LATENCY = 0,
@@ -207,6 +210,7 @@ typedef struct QEMU_PACKED NvmeIdNsZoned {
 typedef struct NvmeZone {
     NvmeZoneDescr   d;
     uint64_t        w_ptr;
+    uint64_t        cnt_reset;
     pthread_spinlock_t w_ptr_lock;
     QTAILQ_ENTRY(NvmeZone) entry;
 } NvmeZone;

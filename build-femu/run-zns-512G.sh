@@ -8,7 +8,7 @@
 IMGDIR=/home/inhoinno/images
 # Virtual machine disk image
 OSIMGF=$IMGDIR/femu.qcow2
-
+#OSIMGF=$IMGDIR/bak_femu_before_vfs_compile.qcow2
 if [[ ! -e "$OSIMGF" ]]; then
 	echo ""
 	echo "VM disk image couldn't be found ..."

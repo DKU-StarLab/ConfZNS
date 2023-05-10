@@ -69,7 +69,7 @@
 
 #undef CONFIG_CURL
 
-#undef CONFIG_CURSES
+#define CONFIG_CURSES
 
 #undef CONFIG_DBUS_DISPLAY
 

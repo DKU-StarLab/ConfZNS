@@ -949,8 +949,41 @@ static uint16_t nvme_format(FemuCtrl *n, NvmeCmd *cmd)
 static uint16_t nvme_admin_cmd(FemuCtrl *n, NvmeCmd *cmd, NvmeCqe *cqe)
 {
     //inho debug
-    //femu_err("Seq 3 nvme_admin_cmd nvme-admin.c:955\n");
     switch (cmd->opcode) {
+    case NVME_ADM_CMD_CONF_DEBUG:
+
+        femu_log("NVME CMD opcode   x:%x d:%u \n",cmd->opcode, cmd->opcode);
+        femu_log("NVME CMD fuse     x:%x d:%u \n",cmd->fuse, cmd->fuse);
+        femu_log("NVME CMD res1     x:%x d:%u \n",cmd->res1, cmd->res1); 
+        femu_log("NVME CMD psdt     x:%x d:%u \n",cmd->psdt, cmd->psdt);
+        femu_log("NVME CMD cid      x:%x d:%u \n",cmd->cid, cmd->cid);
+        femu_log("NVME CMD nsid     x:%x d:%u \n",cmd->nsid, cmd->nsid); 
+        femu_log("NVME CMD res2     x:%lx d:%lu \n",cmd->res2, cmd->res2);
+        femu_log("NVME CMD mptr     x:%lx d:%lu \n",cmd->mptr, cmd->mptr);
+        //femu_log("NVME CMD opcode x:%x d:%llu \n",&(cmd->dptr), cmd->dptr);
+        femu_log("NVME CMD cdw10    x:%x d:%u \n",cmd->cdw10, cmd->cdw10);
+        femu_log("NVME CMD cdw11    x:%x d:%u \n",cmd->cdw11, cmd->cdw11);
+        femu_log("NVME CMD cdw12    x:%x d:%u \n",cmd->cdw12, cmd->cdw12);
+        femu_log("NVME CMD cdw13    x:%x d:%u \n",cmd->cdw13, cmd->cdw13);
+        femu_log("NVME CMD cdw14    x:%x d:%u \n",cmd->cdw14, cmd->cdw14);
+        femu_log("NVME CMD cdw15    x:%x d:%u \n",cmd->cdw15, cmd->cdw15);
+
+        struct nvme_passthru_cmd * c = (struct nvme_passthru_cmd *)cmd;
+
+        femu_log("NVME CMD data    x:%lx d:%lu \n",c->addr, c->addr);
+
+        /*
+        cmd->cdw10
+        cmd->cdw11              
+        cmd->cdw12              //zone index
+        cmd->cdw13              //num zone write 
+        cmd->cdw14              //num zone reset
+        */
+        //femu_log("NVME ADM CMD opcode x:%x d:%d \n",cmd->opcode, cmd->opcode); TEST OK
+
+
+        return NVME_SUCCESS;
+
     case NVME_ADM_CMD_FEMU_DEBUG:
         n->upg_rd_lat_ns = le64_to_cpu(cmd->cdw10);
         n->lpg_rd_lat_ns = le64_to_cpu(cmd->cdw11);

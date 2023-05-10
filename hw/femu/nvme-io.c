@@ -617,6 +617,7 @@ static uint16_t nvme_io_cmd(FemuCtrl *n, NvmeCmd *cmd, NvmeRequest *req)
          * req = n->scheduler.schedule()     
          * cmd = &req->cmd 
         */
+        femu_log("Inho, nvme-io.c : 620 Cmd->opcode %d %x Entering ZNS\n",cmd->opcode, cmd->opcode );
         if (n->ext_ops.io_cmd) {
             return n->ext_ops.io_cmd(n, ns, cmd, req);
         }
