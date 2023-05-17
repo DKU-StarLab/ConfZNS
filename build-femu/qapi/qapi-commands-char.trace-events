@@ -1,0 +1,18 @@
+# AUTOMATICALLY GENERATED, DO NOT MODIFY
+
+qmp_enter_query_chardev(const char *json) "%s"
+qmp_exit_query_chardev(const char *result, bool succeeded) "%s %d"
+qmp_enter_query_chardev_backends(const char *json) "%s"
+qmp_exit_query_chardev_backends(const char *result, bool succeeded) "%s %d"
+qmp_enter_ringbuf_write(const char *json) "%s"
+qmp_exit_ringbuf_write(const char *result, bool succeeded) "%s %d"
+qmp_enter_ringbuf_read(const char *json) "%s"
+qmp_exit_ringbuf_read(const char *result, bool succeeded) "%s %d"
+qmp_enter_chardev_add(const char *json) "%s"
+qmp_exit_chardev_add(const char *result, bool succeeded) "%s %d"
+qmp_enter_chardev_change(const char *json) "%s"
+qmp_exit_chardev_change(const char *result, bool succeeded) "%s %d"
+qmp_enter_chardev_remove(const char *json) "%s"
+qmp_exit_chardev_remove(const char *result, bool succeeded) "%s %d"
+qmp_enter_chardev_send_break(const char *json) "%s"
+qmp_exit_chardev_send_break(const char *result, bool succeeded) "%s %d"

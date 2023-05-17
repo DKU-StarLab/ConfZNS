@@ -1,4 +1,4 @@
-# QEMU configure log Mon May  8 07:44:12 UTC 2023
+# QEMU configure log Wed May 17 05:24:24 UTC 2023
 # Configured with: '../configure' '--enable-kvm' '--target-list=x86_64-softmmu'
 #
 cc -std=gnu11 -Wall -D_GNU_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -Wstrict-prototypes -Wredundant-decls -Wundef -Wwrite-strings -Wmissing-prototypes -fno-strict-aliasing -fno-common -fwrapv -c -o config-temp/qemu-conf.o config-temp/qemu-conf.c
