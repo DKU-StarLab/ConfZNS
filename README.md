@@ -5,9 +5,99 @@
 ```
 [![SYSTOR23 paper](https://doi.org/https://doi.org/10.1145/3579370.3594772)]
 
+# USAGE
+### How to Configure?
+The current version of ConfZNS supports built-in configuration, so user have to compile confZNS for each setting(this will be change soon)
+```c++
+//Example in zns.c:1787
+    spp->pg_rd_lat = NAND_READ_LATENCY;
+    spp->pg_wr_lat = NAND_PROG_LATENCY;
+    spp->blk_er_lat = NAND_ERASE_LATENCY;
+    spp->ch_xfer_lat = NAND_CHNL_PAGE_TRANSFER_LATENCY;
+
+    spp->nchnls         = 8;   //default : 8
+    spp->chnls_per_zone = 1;   
+    spp->zones          = n->num_zones;     
+    spp->ways           = 2;    //default : 2
+    spp->ways_per_zone  = 2;    //default :==spp->ways
+    spp->dies_per_chip  = 1;    //default : 1
+    spp->planes_per_die = 4;    //default : 4
+    spp->register_model = 1;    
+```
+* to change configurations, 
+  * SU-zone
+  ```c++
+      spp->chnls_per_zone = 1;   
+      spp->ways_per_zone  = 1;    //default :==spp->ways
+  ```
+  * MU4-zone
+  ```c++
+      spp->chnls_per_zone = 4;    
+      spp->ways_per_zone  = 1;    //default :==spp->ways
+  ```
+  * MU8-zone
+  ```c++
+      spp->chnls_per_zone = 8;    
+      spp->ways_per_zone  = 1;    //default :==spp->ways
+  ```
+  * FU-zone(16)
+  ```c++
+      spp->chnls_per_zone = 8;    
+      spp->ways_per_zone  = 2;    //default :==spp->ways
+  ```
+  
+### How to support conventional zone?
+
+* In ConfZNS, 
+```c++
+//in nvme.h : 40, 
+#define MK_ZONE_CONVENTIONAL 5    // making 32(=2^5) conventional zones 
+
+```
+* In Guest Kernel (v5.10.2)
+```c++
+//in linux-5.10.2/driver/nvme/host/zns.c:146 
+
+static int nvme_zone_parse_entry(struct nvme_ns *ns,
+				 struct nvme_zone_descriptor *entry,
+				 unsigned int idx, report_zones_cb cb,
+				 void *data)
+{
+	struct blk_zone zone = { };
+
+	if ((((entry->zt & 0xf) != NVME_ZONE_TYPE_SEQWRITE_REQ)&&((entry->zt & 0xf) != NVME_ZONE_TYPE_CONVENTIONAL))){
+		return -EINVAL;
+	}
+
+	//zone.type = BLK_ZONE_TYPE_SEQWRITE_REQ;
+	if((entry->zt & 0xf) == NVME_ZONE_TYPE_CONVENTIONAL){
+		zone.type = BLK_ZONE_TYPE_CONVENTIONAL;
+		dev_err(ns->ctrl->device, "[inho] conv to zidx %x\n",idx);
+	}
+	else {
+		zone.type = BLK_ZONE_TYPE_SEQWRITE_REQ;
+	}
+	zone.cond = entry->zs >> 4;
+	zone.len = ns->zsze;
+	zone.capacity = nvme_lba_to_sect(ns, le64_to_cpu(entry->zcap));
+	zone.start = nvme_lba_to_sect(ns, le64_to_cpu(entry->zslba));
+	zone.wp = nvme_lba_to_sect(ns, le64_to_cpu(entry->wp));
+
+	return cb(&zone, idx, data);
+}
+```
+
+```c++
+//in linux-5.10.2/include/linux/nvme.h:570
+
+enum {
+	NVME_ZONE_TYPE_CONVENTIONAL =0x1, 	
+	NVME_ZONE_TYPE_SEQWRITE_REQ =0x2,
+};
+```
 
 <details>
-<summary>FEMU readme below:</summary>
+<summary>Installation (FEMU readme)</summary>
 <div markdown="1">       
 
 [![FEMU Version](https://img.shields.io/badge/FEMU-v7.0-brightgreen)](https://img.shields.io/badge/FEMU-v7.0-brightgreen)
