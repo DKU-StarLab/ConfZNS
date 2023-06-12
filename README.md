@@ -1,9 +1,10 @@
 ```
 +-------------------------------------------------------------------------------+
 | ConfZNS : A Novel Emulator for Exploring Design Space of ZNS SSDs             |
-| [![SYSTOR23 paper](https://doi.org/https://doi.org/10.1145/3579370.3594772)]  |
 +-------------------------------------------------------------------------------+
 ```
+[![SYSTOR23 paper](https://doi.org/https://doi.org/10.1145/3579370.3594772)]
+
 
 <details>
 <summary>FEMU readme below:</summary>
