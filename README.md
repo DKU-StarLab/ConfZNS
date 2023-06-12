@@ -1,3 +1,13 @@
++-------------------------------------------------------------------------------+
+| ConfZNS : A Novel Emulator for Exploring Design Space of ZNS SSDs             |
+| [![SYSTOR23 paper](https://doi.org/https://doi.org/10.1145/3579370.3594772)]  |
++-------------------------------------------------------------------------------+
+
+
+<details>
+<summary>FEMU readme below:</summary>
+<div markdown="1">       
+
 [![FEMU Version](https://img.shields.io/badge/FEMU-v7.0-brightgreen)](https://img.shields.io/badge/FEMU-v7.0-brightgreen)
 [![Build Status](https://travis-ci.com/ucare-uchicago/FEMU.svg?branch=master)](https://travis-ci.com/ucare-uchicago/FEMU)
 [![License: GPL v2](https://img.shields.io/badge/License-GPL%20v2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html)
@@ -307,3 +317,5 @@ FEMU's NVMe controller logic is based on QEMU/NVMe, LightNVM/QEMU and ZNS/QEMU.
 
 ### For more detail, please checkout the [Wiki](https://github.com/ucare-uchicago/femu/wiki)!
 
+</div>
+</details>
