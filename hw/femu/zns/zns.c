@@ -1300,6 +1300,13 @@ static uint64_t znsssd_write(ZNS *zns, NvmeRequest *req){
     uint32_t nlb = (uint32_t)le16_to_cpu(rw->nlb) + 1;
     uint64_t currlat = 0, maxlat= 0;
 
+    // To get accurate append latency we need to change the slba to the zone pointer (we do not send all requests to slba even for appends).
+    {
+        NvmeZone *zone;
+        zone = zns_get_zone_by_slba(ns, slba);
+        slba = zone->w_pt
+    }
+
     uint64_t nand_stime =0;
     uint64_t cmd_stime = 0;
     zns_ssd_channel *chnl =NULL;
