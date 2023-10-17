@@ -137,6 +137,25 @@ Starting from 17-th zone, all zones are configured as 2channels zone.
 
 Host can access each zone by different lba, aligned with the zone size
 
+If you want to change the border of each zone groups, change "(zidx < 16)" to some setting( e.g, < 32, < 1024, etc)
+```c++
+//Example in zns.c:123
+
+static inline uint64_t zns_get_multiway_chip_idx(NvmeNamespace *ns, uint64_t slba){
+    FemuCtrl *n = ns->ctrl;
+    struct zns * zns = n->zns;
+    struct zns_ssdparams *spp = &zns->sp;
+    uint64_t zidx= zns_zone_idx(ns, slba);
+
+    if (spp->is_another_namespace)
+        return (zidx < 16) ? (zns_get_ns0_zone_ppn_idx(ns,slba)% (spp->nchnls * spp->ways)) : (zns_another_ns1_zone_ppn_idx(ns,slba) % (spp->nchnls * spp->ways)); 
+    else{
+        uint64_t ppn = zns_get_multichnlway_ppn_idx(ns,slba);
+        return ((ppn/spp->planes_per_die) % (spp->nchnls * spp->ways));
+    }
+}
+
+```
 
 
 <details>
