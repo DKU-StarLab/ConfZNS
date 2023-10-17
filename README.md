@@ -96,6 +96,49 @@ enum {
 };
 ```
 
+### How to enable mixed zone?(Different paralelism support in ConfZNS)
+You can set the 'is_another_namespace' parameter for different mapping to a zone
+
+Here is an example to set [14 channels zone] + [2 channels zone] setting.
+In here, let us call these two zone groups as "namespace"
+14 channels zone = ns0
+2 channels zone = ns1
+
+Configuration goes like 
+```c++
+//Example in zns.c:1787
+    spp->nchnls         = 16;   //default : 8
+    spp->chnls_per_zone = 2;   
+    spp->zones          = n->num_zones;     
+    spp->ways           = 1;    //default : 2
+    spp->ways_per_zone  = 1;    //default :==spp->ways
+    spp->dies_per_chip  = 1;    //default : 1
+    spp->planes_per_die = 4;    //default : 4
+    spp->register_model = 1;    
+```
+and
+```c++
+    spp->is_another_namespace = true;	//default : false
+    spp->chnls_per_another_zone = 14;
+```
+ spp->chnls_per_another_zone = 14; means allocate 14 channels to zone, where spp->nchnls = 16.
+Rest of the channels(in here, 2channels) will assigned to ns1, which is another zone groups.
+
+This changes the zone mapping. 
+
+Here, example of 16 zones are configured as 14 channels zone.
+Starting from 17-th zone, all zones are configured as 2channels zone. 
+
+```
+|LBA : 0 - zonesize * 16|  zonesize * 16 - dev size |
+|<----- 16 zones ------>|<-------- N zones -------->|
+| 14ch z | 14ch z | ..  | 2ch z | 2ch z |.. | 2ch z |   
+```
+
+Host can access each zone by different lba, aligned with the zone size
+
+
+
 <details>
 <summary>Installation (FEMU readme)</summary>
 <div markdown="1">       
