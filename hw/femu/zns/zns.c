@@ -1304,7 +1304,7 @@ static uint64_t znsssd_write(ZNS *zns, NvmeRequest *req){
     {
         NvmeZone *zone;
         zone = zns_get_zone_by_slba(ns, slba);
-        slba = zone->w_pt
+        slba = zone->w_ptr;
     }
 
     uint64_t nand_stime =0;
